@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">电动车秘书</string>
+
+    <!-- CustomDialog -->
+    <string name="prompt">提示</string>
+    <string name="exit_app">你确定要退出应用吗?</string>
+    <string name="confirm">确认</string>
+    <string name="cancel">取消</string>
+    <string name="string_confirm">确定</string>
+    <string name="string_reset">清除</string>
 </resources>
