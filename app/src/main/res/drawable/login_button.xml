@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item>
+        <shape>
+            <solid android:color="#ffa043" />
+
+            <corners android:radius="3dp" />
+
+            <!-- padding：Button里面的文字与Button边界的间隔 -->
+            <padding android:bottom="6dp" android:left="12dp" android:right="12dp" android:top="6dp" />
+        </shape>
+    </item>
+
+</selector>

@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 import com.jcsoft.emsystem.R;
 import com.jcsoft.emsystem.base.BaseActivity;
 import com.jcsoft.emsystem.callback.DDoubleDialogCallback;
+import com.jcsoft.emsystem.database.DBHelper;
 import com.jcsoft.emsystem.utils.CommonUtils;
 import com.jcsoft.emsystem.view.CustomDialog;
 
@@ -31,14 +32,19 @@ public class SplashActivity extends BaseActivity {
     private boolean isStartUp;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void loadXml() {
         setContentView(R.layout.activity_splash);
         x.view().inject(this);
+        DBHelper.instance(this);
         isStartUp = true;
-        init();
     }
 
+    @Override
+    public void getIntentData(Bundle savedInstanceState) {
+
+    }
+
+    @Override
     public void init() {
         try {
             if (!CommonUtils.isNetworkConnected(SplashActivity.this)) {
@@ -74,7 +80,7 @@ public class SplashActivity extends BaseActivity {
                     splashRelativeLayout.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                            Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
                             startActivity(intent);
                             finish();
                         }
@@ -84,6 +90,16 @@ public class SplashActivity extends BaseActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void setListener() {
+
+    }
+
+    @Override
+    public void setData() {
+
     }
 
     //网络变化广播处理

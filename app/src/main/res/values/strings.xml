@@ -1,6 +1,12 @@
 <resources>
     <string name="app_name">电动车秘书</string>
 
+    <!-- login activity -->
+    <string name="register">注册</string>
+
+    <!-- main activity -->
+    <string name="company">捷可视</string>
+
     <!-- CustomDialog -->
     <string name="prompt">提示</string>
     <string name="exit_app">你确定要退出应用吗?</string>

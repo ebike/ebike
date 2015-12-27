@@ -2,6 +2,17 @@
 <resources>
     <color name="white">#ffffff</color>
     <color name="gray_dark">#1c1c1c</color>
+    <color name="login_line">#ffa043</color> 
+    <color name="login_text_disabled">#fc5823</color>
+
+    <!-- topbar -->
+    <color name="topbar_bg">#fc5823</color>
+
+    <!-- bottombar -->
+    <color name="bottombar_bg">#FCFCFC</color>
+    <color name="bottombar_line">#D6D6D6</color>
+    <color name="bottombar_text_selected">#FC5823</color>
+    <color name="bottombar_text_default">#9B9B9B</color>
 
     <!--dialog中按钮字体颜色 -->
     <color name="custom_dialog_btn">#ff1E90FF</color>
