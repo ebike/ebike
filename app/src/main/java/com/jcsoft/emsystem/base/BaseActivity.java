@@ -3,6 +3,7 @@ package com.jcsoft.emsystem.base;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.FragmentActivity;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
@@ -14,7 +15,7 @@ import com.jcsoft.emsystem.view.LoadingDialog;
 /**
  * 所有activity的父类
  */
-public abstract class BaseActivity extends Activity {
+public abstract class BaseActivity extends FragmentActivity {
 
     private Handler mHandler = new Handler();
     private LoadingDialog mLoadingBar;

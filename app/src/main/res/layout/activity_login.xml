@@ -1,5 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/relayout_rootView"
+    android:id="@+id/rl_rootView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@mipmap/bg_splash"
@@ -25,25 +25,25 @@
         android:src="@mipmap/logo_txt" />
 
     <RelativeLayout
-        android:id="@+id/account"
+        android:id="@+id/rl_userName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/iv_logo_txt"
         android:layout_marginTop="50dp">
 
         <ImageView
-            android:id="@+id/image_account"
+            android:id="@+id/iv_userName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@mipmap/account" />
 
         <EditText
-            android:id="@+id/edit_account"
+            android:id="@+id/et_userName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/image_account"
+            android:layout_alignBottom="@+id/iv_userName"
             android:layout_marginLeft="3dp"
-            android:layout_toRightOf="@+id/image_account"
+            android:layout_toRightOf="@+id/iv_userName"
             android:background="@null"
             android:hint="手机号码/设备编码"
             android:inputType="phone"
@@ -57,31 +57,31 @@
         android:id="@+id/line1"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_below="@id/account"
+        android:layout_below="@id/rl_userName"
         android:layout_marginBottom="9dp"
         android:layout_marginTop="9dp"
         android:background="@color/login_line" />
 
     <RelativeLayout
-        android:id="@+id/password"
+        android:id="@+id/rl_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/line1"
         android:layout_marginTop="20dp">
 
         <ImageView
-            android:id="@+id/image_password"
+            android:id="@+id/iv_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@mipmap/password" />
 
         <EditText
-            android:id="@+id/edit_password"
+            android:id="@+id/et_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/image_password"
+            android:layout_alignBottom="@+id/iv_password"
             android:layout_marginLeft="3dp"
-            android:layout_toRightOf="@+id/image_password"
+            android:layout_toRightOf="@+id/iv_password"
             android:background="@null"
             android:hint="密码"
             android:inputType="textPassword"
@@ -95,20 +95,22 @@
         android:id="@+id/line2"
         android:layout_width="match_parent"
         android:layout_height="1sp"
-        android:layout_below="@id/password"
+        android:layout_below="@id/rl_password"
         android:layout_marginBottom="9dp"
         android:layout_marginTop="9dp"
         android:background="@color/login_line" />
 
     <Button
-        android:id="@+id/button_login"
+        android:id="@+id/btn_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/line2"
         android:layout_marginTop="50dp"
+        android:alpha="0.4"
         android:background="@drawable/login_button"
+        android:enabled="false"
         android:text="登录"
-        android:textColor="@color/gray_dark"
+        android:textColor="@color/login_text_disabled"
         android:textSize="22sp" />
 
     <RelativeLayout

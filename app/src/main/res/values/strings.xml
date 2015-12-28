@@ -14,4 +14,14 @@
     <string name="cancel">取消</string>
     <string name="string_confirm">确定</string>
     <string name="string_reset">清除</string>
+
+    <!-- network -->
+    <string name="no_network">无网络，请联网后重试</string>
+    <string name="server_timeout">网络请求失败，请稍后重试</string>
+    <string name="client_timeout">网络请求失败，请检查你的网络设置</string>
+
+    <!-- http -->
+    <string name="data_error">数据异常...</string>
+    <string name="http_download_failed">下载失败</string>
+
 </resources>
