@@ -1,4 +1,4 @@
-package com.jcsoft.emsystem.constants;
+package com.jcsoft.emsystem.http;
 
 import com.jcsoft.emsystem.utils.CommonUtils;
 
@@ -8,7 +8,7 @@ import com.jcsoft.emsystem.utils.CommonUtils;
 public class HttpConstants {
 
     //接口前缀
-    public static String baseUrl = "http://api.gnets.cn/app";
+    public static String baseUrl = "http://dev.gnets.cn/app";
 
     //登录
     public static String getLoginUrl(String userName, String password) {

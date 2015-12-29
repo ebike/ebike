@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:text="@string/company"
+            android:text="@string/app_name"
             android:textColor="@color/white"
             android:textSize="18sp" />
 

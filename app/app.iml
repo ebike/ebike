@@ -90,10 +90,13 @@
     </content>
     <orderEntry type="jdk" jdkName="Android API 23 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" exported="" name="AMap_Services_V2.7.0_20151125" level="project" />
     <orderEntry type="library" exported="" name="appcompat-v7-23.0.1" level="project" />
     <orderEntry type="library" exported="" name="xUtils-3.1.22" level="project" />
     <orderEntry type="library" exported="" name="gson-2.2.2" level="project" />
+    <orderEntry type="library" exported="" name="Android_Map_V2.7.20151124" level="project" />
     <orderEntry type="library" exported="" name="support-v4-23.0.1" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-23.0.1" level="project" />
+    <orderEntry type="library" exported="" name="AMap_Location_v2.0.0_20151117" level="project" />
   </component>
 </module>

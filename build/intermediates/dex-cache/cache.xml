@@ -2,11 +2,18 @@
 <items version="2" >
 
     <item
-        jar="/Users/huguangwen/Documents/Code/gitlab/ebike/app/libs/gson-2.2.2.jar"
+        jar="/Users/huguangwen/Documents/Code/gitlab/ebike/app/libs/AMap_Services_V2.7.0_20151125.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="53bfcd3c8e310d1493b2691484525ed90b04e236">
-        <dex dex="/Users/huguangwen/Documents/Code/gitlab/ebike/app/build/intermediates/pre-dexed/debug/gson-2.2.2-07055920e1736557acdc4844301e57b2f8eb430c.jar" />
+        sha1="7eac53aff3958c7447c434fe376c8c978a2f9c5c">
+        <dex dex="/Users/huguangwen/Documents/Code/gitlab/ebike/app/build/intermediates/pre-dexed/debug/AMap_Services_V2.7.0_20151125-f315c5271b58cf3e1426d678333bebff95c32295.jar" />
+    </item>
+    <item
+        jar="/Users/huguangwen/Documents/Code/gitlab/ebike/app/libs/AMap_Location_v2.0.0_20151117.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="fbd0189f0d86bbfa558b2c2344ea3f3932a2ad35">
+        <dex dex="/Users/huguangwen/Documents/Code/gitlab/ebike/app/build/intermediates/pre-dexed/debug/AMap_Location_v2.0.0_20151117-e27acff88e3c1d0b1838ae1c964567b848834fad.jar" />
     </item>
 
 </items>

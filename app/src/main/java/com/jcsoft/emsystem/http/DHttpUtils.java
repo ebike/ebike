@@ -268,7 +268,7 @@ public class DHttpUtils {
                     if (bean.getCode() == 1) {
                         callback.onSuccess(bean);
                     } else {
-                        activity.showLongText(bean.getMessage());
+                        activity.showLongText(bean.getErrmsg());
                     }
                 } else {//数据异常
                     activity.showLongText(activity.getResources().getString(R.string.data_error));
@@ -331,7 +331,7 @@ public class DHttpUtils {
                     if (bean.getCode() == 1) {
                         callback.onSuccess(bean);
                     } else {
-                        activity.showLongText(bean.getMessage());
+                        activity.showLongText(bean.getErrmsg());
                     }
                 } else {//数据异常
                     activity.showLongText(activity.getResources().getString(R.string.data_error));

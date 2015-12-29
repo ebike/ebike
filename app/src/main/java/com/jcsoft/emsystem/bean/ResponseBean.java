@@ -9,18 +9,18 @@ import java.io.Serializable;
 public class ResponseBean implements Serializable {
 
     private Integer code;
-    private String message;
+    private String errmsg;
 
     public ResponseBean(){
 
     }
 
-    public String getMessage() {
-        return message;
+    public String getErrmsg() {
+        return errmsg;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setErrmsg(String errmsg) {
+        this.errmsg = errmsg;
     }
 
     public Integer getCode() {

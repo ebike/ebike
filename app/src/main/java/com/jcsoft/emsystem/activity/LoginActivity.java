@@ -14,9 +14,14 @@ import android.widget.RelativeLayout;
 
 import com.jcsoft.emsystem.R;
 import com.jcsoft.emsystem.base.BaseActivity;
+import com.jcsoft.emsystem.bean.ResponseBean;
+import com.jcsoft.emsystem.callback.DCommonCallback;
 import com.jcsoft.emsystem.constants.AppConfig;
+import com.jcsoft.emsystem.http.HttpConstants;
+import com.jcsoft.emsystem.http.DHttpUtils;
 import com.jcsoft.emsystem.utils.CommonUtils;
 
+import org.xutils.http.RequestParams;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
@@ -78,14 +83,14 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                     showShortText("请输入密码");
                     return;
                 }
-//                RequestParams params =  new RequestParams(HttpConstants.getLoginUrl(userName,password));
-//                DHttpUtils.get_ResponseBean(LoginActivity.this, true, params, new DCommonCallback<ResponseBean>() {
-//                    @Override
-//                    public void onSuccess(ResponseBean result) {
-                startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                this.finish();
-//                    }
-//                });
+                RequestParams params = new RequestParams(HttpConstants.getLoginUrl(userName, password));
+                DHttpUtils.get_ResponseBean(LoginActivity.this, true, params, new DCommonCallback<ResponseBean>() {
+                    @Override
+                    public void onSuccess(ResponseBean result) {
+                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                        LoginActivity.this.finish();
+                    }
+                });
                 break;
         }
     }

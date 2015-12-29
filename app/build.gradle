@@ -11,6 +11,11 @@ android {
         versionCode 1
         versionName "1.0"
     }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false
@@ -24,5 +29,8 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile files('libs/xUtils-3.1.22.jar')
     compile files('libs/gson-2.2.2.jar')
+    compile files('libs/AMap_Location_v2.0.0_20151117.jar')
+    compile files('libs/AMap_Services_V2.7.0_20151125.jar')
+    compile files('libs/Android_Map_V2.7.20151124.jar')
     compile 'com.android.support:appcompat-v7:23.0.1'
 }
