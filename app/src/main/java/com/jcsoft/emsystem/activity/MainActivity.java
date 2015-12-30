@@ -11,6 +11,7 @@ import com.jcsoft.emsystem.R;
 import com.jcsoft.emsystem.adapter.ViewPagerFragmentAdapter;
 import com.jcsoft.emsystem.base.BaseActivity;
 import com.jcsoft.emsystem.base.TabIndicator;
+import com.jcsoft.emsystem.constants.AppConfig;
 import com.jcsoft.emsystem.fragment.AlarmFragment;
 import com.jcsoft.emsystem.fragment.ChartFragment;
 import com.jcsoft.emsystem.fragment.LocationFragment;
@@ -72,6 +73,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     public void init() {
+        //初始化缓存
+        AppConfig.loginName = preferencesUtil.getPrefString(MainActivity.this, AppConfig.LOGIN_NAME, "");
+        AppConfig.password = preferencesUtil.getPrefString(MainActivity.this, AppConfig.PASSWORD, "");
+        //初始化viewpager
         imageViews = new ArrayList<ImageView>();
         imageViews.add(locationImageView);
         imageViews.add(alarmImageView);

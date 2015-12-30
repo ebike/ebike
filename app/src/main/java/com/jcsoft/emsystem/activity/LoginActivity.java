@@ -28,13 +28,13 @@ import org.xutils.x;
 public class LoginActivity extends BaseActivity implements View.OnClickListener, TextWatcher {
     @ViewInject(R.id.rl_rootView)
     RelativeLayout rootViewRelativeLayout;
-    @ViewInject(R.id.et_userName)
-    EditText userNameEditText;
+    @ViewInject(R.id.et_loginName)
+    EditText loginNameEditText;
     @ViewInject(R.id.et_password)
     EditText passwordEditText;
     @ViewInject(R.id.btn_login)
     Button loginButton;
-    private String userName;
+    private String loginName;
     private String password;
 
     @Override
@@ -51,17 +51,17 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     }
 
     public void init() {
-        if (CommonUtils.strIsEmpty(AppConfig.userAccount)) {
-            AppConfig.userAccount = preferencesUtil.getPrefString(LoginActivity.this, AppConfig.USER_ACCOUNT, "");
+        if (CommonUtils.strIsEmpty(AppConfig.loginName)) {
+            AppConfig.loginName = preferencesUtil.getPrefString(LoginActivity.this, AppConfig.LOGIN_NAME, "");
         }
-        userNameEditText.setText(AppConfig.userAccount);
-        userNameEditText.requestFocus();
+        loginNameEditText.setText(AppConfig.loginName);
+        loginNameEditText.requestFocus();
     }
 
     @Override
     public void setListener() {
         //监控输入变化
-        userNameEditText.addTextChangedListener(this);
+        loginNameEditText.addTextChangedListener(this);
         passwordEditText.addTextChangedListener(this);
         loginButton.setOnClickListener(this);
     }
@@ -74,19 +74,22 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_login:
-                userName = userNameEditText.getText().toString().trim();
+                loginName = loginNameEditText.getText().toString().trim();
                 password = passwordEditText.getText().toString().trim();
-                if (CommonUtils.strIsEmpty(userName)) {
+                if (CommonUtils.strIsEmpty(loginName)) {
                     showShortText("请输入手机号");
                     return;
                 } else if (CommonUtils.strIsEmpty(password)) {
                     showShortText("请输入密码");
                     return;
                 }
-                RequestParams params = new RequestParams(HttpConstants.getLoginUrl(userName, password));
-                DHttpUtils.get_ResponseBean(LoginActivity.this, true, params, new DCommonCallback<ResponseBean>() {
+                RequestParams params = new RequestParams(HttpConstants.getLoginUrl(loginName, CommonUtils.MD5(password)));
+                DHttpUtils.get_Success_ResponseBean(LoginActivity.this, true, params, new DCommonCallback<ResponseBean>() {
                     @Override
                     public void onSuccess(ResponseBean result) {
+                        preferencesUtil.setPrefString(LoginActivity.this, AppConfig.LOGIN_NAME, loginName);
+                        preferencesUtil.setPrefString(LoginActivity.this, AppConfig.PASSWORD, CommonUtils.MD5(password));
+                        preferencesUtil.setPrefString(LoginActivity.this, AppConfig.REGISTRATION_ID, AppConfig.registrationId);
                         startActivity(new Intent(LoginActivity.this, MainActivity.class));
                         LoginActivity.this.finish();
                     }
@@ -139,9 +142,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     @Override
     public void afterTextChanged(Editable editable) {
         //判断手机和密码是否填写
-        userName = userNameEditText.getText().toString().trim();
+        loginName = loginNameEditText.getText().toString().trim();
         password = passwordEditText.getText().toString().trim();
-        if (!CommonUtils.strIsEmpty(userName) && !CommonUtils.strIsEmpty(password)) {
+        if (!CommonUtils.strIsEmpty(loginName) && !CommonUtils.strIsEmpty(password)) {
             //设置登录按钮可点击
             loginButton.setEnabled(true);
             //改变按钮样式

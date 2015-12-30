@@ -12,11 +12,17 @@ import android.widget.RelativeLayout;
 
 import com.jcsoft.emsystem.R;
 import com.jcsoft.emsystem.base.BaseActivity;
+import com.jcsoft.emsystem.bean.ResponseBean;
+import com.jcsoft.emsystem.callback.DCommonCallback;
 import com.jcsoft.emsystem.callback.DDoubleDialogCallback;
+import com.jcsoft.emsystem.constants.AppConfig;
 import com.jcsoft.emsystem.database.DBHelper;
+import com.jcsoft.emsystem.http.DHttpUtils;
+import com.jcsoft.emsystem.http.HttpConstants;
 import com.jcsoft.emsystem.utils.CommonUtils;
 import com.jcsoft.emsystem.view.CustomDialog;
 
+import org.xutils.http.RequestParams;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
@@ -77,19 +83,43 @@ public class SplashActivity extends BaseActivity {
             } else {
                 if (isStartUp) {
                     isStartUp = false;
-                    splashRelativeLayout.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
-                            startActivity(intent);
-                            finish();
-                        }
-                    }, MILLIS);
+                    //获取share中的账号、密码
+                    final String loginName = preferencesUtil.getPrefString(SplashActivity.this, AppConfig.LOGIN_NAME, "");
+                    final String password = preferencesUtil.getPrefString(SplashActivity.this, AppConfig.PASSWORD, "");
+                    AppConfig.registrationId = preferencesUtil.getPrefString(SplashActivity.this, AppConfig.REGISTRATION_ID, "");
+                    if (!CommonUtils.strIsEmpty(loginName) && !CommonUtils.strIsEmpty(password)) {
+                        RequestParams params = new RequestParams(HttpConstants.getLoginUrl(loginName, password));
+                        DHttpUtils.get_ResponseBean(SplashActivity.this, false, params, new DCommonCallback<ResponseBean>() {
+                            @Override
+                            public void onSuccess(ResponseBean result) {
+                                if (result.getCode() == 1) {
+                                    preferencesUtil.setPrefString(SplashActivity.this, AppConfig.LOGIN_NAME, loginName);
+                                    preferencesUtil.setPrefString(SplashActivity.this, AppConfig.PASSWORD, CommonUtils.MD5(password));
+                                    goToActivity(MainActivity.class);
+                                } else {
+                                    goToActivity(LoginActivity.class);
+                                }
+                            }
+                        });
+                    } else {
+                        goToActivity(LoginActivity.class);
+                    }
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void goToActivity(final Class clazz) {
+        splashRelativeLayout.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(SplashActivity.this, clazz);
+                startActivity(intent);
+                finish();
+            }
+        }, MILLIS);
     }
 
     @Override

@@ -311,7 +311,7 @@ public class DHttpUtils {
      * @param callback     接口中参数值类型为ResponseBean，即：将返回的json转化成ResponseBean对象
      * @return
      */
-    public static Callback.Cancelable get_ResponseBean(final BaseActivity activity, final boolean showProgress,
+    public static Callback.Cancelable get_Success_ResponseBean(final BaseActivity activity, final boolean showProgress,
                                                         RequestParams params, final DCommonCallback<ResponseBean> callback) {
         //是否显示加载框
         if (activity != null && showProgress) {
@@ -333,6 +333,56 @@ public class DHttpUtils {
                     } else {
                         activity.showLongText(bean.getErrmsg());
                     }
+                } else {//数据异常
+                    activity.showLongText(activity.getResources().getString(R.string.data_error));
+                }
+
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean b) {
+                //关闭加载框
+                if (activity != null && showProgress) {
+                    activity.dismissLoadingprogress();
+                }
+                dealException(activity, ex);
+            }
+
+            @Override
+            public void onCancelled(CancelledException e) {
+                //关闭加载框
+                if (activity != null && showProgress) {
+                    activity.dismissLoadingprogress();
+                }
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+
+        });
+        return cancelable;
+    }
+
+    public static Callback.Cancelable get_ResponseBean(final BaseActivity activity, final boolean showProgress,
+                                                       RequestParams params, final DCommonCallback<ResponseBean> callback) {
+        //是否显示加载框
+        if (activity != null && showProgress) {
+            activity.startLoadingProgress();
+        }
+        Callback.Cancelable cancelable = x.http().get(params, new Callback.CommonCallback<String>() {
+
+            @Override
+            public void onSuccess(String result) {
+                //关闭加载框
+                if (activity != null && showProgress) {
+                    activity.dismissLoadingprogress();
+                }
+                ResponseBean bean = null;
+                if (!CommonUtils.strIsEmpty(result)) {
+                    bean = JsonDataUtils.jsonToObject(result, ResponseBean.class);
+                    callback.onSuccess(bean);
                 } else {//数据异常
                     activity.showLongText(activity.getResources().getString(R.string.data_error));
                 }

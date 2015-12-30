@@ -1,6 +1,6 @@
 package com.jcsoft.emsystem.http;
 
-import com.jcsoft.emsystem.utils.CommonUtils;
+import com.jcsoft.emsystem.constants.AppConfig;
 
 /**
  * Created by jimmy on 15/12/28.
@@ -11,11 +11,12 @@ public class HttpConstants {
     public static String baseUrl = "http://dev.gnets.cn/app";
 
     //登录
-    public static String getLoginUrl(String userName, String password) {
+    public static String getLoginUrl(String loginName, String password) {
         StringBuffer sb = new StringBuffer(baseUrl);
         sb.append("/checkLogin.do");
-        sb.append("?userName=").append(userName);
-        sb.append("&password=").append(CommonUtils.MD5(password));
+        sb.append("?loginName=").append(loginName);
+        sb.append("&password=").append(password);
+        sb.append("&clientId=").append(AppConfig.registrationId);
         return sb.toString();
     }
 }

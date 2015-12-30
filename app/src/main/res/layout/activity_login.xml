@@ -25,25 +25,25 @@
         android:src="@mipmap/logo_txt" />
 
     <RelativeLayout
-        android:id="@+id/rl_userName"
+        android:id="@+id/rl_loginName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/iv_logo_txt"
         android:layout_marginTop="50dp">
 
         <ImageView
-            android:id="@+id/iv_userName"
+            android:id="@+id/iv_loginName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@mipmap/account" />
 
         <EditText
-            android:id="@+id/et_userName"
+            android:id="@+id/et_loginName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/iv_userName"
+            android:layout_alignBottom="@+id/iv_loginName"
             android:layout_marginLeft="3dp"
-            android:layout_toRightOf="@+id/iv_userName"
+            android:layout_toRightOf="@+id/iv_loginName"
             android:background="@null"
             android:hint="手机号码/设备编号"
             android:inputType="phone"
@@ -57,7 +57,7 @@
         android:id="@+id/line1"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_below="@id/rl_userName"
+        android:layout_below="@id/rl_loginName"
         android:layout_marginBottom="9dp"
         android:layout_marginTop="9dp"
         android:background="@color/login_line" />
