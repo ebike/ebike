@@ -12,13 +12,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.jcsoft.emsystem.R;
 import com.jcsoft.emsystem.base.BaseActivity;
 import com.jcsoft.emsystem.bean.ResponseBean;
+import com.jcsoft.emsystem.bean.UserInfoBean;
 import com.jcsoft.emsystem.callback.DCommonCallback;
 import com.jcsoft.emsystem.constants.AppConfig;
-import com.jcsoft.emsystem.http.HttpConstants;
 import com.jcsoft.emsystem.http.DHttpUtils;
+import com.jcsoft.emsystem.http.HttpConstants;
 import com.jcsoft.emsystem.utils.CommonUtils;
 
 import org.xutils.http.RequestParams;
@@ -84,14 +87,21 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                     return;
                 }
                 RequestParams params = new RequestParams(HttpConstants.getLoginUrl(loginName, CommonUtils.MD5(password)));
-                DHttpUtils.get_Success_ResponseBean(LoginActivity.this, true, params, new DCommonCallback<ResponseBean>() {
+                DHttpUtils.get_String(LoginActivity.this, true, params, new DCommonCallback<String>() {
                     @Override
-                    public void onSuccess(ResponseBean result) {
-                        preferencesUtil.setPrefString(LoginActivity.this, AppConfig.LOGIN_NAME, loginName);
-                        preferencesUtil.setPrefString(LoginActivity.this, AppConfig.PASSWORD, CommonUtils.MD5(password));
-                        preferencesUtil.setPrefString(LoginActivity.this, AppConfig.REGISTRATION_ID, AppConfig.registrationId);
-                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                        LoginActivity.this.finish();
+                    public void onSuccess(String result) {
+                        ResponseBean<UserInfoBean> responseBean = new Gson().fromJson(result, new TypeToken<ResponseBean<UserInfoBean>>() {
+                        }.getType());
+                        if (responseBean.getCode() == 1) {
+                            AppConfig.userInfoBean = responseBean.getData();
+                            preferencesUtil.setPrefString(LoginActivity.this, AppConfig.LOGIN_NAME, loginName);
+                            preferencesUtil.setPrefString(LoginActivity.this, AppConfig.PASSWORD, CommonUtils.MD5(password));
+                            preferencesUtil.setPrefString(LoginActivity.this, AppConfig.REGISTRATION_ID, AppConfig.registrationId);
+                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                            LoginActivity.this.finish();
+                        } else {
+                            showShortText(responseBean.getErrmsg());
+                        }
                     }
                 });
                 break;

@@ -1,5 +1,7 @@
 package com.jcsoft.emsystem.constants;
 
+import com.jcsoft.emsystem.bean.UserInfoBean;
+
 /*
  * 全局的常量存放工具
  */
@@ -13,4 +15,6 @@ public class AppConfig {
     //登录密码（MD5加密）
     public static String password;
     public static String PASSWORD = "password";
+    //当前用户信息
+    public static UserInfoBean userInfoBean;
 }

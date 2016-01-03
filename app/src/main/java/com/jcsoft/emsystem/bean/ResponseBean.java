@@ -6,10 +6,11 @@ import java.io.Serializable;
  * 响应状态信息
  * Created by jimmy on 2015/07/12.
  */
-public class ResponseBean implements Serializable {
+public class ResponseBean<T> implements Serializable {
 
     private Integer code;
     private String errmsg;
+    private T data;
 
     public ResponseBean(){
 
@@ -29,5 +30,13 @@ public class ResponseBean implements Serializable {
 
     public void setCode(Integer code) {
         this.code = code;
+    }
+
+    public T getData() {
+        return data;
+    }
+
+    public void setData(T data) {
+        this.data = data;
     }
 }

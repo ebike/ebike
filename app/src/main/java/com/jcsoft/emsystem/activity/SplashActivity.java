@@ -10,9 +10,12 @@ import android.provider.Settings;
 import android.view.KeyEvent;
 import android.widget.RelativeLayout;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.jcsoft.emsystem.R;
 import com.jcsoft.emsystem.base.BaseActivity;
 import com.jcsoft.emsystem.bean.ResponseBean;
+import com.jcsoft.emsystem.bean.UserInfoBean;
 import com.jcsoft.emsystem.callback.DCommonCallback;
 import com.jcsoft.emsystem.callback.DDoubleDialogCallback;
 import com.jcsoft.emsystem.constants.AppConfig;
@@ -89,10 +92,13 @@ public class SplashActivity extends BaseActivity {
                     AppConfig.registrationId = preferencesUtil.getPrefString(SplashActivity.this, AppConfig.REGISTRATION_ID, "");
                     if (!CommonUtils.strIsEmpty(loginName) && !CommonUtils.strIsEmpty(password)) {
                         RequestParams params = new RequestParams(HttpConstants.getLoginUrl(loginName, password));
-                        DHttpUtils.get_ResponseBean(SplashActivity.this, false, params, new DCommonCallback<ResponseBean>() {
+                        DHttpUtils.get_String(SplashActivity.this, false, params, new DCommonCallback<String>() {
                             @Override
-                            public void onSuccess(ResponseBean result) {
-                                if (result.getCode() == 1) {
+                            public void onSuccess(String result) {
+                                ResponseBean<UserInfoBean> responseBean = new Gson().fromJson(result, new TypeToken<ResponseBean<UserInfoBean>>() {
+                                }.getType());
+                                if (responseBean.getCode() == 1) {
+                                    AppConfig.userInfoBean = responseBean.getData();
                                     preferencesUtil.setPrefString(SplashActivity.this, AppConfig.LOGIN_NAME, loginName);
                                     preferencesUtil.setPrefString(SplashActivity.this, AppConfig.PASSWORD, CommonUtils.MD5(password));
                                     goToActivity(MainActivity.class);

@@ -19,4 +19,22 @@ public class HttpConstants {
         sb.append("&clientId=").append(AppConfig.registrationId);
         return sb.toString();
     }
+
+    //查询当前车辆位置信息
+    public static String getLocInfoUrl() {
+        StringBuffer sb = new StringBuffer(baseUrl);
+        sb.append("/map/getLocInfo.do");
+        if (AppConfig.userInfoBean != null) {
+            sb.append("?carId=").append(AppConfig.userInfoBean.getCarId());
+        }
+        return sb.toString();
+    }
+
+    //
+//    public static String getCarInfoUrl(){
+//        StringBuffer sb = new StringBuffer(baseUrl);
+//        sb.append("/user/getCarInfo.do");
+//        sb.append("?carId=").append(AppConfig.userInfoBean.getCarId());
+//        return sb.toString();
+//    }
 }
