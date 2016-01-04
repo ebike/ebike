@@ -9,48 +9,4 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <TextView
-        android:id="@+id/location_errInfo_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|left"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="10dp"
-        android:background="#ff0000"
-        android:text="TextView"
-        android:textColor="@color/gray_dark"
-        android:visibility="gone" />
-
-    <RadioGroup
-        android:id="@+id/gps_radio_group"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top|left"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:background="@color/gray_dark"
-        android:orientation="horizontal">
-
-        <RadioButton
-            android:id="@+id/gps_locate_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="gpslocate"
-            android:textColor="@android:color/black" />
-
-        <RadioButton
-            android:id="@+id/gps_follow_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="gpsfollow"
-            android:textColor="@android:color/black" />
-
-        <RadioButton
-            android:id="@+id/gps_rotate_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="gpsrotate"
-            android:textColor="@android:color/black" />
-    </RadioGroup>
 </LinearLayout>
