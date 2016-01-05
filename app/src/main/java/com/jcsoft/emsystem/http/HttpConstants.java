@@ -30,6 +30,18 @@ public class HttpConstants {
         return sb.toString();
     }
 
+    //根据起止时间查询轨迹信息
+    public static String getTrackInfoUrl(String startTime, String endTime) {
+        StringBuffer sb = new StringBuffer(baseUrl);
+        sb.append("/map/searchTrack.do");
+        if (AppConfig.userInfoBean != null) {
+            sb.append("?carId=").append(AppConfig.userInfoBean.getCarId());
+        }
+        sb.append("&startTime=").append(startTime);
+        sb.append("&endTime=").append(endTime);
+        return sb.toString().replace(" ", "%20");
+    }
+
     //
 //    public static String getCarInfoUrl(){
 //        StringBuffer sb = new StringBuffer(baseUrl);

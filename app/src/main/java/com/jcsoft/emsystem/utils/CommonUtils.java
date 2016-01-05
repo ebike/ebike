@@ -28,6 +28,8 @@ import com.jcsoft.emsystem.view.CustomDialog;
 import java.security.MessageDigest;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.regex.Matcher;
@@ -38,6 +40,9 @@ import java.util.regex.Pattern;
  * Created by dive on 2015/07/11.
  */
 public class CommonUtils {
+    // 默认日期转换格式
+    public static final String DEFAULT_DATE_FORMAT = "yyyy-MM-dd";
+    public static final String DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
     private static PopupWindow popupWindow;
 
     /**
@@ -52,6 +57,7 @@ public class CommonUtils {
 
     /**
      * 进行MD5加密
+     *
      * @param s
      * @return
      */
@@ -81,6 +87,38 @@ public class CommonUtils {
             e.printStackTrace();
             return "";
         }
+    }
+
+    //转化时间格式
+    public static String DateToString(Date date, String format) {
+        if (format == null || format.length() == 0) {
+            format = DEFAULT_DATE_FORMAT;
+        }
+        SimpleDateFormat df = new SimpleDateFormat(format);
+        return df.format(date);
+    }
+
+    // 取得当前日期
+    public static String getCurrentDateString(String format) {
+        if (format == null || format.length() == 0) {
+            format = DEFAULT_DATE_FORMAT;
+        }
+        Date d = new Date();
+        SimpleDateFormat df = new SimpleDateFormat(format);
+        return df.format(d);
+    }
+
+    //取得昨天日期
+    public static String getYesterdayDateString(String format) {
+        //先获取今天时间
+        Date today = new Date();
+        //得到当前时刻距离1970.1.1的毫秒数
+        long t1 = today.getTime();
+        //计算昨天时间：将当前时间毫秒数减去一天的毫秒数
+        Date yesterday = new Date();
+        long t2 = t1 - 24 * 60 * 60 * 1000;
+        yesterday.setTime(t2);
+        return DateToString(yesterday, format);
     }
 
     /**
@@ -218,7 +256,6 @@ public class CommonUtils {
 
             resutl = decimalFormat.format(blance);
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return resutl;
@@ -293,6 +330,26 @@ public class CommonUtils {
         CustomDialog.Builder builder = new CustomDialog.Builder(ctx);
         builder.setTitle(title);
         builder.setMessage(mesage);
+        builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                if (callback != null) {
+                    callback.onPositiveButtonClick("");
+                }
+            }
+        });
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        builder.create().show();
+    }
+
+    public static void showCustomDialog1(Context ctx, String title, View view, final DSingleDialogCallback callback) {
+        CustomDialog.Builder builder = new CustomDialog.Builder(ctx);
+        builder.setTitle(title);
+        builder.setContentView(view);
         builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();

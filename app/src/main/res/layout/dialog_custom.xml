@@ -53,8 +53,14 @@
                 android:padding="4dp"
                 android:textColor="@color/gray_dark"
                 android:textSize="14sp"
-                android:visibility="gone"
-                android:inputType=""/>
+                android:visibility="gone"/>
+
+            <LinearLayout
+                android:id="@+id/contentView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="gone"/>
         </RelativeLayout>
 
         <LinearLayout

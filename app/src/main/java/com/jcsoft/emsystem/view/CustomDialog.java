@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jcsoft.emsystem.R;
@@ -183,6 +184,7 @@ public class CustomDialog extends Dialog {
             Button cancelButton = (Button) layout.findViewById(R.id.cancel_btn);
             TextView messageTextView = (TextView) layout.findViewById(R.id.message);
             TextView divider = (TextView) layout.findViewById(R.id.divider);
+            LinearLayout contentViewLL = (LinearLayout) layout.findViewById(R.id.contentView);
             //设置标题
             titleTextView.setText(title);
             titleTextView.getPaint().setFakeBoldText(true);
@@ -223,12 +225,11 @@ public class CustomDialog extends Dialog {
             } else if (contentView != null) {
                 // if no message set
                 // add the contentView to the dialog body
-//                ((LinearLayout) layout.findViewById(R.id.message))
-//                        .removeAllViews();
-//                ((LinearLayout) layout.findViewById(R.id.message)).addView(
-//                        contentView, new ViewGroup.LayoutParams(
-//                                ViewGroup.LayoutParams.WRAP_CONTENT,
-//                                ViewGroup.LayoutParams.WRAP_CONTENT));
+                contentViewLL.setVisibility(View.VISIBLE);
+                contentViewLL.removeAllViews();
+                contentViewLL.addView(contentView, new ViewGroup.LayoutParams(
+                        ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT));
             }
             //设置是否显示输入框
             if (hasEditText) {
