@@ -1,5 +1,6 @@
 package com.jcsoft.emsystem.fragment;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -13,10 +14,13 @@ import com.amap.api.maps.CameraUpdate;
 import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.MapView;
 import com.amap.api.maps.UiSettings;
+import com.amap.api.maps.model.BitmapDescriptor;
 import com.amap.api.maps.model.BitmapDescriptorFactory;
 import com.amap.api.maps.model.CameraPosition;
 import com.amap.api.maps.model.LatLng;
+import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
+import com.amap.api.maps.model.PolylineOptions;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jcsoft.emsystem.R;
@@ -36,6 +40,7 @@ import org.xutils.http.RequestParams;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -134,7 +139,7 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
                         markerOptions.position(position);
                         markerOptions.title(locInfoBean.getSatelliteTime()).snippet(locInfoBean.getSpeed() + "km/h");
                         markerOptions.perspective(true);
-                        if (locInfoBean.getAcc().equals("1")) {
+                        if (locInfoBean.getIsOnline().equals("1")) {
                             markerOptions.icon(BitmapDescriptorFactory.fromResource(R.mipmap.ebike_online));
                         } else {
                             markerOptions.icon(BitmapDescriptorFactory.fromResource(R.mipmap.ebike_offline));
@@ -219,7 +224,73 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
                             public void onSuccess(String result) {
                                 ResponseBean<List<TrackBean>> responseBean = new Gson().fromJson(result, new TypeToken<ResponseBean<List<TrackBean>>>() {
                                 }.getType());
+                                if (responseBean.getCode() == 1) {
+                                    if (responseBean.getData().size() <= 0) {
+                                        return;
+                                    }
+                                    aMap.clear();
+                                    String isShowNonGps = ConfigService.instance().getConfigValue(
+                                            JCConstValues.S_IsShowNonGps);
+                                    if (isShowNonGps == null || isShowNonGps.length() == 0) {
+                                        // 系统中暂无此值，操作一次数据库
+                                        ConfigService.instance().insertConfigValue(
+                                                JCConstValues.S_IsShowNonGps, "1");
+                                        isShowNonGps = "1";
+                                    }
+                                    boolean isShowNonGpsBool = isShowNonGps.equalsIgnoreCase("1");
+                                    // 如果不显示基站定位，则过滤掉基站定位点
+                                    List<LatLng> points = new ArrayList<LatLng>();
+                                    int i = 0;
+                                    int maxCount = responseBean.getData().size();
+                                    for (TrackBean trackBean : responseBean.getData()) {
+                                        int status = trackBean.getSourceType();
+                                        boolean isGps = (status & 0x01) == 0; // 第0个二进制位 0：卫星定位；1：基站定位
+                                        if (!isShowNonGpsBool && !isGps) {
+                                            continue;
+                                        }
+                                        LatLng point = new LatLng(trackBean.getLat() / 1000000.0,
+                                                trackBean.getLon() / 1000000.0);
+                                        points.add(point);
+                                        if (i != 0 && i < maxCount - 1) {
+                                            addMarkerToMap(point,
+                                                    getResources().getString(R.string.txt_track_prompt),
+                                                    trackBean.getSatelliteTime(), trackBean.getSpeed(),
+                                                    R.mipmap.point, false);
+                                        }
+//                                        if (!isGps) {
+//                                            // 如果是基站定位，则在每个点上画一个红色圈
+//                                            addMarkerToMap(point,
+//                                                    getResources().getString(R.string.txt_track_prompt),
+//                                                    trackBean.getSatelliteTime(), trackBean.getSpeed(),
+//                                                    R.mipmap.point_e, false);
+//                                        }
+                                        i++;
+                                    }
+                                    if (i == 0) {
+                                        // 如果所有信息点都是基站定位，则提示没有轨迹信息，并返回
+                                        showShortText("您选择的时间段内只有基站定位信息，请在设置中开启显示基站定位！");
+                                        return;
+                                    }
 
+                                    TrackBean start = responseBean.getData().get(0);
+                                    TrackBean end = responseBean.getData().get(maxCount - 1);
+                                    addMarkerToMap(points.get(0),
+                                            getResources().getString(R.string.txt_start),
+                                            start.getSatelliteTime(), start.getSpeed(),
+                                            R.mipmap.start, true);
+                                    if (maxCount > 1) {
+                                        addMarkerToMap(points.get(points.size() - 1), getResources()
+                                                        .getString(R.string.txt_end), end.getSatelliteTime(),
+                                                end.getSpeed(), R.mipmap.end, true);
+                                    }
+                                    //在地图上添加轨迹实线
+                                    drawTrack(points);
+                                    CameraPosition cp = new CameraPosition(points.get(0), 17, 0, 0);
+                                    CameraUpdate center = CameraUpdateFactory.newCameraPosition(cp);
+                                    aMap.moveCamera(center);
+                                } else {
+                                    showShortText(responseBean.getErrmsg());
+                                }
                             }
                         });
 
@@ -227,5 +298,26 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
                 });
                 break;
         }
+    }
+
+    //在地图上添加轨迹蓝点
+    private Marker addMarkerToMap(LatLng latlng, String devName, String time,
+                                  double speed, int drawableId, boolean isPerspective) {
+        MarkerOptions options = new MarkerOptions();
+        options.anchor(0.5f, 0.5f);
+        options.position(latlng);
+        options.title(devName);
+        options.snippet(time + "\n" + String.valueOf(speed) + "km/h");
+        options.draggable(false);
+        BitmapDescriptor bd = BitmapDescriptorFactory.fromResource(drawableId);
+        options.icon(bd);
+        return aMap.addMarker(options);
+    }
+    //在地图上添加轨迹实线
+    private void drawTrack(List<LatLng> points) {
+        PolylineOptions options = new PolylineOptions();
+        options.addAll(points);
+        options.color(Color.argb(255, 47, 172, 245));
+        aMap.addPolyline(options);
     }
 }
