@@ -1,15 +1,28 @@
 package com.jcsoft.emsystem.base;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.jcsoft.emsystem.activity.LoginActivity;
+import com.jcsoft.emsystem.callback.DSingleDialogCallback;
+import com.jcsoft.emsystem.constants.AppConfig;
+import com.jcsoft.emsystem.event.OnlineExceptionEvent;
+import com.jcsoft.emsystem.utils.CommonUtils;
+import com.jcsoft.emsystem.utils.DataCleanManager;
 import com.jcsoft.emsystem.utils.DensityUtil;
 import com.jcsoft.emsystem.utils.PreferencesUtil;
 import com.jcsoft.emsystem.view.LoadingDialog;
+
+import java.util.Set;
+
+import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.api.TagAliasCallback;
+import de.greenrobot.event.EventBus;
 
 
 /**
@@ -17,6 +30,7 @@ import com.jcsoft.emsystem.view.LoadingDialog;
  */
 public abstract class BaseActivity extends FragmentActivity {
 
+    private static final int MSG_SET_ALIAS = 1001;
     private Handler mHandler = new Handler();
     private LoadingDialog mLoadingBar;
     protected PreferencesUtil preferencesUtil;
@@ -27,11 +41,38 @@ public abstract class BaseActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         preferencesUtil = PreferencesUtil.getInstance();
         densityUtil = new DensityUtil(BaseActivity.this);
+        EventBus.getDefault().register(this);
         loadXml();
         getIntentData(savedInstanceState);
         init();
         setListener();
         setData();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        if (AppConfig.isDisabled) {
+            switch (AppConfig.eventType) {
+                case 10:
+                    CommonUtils.showCustomDialogSignle2(this, "", AppConfig.eventMsg, new DSingleDialogCallback() {
+                        @Override
+                        public void onPositiveButtonClick(String editText) {
+                            logout();
+                            AppConfig.isDisabled = false;
+                            AppConfig.eventType = 0;
+                            AppConfig.eventMsg = "";
+                        }
+                    });
+                    break;
+            }
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 
     /**
@@ -118,4 +159,66 @@ public abstract class BaseActivity extends FragmentActivity {
             }
         }
     }
+
+    //设置别名
+    protected void setAlias() {
+        // 调用 Handler 来异步设置别名
+        aliasHandler.sendMessage(aliasHandler.obtainMessage(MSG_SET_ALIAS, AppConfig.registrationId));
+    }
+
+    //设置别名回调方法
+    private final TagAliasCallback mAliasCallback = new TagAliasCallback() {
+        @Override
+        public void gotResult(int code, String alias, Set<String> tags) {
+            switch (code) {
+                case 0://成功
+                    // 建议这里往 SharePreference 里写一个成功设置的状态。成功设置一次后，以后不必再次设置了。
+                    break;
+                case 6002://超时
+                    // 延迟 60 秒来调用 Handler 设置别名
+                    aliasHandler.sendMessageDelayed(aliasHandler.obtainMessage(MSG_SET_ALIAS, alias), 1000 * 60);
+                    break;
+            }
+        }
+    };
+
+    //处理设置别名消息
+    private final Handler aliasHandler = new Handler() {
+        @Override
+        public void handleMessage(android.os.Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case MSG_SET_ALIAS:
+                    // 调用 JPush 接口来设置别名。
+                    JPushInterface.setAliasAndTags(getApplicationContext(),
+                            (String) msg.obj,
+                            null,
+                            mAliasCallback);
+                    break;
+            }
+        }
+    };
+
+    public void onEvent(OnlineExceptionEvent onlineExceptionEvent) {
+        if (onlineExceptionEvent.isFlag()) {
+            CommonUtils.showCustomDialogSignle2(this, "", onlineExceptionEvent.getMessage(), new DSingleDialogCallback() {
+                @Override
+                public void onPositiveButtonClick(String editText) {
+                    logout();
+                }
+            });
+        }
+    }
+
+    private void logout() {
+        AppConfig.registrationId = "";
+        AppConfig.loginName = "";
+        AppConfig.password = "";
+        AppConfig.userInfoBean = null;
+        DataCleanManager.cleanSharedPreference(this);
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+        this.finish();
+    }
+
 }

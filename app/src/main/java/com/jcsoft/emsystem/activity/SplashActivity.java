@@ -98,9 +98,13 @@ public class SplashActivity extends BaseActivity {
                                 ResponseBean<UserInfoBean> responseBean = new Gson().fromJson(result, new TypeToken<ResponseBean<UserInfoBean>>() {
                                 }.getType());
                                 if (responseBean.getCode() == 1) {
+                                    //保存数据信息
                                     AppConfig.userInfoBean = responseBean.getData();
                                     preferencesUtil.setPrefString(SplashActivity.this, AppConfig.LOGIN_NAME, loginName);
                                     preferencesUtil.setPrefString(SplashActivity.this, AppConfig.PASSWORD, CommonUtils.MD5(password));
+                                    //注册极光推送别名
+                                    setAlias();
+                                    //进入首页
                                     goToActivity(MainActivity.class);
                                 } else {
                                     goToActivity(LoginActivity.class);

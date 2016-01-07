@@ -17,4 +17,8 @@ public class AppConfig {
     public static String PASSWORD = "password";
     //当前用户信息
     public static UserInfoBean userInfoBean;
+    //用户被禁用或删除
+    public static boolean isDisabled;
+    public static int eventType;
+    public static String eventMsg;
 }

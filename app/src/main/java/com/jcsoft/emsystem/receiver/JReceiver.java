@@ -6,7 +6,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.google.gson.Gson;
+import com.jcsoft.emsystem.bean.ReceiveExtraBean;
 import com.jcsoft.emsystem.constants.AppConfig;
+import com.jcsoft.emsystem.event.OnlineExceptionEvent;
+import com.jcsoft.emsystem.utils.CommonUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -14,6 +18,7 @@ import org.json.JSONObject;
 import java.util.Iterator;
 
 import cn.jpush.android.api.JPushInterface;
+import de.greenrobot.event.EventBus;
 
 /**
  * 自定义接收器
@@ -35,8 +40,40 @@ public class JReceiver extends BroadcastReceiver {
             //保存推送的ID
             AppConfig.registrationId = regId;
         } else if (JPushInterface.ACTION_MESSAGE_RECEIVED.equals(intent.getAction())) {
-            Log.d(TAG, "[MyReceiver] 接收到推送下来的自定义消息: " + bundle.getString(JPushInterface.EXTRA_MESSAGE));
-            processCustomMessage(context, bundle);
+            String extra = bundle.getString(JPushInterface.EXTRA_EXTRA);
+            ReceiveExtraBean receiveExtraBean = new Gson().fromJson(extra, ReceiveExtraBean.class);
+            int eventType = receiveExtraBean.eventType;
+            String msg = bundle.getString(JPushInterface.EXTRA_MESSAGE);
+            //如果在后台运行
+            if (CommonUtils.isBackground(context)) {
+                AppConfig.isDisabled = true;
+                AppConfig.eventType = eventType;
+                AppConfig.eventMsg = msg;
+            } else {
+                switch (eventType) {
+                    case 1://锁车成功
+                        break;
+                    case 2://锁车超时
+                        break;
+                    case 3://解锁成功
+                        break;
+                    case 4://解锁超时
+                        break;
+                    case 5://电子围栏开启成功
+                        break;
+                    case 6://电子围栏开启超时
+                        break;
+                    case 7://电子围栏关闭成功
+                        break;
+                    case 8://电子围栏关闭超时
+                        break;
+                    case 9://报警消息
+                        break;
+                    case 10://账号在其他设备登录被迫下线
+                        EventBus.getDefault().post(new OnlineExceptionEvent(true, "你的帐号已在其他地方登录，本地已经下线。"));
+                        break;
+                }
+            }
 
         } else if (JPushInterface.ACTION_NOTIFICATION_RECEIVED.equals(intent.getAction())) {
             Log.d(TAG, "[MyReceiver] 接收到推送下来的通知");

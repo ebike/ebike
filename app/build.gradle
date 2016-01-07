@@ -34,4 +34,5 @@ dependencies {
     compile files('libs/Android_Map_V2.7.20151124.jar')
     compile files('libs/jpush-android-2.0.5.jar')
     compile 'com.android.support:appcompat-v7:23.0.1'
+    compile 'de.greenrobot:eventbus:2.4.0'
 }

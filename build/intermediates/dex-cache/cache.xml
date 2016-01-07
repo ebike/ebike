@@ -2,32 +2,11 @@
 <items version="2" >
 
     <item
-        jar="/Users/huguangwen/Documents/Code/gitlab/ebike/app/libs/jpush-android-2.0.5.jar"
+        jar="/Users/huguangwen/.gradle/caches/modules-2/files-2.1/de.greenrobot/eventbus/2.4.0/ddd166d01b3158d1c00576d29f7ed15c030df719/eventbus-2.4.0.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="f2c821a0d13219a2e70490085c390bab03fb5953">
-        <dex dex="/Users/huguangwen/Documents/Code/gitlab/ebike/app/build/intermediates/pre-dexed/release/jpush-android-2.0.5-11bd2b757c889a766e50cfe363ea63b1308b6cc0.jar" />
-    </item>
-    <item
-        jar="/Users/huguangwen/Documents/Code/gitlab/ebike/app/libs/Android_Map_V2.7.20151124.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="2445bf37f89fbcd046db9bd82891bc9d6cc293ba">
-        <dex dex="/Users/huguangwen/Documents/Code/gitlab/ebike/app/build/intermediates/pre-dexed/release/Android_Map_V2.7.20151124-235cc0ab5f02acf29edb917039abe39c5a7eabfa.jar" />
-    </item>
-    <item
-        jar="/Users/huguangwen/Documents/Code/gitlab/ebike/app/libs/AMap_Location_v2.0.0_20151117.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="fbd0189f0d86bbfa558b2c2344ea3f3932a2ad35">
-        <dex dex="/Users/huguangwen/Documents/Code/gitlab/ebike/app/build/intermediates/pre-dexed/release/AMap_Location_v2.0.0_20151117-e27acff88e3c1d0b1838ae1c964567b848834fad.jar" />
-    </item>
-    <item
-        jar="/Users/huguangwen/Documents/Code/gitlab/ebike/app/libs/AMap_Services_V2.7.0_20151125.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="7eac53aff3958c7447c434fe376c8c978a2f9c5c">
-        <dex dex="/Users/huguangwen/Documents/Code/gitlab/ebike/app/build/intermediates/pre-dexed/release/AMap_Services_V2.7.0_20151125-f315c5271b58cf3e1426d678333bebff95c32295.jar" />
+        sha1="ddd166d01b3158d1c00576d29f7ed15c030df719">
+        <dex dex="/Users/huguangwen/Documents/Code/gitlab/ebike/app/build/intermediates/pre-dexed/debug/eventbus-2.4.0-0fb80b8084aaead876d71853758f447d5237d5be.jar" />
     </item>
 
 </items>

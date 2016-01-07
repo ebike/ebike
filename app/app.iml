@@ -96,6 +96,7 @@
     <orderEntry type="library" exported="" name="jpush-android-2.0.5" level="project" />
     <orderEntry type="library" exported="" name="gson-2.2.2" level="project" />
     <orderEntry type="library" exported="" name="Android_Map_V2.7.20151124" level="project" />
+    <orderEntry type="library" exported="" name="eventbus-2.4.0" level="project" />
     <orderEntry type="library" exported="" name="support-v4-23.0.1" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-23.0.1" level="project" />
     <orderEntry type="library" exported="" name="AMap_Location_v2.0.0_20151117" level="project" />
