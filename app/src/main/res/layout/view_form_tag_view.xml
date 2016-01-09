@@ -1,0 +1,54 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <View android:id="@+id/form_divider"
+        style="@style/style_base_line"/>
+
+    <TextView
+        android:id="@+id/form_tag"
+        android:layout_width="fill_parent"
+        android:layout_height="30dp"
+        android:background="@color/gray"
+        android:gravity="center_vertical"
+        android:paddingLeft="12dp"
+        android:layout_gravity="center_vertical"
+        android:textSize="16sp"
+        android:textColor="@color/dc_title_text"
+        android:text="查看名片" />
+
+    <View
+        style="@style/style_base_line"/>
+
+    <RelativeLayout
+        android:id="@+id/form_contact_card"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true"
+        android:padding="12dp"
+        android:descendantFocusability="blocksDescendants"
+        android:layout_above="@id/form_divider"
+        android:background="@drawable/camcard_selector"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/form_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:textSize="16sp"
+            android:textColor="@color/dc_title_text"
+            android:text="查看名片" />
+
+        <ImageView
+            android:id="@+id/form_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@mipmap/navigation" />
+
+    </RelativeLayout>
+</LinearLayout>
+

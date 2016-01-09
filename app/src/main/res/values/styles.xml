@@ -14,4 +14,61 @@
         <item name="android:backgroundDimEnabled">true</item>
     </style>
 
+
+    <!--基本样式-->
+    <style name="style_base_f">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="style_base_w">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="white_18" parent="@style/style_base_w">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="white_16" parent="@style/style_base_w">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="white_14" parent="@style/style_base_w">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="black_18" parent="@style/style_base_w">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="black_16" parent="@style/style_base_w">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="black_14" parent="@style/style_base_w">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="orange_16" parent="@style/style_base_w">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/orange_dark</item>
+    </style>
+
+    <style name="orange_14" parent="@style/style_base_w">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/orange_dark</item>
+    </style>
+
+    <style name="style_base_line">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/dc_view_line</item>
+    </style>
 </resources>

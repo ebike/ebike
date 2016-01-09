@@ -1,0 +1,62 @@
+<resources>
+    <declare-styleable name="FormView">
+        <attr name="form_tag" format="string" />
+        <attr name="form_text" format="reference|string" />
+        <attr name="form_hint" format="reference|string" />
+        <attr name="form_divider" format="boolean" />
+        <attr name="form_array" format="reference" />
+        <attr name="form_value_array" format="reference" />
+        <attr name="form_intent" format="string" />
+        <attr name="form_prompt" format="string" />
+        <attr name="form_icon" format="reference" />
+        <attr name="form_hasdata" format="boolean" />
+        <attr name="form_input_type" format="integer" />
+        <attr name="form_header_type" format="integer" />
+        <attr name="form_arrow_icon" format="integer"></attr>
+        <attr name="form_attachments_tag" format="string" />
+        <attr name="form_has_text" format="boolean" />
+        <attr name="form_has_arrow" format="boolean" />
+        <attr name="form_clickable" format="boolean" />
+        <attr name="form_isright" format="boolean" />
+        <!--用于判断 电话，座机，发送短信，网址-->
+        <attr name="form_action_type">
+            <enum name="none" value="-1" />
+            <enum name="mobile" value="0" />
+            <enum name="msg" value="1" />
+            <enum name="tel" value="2" />
+            <enum name="web" value="3" />
+            <enum name="email" value="4" />
+            <enum name="locate" value="5" />
+        </attr>
+
+        <attr name="form_datetime_picker_type">
+            <enum name="date" value="0" />
+            <enum name="time" value="1" />
+            <enum name="datetime" value="2" />
+        </attr>
+        <!--是否需要验证-->
+        <attr name="form_is_verification" format="boolean" />
+
+    </declare-styleable>
+
+    <declare-styleable name="TopBarView">
+        <attr name="has_left" format="boolean" />
+        <attr name="left_text" format="string" />
+        <attr name="left_icon" format="reference" />
+        <attr name="has_left_clickable" format="boolean" />
+        <attr name="has_center" format="boolean" />
+        <attr name="center_text" format="string" />
+        <attr name="has_right" format="boolean" />
+        <attr name="right_text" format="string" />
+        <attr name="right_icon" format="reference" />
+        <attr name="has_right_clickable" format="boolean" />
+        <attr name="back_is_finish" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="InformationView">
+        <attr name="label_text" format="string" />
+        <attr name="content_text" format="string" />
+        <attr name="content_icon" format="reference" />
+        <attr name="has_clickable" format="boolean" />
+    </declare-styleable>
+</resources>

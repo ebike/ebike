@@ -1,0 +1,104 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="9dp"
+        android:orientation="vertical"
+        android:paddingLeft="16dp">
+
+        <LinearLayout
+            android:id="@+id/form_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:minHeight="48dp"
+            android:paddingBottom="6dip"
+            android:paddingRight="6dip"
+            android:paddingTop="6dip">
+
+            <TextView
+                android:id="@+id/form_tag"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="3"
+                android:text="任务主题"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/form_text"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="21dp"
+                android:layout_weight="7"
+                android:textColor="@color/dc_context_text"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/form_content_new"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:paddingBottom="6dip"
+            android:paddingRight="6dip"
+            android:paddingTop="6dip"
+            android:visibility="gone">
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/form_tag_new"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="任务主题"
+                    android:textColor="@color/dc_title_text"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/form_sub_tag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="7dp"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/form_text_new"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="24dp"
+                android:textColor="@color/dc_context_text"
+                android:textColorHint="@color/bold_gray"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/form_divider"
+            style="@style/style_base_line" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/form_image_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="9dp"
+        android:layout_marginRight="16dp"
+        android:visibility="visible" />
+</RelativeLayout>
+

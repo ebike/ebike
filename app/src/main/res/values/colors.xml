@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="white">#ffffff</color>
+    <color name="black">@android:color/black</color> 
     <color name="gray_dark">#1c1c1c</color>
+    <color name="color_gray">#a2a2a2</color>
     <color name="login_line">#ffa043</color> 
     <color name="login_text_disabled">#fc5823</color>
+    <color name="dc_title_text">#999999</color> 
+    <color name="dc_context_text">#1c1c1c</color> 
+    <color name="orange_dark">#f47b2a</color>
+    <color name="dc_view_line">#e6e6e6</color> 
+    <color name="list_selector_disable">#aaa</color>
+    <color name="gray">#eaebed</color>
+    <color name="bold_gray">#d1d1d1</color>
 
     <!-- topbar -->
     <color name="topbar_bg">#fc5823</color>

@@ -6,8 +6,8 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.CameraUpdate;
@@ -35,6 +35,8 @@ import com.jcsoft.emsystem.database.ConfigService;
 import com.jcsoft.emsystem.http.DHttpUtils;
 import com.jcsoft.emsystem.http.HttpConstants;
 import com.jcsoft.emsystem.utils.CommonUtils;
+import com.jcsoft.emsystem.view.formview.FormTextDateTimeView;
+import com.jcsoft.emsystem.view.formview.FormViewUtils;
 
 import org.xutils.http.RequestParams;
 import org.xutils.view.annotation.ViewInject;
@@ -51,8 +53,12 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
     MapView mapView;
     @ViewInject(R.id.iv_trajectory)
     ImageView trajectoryImageView;
-    EditText startTimeEditText;
-    EditText endTimeEditText;
+    //轨迹查询时间布局
+    LinearLayout dateLayout;
+    //轨迹查询开始时间
+    FormTextDateTimeView startDateView;
+    //轨迹查询结束时间
+    FormTextDateTimeView endDateView;
     private AMap aMap;
     private UiSettings uiSettings;
     //标志位，标志已经初始化完成
@@ -206,18 +212,14 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.iv_trajectory://轨迹
-                dialogView = inflater.inflate(R.layout.view_custom_dialog_content1, null, false);
-                startTimeEditText = (EditText) dialogView.findViewById(R.id.et_start_time);
-                endTimeEditText = (EditText) dialogView.findViewById(R.id.et_end_time);
-                //初始化开始时间和结束时间
-                startTimeEditText.setText(CommonUtils.getYesterdayDateString("yyyy-MM-dd HH:mm"));
-                endTimeEditText.setText(CommonUtils.getCurrentDateString("yyyy-MM-dd HH:mm"));
-                CommonUtils.showCustomDialog1(getActivity(), "", dialogView, new DSingleDialogCallback() {
+                //选择时间弹出框
+                initDateWindow();
+                CommonUtils.showCustomDialog1(getActivity(), "", dateLayout, new DSingleDialogCallback() {
                     @Override
                     public void onPositiveButtonClick(String editText) {
                         // 发送命令到服务器，在获取了轨迹信息之后，展现在地图上
-                        String startTime = startTimeEditText.getText().toString();
-                        String endTime = endTimeEditText.getText().toString();
+                        String startTime = startDateView.getDateText();
+                        String endTime = endDateView.getDateText();
                         RequestParams params = new RequestParams(HttpConstants.getTrackInfoUrl(startTime, endTime));
                         DHttpUtils.get_String((MainActivity) getActivity(), true, params, new DCommonCallback<String>() {
                             @Override
@@ -288,6 +290,7 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
                                     CameraPosition cp = new CameraPosition(points.get(0), 17, 0, 0);
                                     CameraUpdate center = CameraUpdateFactory.newCameraPosition(cp);
                                     aMap.moveCamera(center);
+                                    handler.removeCallbacks(LocationFragment.this); //停止刷新
                                 } else {
                                     showShortText(responseBean.getErrmsg());
                                 }
@@ -313,11 +316,30 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
         options.icon(bd);
         return aMap.addMarker(options);
     }
+
     //在地图上添加轨迹实线
     private void drawTrack(List<LatLng> points) {
         PolylineOptions options = new PolylineOptions();
         options.addAll(points);
         options.color(Color.argb(255, 47, 172, 245));
         aMap.addPolyline(options);
+    }
+
+    //选择时间弹出框
+    private void initDateWindow() {
+        //时间布局
+        dateLayout = new LinearLayout(getActivity());
+        dateLayout.setOrientation(LinearLayout.VERTICAL);
+        dateLayout.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        //开始时间
+        startDateView = FormViewUtils.createFormTextDateTimeView(getActivity(), "开始时间", 2, true, true, true);
+        startDateView.setDateText(CommonUtils.getYesterdayDateString("yyyy-MM-dd HH:mm"));
+        startDateView.setmFormViewOnclick(true);
+        dateLayout.addView(startDateView);
+        //结束时间
+        endDateView = FormViewUtils.createFormTextDateTimeView(getActivity(), "结束时间", 2, true, true, true);
+        endDateView.setDateText(CommonUtils.getCurrentDateString("yyyy-MM-dd HH:mm"));
+        endDateView.setmFormViewOnclick(true);
+        dateLayout.addView(endDateView);
     }
 }

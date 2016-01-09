@@ -1,0 +1,68 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:minHeight="42dp"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/form_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:clickable="true"
+        android:minHeight="55dp"
+        android:paddingBottom="6dp"
+        android:paddingTop="6dp">
+
+        <ImageView
+            android:id="@+id/iv_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="18dp"
+            android:src="@mipmap/navigation" />
+
+        <TextView
+            android:id="@+id/formview_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="9dp"
+            android:layout_toLeftOf="@+id/iv_arrow"
+            android:text="请选择"
+            android:textColor="@color/color_gray"
+            android:textSize="14sp" />
+
+        <LinearLayout
+            android:id="@+id/form_content_new"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/iv_arrow"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/formview_tag"
+                style="@style/orange_16"
+                android:layout_gravity="center_vertical" />
+
+            <TextView
+                android:id="@+id/formview_text"
+                style="@style/black_16"
+                android:layout_gravity="center_vertical"
+                android:visibility="gone" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/formview_baseline"
+        style="@style/style_base_line"
+        android:layout_marginLeft="16dp" />
+
+</LinearLayout>
+

@@ -19,6 +19,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.PopupWindow;
+import android.widget.Toast;
 
 import com.jcsoft.emsystem.R;
 import com.jcsoft.emsystem.callback.DDoubleDialogCallback;
@@ -611,5 +612,11 @@ public class CommonUtils {
             }
         }
         return false;
+    }
+    /**
+     * 短文本提示
+     */
+    public static void showShortText(Context context, String text) {
+        Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
     }
 }

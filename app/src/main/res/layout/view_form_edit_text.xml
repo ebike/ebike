@@ -1,0 +1,65 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:minHeight="42dp"
+    android:orientation="vertical"
+    android:paddingLeft="16dp">
+
+    <RelativeLayout
+        android:id="@+id/form_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="55dp"
+        android:orientation="vertical"
+        android:paddingBottom="6dp"
+        android:paddingRight="16dip"
+        android:paddingTop="6dp">
+
+        <TextView
+            android:id="@+id/form_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="18dp"
+            android:text="必输"
+            android:textColor="@color/orange_dark"
+            android:textSize="14sp"
+            android:visibility="visible" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/form_hint"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/form_tag"
+                style="@style/orange_14"
+                android:layout_gravity="center_vertical"
+                android:text="任务主题"
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/form_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:background="@null"
+                android:singleLine="false"
+                android:textColor="@color/black"
+                android:textColorHint="@color/orange_dark"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/form_divider"
+        style="@style/style_base_line" />
+</LinearLayout>
+

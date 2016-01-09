@@ -1,0 +1,22 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/view_top_line"
+        style="@style/style_base_line" />
+
+    <TextView
+        android:id="@+id/formview_area"
+        style="@style/black_14"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="6dp"
+        android:layout_marginTop="6dp"
+        android:paddingLeft="12dp"
+        android:textColor="@color/dc_title_text" />
+
+    <View
+        android:id="@+id/view_bottom_line"
+        style="@style/style_base_line" />
+</LinearLayout>
