@@ -10,6 +10,7 @@ import com.google.gson.Gson;
 import com.jcsoft.emsystem.bean.ReceiveExtraBean;
 import com.jcsoft.emsystem.constants.AppConfig;
 import com.jcsoft.emsystem.event.OnlineExceptionEvent;
+import com.jcsoft.emsystem.event.RemoteLockCarEvent;
 import com.jcsoft.emsystem.utils.CommonUtils;
 
 import org.json.JSONException;
@@ -22,7 +23,7 @@ import de.greenrobot.event.EventBus;
 
 /**
  * 自定义接收器
- * <p/>
+ * <p>
  * 如果不定义这个 Receiver，则：
  * 1) 默认用户会打开主界面
  * 2) 接收不到自定义消息
@@ -52,12 +53,16 @@ public class JReceiver extends BroadcastReceiver {
             } else {
                 switch (eventType) {
                     case 1://锁车成功
+                        EventBus.getDefault().post(new RemoteLockCarEvent("1", msg));
                         break;
                     case 2://锁车超时
+                        EventBus.getDefault().post(new RemoteLockCarEvent("0", msg));
                         break;
                     case 3://解锁成功
+                        EventBus.getDefault().post(new RemoteLockCarEvent("0", msg));
                         break;
                     case 4://解锁超时
+                        EventBus.getDefault().post(new RemoteLockCarEvent("1", msg));
                         break;
                     case 5://电子围栏开启成功
                         break;
@@ -70,7 +75,7 @@ public class JReceiver extends BroadcastReceiver {
                     case 9://报警消息
                         break;
                     case 10://账号在其他设备登录被迫下线
-                        EventBus.getDefault().post(new OnlineExceptionEvent(true, "你的帐号已在其他地方登录，本地已经下线。"));
+                        EventBus.getDefault().post(new OnlineExceptionEvent(true, msg));
                         break;
                 }
             }

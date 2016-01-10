@@ -1,12 +1,18 @@
 package com.jcsoft.emsystem.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.jcsoft.emsystem.R;
+import com.jcsoft.emsystem.activity.MainActivity;
+import com.jcsoft.emsystem.callback.DCommonCallback;
+import com.jcsoft.emsystem.http.DHttpUtils;
+import com.jcsoft.emsystem.http.HttpConstants;
 
+import org.xutils.http.RequestParams;
 import org.xutils.x;
 
 /**
@@ -24,12 +30,24 @@ public class MyFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_location, container, false);
         x.view().inject(this, view);
         isPrepared = true;
-
+        //获取车辆基本信息
+        getCarInfo();
         return view;
     }
 
     @Override
     protected void requestDatas() {
 
+    }
+
+    //获取车辆基本信息
+    private void getCarInfo() {
+        RequestParams params = new RequestParams(HttpConstants.getCarInfoUrl());
+        DHttpUtils.get_String((MainActivity) getActivity(), false, params, new DCommonCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+                Log.e("getCarInfo", "result:" + result);
+            }
+        });
     }
 }

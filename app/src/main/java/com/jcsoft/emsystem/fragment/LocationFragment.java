@@ -32,6 +32,7 @@ import com.jcsoft.emsystem.callback.DCommonCallback;
 import com.jcsoft.emsystem.callback.DSingleDialogCallback;
 import com.jcsoft.emsystem.constants.JCConstValues;
 import com.jcsoft.emsystem.database.ConfigService;
+import com.jcsoft.emsystem.event.RemoteLockCarEvent;
 import com.jcsoft.emsystem.http.DHttpUtils;
 import com.jcsoft.emsystem.http.HttpConstants;
 import com.jcsoft.emsystem.utils.CommonUtils;
@@ -45,14 +46,21 @@ import org.xutils.x;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.greenrobot.event.EventBus;
+
 /**
+ * 卫星定位
  * Created by jimmy on 15/12/28.
  */
 public class LocationFragment extends BaseFragment implements Runnable, View.OnClickListener {
     @ViewInject(R.id.map_view)
     MapView mapView;
+    @ViewInject(R.id.iv_lock)
+    ImageView lockImageView;
     @ViewInject(R.id.iv_trajectory)
     ImageView trajectoryImageView;
+    @ViewInject(R.id.iv_fence)
+    ImageView fenceImageView;
     //轨迹查询时间布局
     LinearLayout dateLayout;
     //轨迹查询开始时间
@@ -64,15 +72,15 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
     //标志位，标志已经初始化完成
     private boolean isPrepared;
     private Handler handler = new Handler();
-    private LayoutInflater inflater;
-    //查询轨迹时弹出框内部View
-    private View dialogView;
+    private boolean hasTrack;
+    //车辆位置信息
+    private LocInfoBean locInfoBean;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_location, container, false);
         x.view().inject(this, view);
-        this.inflater = inflater;
+        EventBus.getDefault().register(this);
         isPrepared = true;
         mapView.onCreate(savedInstanceState);
         init();
@@ -83,7 +91,9 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
     }
 
     private void setListeners() {
+        lockImageView.setOnClickListener(this);
         trajectoryImageView.setOnClickListener(this);
+        fenceImageView.setOnClickListener(this);
     }
 
     /**
@@ -130,14 +140,17 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
         if (!isPrepared || !isVisible || hasLoadedOnce || !isAdded()) {
             return;
         }
+        if (hasTrack) {
+            aMap.clear();
+        }
         RequestParams params = new RequestParams(HttpConstants.getLocInfoUrl());
         DHttpUtils.get_String((MainActivity) getActivity(), true, params, new DCommonCallback<String>() {
             @Override
             public void onSuccess(String result) {
                 ResponseBean<LocInfoBean> responseBean = new Gson().fromJson(result, new TypeToken<ResponseBean<LocInfoBean>>() {
                 }.getType());
-                if (responseBean.getCode() == 1) {
-                    LocInfoBean locInfoBean = responseBean.getData();
+                if (responseBean != null && responseBean.getCode() == 1) {
+                    locInfoBean = responseBean.getData();
                     if (locInfoBean.getLon() > 0 && locInfoBean.getLat() > 0) {
                         //添加障碍物
                         MarkerOptions markerOptions = new MarkerOptions();
@@ -153,6 +166,18 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
                         aMap.addMarker(markerOptions).showInfoWindow();
                         CameraUpdate cu = CameraUpdateFactory.changeLatLng(position);
                         aMap.moveCamera(cu);
+                        //判断锁车状态
+                        if (locInfoBean.getLock().equals("1")) {
+                            lockImageView.setImageResource(R.mipmap.voice_lock);
+                        } else {
+                            lockImageView.setImageResource(R.mipmap.voice_unlock);
+                        }
+                        //判断电子围栏
+                        if (locInfoBean.isOpenVf()) {
+                            fenceImageView.setImageResource(R.mipmap.fence);
+                        } else {
+                            fenceImageView.setImageResource(R.mipmap.fence);
+                        }
                     } else {
                         showShortText("定位失败");
                     }
@@ -170,6 +195,7 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
     public void onResume() {
         super.onResume();
         mapView.onResume();
+        aMap.clear();
         //每20秒刷新一次电动车位置
         handler.postDelayed(this, 1000 * 20);
     }
@@ -200,6 +226,7 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
         super.onDestroy();
         mapView.onDestroy();
         handler.removeCallbacks(this); //停止刷新
+        EventBus.getDefault().unregister(this);
     }
 
     @Override
@@ -211,6 +238,45 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.iv_lock://远程锁车
+                if (locInfoBean.getLock().equals("1")) {
+                    CommonUtils.showCustomDialog0(getActivity(), "提示", "你确定要解除对电动车的锁定吗？", new DSingleDialogCallback() {
+                        @Override
+                        public void onPositiveButtonClick(String editText) {
+                            RequestParams params = new RequestParams(HttpConstants.getUnLockBikeUrl());
+                            DHttpUtils.get_String((MainActivity) getActivity(), true, params, new DCommonCallback<String>() {
+                                @Override
+                                public void onSuccess(String result) {
+                                    ResponseBean<String> responseBean = new Gson().fromJson(result, new TypeToken<ResponseBean<String>>() {
+                                    }.getType());
+                                    if (responseBean != null) {
+                                        showShortText(responseBean.getErrmsg());
+                                        lockImageView.setEnabled(false);
+                                    }
+                                }
+                            });
+                        }
+                    });
+                } else {
+                    CommonUtils.showCustomDialog0(getActivity(), "提示", "你确定要锁定电动车吗？", new DSingleDialogCallback() {
+                        @Override
+                        public void onPositiveButtonClick(String editText) {
+                            RequestParams params = new RequestParams(HttpConstants.getlockBikeUrl());
+                            DHttpUtils.get_String((MainActivity) getActivity(), true, params, new DCommonCallback<String>() {
+                                @Override
+                                public void onSuccess(String result) {
+                                    ResponseBean<String> responseBean = new Gson().fromJson(result, new TypeToken<ResponseBean<String>>() {
+                                    }.getType());
+                                    if (responseBean != null) {
+                                        showShortText(responseBean.getErrmsg());
+                                        lockImageView.setEnabled(false);
+                                    }
+                                }
+                            });
+                        }
+                    });
+                }
+                break;
             case R.id.iv_trajectory://轨迹
                 //选择时间弹出框
                 initDateWindow();
@@ -226,7 +292,8 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
                             public void onSuccess(String result) {
                                 ResponseBean<List<TrackBean>> responseBean = new Gson().fromJson(result, new TypeToken<ResponseBean<List<TrackBean>>>() {
                                 }.getType());
-                                if (responseBean.getCode() == 1) {
+                                if (responseBean != null && responseBean.getCode() == 1) {
+                                    hasTrack = true;
                                     if (responseBean.getData().size() <= 0) {
                                         return;
                                     }
@@ -259,13 +326,6 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
                                                     trackBean.getSatelliteTime(), trackBean.getSpeed(),
                                                     R.mipmap.point, false);
                                         }
-//                                        if (!isGps) {
-//                                            // 如果是基站定位，则在每个点上画一个红色圈
-//                                            addMarkerToMap(point,
-//                                                    getResources().getString(R.string.txt_track_prompt),
-//                                                    trackBean.getSatelliteTime(), trackBean.getSpeed(),
-//                                                    R.mipmap.point_e, false);
-//                                        }
                                         i++;
                                     }
                                     if (i == 0) {
@@ -299,6 +359,53 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
 
                     }
                 });
+                break;
+            case R.id.iv_fence://电子围栏
+                if (locInfoBean.isOpenVf()) {
+                    CommonUtils.showCustomDialog0(getActivity(), "提示", "您确定要关闭电子围栏吗？", new DSingleDialogCallback() {
+                        @Override
+                        public void onPositiveButtonClick(String editText) {
+                            RequestParams params = new RequestParams(HttpConstants.getcloseVfUrl());
+                            DHttpUtils.get_String((MainActivity) getActivity(), true, params, new DCommonCallback<String>() {
+                                @Override
+                                public void onSuccess(String result) {
+                                    ResponseBean<String> responseBean = new Gson().fromJson(result, new TypeToken<ResponseBean<String>>() {
+                                    }.getType());
+                                    if (responseBean != null) {
+                                        showShortText(responseBean.getErrmsg());
+                                        fenceImageView.setEnabled(false);
+                                    }
+                                }
+                            });
+                        }
+                    });
+                } else {
+//                    CommonUtils.showCustomDialog0(getActivity(), "提示", "您确定要开启电子围栏吗？", new DSingleDialogCallback() {
+//                        @Override
+//                        public void onPositiveButtonClick(String editText) {
+//                            String vfRangeStr = ConfigService.instance()
+//                                    .getConfigValue(JCConstValues.S_VFRange);
+//                            if (vfRangeStr == null || vfRangeStr.length() == 0) {
+//                                // 系统中暂无此值，操作一次数据库
+//                                ConfigService.instance().insertConfigValue(
+//                                        JCConstValues.S_VFRange, "100");
+//                                vfRangeStr = "100";
+//                            }
+//                            RequestParams params = new RequestParams(HttpConstants.getcloseVfUrl());
+//                            DHttpUtils.get_String((MainActivity) getActivity(), true, params, new DCommonCallback<String>() {
+//                                @Override
+//                                public void onSuccess(String result) {
+//                                    ResponseBean<String> responseBean = new Gson().fromJson(result, new TypeToken<ResponseBean<String>>() {
+//                                    }.getType());
+//                                    if (responseBean != null) {
+//                                        showShortText(responseBean.getErrmsg());
+//                                        fenceImageView.setEnabled(false);
+//                                    }
+//                                }
+//                            });
+//                        }
+//                    });
+                }
                 break;
         }
     }
@@ -342,4 +449,31 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
         endDateView.setmFormViewOnclick(true);
         dateLayout.addView(endDateView);
     }
+
+    //处理远程锁车推送
+    public void onEvent(RemoteLockCarEvent event) {
+        if (event != null) {
+            if (event.getIsLock().equals("1")) {
+                lockImageView.setImageResource(R.mipmap.voice_lock);
+            } else {
+                lockImageView.setImageResource(R.mipmap.voice_unlock);
+            }
+            lockImageView.setEnabled(true);
+            showShortText(event.getMsg());
+        }
+    }
+
+    //处理远程锁车推送
+//    public void onEvent(RemoteLockCarEvent event) {
+//        if (event != null) {
+//            if (event.getIsLock().equals("1")) {
+//                lockImageView.setImageResource(R.mipmap.voice_lock);
+//            } else {
+//                lockImageView.setImageResource(R.mipmap.voice_unlock);
+//            }
+//            lockImageView.setEnabled(true);
+//            showShortText(event.getMsg());
+//        }
+//    }
+
 }

@@ -42,11 +42,35 @@ public class HttpConstants {
         return sb.toString().replace(" ", "%20");
     }
 
-    //
-//    public static String getCarInfoUrl(){
-//        StringBuffer sb = new StringBuffer(baseUrl);
-//        sb.append("/user/getCarInfo.do");
-//        sb.append("?carId=").append(AppConfig.userInfoBean.getCarId());
-//        return sb.toString();
-//    }
+    //返回车辆基本信息
+    public static String getCarInfoUrl() {
+        StringBuffer sb = new StringBuffer(baseUrl);
+        sb.append("/user/getCarInfo.do");
+        sb.append("?carId=").append(AppConfig.userInfoBean.getCarId());
+        return sb.toString();
+    }
+
+    //远程锁车
+    public static String getlockBikeUrl(){
+        StringBuffer sb = new StringBuffer(baseUrl);
+        sb.append("/lock/lockBike.do");
+        sb.append("?carId=").append(AppConfig.userInfoBean.getCarId());
+        return sb.toString();
+    }
+
+    //远程解锁
+    public static String getUnLockBikeUrl(){
+        StringBuffer sb = new StringBuffer(baseUrl);
+        sb.append("/lock/unLockBike.do");
+        sb.append("?carId=").append(AppConfig.userInfoBean.getCarId());
+        return sb.toString();
+    }
+
+    //关闭电子围栏
+    public static  String getcloseVfUrl(){
+        StringBuffer sb = new StringBuffer(baseUrl);
+        sb.append("/vf/closeVf.do");
+        sb.append("?carId=").append(AppConfig.userInfoBean.getCarId());
+        return sb.toString();
+    }
 }
