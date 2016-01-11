@@ -1,6 +1,10 @@
 package com.jcsoft.emsystem.fragment;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Color;
+import android.location.Location;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -8,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.CameraUpdate;
@@ -17,25 +22,38 @@ import com.amap.api.maps.UiSettings;
 import com.amap.api.maps.model.BitmapDescriptor;
 import com.amap.api.maps.model.BitmapDescriptorFactory;
 import com.amap.api.maps.model.CameraPosition;
+import com.amap.api.maps.model.CircleOptions;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.maps.model.PolylineOptions;
+import com.amap.api.navi.AMapNavi;
+import com.amap.api.navi.AMapNaviListener;
+import com.amap.api.navi.model.AMapNaviInfo;
+import com.amap.api.navi.model.AMapNaviLocation;
+import com.amap.api.navi.model.NaviInfo;
+import com.amap.api.navi.model.NaviLatLng;
+import com.amap.api.services.core.LatLonPoint;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jcsoft.emsystem.R;
 import com.jcsoft.emsystem.activity.MainActivity;
+import com.jcsoft.emsystem.activity.SimpleNaviActivity;
 import com.jcsoft.emsystem.base.LocInfoBean;
 import com.jcsoft.emsystem.bean.ResponseBean;
 import com.jcsoft.emsystem.bean.TrackBean;
 import com.jcsoft.emsystem.callback.DCommonCallback;
 import com.jcsoft.emsystem.callback.DSingleDialogCallback;
+import com.jcsoft.emsystem.client.JCLocationManager;
 import com.jcsoft.emsystem.constants.JCConstValues;
 import com.jcsoft.emsystem.database.ConfigService;
 import com.jcsoft.emsystem.event.RemoteLockCarEvent;
+import com.jcsoft.emsystem.event.StopNaviEvent;
 import com.jcsoft.emsystem.http.DHttpUtils;
 import com.jcsoft.emsystem.http.HttpConstants;
+import com.jcsoft.emsystem.map.TTSController;
 import com.jcsoft.emsystem.utils.CommonUtils;
+import com.jcsoft.emsystem.utils.Utils;
 import com.jcsoft.emsystem.view.formview.FormTextDateTimeView;
 import com.jcsoft.emsystem.view.formview.FormViewUtils;
 
@@ -43,8 +61,11 @@ import org.xutils.http.RequestParams;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import de.greenrobot.event.EventBus;
 
@@ -52,7 +73,8 @@ import de.greenrobot.event.EventBus;
  * 卫星定位
  * Created by jimmy on 15/12/28.
  */
-public class LocationFragment extends BaseFragment implements Runnable, View.OnClickListener {
+public class LocationFragment extends BaseFragment implements Runnable, View.OnClickListener,
+        AMap.OnMapClickListener, AMapNaviListener, AMap.OnInfoWindowClickListener {
     @ViewInject(R.id.map_view)
     MapView mapView;
     @ViewInject(R.id.iv_lock)
@@ -61,6 +83,8 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
     ImageView trajectoryImageView;
     @ViewInject(R.id.iv_fence)
     ImageView fenceImageView;
+    @ViewInject(R.id.iv_nav)
+    ImageView navImageView;
     //轨迹查询时间布局
     LinearLayout dateLayout;
     //轨迹查询开始时间
@@ -75,6 +99,18 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
     private boolean hasTrack;
     //车辆位置信息
     private LocInfoBean locInfoBean;
+    //手动选择起点
+    private boolean _isChooseStart;
+    //手动选择起点的信息框
+    private Marker _startMarker;
+    //电动车上面信息框
+    private Marker marker;
+    private MediaPlayer _dingPlayer = null;
+    private Timer _dingPlayerTimer = null;
+    private int _dingPlayerTimerCount = 0;
+    private MediaPlayer _ding2Player = null;
+    private Timer _ding2PlayerTimer = null;
+    private int _ding2PlayerTimerCount = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -94,6 +130,7 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
         lockImageView.setOnClickListener(this);
         trajectoryImageView.setOnClickListener(this);
         fenceImageView.setOnClickListener(this);
+        navImageView.setOnClickListener(this);
     }
 
     /**
@@ -102,6 +139,8 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
     private void init() {
         if (aMap == null) {
             aMap = mapView.getMap();
+            aMap.setOnMapClickListener(this);
+            aMap.setOnInfoWindowClickListener(this);
             uiSettings = aMap.getUiSettings();
             //不显示缩放按键
             uiSettings.setZoomControlsEnabled(false);
@@ -109,6 +148,12 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
             uiSettings.setScaleControlsEnabled(true);
         }
         moveToCenter("36.68445", "117.126229");
+        // 初始化语音模块
+        TTSController ttsManager = TTSController.getInstance(getActivity());
+        ttsManager.init();
+        AMapNavi mapNavi = AMapNavi.getInstance(getActivity());
+        mapNavi.setAMapNaviListener(ttsManager);// 设置语音模块播报
+        mapNavi.setAMapNaviListener(this);
     }
 
     //设置地图中心点
@@ -163,7 +208,8 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
                         } else {
                             markerOptions.icon(BitmapDescriptorFactory.fromResource(R.mipmap.ebike_offline));
                         }
-                        aMap.addMarker(markerOptions).showInfoWindow();
+                        marker = aMap.addMarker(markerOptions);
+                        marker.showInfoWindow();
                         CameraUpdate cu = CameraUpdateFactory.changeLatLng(position);
                         aMap.moveCamera(cu);
                         //判断锁车状态
@@ -175,6 +221,9 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
                         //判断电子围栏
                         if (locInfoBean.isOpenVf()) {
                             fenceImageView.setImageResource(R.mipmap.fence);
+                            aMap.addCircle(new CircleOptions().center(position)
+                                    .radius(100).strokeColor(Color.RED).fillColor(Color.TRANSPARENT)
+                                    .strokeWidth(1));
                         } else {
                             fenceImageView.setImageResource(R.mipmap.fence);
                         }
@@ -207,6 +256,7 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
     public void onPause() {
         super.onPause();
         mapView.onPause();
+        TTSController.getInstance(getActivity()).startSpeaking();
     }
 
     /**
@@ -383,14 +433,6 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
 //                    CommonUtils.showCustomDialog0(getActivity(), "提示", "您确定要开启电子围栏吗？", new DSingleDialogCallback() {
 //                        @Override
 //                        public void onPositiveButtonClick(String editText) {
-//                            String vfRangeStr = ConfigService.instance()
-//                                    .getConfigValue(JCConstValues.S_VFRange);
-//                            if (vfRangeStr == null || vfRangeStr.length() == 0) {
-//                                // 系统中暂无此值，操作一次数据库
-//                                ConfigService.instance().insertConfigValue(
-//                                        JCConstValues.S_VFRange, "100");
-//                                vfRangeStr = "100";
-//                            }
 //                            RequestParams params = new RequestParams(HttpConstants.getcloseVfUrl());
 //                            DHttpUtils.get_String((MainActivity) getActivity(), true, params, new DCommonCallback<String>() {
 //                                @Override
@@ -407,8 +449,28 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
 //                    });
                 }
                 break;
+            case R.id.iv_nav://导航
+                marker.hideInfoWindow();
+                JCLocationManager.instance().start();
+                Location location = JCLocationManager.instance().getCurrentLocation();
+                LatLonPoint destPoint = new LatLonPoint(locInfoBean.getLat() / 1000000.0, locInfoBean.getLon() / 1000000.0);
+                if (location != null) {
+                    Toast.makeText(getActivity(), "正在进行路径计算...", Toast.LENGTH_LONG).show();
+                    LatLonPoint startPoint = new LatLonPoint(location.getLatitude(), location.getLongitude());
+                    startNavi(startPoint, destPoint);
+                } else {
+                    String text = "手机定位尚未完成，请先在地图上选择您的位置";
+                    TTSController.getInstance(getActivity()).playText(text);
+                    showShortText(text);
+                    _isChooseStart = true;
+                    CameraUpdate cu = CameraUpdateFactory.newLatLngZoom(
+                            new LatLng(destPoint.getLatitude(), destPoint.getLongitude()), 15);
+                    aMap.moveCamera(cu);
+                }
+                break;
         }
     }
+
 
     //在地图上添加轨迹蓝点
     private Marker addMarkerToMap(LatLng latlng, String devName, String time,
@@ -463,17 +525,296 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
         }
     }
 
-    //处理远程锁车推送
-//    public void onEvent(RemoteLockCarEvent event) {
-//        if (event != null) {
-//            if (event.getIsLock().equals("1")) {
-//                lockImageView.setImageResource(R.mipmap.voice_lock);
-//            } else {
-//                lockImageView.setImageResource(R.mipmap.voice_unlock);
-//            }
-//            lockImageView.setEnabled(true);
-//            showShortText(event.getMsg());
-//        }
-//    }
+    //停止导航
+    public void onEvent(StopNaviEvent event) {
+        if (event != null && event.isStopNavi()) {
+            this.stopNavi();
+        }
+    }
 
+    @Override
+    public void onMapClick(LatLng latLng) {
+        if (_isChooseStart) {
+            if (_startMarker != null) {
+                _startMarker.remove();
+            }
+            _startMarker = aMap.addMarker(new MarkerOptions()
+                    .anchor(0.5f, 1)
+                    .icon(BitmapDescriptorFactory
+                            .fromResource(R.mipmap.point)).position(latLng)
+                    .title("点击选择为起点"));
+            _startMarker.showInfoWindow();
+        }
+    }
+
+    @Override
+    public void onInitNaviFailure() {
+
+    }
+
+    @Override
+    public void onInitNaviSuccess() {
+
+    }
+
+    @Override
+    public void onStartNavi(int i) {
+
+    }
+
+    @Override
+    public void onTrafficStatusUpdate() {
+
+    }
+
+    @Override
+    public void onLocationChange(AMapNaviLocation newLoc) {
+        double d = calculateDistance(newLoc.getCoord().getLatitude(), newLoc.getCoord().getLongitude()
+                , locInfoBean.getLat() / 1000000.0f
+                , locInfoBean.getLon() / 1000000.0f);
+        checkToPlayDing(d);
+    }
+
+    @Override
+    public void onGetNavigationText(int i, String s) {
+
+    }
+
+    @Override
+    public void onEndEmulatorNavi() {
+
+    }
+
+    @Override
+    public void onArriveDestination() {
+
+    }
+
+    @Override
+    public void onCalculateRouteSuccess() {
+        Intent intent = new Intent(getActivity(),
+                SimpleNaviActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        Bundle bundle = new Bundle();
+        bundle.putInt(Utils.ACTIVITYINDEX, Utils.SIMPLEGPSNAVI);
+        bundle.putBoolean(Utils.ISEMULATOR, false);
+        intent.putExtras(bundle);
+        startActivity(intent);
+        ((MainActivity) getActivity()).dismissLoadingprogress();
+    }
+
+    @Override
+    public void onCalculateRouteFailure(int i) {
+        ((MainActivity) getActivity()).startLoadingProgress();
+    }
+
+    @Override
+    public void onReCalculateRouteForYaw() {
+
+    }
+
+    @Override
+    public void onReCalculateRouteForTrafficJam() {
+
+    }
+
+    @Override
+    public void onArrivedWayPoint(int i) {
+
+    }
+
+    @Override
+    public void onGpsOpenStatus(boolean b) {
+
+    }
+
+    @Override
+    public void onNaviInfoUpdated(AMapNaviInfo aMapNaviInfo) {
+
+    }
+
+    @Override
+    public void onNaviInfoUpdate(NaviInfo naviInfo) {
+
+    }
+
+    //开始导航
+    private void startNavi(LatLonPoint startPoint, LatLonPoint stopPoint) {
+        NaviLatLng startP = new NaviLatLng(startPoint.getLatitude(), startPoint.getLongitude());
+        NaviLatLng endP = new NaviLatLng(stopPoint.getLatitude(), stopPoint.getLongitude());
+        AMapNavi.getInstance(getActivity()).calculateWalkRoute(startP, endP);
+    }
+
+    @Override
+    public void onInfoWindowClick(Marker marker) {
+        marker.hideInfoWindow();
+        _isChooseStart = false;
+        if (_startMarker != null && _startMarker.equals(marker)) {
+            LatLonPoint startPoint = new LatLonPoint(_startMarker.getPosition().latitude, _startMarker.getPosition().longitude);
+            LatLonPoint destPoint = new LatLonPoint(locInfoBean.getLat() / 1000000.0, locInfoBean.getLon() / 1000000.0);
+            startNavi(startPoint, destPoint);
+            _startMarker.remove();
+            aMap.setTrafficEnabled(true);
+            return;
+        }
+    }
+
+    private double calculateDistance(double firstLat, double firstLon, double secondLat, double secondLon) {
+        double d = getDistance(firstLat, firstLon, secondLat, secondLon);
+        return d;
+    }
+
+    public static double getDistance(double lat1, double lng1, double lat2, double lng2) {
+        double radLat1 = rad(lat1);
+        double radLat2 = rad(lat2);
+        double difference = radLat1 - radLat2;
+        double mdifference = rad(lng1) - rad(lng2);
+        double distance = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(difference / 2), 2)
+                + Math.cos(radLat1) * Math.cos(radLat2)
+                * Math.pow(Math.sin(mdifference / 2), 2)));
+        distance = distance * 6378.137f;
+        distance = Math.round(distance * 10000) / 10.0f;
+
+        return distance;
+    }
+
+    private static double rad(double d) {
+        return d * Math.PI / 180.0;
+    }
+
+    @SuppressLint("DefaultLocale")
+    private void checkToPlayDing(double d) {
+        String dStr = String.format("%.2f米", d);
+        dStr = dStr.substring(0, dStr.indexOf("."));
+        showShortText("与车辆最后位置直线距离：" + dStr);
+        if (d > 40.0) {
+            if (_dingPlayerTimer != null) {
+                _dingPlayerTimer.cancel();
+            }
+
+            if (_ding2PlayerTimer != null) {
+                _ding2PlayerTimer.cancel();
+            }
+        } else if (d <= 40.0 && d > 10.0) //如果小于40米，播放声音"叮"
+        {
+            if (_ding2PlayerTimer != null) {
+                _ding2PlayerTimer.cancel();
+            }
+            playDing(1000);
+        } else if (d <= 10.0) {
+            if (_dingPlayerTimer != null) {
+                _dingPlayerTimer.cancel();
+            }
+            playDing2(3000);
+        }
+    }
+
+    private void playDing(int intervalMs) {
+        if (_dingPlayerTimer != null) {
+            _dingPlayerTimer.cancel();
+        }
+        _dingPlayerTimer = new Timer();
+        _dingPlayerTimerCount = 0;
+
+        _dingPlayerTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                playDingMsgPrompt();
+                if (_dingPlayerTimerCount++ >= 20) {
+                    _dingPlayerTimerCount = 0;
+                    _dingPlayerTimer.cancel();
+                }
+            }
+        }, 0, intervalMs);
+    }
+
+    private void playDing2(int intervalMs) {
+        if (_ding2PlayerTimer != null) {
+            _ding2PlayerTimer.cancel();
+        }
+        _ding2PlayerTimer = new Timer();
+        _ding2PlayerTimerCount = 0;
+
+        _ding2PlayerTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                playDing2MsgPrompt();
+                if (_ding2PlayerTimerCount++ >= 20) {
+                    _ding2PlayerTimerCount = 0;
+                    _ding2PlayerTimer.cancel();
+                }
+            }
+        }, 0, intervalMs);
+    }
+
+    private void playDingMsgPrompt() {
+        _dingPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                _dingPlayer.stop();
+                try {
+                    _dingPlayer.prepare();
+                } catch (IllegalStateException e) {
+                    e.printStackTrace();
+
+                    _dingPlayer.reset();
+                    _dingPlayer = MediaPlayer.create(getActivity(), R.raw.ding_1);
+                } catch (IOException e) {
+                    e.printStackTrace();
+
+                    _dingPlayer.reset();
+                    _dingPlayer = MediaPlayer.create(getActivity(), R.raw.ding_1);
+                } catch (Exception e) {
+                    e.printStackTrace();
+
+                    _dingPlayer.reset();
+                    _dingPlayer = MediaPlayer.create(getActivity(), R.raw.ding_1);
+                }
+            }
+        });
+
+        _dingPlayer.start();
+    }
+
+    private void playDing2MsgPrompt() {
+        _ding2Player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                _ding2Player.stop();
+                try {
+                    _ding2Player.prepare();
+                } catch (IllegalStateException e) {
+                    e.printStackTrace();
+
+                    _ding2Player.reset();
+                    _ding2Player = MediaPlayer.create(getActivity(), R.raw.ding_2);
+                } catch (IOException e) {
+                    e.printStackTrace();
+
+                    _ding2Player.reset();
+                    _ding2Player = MediaPlayer.create(getActivity(), R.raw.ding_2);
+                } catch (Exception e) {
+                    e.printStackTrace();
+
+                    _ding2Player.reset();
+                    _ding2Player = MediaPlayer.create(getActivity(), R.raw.ding_2);
+                }
+            }
+        });
+
+        _ding2Player.start();
+    }
+
+    public void stopNavi() {
+        if (_dingPlayerTimer != null) {
+            _dingPlayerTimer.cancel();
+        }
+
+        if (_ding2PlayerTimer != null) {
+            _ding2PlayerTimer.cancel();
+        }
+        JCLocationManager.instance().stop();
+        AMapNavi.getInstance(getActivity()).stopNavi();
+
+    }
 }

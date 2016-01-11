@@ -178,6 +178,9 @@
             android:name=".activity.LoginActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar"/>
+        <activity
+            android:name=".activity.SimpleNaviActivity"
+            android:configChanges="orientation|keyboardHidden" />
     </application>
 
 </manifest>

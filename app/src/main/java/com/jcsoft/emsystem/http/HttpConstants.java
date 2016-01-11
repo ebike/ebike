@@ -51,7 +51,7 @@ public class HttpConstants {
     }
 
     //远程锁车
-    public static String getlockBikeUrl(){
+    public static String getlockBikeUrl() {
         StringBuffer sb = new StringBuffer(baseUrl);
         sb.append("/lock/lockBike.do");
         sb.append("?carId=").append(AppConfig.userInfoBean.getCarId());
@@ -59,7 +59,7 @@ public class HttpConstants {
     }
 
     //远程解锁
-    public static String getUnLockBikeUrl(){
+    public static String getUnLockBikeUrl() {
         StringBuffer sb = new StringBuffer(baseUrl);
         sb.append("/lock/unLockBike.do");
         sb.append("?carId=").append(AppConfig.userInfoBean.getCarId());
@@ -67,10 +67,24 @@ public class HttpConstants {
     }
 
     //关闭电子围栏
-    public static  String getcloseVfUrl(){
+    public static String getcloseVfUrl() {
         StringBuffer sb = new StringBuffer(baseUrl);
         sb.append("/vf/closeVf.do");
         sb.append("?carId=").append(AppConfig.userInfoBean.getCarId());
         return sb.toString();
     }
+
+    //开启电子围栏
+//    public static String getOpenVfUrl(){
+//        StringBuffer sb = new StringBuffer(baseUrl);
+//        sb.append("/vf/openVf.do");
+//        sb.append("?carId=").append(AppConfig.userInfoBean.getCarId());
+//        sb.append("&maxLon=").append();
+//        sb.append("&maxLat=").append();
+//        sb.append("&minLon=").append();
+//        sb.append("&minLat=").append();
+//        sb.append("&lon=").append();
+//        sb.append("&lat=").append();
+//        return sb.toString();
+//    }
 }
