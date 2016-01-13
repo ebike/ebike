@@ -71,4 +71,9 @@
         <item name="android:layout_height">1dp</item>
         <item name="android:background">@color/dc_view_line</item>
     </style>
+
+    <style name="PopupWindowAnimation">
+        <item name="android:windowEnterAnimation">@anim/popshow_anim</item>
+        <item name="android:windowExitAnimation">@anim/pophidden_anim</item>
+    </style>
 </resources>

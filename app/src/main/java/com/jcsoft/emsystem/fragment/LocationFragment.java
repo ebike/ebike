@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import com.amap.api.maps.AMap;
@@ -77,6 +78,10 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
         AMap.OnMapClickListener, AMapNaviListener, AMap.OnInfoWindowClickListener {
     @ViewInject(R.id.map_view)
     MapView mapView;
+    @ViewInject(R.id.iv_traffic)
+    ImageView trafficImageView;
+    @ViewInject(R.id.iv_map_type)
+    ImageView mapTypeImageView;
     @ViewInject(R.id.iv_lock)
     ImageView lockImageView;
     @ViewInject(R.id.iv_trajectory)
@@ -105,6 +110,12 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
     private Marker _startMarker;
     //电动车上面信息框
     private Marker marker;
+    //是否开启实时路况
+    private boolean isOpenTraffic;
+    //地图类型选择窗口
+    private View mapTypeView;
+    private PopupWindow popupWindow;
+    //
     private MediaPlayer _dingPlayer = null;
     private Timer _dingPlayerTimer = null;
     private int _dingPlayerTimerCount = 0;
@@ -116,6 +127,8 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_location, container, false);
         x.view().inject(this, view);
+        mapTypeView = inflater.inflate(R.layout.popupwindow_map_type, null, false);
+        x.view().inject(this, mapTypeView);
         EventBus.getDefault().register(this);
         isPrepared = true;
         mapView.onCreate(savedInstanceState);
@@ -127,6 +140,8 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
     }
 
     private void setListeners() {
+        trafficImageView.setOnClickListener(this);
+        mapTypeImageView.setOnClickListener(this);
         lockImageView.setOnClickListener(this);
         trajectoryImageView.setOnClickListener(this);
         fenceImageView.setOnClickListener(this);
@@ -220,12 +235,12 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
                         }
                         //判断电子围栏
                         if (locInfoBean.isOpenVf()) {
-                            fenceImageView.setImageResource(R.mipmap.fence);
+                            fenceImageView.setImageResource(R.mipmap.fence_open);
                             aMap.addCircle(new CircleOptions().center(position)
                                     .radius(100).strokeColor(Color.RED).fillColor(Color.TRANSPARENT)
                                     .strokeWidth(1));
                         } else {
-                            fenceImageView.setImageResource(R.mipmap.fence);
+                            fenceImageView.setImageResource(R.mipmap.fence_close);
                         }
                     } else {
                         showShortText("定位失败");
@@ -245,8 +260,8 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
         super.onResume();
         mapView.onResume();
         aMap.clear();
-        //每20秒刷新一次电动车位置
-        handler.postDelayed(this, 1000 * 20);
+        //每30秒刷新一次电动车位置
+        handler.postDelayed(this, 1000 * 30);
     }
 
     /**
@@ -282,12 +297,35 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
     @Override
     public void run() {
         requestDatas();
-        handler.postDelayed(this, 1000 * 20);// 间隔20秒
+        handler.postDelayed(this, 1000 * 30);// 间隔30秒
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.iv_traffic://实时路况
+                if (isOpenTraffic) {
+                    isOpenTraffic = false;
+                    trafficImageView.setImageResource(R.mipmap.traffic_close);
+                } else {
+                    isOpenTraffic = true;
+                    trafficImageView.setImageResource(R.mipmap.traffic_open);
+                }
+                aMap.setTrafficEnabled(isOpenTraffic);
+                break;
+            case R.id.iv_map_type://切换地图类型
+                if (popupWindow == null) {
+                    popupWindow = CommonUtils.createPopupWindow(mapTypeView);
+                    popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+                        @Override
+                        public void onDismiss() {
+                            mapTypeImageView.setImageResource(R.mipmap.map_switch);
+                        }
+                    });
+                }
+                popupWindow.showAsDropDown(mapTypeImageView);
+                mapTypeImageView.setImageResource(R.mipmap.close_map_type_tip);
+                break;
             case R.id.iv_lock://远程锁车
                 if (locInfoBean.getLock().equals("1")) {
                     CommonUtils.showCustomDialog0(getActivity(), "提示", "你确定要解除对电动车的锁定吗？", new DSingleDialogCallback() {
@@ -389,11 +427,11 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
                                     addMarkerToMap(points.get(0),
                                             getResources().getString(R.string.txt_start),
                                             start.getSatelliteTime(), start.getSpeed(),
-                                            R.mipmap.start, true);
+                                            R.mipmap.marker_start, true);
                                     if (maxCount > 1) {
                                         addMarkerToMap(points.get(points.size() - 1), getResources()
                                                         .getString(R.string.txt_end), end.getSatelliteTime(),
-                                                end.getSpeed(), R.mipmap.end, true);
+                                                end.getSpeed(), R.mipmap.marker_end, true);
                                     }
                                     //在地图上添加轨迹实线
                                     drawTrack(points);
@@ -542,7 +580,7 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
                     .anchor(0.5f, 1)
                     .icon(BitmapDescriptorFactory
                             .fromResource(R.mipmap.point)).position(latLng)
-                    .title("点击选择为起点"));
+                    .snippet("点击选择为起点"));
             _startMarker.showInfoWindow();
         }
     }
@@ -654,7 +692,6 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
             LatLonPoint destPoint = new LatLonPoint(locInfoBean.getLat() / 1000000.0, locInfoBean.getLon() / 1000000.0);
             startNavi(startPoint, destPoint);
             _startMarker.remove();
-            aMap.setTrafficEnabled(true);
             return;
         }
     }

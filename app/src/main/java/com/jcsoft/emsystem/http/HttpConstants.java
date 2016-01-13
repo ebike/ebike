@@ -8,7 +8,7 @@ import com.jcsoft.emsystem.constants.AppConfig;
 public class HttpConstants {
 
     //接口前缀
-    public static String baseUrl = "http://dev.gnets.cn/app";
+    public static String baseUrl = "http://api.gnets.cn/app";
 
     //登录
     public static String getLoginUrl(String loginName, String password) {

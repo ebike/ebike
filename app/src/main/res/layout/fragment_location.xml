@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="top|right"
@@ -17,9 +17,29 @@
         android:padding="4dp">
 
         <ImageView
+            android:id="@+id/iv_traffic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="4dp"
+            android:src="@mipmap/traffic_close" />
+
+        <ImageView
+            android:id="@+id/iv_map_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_traffic"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="4dp"
+            android:src="@mipmap/map_switch" />
+
+        <ImageView
             android:id="@+id/iv_lock"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/iv_map_type"
+            android:layout_centerHorizontal="true"
             android:layout_margin="4dp"
             android:src="@mipmap/voice_lock" />
 
@@ -27,6 +47,8 @@
             android:id="@+id/iv_trajectory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/iv_lock"
+            android:layout_centerHorizontal="true"
             android:layout_margin="4dp"
             android:src="@mipmap/track" />
 
@@ -34,15 +56,19 @@
             android:id="@+id/iv_fence"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/iv_trajectory"
+            android:layout_centerHorizontal="true"
             android:layout_margin="4dp"
-            android:src="@mipmap/fence" />
+            android:src="@mipmap/fence_close" />
 
         <ImageView
             android:id="@+id/iv_nav"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
             android:layout_margin="4dp"
             android:src="@mipmap/nav" />
-    </LinearLayout>
+    </RelativeLayout>
 
 </FrameLayout>
