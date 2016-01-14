@@ -2,19 +2,36 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@mipmap/map_type_bg"
-    android:gravity="center"
-    android:orientation="horizontal">
+    android:background="@android:color/transparent"
+    android:orientation="horizontal"
+    android:paddingRight="8dp">
 
-    <ImageView
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="8dp"
-        android:src="@mipmap/satellite" />
+        android:background="@mipmap/map_type_bg"
+        android:gravity="center"
+        android:orientation="horizontal">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/plane_hover" />
+        <TextView
+            android:id="@+id/tv_satellite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="4dp"
+            android:drawablePadding="4dp"
+            android:drawableTop="@mipmap/satellite"
+            android:gravity="center"
+            android:text="卫星图" />
 
+        <TextView
+            android:id="@+id/tv_plane"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:drawablePadding="4dp"
+            android:drawableTop="@mipmap/plane_hover"
+            android:gravity="center"
+            android:text="平面图" />
+    </LinearLayout>
 </LinearLayout>

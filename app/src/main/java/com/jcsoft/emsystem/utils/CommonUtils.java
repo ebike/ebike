@@ -625,7 +625,7 @@ public class CommonUtils {
     public static PopupWindow createPopupWindow(View popupView) {
         PopupWindow popupWindow = new PopupWindow(popupView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
         popupWindow.setAnimationStyle(R.style.PopupWindowAnimation);
-        popupWindow.setBackgroundDrawable(new ColorDrawable(0xb0000000));
+        popupWindow.setBackgroundDrawable(new ColorDrawable(0x00000000));
         popupWindow.setFocusable(true);
         popupWindow.setOutsideTouchable(true);
         return popupWindow;

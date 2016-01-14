@@ -2,6 +2,7 @@ package com.jcsoft.emsystem.activity;
 
 import android.content.Intent;
 import android.graphics.Rect;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -11,6 +12,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -37,6 +39,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     EditText passwordEditText;
     @ViewInject(R.id.btn_login)
     Button loginButton;
+    @ViewInject(R.id.tv_register)
+    TextView registerTextView;
+    @ViewInject(R.id.tv_forget_password)
+    TextView forgetPasswordTextView;
     private String loginName;
     private String password;
 
@@ -67,6 +73,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         loginNameEditText.addTextChangedListener(this);
         passwordEditText.addTextChangedListener(this);
         loginButton.setOnClickListener(this);
+        forgetPasswordTextView.setOnClickListener(this);
     }
 
     @Override
@@ -76,7 +83,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.btn_login:
+            case R.id.btn_login://登录
                 loginName = loginNameEditText.getText().toString().trim();
                 password = passwordEditText.getText().toString().trim();
                 if (CommonUtils.strIsEmpty(loginName)) {
@@ -108,6 +115,18 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                         }
                     }
                 });
+                break;
+            case R.id.tv_register://注册帐号
+
+                break;
+            case R.id.tv_forget_password://忘记密码
+                // 用intent启动拨打电话
+                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:67805000"));
+                try {
+                    startActivity(intent);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 break;
         }
     }

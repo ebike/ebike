@@ -3,16 +3,19 @@ package com.jcsoft.emsystem.fragment;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.amap.api.maps.AMap;
@@ -88,8 +91,14 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
     ImageView trajectoryImageView;
     @ViewInject(R.id.iv_fence)
     ImageView fenceImageView;
+    @ViewInject(R.id.iv_car_status)
+    ImageView carStatusImageView;
     @ViewInject(R.id.iv_nav)
     ImageView navImageView;
+    @ViewInject(R.id.tv_satellite)
+    TextView satelliteTextView;
+    @ViewInject(R.id.tv_plane)
+    TextView planeTextView;
     //轨迹查询时间布局
     LinearLayout dateLayout;
     //轨迹查询开始时间
@@ -115,7 +124,10 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
     //地图类型选择窗口
     private View mapTypeView;
     private PopupWindow popupWindow;
-    //
+    //车辆信息
+    private View carStatusView;
+    private PopupWindow carPopupWindow;
+    //其他
     private MediaPlayer _dingPlayer = null;
     private Timer _dingPlayerTimer = null;
     private int _dingPlayerTimerCount = 0;
@@ -129,6 +141,9 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
         x.view().inject(this, view);
         mapTypeView = inflater.inflate(R.layout.popupwindow_map_type, null, false);
         x.view().inject(this, mapTypeView);
+        carStatusView = inflater.inflate(R.layout.popupwindow_car_status, null, false);
+        carStatusView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
+        x.view().inject(this,carStatusView);
         EventBus.getDefault().register(this);
         isPrepared = true;
         mapView.onCreate(savedInstanceState);
@@ -146,6 +161,9 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
         trajectoryImageView.setOnClickListener(this);
         fenceImageView.setOnClickListener(this);
         navImageView.setOnClickListener(this);
+        satelliteTextView.setOnClickListener(this);
+        planeTextView.setOnClickListener(this);
+        carStatusImageView.setOnClickListener(this);
     }
 
     /**
@@ -326,6 +344,14 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
                 popupWindow.showAsDropDown(mapTypeImageView);
                 mapTypeImageView.setImageResource(R.mipmap.close_map_type_tip);
                 break;
+            case R.id.tv_satellite://卫星图
+                aMap.setMapType(AMap.MAP_TYPE_SATELLITE);
+                changeMapType(AMap.MAP_TYPE_SATELLITE);
+                break;
+            case R.id.tv_plane://平面图
+                aMap.setMapType(AMap.MAP_TYPE_NORMAL);
+                changeMapType(AMap.MAP_TYPE_NORMAL);
+                break;
             case R.id.iv_lock://远程锁车
                 if (locInfoBean.getLock().equals("1")) {
                     CommonUtils.showCustomDialog0(getActivity(), "提示", "你确定要解除对电动车的锁定吗？", new DSingleDialogCallback() {
@@ -487,6 +513,24 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
 //                    });
                 }
                 break;
+            case R.id.iv_car_status://车辆信息
+                if (carPopupWindow == null) {
+                    carPopupWindow = CommonUtils.createPopupWindow(carStatusView);
+                    carPopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+                        @Override
+                        public void onDismiss() {
+                            carStatusImageView.setImageResource(R.mipmap.car_status);
+                        }
+                    });
+                }
+                int popupWidth = carStatusView.getMeasuredWidth();
+                int popupHeight = carStatusView.getMeasuredHeight();
+                int[] vLocation = new int[2];
+                v.getLocationOnScreen(vLocation);
+                carPopupWindow.showAtLocation(v, Gravity.NO_GRAVITY, (vLocation[0] + v.getWidth() / 2) - popupWidth / 2,
+                        vLocation[1] - popupHeight);
+                carStatusImageView.setImageResource(R.mipmap.close_car_status_tip);
+                break;
             case R.id.iv_nav://导航
                 marker.hideInfoWindow();
                 JCLocationManager.instance().start();
@@ -506,6 +550,29 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
                     aMap.moveCamera(cu);
                 }
                 break;
+        }
+    }
+
+    //切换地图类型时变化页面UI
+    private void changeMapType(int type) {
+        if (type == AMap.MAP_TYPE_SATELLITE) {
+            //选中卫星图
+            Drawable satelliteDrawable = getResources().getDrawable(R.mipmap.satellite_hover);
+            satelliteDrawable.setBounds(0, 0, satelliteDrawable.getMinimumWidth(), satelliteDrawable.getMinimumHeight());
+            satelliteTextView.setCompoundDrawables(null, satelliteDrawable, null, null);
+            //还原平面图
+            Drawable planeDrawable = getResources().getDrawable(R.mipmap.plane);
+            planeDrawable.setBounds(0, 0, planeDrawable.getMinimumWidth(), planeDrawable.getMinimumHeight());
+            planeTextView.setCompoundDrawables(null, planeDrawable, null, null);
+        } else if (type == AMap.MAP_TYPE_NORMAL) {
+            //选中平面图
+            Drawable planeDrawable = getResources().getDrawable(R.mipmap.plane_hover);
+            planeDrawable.setBounds(0, 0, planeDrawable.getMinimumWidth(), planeDrawable.getMinimumHeight());
+            planeTextView.setCompoundDrawables(null, planeDrawable, null, null);
+            //选中卫星图
+            Drawable satelliteDrawable = getResources().getDrawable(R.mipmap.satellite);
+            satelliteDrawable.setBounds(0, 0, satelliteDrawable.getMinimumWidth(), satelliteDrawable.getMinimumHeight());
+            satelliteTextView.setCompoundDrawables(null, satelliteDrawable, null, null);
         }
     }
 
