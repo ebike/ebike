@@ -76,4 +76,8 @@
         <item name="android:windowEnterAnimation">@anim/popshow_anim</item>
         <item name="android:windowExitAnimation">@anim/pophidden_anim</item>
     </style>
+    <style name="AbovePopupWindowAnimation">
+        <item name="android:windowEnterAnimation">@anim/above_popshow_anim</item>
+        <item name="android:windowExitAnimation">@anim/above_pophidden_anim</item>
+    </style>
 </resources>

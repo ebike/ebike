@@ -74,6 +74,16 @@ public class HttpConstants {
         return sb.toString();
     }
 
+    //逆地理编码
+    public static String geocodeRegeo(double lon, double lat) {
+        StringBuffer sb = new StringBuffer();
+        sb.append("http://restapi.amap.com/v3/geocode/regeo");
+        sb.append("?location=").append(lon).append(",").append(lat);
+        sb.append("&extensions=base&output=json");
+        sb.append("&key=cfd66d352d462f4df63d314655257c0b");
+        return sb.toString();
+    }
+
     //开启电子围栏
 //    public static String getOpenVfUrl(){
 //        StringBuffer sb = new StringBuffer(baseUrl);

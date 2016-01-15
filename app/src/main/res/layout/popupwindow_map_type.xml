@@ -9,7 +9,7 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@mipmap/map_type_bg"
+        android:background="@drawable/map_type_bg"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -17,7 +17,7 @@
             android:id="@+id/tv_satellite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="8dp"
+            android:layout_marginRight="16dp"
             android:layout_marginTop="4dp"
             android:drawablePadding="4dp"
             android:drawableTop="@mipmap/satellite"

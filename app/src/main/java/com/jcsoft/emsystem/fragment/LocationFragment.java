@@ -38,6 +38,11 @@ import com.amap.api.navi.model.AMapNaviLocation;
 import com.amap.api.navi.model.NaviInfo;
 import com.amap.api.navi.model.NaviLatLng;
 import com.amap.api.services.core.LatLonPoint;
+import com.amap.api.services.geocoder.GeocodeResult;
+import com.amap.api.services.geocoder.GeocodeSearch;
+import com.amap.api.services.geocoder.RegeocodeAddress;
+import com.amap.api.services.geocoder.RegeocodeQuery;
+import com.amap.api.services.geocoder.RegeocodeResult;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jcsoft.emsystem.R;
@@ -57,6 +62,7 @@ import com.jcsoft.emsystem.http.DHttpUtils;
 import com.jcsoft.emsystem.http.HttpConstants;
 import com.jcsoft.emsystem.map.TTSController;
 import com.jcsoft.emsystem.utils.CommonUtils;
+import com.jcsoft.emsystem.utils.MapUtils;
 import com.jcsoft.emsystem.utils.Utils;
 import com.jcsoft.emsystem.view.formview.FormTextDateTimeView;
 import com.jcsoft.emsystem.view.formview.FormViewUtils;
@@ -78,7 +84,7 @@ import de.greenrobot.event.EventBus;
  * Created by jimmy on 15/12/28.
  */
 public class LocationFragment extends BaseFragment implements Runnable, View.OnClickListener,
-        AMap.OnMapClickListener, AMapNaviListener, AMap.OnInfoWindowClickListener {
+        AMap.OnMapClickListener, AMapNaviListener, AMap.OnInfoWindowClickListener, GeocodeSearch.OnGeocodeSearchListener {
     @ViewInject(R.id.map_view)
     MapView mapView;
     @ViewInject(R.id.iv_traffic)
@@ -99,6 +105,22 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
     TextView satelliteTextView;
     @ViewInject(R.id.tv_plane)
     TextView planeTextView;
+    @ViewInject(R.id.tv_equipment_serial_number)
+    TextView equipmentSerialNumberTextView;
+    @ViewInject(R.id.tv_positioning_state)
+    TextView positioningStateTextView;
+    @ViewInject(R.id.tv_online_status)
+    TextView onlineStatusTextView;
+    @ViewInject(R.id.tv_acc)
+    TextView accTextView;
+    @ViewInject(R.id.tv_main_power)
+    TextView mainPowerTextView;
+    @ViewInject(R.id.tv_lock_car_status)
+    TextView lockCarStatusTextView;
+    @ViewInject(R.id.tv_direction)
+    TextView directionTextView;
+    @ViewInject(R.id.tv_address)
+    TextView addressTextView;
     //轨迹查询时间布局
     LinearLayout dateLayout;
     //轨迹查询开始时间
@@ -143,7 +165,7 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
         x.view().inject(this, mapTypeView);
         carStatusView = inflater.inflate(R.layout.popupwindow_car_status, null, false);
         carStatusView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
-        x.view().inject(this,carStatusView);
+        x.view().inject(this, carStatusView);
         EventBus.getDefault().register(this);
         isPrepared = true;
         mapView.onCreate(savedInstanceState);
@@ -263,6 +285,39 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
                     } else {
                         showShortText("定位失败");
                     }
+                    //刷新车辆信息
+                    equipmentSerialNumberTextView.setText(getResources().getString(R.string.equipment_serial_number) + locInfoBean.getCarId() + "");
+                    if (locInfoBean.getSourceType() == 1) {
+                        positioningStateTextView.setText(getResources().getString(R.string.positioning_state) + "GPS定位");
+                    } else if (locInfoBean.getSourceType() == 2) {
+                        positioningStateTextView.setText(getResources().getString(R.string.positioning_state) + "基站定位");
+                    }
+                    if (locInfoBean.getIsOnline().equals("1")) {
+                        onlineStatusTextView.setText(getResources().getString(R.string.online_status) + "在线");
+                    } else {
+                        onlineStatusTextView.setText(getResources().getString(R.string.online_status) + "不在线");
+                    }
+                    if (locInfoBean.getAcc().equals("1")) {
+                        accTextView.setText(getResources().getString(R.string.acc) + "开启");
+                    } else {
+                        accTextView.setText(getResources().getString(R.string.acc) + "关闭");
+                    }
+                    if (locInfoBean.getPower().equals("1")) {
+                        mainPowerTextView.setText(getResources().getString(R.string.main_power) + "开启");
+                    } else {
+                        mainPowerTextView.setText(getResources().getString(R.string.main_power) + "关闭");
+                    }
+                    if (locInfoBean.getLock().equals("1")) {
+                        lockCarStatusTextView.setText(getResources().getString(R.string.lock_car_status) + "锁定");
+                    } else {
+                        lockCarStatusTextView.setText(getResources().getString(R.string.lock_car_status) + "未锁定");
+                    }
+                    directionTextView.setText(getResources().getString(R.string.direction) + MapUtils.directionStr(locInfoBean.getHeading()));
+                    GeocodeSearch geocodeSearch = new GeocodeSearch(getActivity());
+                    geocodeSearch.setOnGeocodeSearchListener(LocationFragment.this);
+                    LatLonPoint latLonPoint = new LatLonPoint(locInfoBean.getLat() / 1000000.0, locInfoBean.getLon() / 1000000.0);
+                    RegeocodeQuery regeocodeQuery = new RegeocodeQuery(latLonPoint, 200, GeocodeSearch.AMAP);
+                    geocodeSearch.getFromLocationAsyn(regeocodeQuery);
                 } else {
                     showShortText(responseBean.getErrmsg());
                 }
@@ -515,7 +570,7 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
                 break;
             case R.id.iv_car_status://车辆信息
                 if (carPopupWindow == null) {
-                    carPopupWindow = CommonUtils.createPopupWindow(carStatusView);
+                    carPopupWindow = CommonUtils.createAbovePopupWindow(carStatusView);
                     carPopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
                         @Override
                         public void onDismiss() {
@@ -919,6 +974,20 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
         }
         JCLocationManager.instance().stop();
         AMapNavi.getInstance(getActivity()).stopNavi();
+
+    }
+
+    //逆地理编码回调接口
+    @Override
+    public void onRegeocodeSearched(RegeocodeResult regeocodeResult, int i) {
+        if (i == 0 && regeocodeResult != null && regeocodeResult.getRegeocodeAddress() != null) {
+            RegeocodeAddress regeocodeAddress = regeocodeResult.getRegeocodeAddress();
+            addressTextView.setText(getResources().getString(R.string.address) + regeocodeAddress.getFormatAddress());
+        }
+    }
+
+    @Override
+    public void onGeocodeSearched(GeocodeResult geocodeResult, int i) {
 
     }
 }

@@ -622,9 +622,28 @@ public class CommonUtils {
         Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * 窗口显示在控件下方
+     * @param popupView
+     * @return
+     */
     public static PopupWindow createPopupWindow(View popupView) {
         PopupWindow popupWindow = new PopupWindow(popupView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
         popupWindow.setAnimationStyle(R.style.PopupWindowAnimation);
+        popupWindow.setBackgroundDrawable(new ColorDrawable(0x00000000));
+        popupWindow.setFocusable(true);
+        popupWindow.setOutsideTouchable(true);
+        return popupWindow;
+    }
+
+    /**
+     * 窗口显示在控件上方
+     * @param popupView
+     * @return
+     */
+    public static PopupWindow createAbovePopupWindow(View popupView) {
+        PopupWindow popupWindow = new PopupWindow(popupView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
+        popupWindow.setAnimationStyle(R.style.AbovePopupWindowAnimation);
         popupWindow.setBackgroundDrawable(new ColorDrawable(0x00000000));
         popupWindow.setFocusable(true);
         popupWindow.setOutsideTouchable(true);

@@ -121,7 +121,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                 break;
             case R.id.tv_forget_password://忘记密码
                 // 用intent启动拨打电话
-                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:67805000"));
+                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:053167805000"));
                 try {
                     startActivity(intent);
                 } catch (Exception e) {

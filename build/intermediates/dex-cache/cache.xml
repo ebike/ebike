@@ -2,18 +2,25 @@
 <items version="2" >
 
     <item
+        jar="/Users/huguangwen/.gradle/caches/modules-2/files-2.1/de.greenrobot/eventbus/2.4.0/ddd166d01b3158d1c00576d29f7ed15c030df719/eventbus-2.4.0.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="ddd166d01b3158d1c00576d29f7ed15c030df719">
+        <dex dex="/Users/huguangwen/Documents/Code/gitlab/ebike/app/build/intermediates/pre-dexed/release/eventbus-2.4.0-0fb80b8084aaead876d71853758f447d5237d5be.jar" />
+    </item>
+    <item
         jar="/Users/huguangwen/Documents/Code/gitlab/ebike/app/libs/Msc.jar"
         jumboMode="false"
         revision="23.0.1"
         sha1="14e02a95fa56eb18b385a4f156b4fb14d4721df4">
-        <dex dex="/Users/huguangwen/Documents/Code/gitlab/ebike/app/build/intermediates/pre-dexed/debug/Msc-bb989c4b04d4bd2d103b7fa12b96c97e8e0499bf.jar" />
+        <dex dex="/Users/huguangwen/Documents/Code/gitlab/ebike/app/build/intermediates/pre-dexed/release/Msc-bb989c4b04d4bd2d103b7fa12b96c97e8e0499bf.jar" />
     </item>
     <item
         jar="/Users/huguangwen/Documents/Code/gitlab/ebike/app/libs/Android_Navi_V1.1.2.jar"
         jumboMode="false"
         revision="23.0.1"
         sha1="608ac5c3d9ff1e979301a88f5cb8e66d75333db4">
-        <dex dex="/Users/huguangwen/Documents/Code/gitlab/ebike/app/build/intermediates/pre-dexed/debug/Android_Navi_V1.1.2-4d8a95638675c39e0403fbf153aa7d356b8e3124.jar" />
+        <dex dex="/Users/huguangwen/Documents/Code/gitlab/ebike/app/build/intermediates/pre-dexed/release/Android_Navi_V1.1.2-4d8a95638675c39e0403fbf153aa7d356b8e3124.jar" />
     </item>
 
 </items>

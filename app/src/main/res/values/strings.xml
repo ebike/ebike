@@ -42,5 +42,14 @@
     <string name="txt_start">起点</string>
     <string name="txt_end">终点</string>
 
+    <!-- car_status -->
+    <string name="equipment_serial_number">设备编号：</string>
+    <string name="positioning_state">定位状态：</string>
+    <string name="online_status">在线状态：</string>
+    <string name="acc">ACC：</string>
+    <string name="main_power">主电源：</string>
+    <string name="lock_car_status">锁车状态：</string>
+    <string name="direction">方向：</string>
+    <string name="address">最后位置：</string>
 
 </resources>
