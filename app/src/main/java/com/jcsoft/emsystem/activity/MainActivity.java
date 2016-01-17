@@ -12,7 +12,7 @@ import com.jcsoft.emsystem.adapter.ViewPagerFragmentAdapter;
 import com.jcsoft.emsystem.base.BaseActivity;
 import com.jcsoft.emsystem.base.TabIndicator;
 import com.jcsoft.emsystem.constants.AppConfig;
-import com.jcsoft.emsystem.fragment.AlarmFragment;
+import com.jcsoft.emsystem.fragment.AlarmMessageFragment;
 import com.jcsoft.emsystem.fragment.ChartFragment;
 import com.jcsoft.emsystem.fragment.LocationFragment;
 import com.jcsoft.emsystem.fragment.MyFragment;
@@ -89,12 +89,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         textViews.add(myTextView);
         //初始化ViewPager
         viewPager.setOffscreenPageLimit(4);
-        // 包含3个fragment界面
+        // 包含4个fragment界面
         tabIndicatorList = ViewPagerUtils.getTabIndicator(4);
-        // 3个fragment界面封装
+        // 4个fragment界面封装
         fragmentList = new ArrayList<Fragment>();
         fragmentList.add(new LocationFragment());
-        fragmentList.add(new AlarmFragment());
+        fragmentList.add(new AlarmMessageFragment());
         fragmentList.add(new ChartFragment());
         fragmentList.add(new MyFragment());
         // 设置ViewPager适配器

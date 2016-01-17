@@ -2,6 +2,8 @@ package com.jcsoft.emsystem.base;
 
 import android.app.Application;
 
+import com.jcsoft.emsystem.db.XUtil;
+
 import org.xutils.x;
 
 import cn.jpush.android.api.JPushInterface;
@@ -18,6 +20,8 @@ public class BaseApplication extends Application {
         //初始化xutils框架
         x.Ext.init(this);
         x.Ext.setDebug(true);
+        //初始化DB
+        XUtil.initDB();
         // 设置开启日志,发布时请关闭日志
         JPushInterface.setDebugMode(true);
         // 初始化 JPush

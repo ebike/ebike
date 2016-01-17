@@ -2,6 +2,7 @@
 <resources>
     <color name="white">#ffffff</color>
     <color name="black">@android:color/black</color> 
+    <color name="gray_bg">#f9f9f9</color>
     <color name="gray_dark">#1c1c1c</color>
     <color name="color_gray">#a2a2a2</color>
     <color name="login_line">#ffa043</color> 

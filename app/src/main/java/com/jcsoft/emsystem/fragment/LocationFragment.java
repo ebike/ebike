@@ -236,7 +236,7 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
     }
 
     @Override
-    protected void requestDatas() {
+    public void requestDatas() {
         if (!isPrepared || !isVisible || hasLoadedOnce || !isAdded()) {
             return;
         }
@@ -286,33 +286,33 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
                         showShortText("定位失败");
                     }
                     //刷新车辆信息
-                    equipmentSerialNumberTextView.setText(getResources().getString(R.string.equipment_serial_number) + locInfoBean.getCarId() + "");
+                    equipmentSerialNumberTextView.setText(locInfoBean.getCarId() + "");
                     if (locInfoBean.getSourceType() == 1) {
-                        positioningStateTextView.setText(getResources().getString(R.string.positioning_state) + "GPS定位");
+                        positioningStateTextView.setText("GPS定位");
                     } else if (locInfoBean.getSourceType() == 2) {
-                        positioningStateTextView.setText(getResources().getString(R.string.positioning_state) + "基站定位");
+                        positioningStateTextView.setText("基站定位");
                     }
                     if (locInfoBean.getIsOnline().equals("1")) {
-                        onlineStatusTextView.setText(getResources().getString(R.string.online_status) + "在线");
+                        onlineStatusTextView.setText("在线");
                     } else {
-                        onlineStatusTextView.setText(getResources().getString(R.string.online_status) + "不在线");
+                        onlineStatusTextView.setText("不在线");
                     }
                     if (locInfoBean.getAcc().equals("1")) {
-                        accTextView.setText(getResources().getString(R.string.acc) + "开启");
+                        accTextView.setText("开启");
                     } else {
-                        accTextView.setText(getResources().getString(R.string.acc) + "关闭");
+                        accTextView.setText("关闭");
                     }
                     if (locInfoBean.getPower().equals("1")) {
-                        mainPowerTextView.setText(getResources().getString(R.string.main_power) + "开启");
+                        mainPowerTextView.setText("开启");
                     } else {
-                        mainPowerTextView.setText(getResources().getString(R.string.main_power) + "关闭");
+                        mainPowerTextView.setText("关闭");
                     }
                     if (locInfoBean.getLock().equals("1")) {
-                        lockCarStatusTextView.setText(getResources().getString(R.string.lock_car_status) + "锁定");
+                        lockCarStatusTextView.setText("锁定");
                     } else {
-                        lockCarStatusTextView.setText(getResources().getString(R.string.lock_car_status) + "未锁定");
+                        lockCarStatusTextView.setText("未锁定");
                     }
-                    directionTextView.setText(getResources().getString(R.string.direction) + MapUtils.directionStr(locInfoBean.getHeading()));
+                    directionTextView.setText(MapUtils.directionStr(locInfoBean.getHeading()));
                     GeocodeSearch geocodeSearch = new GeocodeSearch(getActivity());
                     geocodeSearch.setOnGeocodeSearchListener(LocationFragment.this);
                     LatLonPoint latLonPoint = new LatLonPoint(locInfoBean.getLat() / 1000000.0, locInfoBean.getLon() / 1000000.0);
@@ -534,7 +534,7 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
                     CommonUtils.showCustomDialog0(getActivity(), "提示", "您确定要关闭电子围栏吗？", new DSingleDialogCallback() {
                         @Override
                         public void onPositiveButtonClick(String editText) {
-                            RequestParams params = new RequestParams(HttpConstants.getcloseVfUrl());
+                            RequestParams params = new RequestParams(HttpConstants.getCloseVfUrl());
                             DHttpUtils.get_String((MainActivity) getActivity(), true, params, new DCommonCallback<String>() {
                                 @Override
                                 public void onSuccess(String result) {
@@ -982,7 +982,7 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
     public void onRegeocodeSearched(RegeocodeResult regeocodeResult, int i) {
         if (i == 0 && regeocodeResult != null && regeocodeResult.getRegeocodeAddress() != null) {
             RegeocodeAddress regeocodeAddress = regeocodeResult.getRegeocodeAddress();
-            addressTextView.setText(getResources().getString(R.string.address) + regeocodeAddress.getFormatAddress());
+            addressTextView.setText(regeocodeAddress.getFormatAddress());
         }
     }
 

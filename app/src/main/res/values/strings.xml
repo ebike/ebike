@@ -52,4 +52,21 @@
     <string name="direction">方向：</string>
     <string name="address">最后位置：</string>
 
+    <!-- 下拉刷新控件 -->
+    <string name="pull_to_refresh_pull_label">下拉可以刷新</string>
+    <string name="pull_to_refresh_release_label">松开可以刷新</string>
+    <string name="pull_to_refresh_refreshing_label">正在刷新···</string>
+    <string name="pull_to_refresh_update">最近更新：%s</string>
+    <string name="pull_to_refresh_load_more">查看更多</string>
+    <string name="pull_to_refresh_load_finish">已加载完全部数据</string>
+    <string name="pull_to_refresh_loading">正在加载···</string>
+    <string name="pull_to_refresh_loading_label">松开查看更多</string>
+    <string name="loadding">正在加载中...</string>
+
+    <!-- topbar -->
+    <string name="top_bar_location">卫星定位</string>
+    <string name="top_bar_alarm_message">报警信息</string>
+    <string name="top_bar_chart">每日统计</string>
+    <string name="top_bar_my">我</string>
+
 </resources>

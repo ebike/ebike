@@ -29,7 +29,7 @@ public class ChartFragment extends BaseFragment {
     }
 
     @Override
-    protected void requestDatas() {
+    public void requestDatas() {
 
     }
 }

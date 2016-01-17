@@ -5,13 +5,13 @@ import android.support.v4.app.Fragment;
 import android.widget.Toast;
 
 /**
- * Created by dive on 2015/07/11.
+ * Fragment的父类
  */
 public abstract class BaseFragment extends Fragment {
     // Fragment当前状态是否可见
     protected boolean isVisible;
     //是否已被加载过一次，第二次就不再去请求数据了
-    protected boolean hasLoadedOnce;
+    public boolean hasLoadedOnce;
 
     @Override
     public void onStart() {
@@ -63,7 +63,7 @@ public abstract class BaseFragment extends Fragment {
     /**
      * 延迟加载 子类必须重写此方法
      */
-    protected abstract void requestDatas();
+    public abstract void requestDatas();
     /**
      * 长文本提示
      */

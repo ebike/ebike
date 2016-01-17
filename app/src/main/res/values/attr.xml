@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="EmptyView">
+        <attr name="empty_iv_src" format="reference"/>
+
+        <attr name="empty_tv_text" format="reference|string"/>
+        <attr name="empty_tv_text_color" format="reference|color"/>
+        <attr name="empty_tv_text_size" format="reference|dimension"/>
+        <attr name="empty_btn_text" format="reference|string"/>
+        <attr name="empty_btn_action" format="string"/>
+        <attr name="empty_btn_text_color" format="reference|color"/>
+        <attr name="empty_btn_background" format="reference|color"/>
+        <attr name="empty_btn_visibility">
+            <enum name="gone" value="2" />
+            <enum name="invisible" value="1" />
+            <enum name="visible" value="0" />
+        </attr>
+        <!--是否携带bundle数据-->
+        <attr name="empty_has_data" format="boolean"/>
+
+    </declare-styleable>
+
+    <declare-styleable name="LockPatternView">
+
+        <!--
+             Aspect to use when drawing LockPatternView. Choices are "square"(default), "lock_width"
+             or "lock_height"
+        -->
+        <attr name="aspect">
+            <enum name="square" value="0" />
+            <enum name="lockWidth" value="1" />
+            <enum name="lockHeight" value="2" />
+        </attr>
+        <attr name="line" format="color" />
+        <attr name="btnNormal" format="reference" />
+        <attr name="btnTouched" format="reference" />
+        <attr name="circleNormal" format="reference" />
+        <attr name="circleGreen" format="reference" />
+        <attr name="circleRed" format="reference" />
+        <attr name="arrowGreenUp" format="reference" />
+        <attr name="arrowRedUp" format="reference" />
+    </declare-styleable>
+    <declare-styleable name="SegmentControl">
+        <attr name="cornerRadius" format="dimension|reference" />
+        <attr name="selectedBackgroundColors" format="color|reference" />
+        <attr name="selectedTextColors" format="color|reference" />
+        <attr name="texts" format="string|reference" />
+        <attr name="android:textSize" />
+        <attr name="direction" format="enum">
+            <enum name="horizon" value="0" />
+            <enum name="vertical" value="1" />
+        </attr>
+        <attr name="gaps" format="dimension|reference" />
+        <attr name="horizonGap" format="dimension|reference" />
+        <attr name="verticalGap" format="dimension|reference" />
+        <attr name="selectedIndex" format="integer" />
+    </declare-styleable>
+</resources>

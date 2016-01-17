@@ -125,6 +125,60 @@ public class CommonUtils {
     }
 
     /**
+     * Description 友好显示时间
+     *
+     * @param time 要格式化的时间戳
+     * @return String txt 格式化后的时间戳
+     * @author ernest
+     */
+    public static String friendlyShowTime(long time) {
+        long nowTime = new Date().getTime();
+        String txt = "";
+        long t = nowTime - time; //时间差（毫秒）
+        if (t == 0) {
+            txt = "刚刚";
+        } else if (t < 60 * 1000) {
+            txt = t / 1000 + "秒前"; // 一分钟内
+        } else if (t < 60 * 60 * 1000) {
+            String s = subZeroAndDot(String.valueOf(Math.floor(t / (60 * 1000))));
+            txt = s + "分钟前"; //一小时内
+        } else if (t < 60 * 60 * 24 * 1000) {
+            String s = subZeroAndDot(String.valueOf(Math.floor(t / (60 * 60 * 1000))));
+            txt = s + "小时前"; // 一天内
+        } else if (t < 60 * 60 * 24 * 3 * 1000) {
+            String date = formatDateToStr("HH:mm", new Date(time));
+            txt = Math.floor(time / (60 * 60 * 24 * 1000)) == 1 ? "昨天" + date : "前天 " + date; //昨天和前天
+        } else if (t < 60 * 60 * 24 * 30 * 1000) {
+            txt = formatDateToStr("MM月dd日 HH:mm", new Date(time)); //一个月内
+        } else if (t < 60 * 60 * 24 * 365 * 1000) {
+            txt = formatDateToStr("MM月dd日", new Date(time)); //一年内
+        } else {
+            txt = formatDateToStr("yyyy年MM月dd日", new Date(time));//一年以前
+        }
+        return txt;
+    }
+
+    /**
+     * 使用java正则表达式去掉多余的.与0
+     *
+     * @param s
+     * @return
+     */
+    public static String subZeroAndDot(String s) {
+        if (s.indexOf(".") > 0) {
+            s = s.replaceAll("0+?$", "");//去掉多余的0
+            s = s.replaceAll("[.]$", "");//如最后一位是.则去掉
+        }
+        return s;
+    }
+
+    //将日期转化为字符串
+    public static String formatDateToStr(String format, Date date) {
+        SimpleDateFormat sdf = new SimpleDateFormat(format);
+        return sdf.format(date);
+    }
+
+    /**
      * @param mail 邮件
      * @return
      */
@@ -615,6 +669,7 @@ public class CommonUtils {
         }
         return false;
     }
+
     /**
      * 短文本提示
      */
@@ -624,6 +679,7 @@ public class CommonUtils {
 
     /**
      * 窗口显示在控件下方
+     *
      * @param popupView
      * @return
      */
@@ -638,6 +694,7 @@ public class CommonUtils {
 
     /**
      * 窗口显示在控件上方
+     *
      * @param popupView
      * @return
      */

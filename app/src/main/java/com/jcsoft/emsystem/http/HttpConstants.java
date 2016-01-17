@@ -67,20 +67,28 @@ public class HttpConstants {
     }
 
     //关闭电子围栏
-    public static String getcloseVfUrl() {
+    public static String getCloseVfUrl() {
         StringBuffer sb = new StringBuffer(baseUrl);
         sb.append("/vf/closeVf.do");
         sb.append("?carId=").append(AppConfig.userInfoBean.getCarId());
         return sb.toString();
     }
 
-    //逆地理编码
-    public static String geocodeRegeo(double lon, double lat) {
-        StringBuffer sb = new StringBuffer();
-        sb.append("http://restapi.amap.com/v3/geocode/regeo");
-        sb.append("?location=").append(lon).append(",").append(lat);
-        sb.append("&extensions=base&output=json");
-        sb.append("&key=cfd66d352d462f4df63d314655257c0b");
+    //查询报警消息
+    public static String getNewAlarmEventInfo(int mark, int eventId) {
+        StringBuffer sb = new StringBuffer(baseUrl);
+        sb.append("/alarm/getNewAlarmEventInfo.do");
+        sb.append("?carId=").append(AppConfig.userInfoBean.getCarId());
+        sb.append("&mark=").append(mark);
+        sb.append("&eventId=").append(eventId);
+        return sb.toString();
+    }
+
+    //查看报警消息
+    public static String viewAlarmEvent(int eventId) {
+        StringBuffer sb = new StringBuffer(baseUrl);
+        sb.append("/alarm/viewAlarmEvent.do");
+        sb.append("?eventId=").append(eventId);
         return sb.toString();
     }
 
