@@ -32,4 +32,9 @@
     <color name="color_title">#444a63</color>
     <color name="popup_main_background">#51000000</color>
     <color name="refresh_view_bg">#f6f6f6</color>
+
+    <color name="gray_3">#333333</color>
+    <color name="gray_6">#666666</color>
+    <color name="white_f5">#F5F5F5</color>
+
 </resources>

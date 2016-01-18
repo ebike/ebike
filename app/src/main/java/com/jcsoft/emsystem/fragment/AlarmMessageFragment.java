@@ -26,6 +26,8 @@ import com.jcsoft.emsystem.view.pullrefresh.EmptyViewForList;
 import com.jcsoft.emsystem.view.pullrefresh.PullToRefreshBase;
 import com.jcsoft.emsystem.view.pullrefresh.PullToRefreshListView;
 
+import org.xutils.common.util.KeyValue;
+import org.xutils.db.sqlite.WhereBuilder;
 import org.xutils.ex.DbException;
 import org.xutils.http.RequestParams;
 import org.xutils.view.annotation.ViewInject;
@@ -114,7 +116,7 @@ public class AlarmMessageFragment extends BaseListFragment {
                     });
                     //更新数据库
                     try {
-//                        XUtil.db.update(bean, WhereBuilder.b("eventId", "=", bean.getEventId() + ""), "status");
+                        XUtil.db.update(bean.getClass(), WhereBuilder.b("eventId", "=", bean.getEventId() + ""), new KeyValue("status","2"));
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

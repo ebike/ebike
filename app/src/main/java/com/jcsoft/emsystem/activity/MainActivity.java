@@ -2,6 +2,7 @@ package com.jcsoft.emsystem.activity;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -139,5 +140,19 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 ViewPagerUtils.setBottomBar(MainActivity.this, fragmentPosition, textViews, imageViews);
                 break;
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if ((System.currentTimeMillis() - mExitTime) > 2000) {
+                mExitTime = System.currentTimeMillis();
+                showLongText("再按一次退出程序");
+            } else {
+                this.finish();
+            }
+            return true;
+        }
+        return false;
     }
 }

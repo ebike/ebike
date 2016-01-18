@@ -65,8 +65,16 @@
 
     <!-- topbar -->
     <string name="top_bar_location">卫星定位</string>
-    <string name="top_bar_alarm_message">报警信息</string>
+    <string name="top_bar_alarm_message">报警消息</string>
     <string name="top_bar_chart">每日统计</string>
     <string name="top_bar_my">我</string>
+
+    <!-- my -->
+    <string name="my_base_info">基本资料</string>
+    <string name="my_car_info">车辆资料</string>
+    <string name="my_remote_lock_car">远程锁车</string>
+    <string name="my_deal_insurance">办理保险</string>
+    <string name="my_insurance_clause">保险条款</string>
+    <string name="my_setting">设置</string>
 
 </resources>

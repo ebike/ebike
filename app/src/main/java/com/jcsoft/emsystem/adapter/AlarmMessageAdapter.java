@@ -35,6 +35,15 @@ public class AlarmMessageAdapter extends TAdapter<AlarmMessageBean> {
 
         AlarmMessageBean bean = mList.get(position);
         if (bean != null) {
+            if(bean.getStatus() == 1){
+                convertView.setBackgroundColor(mContext.getResources().getColor(R.color.white));
+                titleTextView.setTextColor(mContext.getResources().getColor(R.color.gray_3));
+                contentTextView.setTextColor(mContext.getResources().getColor(R.color.gray_6));
+            }else{
+                convertView.setBackgroundColor(mContext.getResources().getColor(R.color.white_f5));
+                titleTextView.setTextColor(mContext.getResources().getColor(R.color.gray_6));
+                contentTextView.setTextColor(mContext.getResources().getColor(R.color.gray_6));
+            }
             switch (bean.getEventType()) {
                 case 1://震动报警
                     msgImageView.setImageResource(R.mipmap.alarm_shake);

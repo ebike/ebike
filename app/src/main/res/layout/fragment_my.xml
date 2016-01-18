@@ -11,6 +11,137 @@
         app:center_text="@string/top_bar_my"
         app:has_center="true" />
 
+    <View
+        style="@style/style_base_line"
+        android:layout_marginTop="16dp" />
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingBottom="8dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="8dp">
 
+        <ImageView
+            android:id="@+id/iv_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"
+            android:src="@mipmap/gaksee_logo" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_toRightOf="@id/iv_header"
+            android:textColor="@color/gray_3"
+            android:textSize="16dp" />
+
+        <TextView
+            android:id="@+id/tv_equipment_serial_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_name"
+            android:layout_marginTop="8dp"
+            android:layout_toRightOf="@id/iv_header"
+            android:textColor="@color/gray_3"
+            android:textSize="14dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/right_arrow_icon" />
+    </RelativeLayout>
+
+    <View style="@style/style_base_line" />
+
+    <View
+        style="@style/style_base_line"
+        android:layout_marginTop="16dp" />
+
+    <com.jcsoft.emsystem.view.RowEntryView
+        android:id="@+id/rev_base_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:row_entry_can_click="true"
+        app:row_entry_has_right_arrow="true"
+        app:row_entry_icon="@mipmap/user_info_icon"
+        app:row_entry_text="@string/my_base_info" />
+
+    <View
+        style="@style/style_base_line"
+        android:layout_marginLeft="16dp" />
+
+    <com.jcsoft.emsystem.view.RowEntryView
+        android:id="@+id/rev_car_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:row_entry_can_click="true"
+        app:row_entry_has_right_arrow="true"
+        app:row_entry_icon="@mipmap/car_info_icon"
+        app:row_entry_text="@string/my_car_info" />
+
+    <View
+        style="@style/style_base_line"
+        android:layout_marginLeft="16dp" />
+
+    <com.jcsoft.emsystem.view.RowEntryView
+        android:id="@+id/rev_remote_lock_car"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:row_entry_can_click="true"
+        app:row_entry_icon="@mipmap/lock_icon"
+        app:row_entry_text="@string/my_remote_lock_car" />
+
+    <View style="@style/style_base_line" />
+
+    <View
+        style="@style/style_base_line"
+        android:layout_marginTop="16dp" />
+
+    <com.jcsoft.emsystem.view.RowEntryView
+        android:id="@+id/rev_deal_insurance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:row_entry_can_click="true"
+        app:row_entry_has_right_arrow="true"
+        app:row_entry_icon="@mipmap/insur_icon"
+        app:row_entry_text="@string/my_deal_insurance" />
+
+    <View
+        style="@style/style_base_line"
+        android:layout_marginLeft="16dp" />
+
+    <com.jcsoft.emsystem.view.RowEntryView
+        android:id="@+id/rev_insurance_clause"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:row_entry_can_click="true"
+        app:row_entry_has_right_arrow="true"
+        app:row_entry_icon="@mipmap/insur_item_icon"
+        app:row_entry_text="@string/my_insurance_clause" />
+
+    <View style="@style/style_base_line" />
+
+    <View
+        style="@style/style_base_line"
+        android:layout_marginTop="16dp" />
+
+    <com.jcsoft.emsystem.view.RowEntryView
+        android:id="@+id/rev_setting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:row_entry_can_click="true"
+        app:row_entry_has_right_arrow="true"
+        app:row_entry_icon="@mipmap/set_icon"
+        app:row_entry_text="@string/my_setting" />
+
+    <View style="@style/style_base_line" />
 </LinearLayout>
