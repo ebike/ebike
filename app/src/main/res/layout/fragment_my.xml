@@ -51,13 +51,6 @@
             android:layout_toRightOf="@id/iv_header"
             android:textColor="@color/gray_3"
             android:textSize="14dp" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@mipmap/right_arrow_icon" />
     </RelativeLayout>
 
     <View style="@style/style_base_line" />

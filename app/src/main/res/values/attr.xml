@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="EmptyView">
-        <attr name="empty_iv_src" format="reference"/>
+        <attr name="empty_iv_src" format="reference" />
 
-        <attr name="empty_tv_text" format="reference|string"/>
-        <attr name="empty_tv_text_color" format="reference|color"/>
-        <attr name="empty_tv_text_size" format="reference|dimension"/>
-        <attr name="empty_btn_text" format="reference|string"/>
-        <attr name="empty_btn_action" format="string"/>
-        <attr name="empty_btn_text_color" format="reference|color"/>
-        <attr name="empty_btn_background" format="reference|color"/>
+        <attr name="empty_tv_text" format="reference|string" />
+        <attr name="empty_tv_text_color" format="reference|color" />
+        <attr name="empty_tv_text_size" format="reference|dimension" />
+        <attr name="empty_btn_text" format="reference|string" />
+        <attr name="empty_btn_action" format="string" />
+        <attr name="empty_btn_text_color" format="reference|color" />
+        <attr name="empty_btn_background" format="reference|color" />
         <attr name="empty_btn_visibility">
             <enum name="gone" value="2" />
             <enum name="invisible" value="1" />
             <enum name="visible" value="0" />
         </attr>
         <!--是否携带bundle数据-->
-        <attr name="empty_has_data" format="boolean"/>
+        <attr name="empty_has_data" format="boolean" />
 
     </declare-styleable>
 
@@ -57,10 +57,18 @@
     </declare-styleable>
     <!-- RowEntryView -->
     <declare-styleable name="RowEntryView">
-        <attr name="row_entry_icon_visible" format="boolean"/>
-        <attr name="row_entry_icon" format="reference"/>
-        <attr name="row_entry_text" format="string"/>
-        <attr name="row_entry_has_right_arrow" format="boolean"/>
-        <attr name="row_entry_can_click" format="boolean"/>
+        <attr name="row_entry_icon_visible" format="boolean" />
+        <attr name="row_entry_icon" format="reference" />
+        <attr name="row_entry_text" format="string" />
+        <attr name="row_entry_has_right_arrow" format="boolean" />
+        <attr name="row_entry_can_click" format="boolean" />
+    </declare-styleable>
+    <!-- common -->
+    <declare-styleable name="RowLabelValueView">
+        <attr name="row_label_value_top_line" format="integer" />
+        <attr name="row_label_value_label" format="string" />
+        <attr name="row_label_value_value" format="string" />
+        <attr name="row_label_value_can_click" format="boolean" />
+        <attr name="row_label_value_bottom_line" format="integer" />
     </declare-styleable>
 </resources>

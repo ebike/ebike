@@ -7,6 +7,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -25,7 +26,7 @@ public class TopBarView extends RelativeLayout {
     private View rootView;
     //左侧布局
     @ViewInject(R.id.relayout_left)
-    RelativeLayout leftRelativeLayout;
+    LinearLayout leftRelativeLayout;
     //左侧文字
     @ViewInject(R.id.tv_left)
     TextView leftTextView;

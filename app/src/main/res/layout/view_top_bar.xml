@@ -4,7 +4,7 @@
     android:layout_height="48dp"
     android:background="@color/topbar_bg">
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/relayout_left"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
@@ -17,16 +17,17 @@
         <ImageView
             android:id="@+id/iv_left"
             style="@style/style_base_w"
-            android:src="@mipmap/back"
+            android:layout_marginRight="4dp"
+            android:src="@mipmap/back_icon"
             android:visibility="gone" />
 
         <TextView
             android:id="@+id/tv_left"
-            style="@style/white_14"
+            style="@style/white_18"
             android:gravity="center"
             android:visibility="gone" />
 
-    </RelativeLayout>
+    </LinearLayout>
 
     <TextView
         android:id="@+id/tv_center"

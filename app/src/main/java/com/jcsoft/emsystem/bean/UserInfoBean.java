@@ -1,31 +1,16 @@
 package com.jcsoft.emsystem.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by huguangwen on 16/1/3.
  */
-public class UserInfoBean {
-
-    /**
-     * carId : 22093495
-     * imei : 865328022093495
-     * telNum : 1064820003159
-     * userName : 吴鹏
-     * province : 山东省
-     * city : 济南市
-     * area : 高新区
-     * address :
-     * idNum : 411322199001071357
-     * phone : 18615601816
-     * activeDate : Jun 7, 2015 10:27:54 AM
-     * expireDate : Jun 7, 2016 12:00:00 AM
-     * activeType : 1
-     * salesman : 张加成
-     */
-
+public class UserInfoBean implements Serializable{
     private int carId;
     private long imei;
     private String telNum;
     private String userName;
+    private int sex;
     private String province;
     private String city;
     private String area;
@@ -150,5 +135,13 @@ public class UserInfoBean {
 
     public String getSalesman() {
         return salesman;
+    }
+
+    public int getSex() {
+        return sex;
+    }
+
+    public void setSex(int sex) {
+        this.sex = sex;
     }
 }

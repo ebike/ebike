@@ -33,6 +33,7 @@
         android:layout_toLeftOf="@id/iv_arrow"
         android:layout_toRightOf="@id/iv_icon"
         android:singleLine="true"
-        android:textColor="@color/gray_3" />
+        android:textColor="@color/gray_3"
+        android:textSize="16sp" />
 
 </RelativeLayout>

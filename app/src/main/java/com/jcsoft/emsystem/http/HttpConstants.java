@@ -92,6 +92,14 @@ public class HttpConstants {
         return sb.toString();
     }
 
+    //获取用户基本信息
+    public static String getUserInfo() {
+        StringBuffer sb = new StringBuffer(baseUrl);
+        sb.append("/user/getUserInfo.do");
+        sb.append("?carId=").append(AppConfig.userInfoBean.getCarId());
+        return sb.toString();
+    }
+
     //开启电子围栏
 //    public static String getOpenVfUrl(){
 //        StringBuffer sb = new StringBuffer(baseUrl);
