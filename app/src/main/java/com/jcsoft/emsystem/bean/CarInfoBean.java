@@ -1,19 +1,12 @@
 package com.jcsoft.emsystem.bean;
 
+import java.io.Serializable;
+
 /**
+ * 车辆信息
  * Created by jimmy on 16/1/10.
  */
-public class CarInfoBean{
-
-    /**
-     * carId : 22093495
-     * carBrand :
-     * carModel :
-     * carType : 轻型踏板
-     * carPic : http://img.gnets.cn/no_pic.png
-     * frameNum :
-     * motorNum :
-     */
+public class CarInfoBean implements Serializable{
 
     private int carId;
     private String carBrand;
@@ -22,6 +15,8 @@ public class CarInfoBean{
     private String carPic;
     private String frameNum;
     private String motorNum;
+    private int carPrice;
+    private String carDate;
 
     public CarInfoBean() {
     }
@@ -80,5 +75,21 @@ public class CarInfoBean{
 
     public String getMotorNum() {
         return motorNum;
+    }
+
+    public void setCarPrice(int carPrice) {
+        this.carPrice = carPrice;
+    }
+
+    public void setCarDate(String carDate) {
+        this.carDate = carDate;
+    }
+
+    public int getCarPrice() {
+        return carPrice;
+    }
+
+    public String getCarDate() {
+        return carDate;
     }
 }

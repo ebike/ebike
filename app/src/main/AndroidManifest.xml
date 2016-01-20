@@ -191,6 +191,8 @@
             android:configChanges="orientation|keyboardHidden" />
         <activity android:name=".activity.BaseInformationActivity" >
         </activity>
+        <activity android:name=".activity.CarInformationActivity" >
+        </activity>
     </application>
 
 </manifest>

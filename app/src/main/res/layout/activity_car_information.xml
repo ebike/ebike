@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_bg"
+    android:orientation="vertical">
+
+    <com.jcsoft.emsystem.view.TopBarView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:back_is_finish="true"
+        app:center_text="@string/top_bar_car_info"
+        app:has_center="true"
+        app:has_left="true"
+        app:has_left_clickable="true"
+        app:left_icon="@mipmap/back_icon"
+        app:left_text="@string/top_bar_my" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.jcsoft.emsystem.view.RowLabelValueView
+                android:id="@+id/rlvv_brand_models"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:row_label_value_bottom_line="2"
+                app:row_label_value_label="@string/car_information_brand_models"
+                app:row_label_value_top_line="1" />
+
+            <com.jcsoft.emsystem.view.RowLabelValueView
+                android:id="@+id/rlvv_motor_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:row_label_value_bottom_line="2"
+                app:row_label_value_label="@string/car_information_motor_number" />
+
+            <com.jcsoft.emsystem.view.RowLabelValueView
+                android:id="@+id/rlvv_frame_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:row_label_value_bottom_line="2"
+                app:row_label_value_label="@string/car_information_frame_number" />
+
+            <com.jcsoft.emsystem.view.RowLabelValueView
+                android:id="@+id/rlvv_buy_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:row_label_value_bottom_line="2"
+                app:row_label_value_label="@string/car_information_buy_date" />
+
+            <com.jcsoft.emsystem.view.RowLabelValueView
+                android:id="@+id/rlvv_buy_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:row_label_value_bottom_line="2"
+                app:row_label_value_label="@string/car_information_buy_price" />
+
+            <com.jcsoft.emsystem.view.RowLabelValueView
+                android:id="@+id/rlvv_car_photo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:row_label_value_bottom_line="1"
+                app:row_label_value_label="@string/car_information_car_photo" />
+
+            <ImageView
+                android:id="@+id/iv_car_photo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

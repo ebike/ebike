@@ -11,6 +11,7 @@ import com.jcsoft.emsystem.bean.ReceiveExtraBean;
 import com.jcsoft.emsystem.constants.AppConfig;
 import com.jcsoft.emsystem.event.OnlineExceptionEvent;
 import com.jcsoft.emsystem.event.RemoteLockCarEvent;
+import com.jcsoft.emsystem.event.RemoteVFEvent;
 import com.jcsoft.emsystem.utils.CommonUtils;
 
 import org.json.JSONException;
@@ -65,12 +66,16 @@ public class JReceiver extends BroadcastReceiver {
                         EventBus.getDefault().post(new RemoteLockCarEvent("1", msg));
                         break;
                     case 5://电子围栏开启成功
+                        EventBus.getDefault().post(new RemoteVFEvent("1", msg));
                         break;
                     case 6://电子围栏开启超时
+                        EventBus.getDefault().post(new RemoteVFEvent("0", msg));
                         break;
                     case 7://电子围栏关闭成功
+                        EventBus.getDefault().post(new RemoteVFEvent("0", msg));
                         break;
                     case 8://电子围栏关闭超时
+                        EventBus.getDefault().post(new RemoteVFEvent("1", msg));
                         break;
                     case 9://报警消息
                         break;

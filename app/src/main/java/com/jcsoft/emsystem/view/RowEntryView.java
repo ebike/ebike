@@ -107,4 +107,8 @@ public class RowEntryView extends RelativeLayout {
     public void setOnClickCallback(OnClickCallback onClickCallback) {
         this.onClickCallback = onClickCallback;
     }
+
+    public void setTitleTextView(String title) {
+        titleTextView.setText(title);
+    }
 }

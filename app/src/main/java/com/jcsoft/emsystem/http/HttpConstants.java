@@ -101,16 +101,16 @@ public class HttpConstants {
     }
 
     //开启电子围栏
-//    public static String getOpenVfUrl(){
-//        StringBuffer sb = new StringBuffer(baseUrl);
-//        sb.append("/vf/openVf.do");
-//        sb.append("?carId=").append(AppConfig.userInfoBean.getCarId());
-//        sb.append("&maxLon=").append();
-//        sb.append("&maxLat=").append();
-//        sb.append("&minLon=").append();
-//        sb.append("&minLat=").append();
-//        sb.append("&lon=").append();
-//        sb.append("&lat=").append();
-//        return sb.toString();
-//    }
+    public static String getOpenVfUrl(double lon, double lat, double maxLon, double maxLat, double minLon, double minLat) {
+        StringBuffer sb = new StringBuffer(baseUrl);
+        sb.append("/vf/openVf.do");
+        sb.append("?carId=").append(AppConfig.userInfoBean.getCarId());
+        sb.append("&maxLon=").append(maxLon);
+        sb.append("&maxLat=").append(maxLat);
+        sb.append("&minLon=").append(minLon);
+        sb.append("&minLat=").append(minLat);
+        sb.append("&lon=").append(lon);
+        sb.append("&lat=").append(lat);
+        return sb.toString();
+    }
 }

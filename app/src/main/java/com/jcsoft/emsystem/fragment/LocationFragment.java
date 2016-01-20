@@ -54,9 +54,11 @@ import com.jcsoft.emsystem.bean.TrackBean;
 import com.jcsoft.emsystem.callback.DCommonCallback;
 import com.jcsoft.emsystem.callback.DSingleDialogCallback;
 import com.jcsoft.emsystem.client.JCLocationManager;
+import com.jcsoft.emsystem.constants.AppConfig;
 import com.jcsoft.emsystem.constants.JCConstValues;
 import com.jcsoft.emsystem.database.ConfigService;
 import com.jcsoft.emsystem.event.RemoteLockCarEvent;
+import com.jcsoft.emsystem.event.RemoteVFEvent;
 import com.jcsoft.emsystem.event.StopNaviEvent;
 import com.jcsoft.emsystem.http.DHttpUtils;
 import com.jcsoft.emsystem.http.HttpConstants;
@@ -268,19 +270,26 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
                         CameraUpdate cu = CameraUpdateFactory.changeLatLng(position);
                         aMap.moveCamera(cu);
                         //判断锁车状态
-                        if (locInfoBean.getLock().equals("1")) {
-                            lockImageView.setImageResource(R.mipmap.voice_lock);
-                        } else {
-                            lockImageView.setImageResource(R.mipmap.voice_unlock);
+                        if (AppConfig.isExecuteLock == null) {
+                            if (locInfoBean.getLock().equals("1")) {
+                                AppConfig.isLock = true;
+                                lockImageView.setImageResource(R.mipmap.voice_lock);
+                            } else {
+                                AppConfig.isLock = false;
+                                lockImageView.setImageResource(R.mipmap.voice_unlock);
+                            }
                         }
                         //判断电子围栏
-                        if (locInfoBean.isOpenVf()) {
-                            fenceImageView.setImageResource(R.mipmap.fence_open);
-                            aMap.addCircle(new CircleOptions().center(position)
-                                    .radius(100).strokeColor(Color.RED).fillColor(Color.TRANSPARENT)
-                                    .strokeWidth(1));
-                        } else {
-                            fenceImageView.setImageResource(R.mipmap.fence_close);
+                        if (AppConfig.isExecuteVF == null) {
+                            if (locInfoBean.isOpenVf()) {
+                                fenceImageView.setImageResource(R.mipmap.fence_open);
+                                LatLng vfPosition = new LatLng(locInfoBean.getVfLat() / 1000000.0, locInfoBean.getVfLon() / 1000000.0);
+                                aMap.addCircle(new CircleOptions().center(vfPosition)
+                                        .radius(100).strokeColor(Color.RED).fillColor(Color.TRANSPARENT)
+                                        .strokeWidth(1));
+                            } else {
+                                fenceImageView.setImageResource(R.mipmap.fence_close);
+                            }
                         }
                     } else {
                         showShortText("定位失败");
@@ -407,43 +416,51 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
                 aMap.setMapType(AMap.MAP_TYPE_NORMAL);
                 changeMapType(AMap.MAP_TYPE_NORMAL);
                 break;
-            case R.id.iv_lock://远程锁车
-                if (locInfoBean.getLock().equals("1")) {
-                    CommonUtils.showCustomDialog0(getActivity(), "提示", "你确定要解除对电动车的锁定吗？", new DSingleDialogCallback() {
-                        @Override
-                        public void onPositiveButtonClick(String editText) {
-                            RequestParams params = new RequestParams(HttpConstants.getUnLockBikeUrl());
-                            DHttpUtils.get_String((MainActivity) getActivity(), true, params, new DCommonCallback<String>() {
-                                @Override
-                                public void onSuccess(String result) {
-                                    ResponseBean<String> responseBean = new Gson().fromJson(result, new TypeToken<ResponseBean<String>>() {
-                                    }.getType());
-                                    if (responseBean != null) {
-                                        showShortText(responseBean.getErrmsg());
-                                        lockImageView.setEnabled(false);
-                                    }
-                                }
-                            });
-                        }
-                    });
+            case R.id.iv_lock://远程锁车/解锁
+                if (AppConfig.isExecuteLock != null) {
+                    if (AppConfig.isExecuteLock == 1) {
+                        CommonUtils.showCustomDialogSignle3(getActivity(), "", "正在执行锁车命令，请稍等。");
+                    } else if (AppConfig.isExecuteLock == 0) {
+                        CommonUtils.showCustomDialogSignle3(getActivity(), "", "正在执行解锁命令，请稍等。");
+                    }
                 } else {
-                    CommonUtils.showCustomDialog0(getActivity(), "提示", "你确定要锁定电动车吗？", new DSingleDialogCallback() {
-                        @Override
-                        public void onPositiveButtonClick(String editText) {
-                            RequestParams params = new RequestParams(HttpConstants.getlockBikeUrl());
-                            DHttpUtils.get_String((MainActivity) getActivity(), true, params, new DCommonCallback<String>() {
-                                @Override
-                                public void onSuccess(String result) {
-                                    ResponseBean<String> responseBean = new Gson().fromJson(result, new TypeToken<ResponseBean<String>>() {
-                                    }.getType());
-                                    if (responseBean != null) {
-                                        showShortText(responseBean.getErrmsg());
-                                        lockImageView.setEnabled(false);
+                    if (locInfoBean.getLock().equals("1")) {
+                        CommonUtils.showCustomDialog0(getActivity(), "提示", "您确定要停止语音寻车吗？", new DSingleDialogCallback() {
+                            @Override
+                            public void onPositiveButtonClick(String editText) {
+                                RequestParams params = new RequestParams(HttpConstants.getUnLockBikeUrl());
+                                DHttpUtils.get_String((MainActivity) getActivity(), true, params, new DCommonCallback<String>() {
+                                    @Override
+                                    public void onSuccess(String result) {
+                                        ResponseBean<String> responseBean = new Gson().fromJson(result, new TypeToken<ResponseBean<String>>() {
+                                        }.getType());
+                                        if (responseBean != null) {
+                                            AppConfig.isExecuteLock = 0;
+                                            showShortText("关闭命令发送成功");
+                                        }
                                     }
-                                }
-                            });
-                        }
-                    });
+                                });
+                            }
+                        });
+                    } else {
+                        CommonUtils.showCustomDialog0(getActivity(), "提示", "您确定要开启语音寻车吗？", new DSingleDialogCallback() {
+                            @Override
+                            public void onPositiveButtonClick(String editText) {
+                                RequestParams params = new RequestParams(HttpConstants.getlockBikeUrl());
+                                DHttpUtils.get_String((MainActivity) getActivity(), true, params, new DCommonCallback<String>() {
+                                    @Override
+                                    public void onSuccess(String result) {
+                                        ResponseBean<String> responseBean = new Gson().fromJson(result, new TypeToken<ResponseBean<String>>() {
+                                        }.getType());
+                                        if (responseBean != null) {
+                                            AppConfig.isExecuteLock = 1;
+                                            showShortText("开启命令发送成功");
+                                        }
+                                    }
+                                });
+                            }
+                        });
+                    }
                 }
                 break;
             case R.id.iv_trajectory://轨迹
@@ -530,42 +547,61 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
                 });
                 break;
             case R.id.iv_fence://电子围栏
-                if (locInfoBean.isOpenVf()) {
-                    CommonUtils.showCustomDialog0(getActivity(), "提示", "您确定要关闭电子围栏吗？", new DSingleDialogCallback() {
-                        @Override
-                        public void onPositiveButtonClick(String editText) {
-                            RequestParams params = new RequestParams(HttpConstants.getCloseVfUrl());
-                            DHttpUtils.get_String((MainActivity) getActivity(), true, params, new DCommonCallback<String>() {
-                                @Override
-                                public void onSuccess(String result) {
-                                    ResponseBean<String> responseBean = new Gson().fromJson(result, new TypeToken<ResponseBean<String>>() {
-                                    }.getType());
-                                    if (responseBean != null) {
-                                        showShortText(responseBean.getErrmsg());
-                                        fenceImageView.setEnabled(false);
-                                    }
-                                }
-                            });
-                        }
-                    });
+                if (AppConfig.isExecuteVF != null) {
+                    if (AppConfig.isExecuteVF == 1) {
+                        CommonUtils.showCustomDialogSignle3(getActivity(), "", "正在打开电子围栏，请稍等。");
+                    } else if (AppConfig.isExecuteVF == 0) {
+                        CommonUtils.showCustomDialogSignle3(getActivity(), "", "正在关闭电子围栏，请稍等。");
+                    }
                 } else {
-//                    CommonUtils.showCustomDialog0(getActivity(), "提示", "您确定要开启电子围栏吗？", new DSingleDialogCallback() {
-//                        @Override
-//                        public void onPositiveButtonClick(String editText) {
-//                            RequestParams params = new RequestParams(HttpConstants.getcloseVfUrl());
-//                            DHttpUtils.get_String((MainActivity) getActivity(), true, params, new DCommonCallback<String>() {
-//                                @Override
-//                                public void onSuccess(String result) {
-//                                    ResponseBean<String> responseBean = new Gson().fromJson(result, new TypeToken<ResponseBean<String>>() {
-//                                    }.getType());
-//                                    if (responseBean != null) {
-//                                        showShortText(responseBean.getErrmsg());
-//                                        fenceImageView.setEnabled(false);
-//                                    }
-//                                }
-//                            });
-//                        }
-//                    });
+                    if (locInfoBean.isOpenVf()) {
+                        CommonUtils.showCustomDialog0(getActivity(), "提示", "您确定要关闭电子围栏吗？", new DSingleDialogCallback() {
+                            @Override
+                            public void onPositiveButtonClick(String editText) {
+                                RequestParams params = new RequestParams(HttpConstants.getCloseVfUrl());
+                                DHttpUtils.get_String((MainActivity) getActivity(), true, params, new DCommonCallback<String>() {
+                                    @Override
+                                    public void onSuccess(String result) {
+                                        ResponseBean<String> responseBean = new Gson().fromJson(result, new TypeToken<ResponseBean<String>>() {
+                                        }.getType());
+                                        if (responseBean != null) {
+                                            AppConfig.isExecuteVF = 0;
+                                            showShortText(responseBean.getErrmsg());
+                                        }
+                                    }
+                                });
+                            }
+                        });
+                    } else {
+                        CommonUtils.showCustomDialog0(getActivity(), "提示", "您确定要开启电子围栏吗？", new DSingleDialogCallback() {
+                            @Override
+                            public void onPositiveButtonClick(String editText) {
+                                //常数
+                                int r = 100;
+                                int K = 111700 * 2;
+                                double R = 3.141592654 / 180;
+                                double latitude = locInfoBean.getLat() / 1000000.0;
+                                double longitude = locInfoBean.getLon() / 1000000.0;
+                                //计算电子围栏的范围
+                                double maxLat = latitude + (double) r / K;//最大纬度
+                                double minLat = latitude - (double) r / K;//最小纬度
+                                double minLon = longitude - r / (K * Math.cos(latitude * R));//最小经度
+                                double maxLon = longitude + r / (K * Math.cos(latitude * R));//最大经度
+                                RequestParams params = new RequestParams(HttpConstants.getOpenVfUrl(longitude, latitude, maxLon, maxLat, minLon, minLat));
+                                DHttpUtils.get_String((MainActivity) getActivity(), true, params, new DCommonCallback<String>() {
+                                    @Override
+                                    public void onSuccess(String result) {
+                                        ResponseBean<String> responseBean = new Gson().fromJson(result, new TypeToken<ResponseBean<String>>() {
+                                        }.getType());
+                                        if (responseBean != null) {
+                                            AppConfig.isExecuteVF = 1;
+                                            showShortText(responseBean.getErrmsg());
+                                        }
+                                    }
+                                });
+                            }
+                        });
+                    }
                 }
                 break;
             case R.id.iv_car_status://车辆信息
@@ -675,12 +711,29 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
     //处理远程锁车推送
     public void onEvent(RemoteLockCarEvent event) {
         if (event != null) {
+            AppConfig.isExecuteLock = null;
             if (event.getIsLock().equals("1")) {
                 lockImageView.setImageResource(R.mipmap.voice_lock);
+                AppConfig.isLock = true;
+                showShortText("开启成功");
             } else {
                 lockImageView.setImageResource(R.mipmap.voice_unlock);
+                AppConfig.isLock = false;
+                showShortText("关闭成功");
             }
-            lockImageView.setEnabled(true);
+
+        }
+    }
+
+    //处理电子围栏推送
+    public void onEvent(RemoteVFEvent event) {
+        if (event != null) {
+            if (event.getIsOpen().equals("1")) {
+                fenceImageView.setImageResource(R.mipmap.fence_open);
+            } else {
+                fenceImageView.setImageResource(R.mipmap.fence_close);
+            }
+            AppConfig.isExecuteVF = null;
             showShortText(event.getMsg());
         }
     }

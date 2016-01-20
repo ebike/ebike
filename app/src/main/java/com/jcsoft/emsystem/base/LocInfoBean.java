@@ -4,24 +4,6 @@ package com.jcsoft.emsystem.base;
  * Created by huguangwen on 16/1/3.
  */
 public class LocInfoBean {
-
-    /**
-     * carId : 22093495
-     * lon : 117134842
-     * lat : 36690208
-     * speed : 0
-     * heading : 0
-     * sourceType : 2
-     * satelliteTime : 2016-01-03 21:58
-     * address : 暂时无法获取
-     * isOnline : 1
-     * acc : 0
-     * power : 1
-     * loc : 0
-     * lock : 0
-     * isOpenVf : false
-     */
-
     private int carId;
     private int lon;
     private int lat;
@@ -36,6 +18,9 @@ public class LocInfoBean {
     private String loc;
     private String lock;
     private boolean isOpenVf;
+    private int vfLon;
+    private int vfLat;
+    private int vfStatus;
 
     public LocInfoBean() {
     }
@@ -150,5 +135,29 @@ public class LocInfoBean {
 
     public void setIsOpenVf(boolean isOpenVf) {
         this.isOpenVf = isOpenVf;
+    }
+
+    public void setVfLon(int vfLon) {
+        this.vfLon = vfLon;
+    }
+
+    public void setVfLat(int vfLat) {
+        this.vfLat = vfLat;
+    }
+
+    public void setVfStatus(int vfStatus) {
+        this.vfStatus = vfStatus;
+    }
+
+    public int getVfLon() {
+        return vfLon;
+    }
+
+    public int getVfLat() {
+        return vfLat;
+    }
+
+    public int getVfStatus() {
+        return vfStatus;
     }
 }
