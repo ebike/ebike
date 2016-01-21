@@ -70,6 +70,8 @@
     <string name="top_bar_my">我</string>
     <string name="top_bar_base_info">基本资料</string>
     <string name="top_bar_car_info">车辆资料</string>
+    <string name="top_bar_insurance_clause">保险信息</string>
+    <string name="top_bar_setting">设置</string>
 
     <!-- my -->
     <string name="my_base_info">基本资料</string>
@@ -77,6 +79,7 @@
     <string name="my_remote_lock_car">远程锁车</string>
     <string name="my_remote_open_car">远程解锁</string>
     <string name="my_deal_insurance">办理保险</string>
+    <string name="my_insurance_info">保险信息</string>
     <string name="my_insurance_clause">保险条款</string>
     <string name="my_setting">设置</string>
 
@@ -101,6 +104,23 @@
     <string name="car_information_buy_date">购买日期</string>
     <string name="car_information_buy_price">购买价格</string>
     <string name="car_information_car_photo">车辆照片</string>
+
+    <!-- insurance_clause -->
+    <string name="insurance_clause_equipment_serial_number">设备编号</string>
+    <string name="insurance_clause_policy_number">保险单号</string>
+    <string name="insurance_clause_start_date">起保日期</string>
+    <string name="insurance_clause_due_date">截止日期</string>
+    <string name="insurance_clause_insured_person">被保险人</string>
+    <string name="insurance_clause_id_card">身份证号</string>
+    <string name="insurance_clause_phone">联系电话</string>
+    <string name="insurance_clause_coverage_area">承保区域</string>
+
+    <!-- setting -->
+    <string name="setting_contact_customer_service">联系客服</string>
+    <string name="setting_terms_of_service">服务条款</string>
+    <string name="setting_about">关于</string>
+    <string name="setting_logout">退出登录</string>
+    <string name="setting_phone_number">0531-67805000</string>
 
 
 </resources>

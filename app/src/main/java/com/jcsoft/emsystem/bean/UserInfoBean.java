@@ -21,6 +21,7 @@ public class UserInfoBean implements Serializable{
     private String expireDate;
     private int activeType;
     private String salesman;
+    private String insurNum;
 
     public UserInfoBean() {
     }
@@ -123,6 +124,14 @@ public class UserInfoBean implements Serializable{
 
     public String getActiveDate() {
         return activeDate;
+    }
+
+    public String getInsurNum() {
+        return insurNum;
+    }
+
+    public void setInsurNum(String insurNum) {
+        this.insurNum = insurNum;
     }
 
     public String getExpireDate() {

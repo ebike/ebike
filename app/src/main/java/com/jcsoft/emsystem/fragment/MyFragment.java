@@ -12,7 +12,9 @@ import com.google.gson.reflect.TypeToken;
 import com.jcsoft.emsystem.R;
 import com.jcsoft.emsystem.activity.BaseInformationActivity;
 import com.jcsoft.emsystem.activity.CarInformationActivity;
+import com.jcsoft.emsystem.activity.InsuranceClauseActivity;
 import com.jcsoft.emsystem.activity.MainActivity;
+import com.jcsoft.emsystem.activity.SettingActivity;
 import com.jcsoft.emsystem.bean.ResponseBean;
 import com.jcsoft.emsystem.callback.DCommonCallback;
 import com.jcsoft.emsystem.constants.AppConfig;
@@ -71,6 +73,11 @@ public class MyFragment extends BaseFragment implements RowEntryView.OnClickCall
             remoteLockCarRowEntryView.setTitleTextView(getResources().getString(R.string.my_remote_open_car));
         } else {
             remoteLockCarRowEntryView.setTitleTextView(getResources().getString(R.string.my_remote_lock_car));
+        }
+        if (!CommonUtils.strIsEmpty(AppConfig.userInfoBean.getInsurNum())) {
+            dealInsuranceRowEntryView.setTitleTextView(getResources().getString(R.string.my_insurance_info));
+        } else {
+            dealInsuranceRowEntryView.setTitleTextView(getResources().getString(R.string.my_deal_insurance));
         }
     }
 
@@ -137,13 +144,19 @@ public class MyFragment extends BaseFragment implements RowEntryView.OnClickCall
                 }
                 break;
             case R.id.rev_deal_insurance://办理保险
-
+                if (!CommonUtils.strIsEmpty(AppConfig.userInfoBean.getInsurNum())) {
+                    intent = new Intent(getActivity(), InsuranceClauseActivity.class);
+                } else {
+                    intent = new Intent(getActivity(), InsuranceClauseActivity.class);
+                }
+                startActivity(intent);
                 break;
             case R.id.rev_insurance_clause://保险条款
 
                 break;
             case R.id.rev_setting://设置
-
+                intent = new Intent(getActivity(), SettingActivity.class);
+                startActivity(intent);
                 break;
         }
     }

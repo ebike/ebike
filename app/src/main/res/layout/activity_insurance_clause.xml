@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_bg"
+    android:orientation="vertical">
+
+    <com.jcsoft.emsystem.view.TopBarView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:back_is_finish="true"
+        app:center_text="@string/top_bar_insurance_clause"
+        app:has_center="true"
+        app:has_left="true"
+        app:has_left_clickable="true"
+        app:left_icon="@mipmap/back_icon"
+        app:left_text="@string/top_bar_my" />
+
+    <com.jcsoft.emsystem.view.RowLabelValueView
+        android:id="@+id/rlvv_equipment_serial_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:row_label_value_bottom_line="1"
+        app:row_label_value_label="@string/insurance_clause_equipment_serial_number"
+        app:row_label_value_top_line="1" />
+
+    <com.jcsoft.emsystem.view.RowLabelValueView
+        android:id="@+id/rlvv_policy_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:row_label_value_bottom_line="2"
+        app:row_label_value_label="@string/insurance_clause_policy_number"
+        app:row_label_value_top_line="1" />
+
+    <com.jcsoft.emsystem.view.RowLabelValueView
+        android:id="@+id/rlvv_start_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:row_label_value_bottom_line="2"
+        app:row_label_value_label="@string/insurance_clause_start_date" />
+
+    <com.jcsoft.emsystem.view.RowLabelValueView
+        android:id="@+id/rlvv_due_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:row_label_value_bottom_line="2"
+        app:row_label_value_label="@string/insurance_clause_due_date" />
+
+    <com.jcsoft.emsystem.view.RowLabelValueView
+        android:id="@+id/rlvv_insured_person"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:row_label_value_bottom_line="1"
+        app:row_label_value_label="@string/insurance_clause_insured_person" />
+
+    <com.jcsoft.emsystem.view.RowLabelValueView
+        android:id="@+id/rlvv_id_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:row_label_value_bottom_line="2"
+        app:row_label_value_label="@string/insurance_clause_id_card" />
+
+    <com.jcsoft.emsystem.view.RowLabelValueView
+        android:id="@+id/rlvv_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:row_label_value_bottom_line="2"
+        app:row_label_value_label="@string/insurance_clause_phone" />
+
+    <com.jcsoft.emsystem.view.RowLabelValueView
+        android:id="@+id/rlvv_coverage_area"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:row_label_value_bottom_line="1"
+        app:row_label_value_label="@string/insurance_clause_coverage_area" />
+
+</LinearLayout>

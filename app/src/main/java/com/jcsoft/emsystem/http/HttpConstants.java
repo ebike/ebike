@@ -113,4 +113,12 @@ public class HttpConstants {
         sb.append("&lat=").append(lat);
         return sb.toString();
     }
+
+    //获取用户保险信息
+    public static String getInsurInfoUrl(){
+        StringBuffer sb = new StringBuffer(baseUrl);
+        sb.append("/insur/getInsurInfo.do");
+        sb.append("?carId=").append("304949");
+        return sb.toString();
+    }
 }
