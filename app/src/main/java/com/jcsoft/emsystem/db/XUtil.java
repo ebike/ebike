@@ -1,6 +1,6 @@
 package com.jcsoft.emsystem.db;
 
-import android.os.Environment;
+import android.content.Context;
 
 import org.xutils.DbManager;
 import org.xutils.x;
@@ -16,8 +16,8 @@ public class XUtil {
     private static DbManager.DaoConfig daoConfig;
     public static DbManager db;
 
-    public static DbManager.DaoConfig getDaoConfig() {
-        File file = new File(Environment.getExternalStorageDirectory().getPath());
+    public static DbManager.DaoConfig getDaoConfig(Context context) {
+        File file = new File("/data/data/" + context.getPackageName() + "/databases");
         if (daoConfig == null) {
             daoConfig = new DbManager.DaoConfig()
                     .setDbName("emsystem.db")
@@ -35,8 +35,8 @@ public class XUtil {
     }
 
     //初始化数据库
-    public static void initDB(){
-        DbManager.DaoConfig daoConfig = XUtil.getDaoConfig();
+    public static void initDB(Context context){
+        DbManager.DaoConfig daoConfig = XUtil.getDaoConfig(context);
         db = x.getDb(daoConfig);
     }
 

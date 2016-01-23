@@ -85,7 +85,6 @@ public class TTSController implements SynthesizerListener, AMapNaviListener {
 		// 设置语调
 		mSpeechSynthesizer.setParameter(SpeechConstant.PITCH,
 				"" + mContext.getString(R.string.preference_key_tts_pitch));
-
 	}
 
 	/**
@@ -111,7 +110,6 @@ public class TTSController implements SynthesizerListener, AMapNaviListener {
 
 	@Override
 	public void onBufferProgress(int arg0, int arg1, int arg2, String arg3) {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -119,32 +117,27 @@ public class TTSController implements SynthesizerListener, AMapNaviListener {
 
 	@Override
 	public void onCompleted(SpeechError arg0) {
-		// TODO Auto-generated method stub
 		isfinish = true;
 	}
 
 	@Override
 	public void onSpeakBegin() {
-		// TODO Auto-generated method stub
 		isfinish = false;
 
 	}
 
 	@Override
 	public void onSpeakPaused() {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void onSpeakProgress(int arg0, int arg1, int arg2) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void onSpeakResumed() {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -156,13 +149,11 @@ public class TTSController implements SynthesizerListener, AMapNaviListener {
 
 	@Override
 	public void onArriveDestination() {
-		// TODO Auto-generated method stub
 		this.playText("到达目的地");
 	}
 
 	@Override
 	public void onArrivedWayPoint(int arg0) {
-		// TODO Auto-generated method stub
 	}
 
 	@Override
@@ -173,7 +164,6 @@ public class TTSController implements SynthesizerListener, AMapNaviListener {
 	@Override
 	public void onCalculateRouteSuccess() {
 		String calculateResult = "路径计算就绪";
-
 		this.playText(calculateResult);
 	}
 
@@ -185,68 +175,56 @@ public class TTSController implements SynthesizerListener, AMapNaviListener {
 
 	@Override
 	public void onGetNavigationText(int arg0, String arg1) {
-		// TODO Auto-generated method stub
 		this.playText(arg1);
 	}
 
 	@Override
 	public void onInitNaviFailure() {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void onInitNaviSuccess() {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void onLocationChange(AMapNaviLocation arg0) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void onReCalculateRouteForTrafficJam() {
-		// TODO Auto-generated method stub
 		this.playText("前方路线拥堵，路线重新规划");
 	}
 
 	@Override
 	public void onReCalculateRouteForYaw() {
-
 		this.playText("您已偏航");
 	}
 
 	@Override
 	public void onStartNavi(int arg0) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void onTrafficStatusUpdate() {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void onGpsOpenStatus(boolean arg0) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void onNaviInfoUpdated(AMapNaviInfo arg0) {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onNaviInfoUpdate(NaviInfo arg0) {
 		  
-		// TODO Auto-generated method stub  
-		
 	}
 }

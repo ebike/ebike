@@ -21,7 +21,7 @@ public class BaseApplication extends Application {
         x.Ext.init(this);
         x.Ext.setDebug(true);
         //初始化DB
-        XUtil.initDB();
+        XUtil.initDB(this);
         // 设置开启日志,发布时请关闭日志
         JPushInterface.setDebugMode(true);
         // 初始化 JPush
