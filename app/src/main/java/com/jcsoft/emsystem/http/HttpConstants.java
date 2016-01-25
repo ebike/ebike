@@ -115,10 +115,19 @@ public class HttpConstants {
     }
 
     //获取用户保险信息
-    public static String getInsurInfoUrl(){
+    public static String getInsurInfoUrl() {
         StringBuffer sb = new StringBuffer(baseUrl);
         sb.append("/insur/getInsurInfo.do");
-        sb.append("?carId=").append("304949");
+        sb.append("?carId=").append(AppConfig.userInfoBean.getCarId());
+        return sb.toString();
+    }
+
+    //获取每日统计数据
+    public static String getDayDataUrl(String date) {
+        StringBuffer sb = new StringBuffer(baseUrl);
+        sb.append("/chart/getDayData.do");
+        sb.append("?carId=").append(AppConfig.userInfoBean.getCarId());
+        sb.append("&date=").append(date);
         return sb.toString();
     }
 }

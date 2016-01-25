@@ -124,6 +124,18 @@ public class CommonUtils {
         return DateToString(yesterday, format);
     }
 
+    //时间差大于一周
+    public static boolean moreThanAWeek(String start, String end) {
+        Date startDate = new Date(start);
+        Date endDate = new Date(end);
+        long t1 = startDate.getTime();
+        long t2 = endDate.getTime();
+        if (t2 - t1 > 7 * 24 * 60 * 60 * 1000) {
+            return true;
+        }
+        return false;
+    }
+
     /**
      * Description 友好显示时间
      *

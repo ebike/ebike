@@ -57,11 +57,13 @@
     </declare-styleable>
     <!-- RowEntryView -->
     <declare-styleable name="RowEntryView">
+        <attr name="row_entry_top_line" format="integer" />
         <attr name="row_entry_icon_visible" format="boolean" />
         <attr name="row_entry_icon" format="reference" />
         <attr name="row_entry_text" format="string" />
         <attr name="row_entry_has_right_arrow" format="boolean" />
         <attr name="row_entry_can_click" format="boolean" />
+        <attr name="row_entry_bottom_line" format="integer" />
     </declare-styleable>
     <!-- common -->
     <declare-styleable name="RowLabelValueView">

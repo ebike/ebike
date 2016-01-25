@@ -14,6 +14,7 @@
     <color name="list_selector_disable">#aaa</color>
     <color name="gray">#eaebed</color>
     <color name="bold_gray">#d1d1d1</color>
+    <color name="gray_border">#CCCCCC</color>
 
     <!-- topbar -->
     <color name="topbar_bg">#fc5823</color>
@@ -36,5 +37,7 @@
     <color name="gray_3">#333333</color>
     <color name="gray_6">#666666</color>
     <color name="white_f5">#F5F5F5</color>
+    <color name="orange_chart">#cc4216</color>
+    <color name="white_chart">#F3F3F3</color>
 
 </resources>

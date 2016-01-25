@@ -3,8 +3,6 @@ package com.jcsoft.emsystem.utils;
 import android.content.Context;
 import android.util.DisplayMetrics;
 
-import java.util.logging.Logger;
-
 /**
  * 获取设备的 分辨率 像素等参数
  */
@@ -105,7 +103,8 @@ public class DensityUtil {
     }
 
     //获取屏幕宽度
-    public static int getWidthPixels(){
+    public static int screenWidth(){
         return dm.widthPixels;
     }
+
 }

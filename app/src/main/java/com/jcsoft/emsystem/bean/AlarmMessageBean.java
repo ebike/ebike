@@ -9,33 +9,33 @@ import java.io.Serializable;
  * 报警消息
  * Created by jimmy on 16/1/16.
  */
-@Table(name="t_alarm_message")
+@Table(name = "t_alarm_message")
 public class AlarmMessageBean implements Serializable {
-    @Column(name="id",isId=true,autoGen=true)
+    @Column(name = "id", isId = true, autoGen = true)
     private int id;
-    @Column(name="eventId")
+    @Column(name = "eventId")
     private int eventId;
-    @Column(name="carId")
+    @Column(name = "carId")
     private int carId;
-    @Column(name="eventType")
+    @Column(name = "eventType")
     private int eventType;
-    @Column(name="sourceId")
+    @Column(name = "sourceId")
     private int sourceId;
-    @Column(name="status")
+    @Column(name = "status")
     private int status;
-    @Column(name="statusDate")
+    @Column(name = "statusDate")
     private String statusDate;
-    @Column(name="createDate")
+    @Column(name = "createDate")
     private String createDate;
-    @Column(name="lon")
+    @Column(name = "lon")
     private int lon;
-    @Column(name="lat")
+    @Column(name = "lat")
     private int lat;
-    @Column(name="speed")
+    @Column(name = "speed")
     private int speed;
-    @Column(name="heading")
+    @Column(name = "heading")
     private int heading;
-    @Column(name="msg")
+    @Column(name = "msg")
     private String msg;
     //是否展开
     private boolean isExpand;

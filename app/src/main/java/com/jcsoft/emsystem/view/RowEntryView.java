@@ -11,23 +11,30 @@ import android.widget.TextView;
 
 import com.jcsoft.emsystem.R;
 import com.jcsoft.emsystem.utils.CommonUtils;
+import com.jcsoft.emsystem.utils.DensityUtil;
 
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
 /**
  * 横向的条目组件
- * 包含：图标、标题、右箭头
+ * 包含：图标、标题、右箭头、上下横线（0：无线；1：长线；2：短线）
  * Created by jimmy on 16/1/18.
  */
 public class RowEntryView extends RelativeLayout {
     private View rootView;
+    @ViewInject(R.id.v_top_line)
+    View topLineView;
     @ViewInject(R.id.iv_icon)
     ImageView iconImageView;
     @ViewInject(R.id.tv_title)
     TextView titleTextView;
     @ViewInject(R.id.iv_arrow)
     ImageView arrowImageView;
+    @ViewInject(R.id.v_bottom_line)
+    View bottomLineView;
+    //顶部横线
+    private int topLine;
     //显示左侧图片
     private boolean iconVisible;
     //左侧图片
@@ -38,6 +45,8 @@ public class RowEntryView extends RelativeLayout {
     private boolean hasRightArrow;
     //可点击
     private boolean canClick;
+    //底部横线
+    private int bottomLine;
     //点击事件回调接口
     private OnClickCallback onClickCallback;
 
@@ -62,11 +71,13 @@ public class RowEntryView extends RelativeLayout {
         //获取字段信息
         TypedArray typedArray = getContext().obtainStyledAttributes(
                 attrs, R.styleable.RowEntryView, defStyleAttr, 0);
+        topLine = typedArray.getInt(R.styleable.RowEntryView_row_entry_top_line, 0);
         iconVisible = typedArray.getBoolean(R.styleable.RowEntryView_row_entry_icon_visible, true);
         icon = typedArray.getResourceId(R.styleable.RowEntryView_row_entry_icon, 0);
         text = typedArray.getString(R.styleable.RowEntryView_row_entry_text);
         hasRightArrow = typedArray.getBoolean(R.styleable.RowEntryView_row_entry_has_right_arrow, false);
         canClick = typedArray.getBoolean(R.styleable.RowEntryView_row_entry_can_click, false);
+        bottomLine = typedArray.getInt(R.styleable.RowEntryView_row_entry_bottom_line, 0);
         typedArray.recycle();
 
         //获取布局文件
@@ -74,6 +85,15 @@ public class RowEntryView extends RelativeLayout {
         rootView = inflater.inflate(R.layout.view_row_entry, this, true);
         x.view().inject(this, rootView);
         //初始化组件
+        //显示顶部横线
+        if (topLine == 1) {
+            topLineView.setVisibility(View.VISIBLE);
+        } else if (topLine == 2) {
+            topLineView.setVisibility(View.VISIBLE);
+            CommonUtils.setMargins(topLineView, DensityUtil.dip2px(context, 16), 0, 0, 0);
+        } else {
+            topLineView.setVisibility(View.GONE);
+        }
         //左侧icon是否显示
         if (iconVisible) {
             iconImageView.setVisibility(View.VISIBLE);
@@ -90,6 +110,15 @@ public class RowEntryView extends RelativeLayout {
             arrowImageView.setVisibility(View.VISIBLE);
         } else {
             arrowImageView.setVisibility(View.GONE);
+        }
+        //显示底部横线
+        if (bottomLine == 1) {
+            bottomLineView.setVisibility(View.VISIBLE);
+        } else if (bottomLine == 2) {
+            bottomLineView.setVisibility(View.VISIBLE);
+            CommonUtils.setMargins(bottomLineView, DensityUtil.dip2px(context, 16), 0, 0, 0);
+        } else {
+            bottomLineView.setVisibility(View.GONE);
         }
         //是否可点击
         if (canClick) {

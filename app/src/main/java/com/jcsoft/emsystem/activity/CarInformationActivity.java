@@ -53,7 +53,7 @@ public class CarInformationActivity extends BaseActivity {
             motorNumberRowLabelValueView.setValue(carInfoBean.getMotorNum());
             frameNumberRowLabelValueView.setValue(carInfoBean.getFrameNum());
             buyDateRowLabelValueView.setValue(carInfoBean.getCarDate());
-            buyPriceRowLabelValueView.setValue(carInfoBean.getCarPrice() + "");
+            buyPriceRowLabelValueView.setValue("￥" + carInfoBean.getCarPrice());
             x.image().bind(carPhotoImageView, carInfoBean.getCarPic());
         }
     }

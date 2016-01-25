@@ -17,6 +17,7 @@ import com.jcsoft.emsystem.activity.MainActivity;
 import com.jcsoft.emsystem.activity.SettingActivity;
 import com.jcsoft.emsystem.bean.ResponseBean;
 import com.jcsoft.emsystem.callback.DCommonCallback;
+import com.jcsoft.emsystem.callback.DSingleDialogCallback;
 import com.jcsoft.emsystem.constants.AppConfig;
 import com.jcsoft.emsystem.event.RemoteLockCarEvent;
 import com.jcsoft.emsystem.http.DHttpUtils;
@@ -112,32 +113,44 @@ public class MyFragment extends BaseFragment implements RowEntryView.OnClickCall
                 } else {
                     if (AppConfig.isLock) {
                         //解锁
-                        RequestParams params = new RequestParams(HttpConstants.getUnLockBikeUrl());
-                        DHttpUtils.get_String((MainActivity) getActivity(), true, params, new DCommonCallback<String>() {
+                        CommonUtils.showCustomDialog0(getActivity(), "提示", "您确定要执行远程解锁吗？", new DSingleDialogCallback() {
                             @Override
-                            public void onSuccess(String result) {
-                                ResponseBean<String> responseBean = new Gson().fromJson(result, new TypeToken<ResponseBean<String>>() {
-                                }.getType());
-                                if (responseBean != null) {
-                                    AppConfig.isExecuteLock = 0;
-                                    showShortText("解锁命令发送成功");
-                                    remoteLockCarRowEntryView.setTitleTextView(getResources().getString(R.string.my_remote_lock_car));
-                                }
+                            public void onPositiveButtonClick(String editText) {
+                                RequestParams params = new RequestParams(HttpConstants.getUnLockBikeUrl());
+                                DHttpUtils.get_String((MainActivity) getActivity(), true, params, new DCommonCallback<String>() {
+                                    @Override
+                                    public void onSuccess(String result) {
+                                        ResponseBean<String> responseBean = new Gson().fromJson(result, new TypeToken<ResponseBean<String>>() {
+                                        }.getType());
+                                        if (responseBean != null) {
+                                            AppConfig.isExecuteLock = 0;
+                                            AppConfig.lockCarType = 2;
+                                            showShortText("解锁命令发送成功");
+                                            remoteLockCarRowEntryView.setTitleTextView(getResources().getString(R.string.my_remote_lock_car));
+                                        }
+                                    }
+                                });
                             }
                         });
                     } else {
                         //锁车
-                        RequestParams params = new RequestParams(HttpConstants.getlockBikeUrl());
-                        DHttpUtils.get_String((MainActivity) getActivity(), true, params, new DCommonCallback<String>() {
+                        CommonUtils.showCustomDialog0(getActivity(), "提示", "您确定要执行远程锁车吗？", new DSingleDialogCallback() {
                             @Override
-                            public void onSuccess(String result) {
-                                ResponseBean<String> responseBean = new Gson().fromJson(result, new TypeToken<ResponseBean<String>>() {
-                                }.getType());
-                                if (responseBean != null) {
-                                    AppConfig.isExecuteLock = 1;
-                                    showShortText("锁车命令发送成功");
-                                    remoteLockCarRowEntryView.setTitleTextView(getResources().getString(R.string.my_remote_open_car));
-                                }
+                            public void onPositiveButtonClick(String editText) {
+                                RequestParams params = new RequestParams(HttpConstants.getlockBikeUrl());
+                                DHttpUtils.get_String((MainActivity) getActivity(), true, params, new DCommonCallback<String>() {
+                                    @Override
+                                    public void onSuccess(String result) {
+                                        ResponseBean<String> responseBean = new Gson().fromJson(result, new TypeToken<ResponseBean<String>>() {
+                                        }.getType());
+                                        if (responseBean != null) {
+                                            AppConfig.isExecuteLock = 1;
+                                            AppConfig.lockCarType = 2;
+                                            showShortText("锁车命令发送成功");
+                                            remoteLockCarRowEntryView.setTitleTextView(getResources().getString(R.string.my_remote_open_car));
+                                        }
+                                    }
+                                });
                             }
                         });
                     }
@@ -173,11 +186,15 @@ public class MyFragment extends BaseFragment implements RowEntryView.OnClickCall
             if (event.getIsLock().equals("1")) {
                 remoteLockCarRowEntryView.setTitleTextView(getResources().getString(R.string.my_remote_open_car));
                 AppConfig.isLock = true;
-                showShortText("锁车成功");
+                if (AppConfig.lockCarType == 2) {
+                    showShortText("锁车成功");
+                }
             } else {
                 remoteLockCarRowEntryView.setTitleTextView(getResources().getString(R.string.my_remote_lock_car));
                 AppConfig.isLock = false;
-                showShortText("解锁成功");
+                if (AppConfig.lockCarType == 2) {
+                    showShortText("解锁成功");
+                }
             }
         }
     }

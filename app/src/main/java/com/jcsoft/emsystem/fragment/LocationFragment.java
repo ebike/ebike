@@ -26,6 +26,7 @@ import com.amap.api.maps.UiSettings;
 import com.amap.api.maps.model.BitmapDescriptor;
 import com.amap.api.maps.model.BitmapDescriptorFactory;
 import com.amap.api.maps.model.CameraPosition;
+import com.amap.api.maps.model.Circle;
 import com.amap.api.maps.model.CircleOptions;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.Marker;
@@ -158,6 +159,8 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
     private MediaPlayer _ding2Player = null;
     private Timer _ding2PlayerTimer = null;
     private int _ding2PlayerTimerCount = 0;
+    //电子围栏覆盖物
+    private Circle circle;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -284,11 +287,14 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
                             if (locInfoBean.isOpenVf()) {
                                 fenceImageView.setImageResource(R.mipmap.fence_open);
                                 LatLng vfPosition = new LatLng(locInfoBean.getVfLat() / 1000000.0, locInfoBean.getVfLon() / 1000000.0);
-                                aMap.addCircle(new CircleOptions().center(vfPosition)
+                                circle = aMap.addCircle(new CircleOptions().center(vfPosition)
                                         .radius(100).strokeColor(Color.RED).fillColor(Color.TRANSPARENT)
-                                        .strokeWidth(1));
+                                        .strokeWidth(3));
                             } else {
                                 fenceImageView.setImageResource(R.mipmap.fence_close);
+                                if (circle != null) {
+                                    circle.remove();
+                                }
                             }
                         }
                     } else {
@@ -416,7 +422,7 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
                 aMap.setMapType(AMap.MAP_TYPE_NORMAL);
                 changeMapType(AMap.MAP_TYPE_NORMAL);
                 break;
-            case R.id.iv_lock://远程锁车/解锁
+            case R.id.iv_lock://语音锁车/解锁
                 if (AppConfig.isExecuteLock != null) {
                     if (AppConfig.isExecuteLock == 1) {
                         CommonUtils.showCustomDialogSignle3(getActivity(), "", "正在执行锁车命令，请稍等。");
@@ -436,6 +442,7 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
                                         }.getType());
                                         if (responseBean != null) {
                                             AppConfig.isExecuteLock = 0;
+                                            AppConfig.lockCarType = 1;
                                             showShortText("关闭命令发送成功");
                                         }
                                     }
@@ -454,6 +461,7 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
                                         }.getType());
                                         if (responseBean != null) {
                                             AppConfig.isExecuteLock = 1;
+                                            AppConfig.lockCarType = 1;
                                             showShortText("开启命令发送成功");
                                         }
                                     }
@@ -472,6 +480,10 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
                         // 发送命令到服务器，在获取了轨迹信息之后，展现在地图上
                         String startTime = startDateView.getDateText();
                         String endTime = endDateView.getDateText();
+                        if (CommonUtils.moreThanAWeek(startTime, endTime)) {
+                            showShortText("最多可查看一周的轨迹，您已超出时间范围，请修改后重试。");
+                            return;
+                        }
                         RequestParams params = new RequestParams(HttpConstants.getTrackInfoUrl(startTime, endTime));
                         DHttpUtils.get_String((MainActivity) getActivity(), true, params, new DCommonCallback<String>() {
                             @Override
@@ -715,11 +727,15 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
             if (event.getIsLock().equals("1")) {
                 lockImageView.setImageResource(R.mipmap.voice_lock);
                 AppConfig.isLock = true;
-                showShortText("开启成功");
+                if (AppConfig.lockCarType == 1) {
+                    showShortText("开启成功");
+                }
             } else {
                 lockImageView.setImageResource(R.mipmap.voice_unlock);
                 AppConfig.isLock = false;
-                showShortText("关闭成功");
+                if (AppConfig.lockCarType == 1) {
+                    showShortText("关闭成功");
+                }
             }
 
         }
@@ -730,8 +746,15 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
         if (event != null) {
             if (event.getIsOpen().equals("1")) {
                 fenceImageView.setImageResource(R.mipmap.fence_open);
+                LatLng position = new LatLng(locInfoBean.getLat() / 1000000.0, locInfoBean.getLon() / 1000000.0);
+                circle = aMap.addCircle(new CircleOptions().center(position)
+                        .radius(100).strokeColor(Color.RED).fillColor(Color.TRANSPARENT)
+                        .strokeWidth(3));
             } else {
                 fenceImageView.setImageResource(R.mipmap.fence_close);
+                if (circle != null) {
+                    circle.remove();
+                }
             }
             AppConfig.isExecuteVF = null;
             showShortText(event.getMsg());

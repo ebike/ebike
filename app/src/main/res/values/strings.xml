@@ -72,6 +72,7 @@
     <string name="top_bar_car_info">车辆资料</string>
     <string name="top_bar_insurance_clause">保险信息</string>
     <string name="top_bar_setting">设置</string>
+    <string name="top_bar_today_statistics">今日统计</string>
 
     <!-- my -->
     <string name="my_base_info">基本资料</string>
@@ -121,6 +122,12 @@
     <string name="setting_about">关于</string>
     <string name="setting_logout">退出登录</string>
     <string name="setting_phone_number">0531-67805000</string>
+
+    <!-- chart -->
+    <string name="chart_today_mileage">今日里程</string>
+    <string name="chart_average_speed">平均速度</string>
+    <string name="chart_max_speed">最高速度</string>
+    <string name="chart_min_speed">最低速度</string>
 
 
 </resources>
