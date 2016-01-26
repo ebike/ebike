@@ -289,7 +289,7 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
                                 LatLng vfPosition = new LatLng(locInfoBean.getVfLat() / 1000000.0, locInfoBean.getVfLon() / 1000000.0);
                                 circle = aMap.addCircle(new CircleOptions().center(vfPosition)
                                         .radius(100).strokeColor(Color.RED).fillColor(Color.TRANSPARENT)
-                                        .strokeWidth(3));
+                                        .strokeWidth(5));
                             } else {
                                 fenceImageView.setImageResource(R.mipmap.fence_close);
                                 if (circle != null) {
@@ -347,7 +347,9 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
     public void onResume() {
         super.onResume();
         mapView.onResume();
-        aMap.clear();
+        if (hasTrack) {
+            aMap.clear();
+        }
         //每30秒刷新一次电动车位置
         handler.postDelayed(this, 1000 * 30);
     }
@@ -431,7 +433,7 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
                     }
                 } else {
                     if (locInfoBean.getLock().equals("1")) {
-                        CommonUtils.showCustomDialog0(getActivity(), "提示", "您确定要停止语音寻车吗？", new DSingleDialogCallback() {
+                        CommonUtils.showCustomDialog0(getActivity(), "提示", "您确定要关闭语音寻车吗？", new DSingleDialogCallback() {
                             @Override
                             public void onPositiveButtonClick(String editText) {
                                 RequestParams params = new RequestParams(HttpConstants.getUnLockBikeUrl());
@@ -749,7 +751,7 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
                 LatLng position = new LatLng(locInfoBean.getLat() / 1000000.0, locInfoBean.getLon() / 1000000.0);
                 circle = aMap.addCircle(new CircleOptions().center(position)
                         .radius(100).strokeColor(Color.RED).fillColor(Color.TRANSPARENT)
-                        .strokeWidth(3));
+                        .strokeWidth(5));
             } else {
                 fenceImageView.setImageResource(R.mipmap.fence_close);
                 if (circle != null) {

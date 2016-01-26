@@ -21,6 +21,7 @@ import com.jcsoft.emsystem.base.BaseActivity;
 import com.jcsoft.emsystem.bean.ResponseBean;
 import com.jcsoft.emsystem.bean.UserInfoBean;
 import com.jcsoft.emsystem.callback.DCommonCallback;
+import com.jcsoft.emsystem.callback.DSingleDialogCallback;
 import com.jcsoft.emsystem.constants.AppConfig;
 import com.jcsoft.emsystem.http.DHttpUtils;
 import com.jcsoft.emsystem.http.HttpConstants;
@@ -120,13 +121,18 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 
                 break;
             case R.id.tv_forget_password://忘记密码
-                // 用intent启动拨打电话
-                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:053167805000"));
-                try {
-                    startActivity(intent);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                CommonUtils.showCustomDialog3(this, "呼叫", "取消", "", "0531-67805000", new DSingleDialogCallback() {
+                    @Override
+                    public void onPositiveButtonClick(String editText) {
+                        // 用intent启动拨打电话
+                        Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:053167805000"));
+                        try {
+                            startActivity(intent);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
                 break;
         }
     }

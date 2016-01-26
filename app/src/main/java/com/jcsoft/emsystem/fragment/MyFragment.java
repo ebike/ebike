@@ -1,6 +1,7 @@
 package com.jcsoft.emsystem.fragment;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +15,6 @@ import com.jcsoft.emsystem.activity.BaseInformationActivity;
 import com.jcsoft.emsystem.activity.CarInformationActivity;
 import com.jcsoft.emsystem.activity.InsuranceClauseActivity;
 import com.jcsoft.emsystem.activity.MainActivity;
-import com.jcsoft.emsystem.activity.SettingActivity;
 import com.jcsoft.emsystem.bean.ResponseBean;
 import com.jcsoft.emsystem.callback.DCommonCallback;
 import com.jcsoft.emsystem.callback.DSingleDialogCallback;
@@ -34,7 +34,7 @@ import de.greenrobot.event.EventBus;
 /**
  * Created by jimmy on 15/12/28.
  */
-public class MyFragment extends BaseFragment implements RowEntryView.OnClickCallback {
+public class MyFragment extends BaseFragment implements RowEntryView.OnClickCallback, View.OnClickListener {
     @ViewInject(R.id.tv_name)
     TextView nameTextView;
     @ViewInject(R.id.tv_equipment_serial_number)
@@ -49,8 +49,14 @@ public class MyFragment extends BaseFragment implements RowEntryView.OnClickCall
     RowEntryView dealInsuranceRowEntryView;
     @ViewInject(R.id.rev_insurance_clause)
     RowEntryView insuranceClauseRowEntryView;
-    @ViewInject(R.id.rev_setting)
-    RowEntryView settingRowEntryView;
+    @ViewInject(R.id.rev_terms_of_service)
+    RowEntryView termsOfServiceRowEntryView;
+    @ViewInject(R.id.rev_contact_customer_service)
+    RowEntryView contactCustomerServiceRowEntryView;
+    @ViewInject(R.id.rev_about)
+    RowEntryView aboutRowEntryView;
+    @ViewInject(R.id.tv_logout)
+    TextView logoutTextView;
     //标志位，标志已经初始化完成
     private boolean isPrepared;
 
@@ -70,11 +76,6 @@ public class MyFragment extends BaseFragment implements RowEntryView.OnClickCall
             nameTextView.setText(AppConfig.userInfoBean.getUserName());
             equipmentSerialNumberTextView.setText(getResources().getString(R.string.equipment_serial_number) + AppConfig.userInfoBean.getCarId());
         }
-        if (AppConfig.isLock) {
-            remoteLockCarRowEntryView.setTitleTextView(getResources().getString(R.string.my_remote_open_car));
-        } else {
-            remoteLockCarRowEntryView.setTitleTextView(getResources().getString(R.string.my_remote_lock_car));
-        }
         if (!CommonUtils.strIsEmpty(AppConfig.userInfoBean.getInsurNum())) {
             dealInsuranceRowEntryView.setTitleTextView(getResources().getString(R.string.my_insurance_info));
         } else {
@@ -88,7 +89,10 @@ public class MyFragment extends BaseFragment implements RowEntryView.OnClickCall
         remoteLockCarRowEntryView.setOnClickCallback(this);
         dealInsuranceRowEntryView.setOnClickCallback(this);
         insuranceClauseRowEntryView.setOnClickCallback(this);
-        settingRowEntryView.setOnClickCallback(this);
+        termsOfServiceRowEntryView.setOnClickCallback(this);
+        contactCustomerServiceRowEntryView.setOnClickCallback(this);
+        aboutRowEntryView.setOnClickCallback(this);
+        logoutTextView.setOnClickListener(this);
     }
 
     @Override
@@ -126,7 +130,6 @@ public class MyFragment extends BaseFragment implements RowEntryView.OnClickCall
                                             AppConfig.isExecuteLock = 0;
                                             AppConfig.lockCarType = 2;
                                             showShortText("解锁命令发送成功");
-                                            remoteLockCarRowEntryView.setTitleTextView(getResources().getString(R.string.my_remote_lock_car));
                                         }
                                     }
                                 });
@@ -147,7 +150,6 @@ public class MyFragment extends BaseFragment implements RowEntryView.OnClickCall
                                             AppConfig.isExecuteLock = 1;
                                             AppConfig.lockCarType = 2;
                                             showShortText("锁车命令发送成功");
-                                            remoteLockCarRowEntryView.setTitleTextView(getResources().getString(R.string.my_remote_open_car));
                                         }
                                     }
                                 });
@@ -167,16 +169,36 @@ public class MyFragment extends BaseFragment implements RowEntryView.OnClickCall
             case R.id.rev_insurance_clause://保险条款
 
                 break;
-            case R.id.rev_setting://设置
-                intent = new Intent(getActivity(), SettingActivity.class);
-                startActivity(intent);
+            case R.id.rev_terms_of_service://服务条款
+                break;
+            case R.id.rev_contact_customer_service://联系客服
+                CommonUtils.showCustomDialog3(getActivity(), "呼叫", "取消", "", "0531-67805000", new DSingleDialogCallback() {
+                    @Override
+                    public void onPositiveButtonClick(String editText) {
+                        // 用intent启动拨打电话
+                        Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:053167805000"));
+                        try {
+                            startActivity(intent);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+                break;
+            case R.id.rev_about://关于
+                break;
+            case R.id.tv_logout://退出
                 break;
         }
     }
 
     @Override
     public void requestDatas() {
-
+        if (AppConfig.isLock) {
+            remoteLockCarRowEntryView.setTitleTextView(getResources().getString(R.string.my_remote_open_car));
+        } else {
+            remoteLockCarRowEntryView.setTitleTextView(getResources().getString(R.string.my_remote_lock_car));
+        }
     }
 
     //处理远程锁车推送

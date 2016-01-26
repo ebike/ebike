@@ -108,7 +108,7 @@ public class AlarmMessageFragment extends BaseListFragment {
                     bean.setStatus(2);
                     //执行查看报警消息接口
                     RequestParams params = new RequestParams(HttpConstants.viewAlarmEvent(bean.getEventId()));
-                    DHttpUtils.get_String((MainActivity)getActivity(), false, params, new DCommonCallback<String>() {
+                    DHttpUtils.get_String((MainActivity) getActivity(), false, params, new DCommonCallback<String>() {
                         @Override
                         public void onSuccess(String result) {
                             //无操作
@@ -116,7 +116,7 @@ public class AlarmMessageFragment extends BaseListFragment {
                     });
                     //更新数据库
                     try {
-                        XUtil.db.update(bean.getClass(), WhereBuilder.b("eventId", "=", bean.getEventId() + ""), new KeyValue("status","2"));
+                        XUtil.db.update(bean.getClass(), WhereBuilder.b("eventId", "=", bean.getEventId() + ""), new KeyValue("status", "2"));
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -140,7 +140,7 @@ public class AlarmMessageFragment extends BaseListFragment {
         try {
             //先查询数据库中消息数据
             if (!loadedDB) {
-                alarmMessageBeans = XUtil.db.selector(AlarmMessageBean.class).where("carId", "=", AppConfig.userInfoBean.getCarId()).findAll();
+                alarmMessageBeans = XUtil.db.selector(AlarmMessageBean.class).where("carId", "=", AppConfig.userInfoBean.getCarId()).orderBy("eventId", true).findAll();
                 loadedDB = true;
                 if (alarmMessageBeans != null && alarmMessageBeans.size() > 0) {
                     adapter.setList(alarmMessageBeans);

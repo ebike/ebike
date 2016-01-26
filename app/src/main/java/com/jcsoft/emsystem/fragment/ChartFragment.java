@@ -112,16 +112,16 @@ public class ChartFragment extends BaseFragment implements View.OnClickListener 
                 ResponseBean<DayDataBean> bean = new Gson().fromJson(result, new TypeToken<ResponseBean<DayDataBean>>() {
                 }.getType());
                 if (bean.getCode() == 1) {
-                    boolean isUpdate = false;
-                    if (dayDataBeans == null) {
-                        dayDataBeans = new ArrayList<DayDataBean>();
-                    } else {
-                        if (dayDataBeans.get(dayDataBeans.size() - 1).getDate().equals(bean.getData().getDate())) {
-                            isUpdate = true;
-                        }
-                    }
-                    //数据入库
                     try {
+                        boolean isUpdate = false;
+                        if (dayDataBeans == null) {
+                            dayDataBeans = new ArrayList<DayDataBean>();
+                        } else {
+                            if (dayDataBeans.get(dayDataBeans.size() - 1).getDate().equals(bean.getData().getDate())) {
+                                isUpdate = true;
+                            }
+                        }
+                        //数据入库
                         if (isUpdate) {
                             dayDataBeans.remove(dayDataBeans.size() - 1);
                             dayDataBeans.add(bean.getData());
@@ -152,8 +152,6 @@ public class ChartFragment extends BaseFragment implements View.OnClickListener 
     }
 
     private void initViews() {
-        todayMileageRelativeLayout.setBackgroundColor(getResources().getColor(R.color.white_chart));
-        todayMileageImageView.setVisibility(View.VISIBLE);
         todayMileageTextView.setText(dayDataBeans.get(dayDataBeans.size() - 1).getMileage() + "公里");
         averageSpeedTextView.setText(dayDataBeans.get(dayDataBeans.size() - 1).getAvgSpeed() + "km/h");
         maxSpeedTextView.setText(dayDataBeans.get(dayDataBeans.size() - 1).getMaxSpeed() + "km/h");
@@ -217,7 +215,9 @@ public class ChartFragment extends BaseFragment implements View.OnClickListener 
         barDataSet.setColor(getResources().getColor(R.color.orange_chart));// 显示颜色
         barDataSet.setDrawValues(false);
         ArrayList<BarDataSet> barDataSets = new ArrayList<BarDataSet>();
+        barDataSet.setValueTextSize(12f);
         barDataSets.add(barDataSet);
+        barDataSet.setBarSpacePercent(50);
         BarData barData = new BarData(xValues, barDataSets);
         return barData;
     }
@@ -234,6 +234,7 @@ public class ChartFragment extends BaseFragment implements View.OnClickListener 
                 averageSpeedImageView.setVisibility(View.GONE);
                 maxSpeedImageView.setVisibility(View.GONE);
                 minSpeedImageView.setVisibility(View.GONE);
+                which = 0;
                 //初始报表
                 showChart(getBarData());
                 break;
@@ -246,6 +247,7 @@ public class ChartFragment extends BaseFragment implements View.OnClickListener 
                 averageSpeedImageView.setVisibility(View.VISIBLE);
                 maxSpeedImageView.setVisibility(View.GONE);
                 minSpeedImageView.setVisibility(View.GONE);
+                which = 1;
                 //初始报表
                 showChart(getBarData());
                 break;
@@ -258,6 +260,7 @@ public class ChartFragment extends BaseFragment implements View.OnClickListener 
                 averageSpeedImageView.setVisibility(View.GONE);
                 maxSpeedImageView.setVisibility(View.VISIBLE);
                 minSpeedImageView.setVisibility(View.GONE);
+                which = 2;
                 //初始报表
                 showChart(getBarData());
                 break;
@@ -270,6 +273,7 @@ public class ChartFragment extends BaseFragment implements View.OnClickListener 
                 averageSpeedImageView.setVisibility(View.GONE);
                 maxSpeedImageView.setVisibility(View.GONE);
                 minSpeedImageView.setVisibility(View.VISIBLE);
+                which = 3;
                 //初始报表
                 showChart(getBarData());
                 break;

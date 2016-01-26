@@ -83,6 +83,11 @@
     <string name="my_insurance_info">保险信息</string>
     <string name="my_insurance_clause">保险条款</string>
     <string name="my_setting">设置</string>
+    <string name="setting_contact_customer_service">联系客服</string>
+    <string name="setting_terms_of_service">服务条款</string>
+    <string name="setting_about">关于</string>
+    <string name="setting_logout">退出登录</string>
+    <string name="setting_phone_number">0531-67805000</string>
 
     <!-- base_information -->
     <string name="base_information_equipment_serial_number">设备编号</string>
@@ -115,13 +120,6 @@
     <string name="insurance_clause_id_card">身份证号</string>
     <string name="insurance_clause_phone">联系电话</string>
     <string name="insurance_clause_coverage_area">承保区域</string>
-
-    <!-- setting -->
-    <string name="setting_contact_customer_service">联系客服</string>
-    <string name="setting_terms_of_service">服务条款</string>
-    <string name="setting_about">关于</string>
-    <string name="setting_logout">退出登录</string>
-    <string name="setting_phone_number">0531-67805000</string>
 
     <!-- chart -->
     <string name="chart_today_mileage">今日里程</string>

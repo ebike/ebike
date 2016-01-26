@@ -31,6 +31,7 @@ import com.jcsoft.emsystem.view.CustomDialog;
 import java.security.MessageDigest;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -45,7 +46,7 @@ import java.util.regex.Pattern;
 public class CommonUtils {
     // 默认日期转换格式
     public static final String DEFAULT_DATE_FORMAT = "yyyy-MM-dd";
-    public static final String DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
+    public static final String DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm";
     private static PopupWindow popupWindow;
 
     /**
@@ -126,14 +127,22 @@ public class CommonUtils {
 
     //时间差大于一周
     public static boolean moreThanAWeek(String start, String end) {
-        Date startDate = new Date(start);
-        Date endDate = new Date(end);
-        long t1 = startDate.getTime();
-        long t2 = endDate.getTime();
-        if (t2 - t1 > 7 * 24 * 60 * 60 * 1000) {
-            return true;
+        try {
+            SimpleDateFormat df = new SimpleDateFormat(DATE_TIME_FORMAT);
+            Date startDate = df.parse(start);
+            Date endDate = df.parse(end);
+            long t1 = startDate.getTime();
+            long t2 = endDate.getTime();
+            long timeDifference = t2 - t1;
+            long week = 7 * 24 * 60 * 60 * 1000;
+            if (timeDifference > week) {
+                return true;
+            }
+            return false;
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return false;
         }
-        return false;
     }
 
     /**
@@ -494,11 +503,11 @@ public class CommonUtils {
      * @param mesage
      * @param clickInterface
      */
-    public static void showCustomDialog3(Context ctx, String left, String right, String title, String mesage, final DSingleDialogCallback clickInterface) {
+    public static void showCustomDialog3(Context ctx, String positiveText, String negativeText, String title, String mesage, final DSingleDialogCallback clickInterface) {
         CustomDialog.Builder builder = new CustomDialog.Builder(ctx);
         builder.setTitle(title);
         builder.setMessage(mesage);
-        builder.setPositiveButton(left, new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(positiveText, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
                 if (clickInterface != null) {
@@ -506,7 +515,7 @@ public class CommonUtils {
                 }
             }
         });
-        builder.setNegativeButton(right, new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(negativeText, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
             }
@@ -721,13 +730,14 @@ public class CommonUtils {
 
     /**
      * 给组件设置margin
+     *
      * @param v
      * @param l
      * @param t
      * @param r
      * @param b
      */
-    public static void setMargins (View v, int l, int t, int r, int b) {
+    public static void setMargins(View v, int l, int t, int r, int b) {
         if (v.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
             ViewGroup.MarginLayoutParams p = (ViewGroup.MarginLayoutParams) v.getLayoutParams();
             p.setMargins(l, t, r, b);
