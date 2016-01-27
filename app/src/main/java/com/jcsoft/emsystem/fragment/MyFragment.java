@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jcsoft.emsystem.R;
+import com.jcsoft.emsystem.activity.AboutActivity;
 import com.jcsoft.emsystem.activity.BaseInformationActivity;
 import com.jcsoft.emsystem.activity.CarInformationActivity;
 import com.jcsoft.emsystem.activity.InsuranceClauseActivity;
@@ -186,8 +187,16 @@ public class MyFragment extends BaseFragment implements RowEntryView.OnClickCall
                 });
                 break;
             case R.id.rev_about://关于
+                intent = new Intent(getActivity(), AboutActivity.class);
+                startActivity(intent);
                 break;
             case R.id.tv_logout://退出
+                CommonUtils.showCustomDialog0(getActivity(), "", "您确定要退出登录吗？", new DSingleDialogCallback() {
+                    @Override
+                    public void onPositiveButtonClick(String editText) {
+                        ((MainActivity) getActivity()).logout();
+                    }
+                });
                 break;
         }
     }

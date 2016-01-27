@@ -73,6 +73,7 @@
     <string name="top_bar_insurance_clause">保险信息</string>
     <string name="top_bar_setting">设置</string>
     <string name="top_bar_today_statistics">今日统计</string>
+    <string name="top_bar_about">关于</string>
 
     <!-- my -->
     <string name="my_base_info">基本资料</string>

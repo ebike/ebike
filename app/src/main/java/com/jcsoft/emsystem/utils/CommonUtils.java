@@ -47,6 +47,7 @@ public class CommonUtils {
     // 默认日期转换格式
     public static final String DEFAULT_DATE_FORMAT = "yyyy-MM-dd";
     public static final String DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm";
+    public static final String DATE_YEAR_MONTH = "MM/dd";
     private static PopupWindow popupWindow;
 
     /**
@@ -123,6 +124,13 @@ public class CommonUtils {
         long t2 = t1 - 24 * 60 * 60 * 1000;
         yesterday.setTime(t2);
         return DateToString(yesterday, format);
+    }
+
+    //改变日期格式:yyyy-MM-dd  -->  MM/dd
+    public static String changeDateFormat1(String time) throws ParseException {
+        SimpleDateFormat df = new SimpleDateFormat(DEFAULT_DATE_FORMAT);
+        Date date = df.parse(time);
+        return DateToString(date, DATE_YEAR_MONTH);
     }
 
     //时间差大于一周

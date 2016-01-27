@@ -161,6 +161,8 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
     private int _ding2PlayerTimerCount = 0;
     //电子围栏覆盖物
     private Circle circle;
+    //地图导航类
+    private AMapNavi mapNavi;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -211,7 +213,7 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
         // 初始化语音模块
         TTSController ttsManager = TTSController.getInstance(getActivity());
         ttsManager.init();
-        AMapNavi mapNavi = AMapNavi.getInstance(getActivity());
+        mapNavi = AMapNavi.getInstance(getActivity());
         mapNavi.setAMapNaviListener(ttsManager);// 设置语音模块播报
         mapNavi.setAMapNaviListener(this);
     }
@@ -379,6 +381,7 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
     @Override
     public void onDestroy() {
         super.onDestroy();
+        mapNavi.destroy();
         mapView.onDestroy();
         handler.removeCallbacks(this); //停止刷新
         EventBus.getDefault().unregister(this);
@@ -427,9 +430,9 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
             case R.id.iv_lock://语音锁车/解锁
                 if (AppConfig.isExecuteLock != null) {
                     if (AppConfig.isExecuteLock == 1) {
-                        CommonUtils.showCustomDialogSignle3(getActivity(), "", "正在执行锁车命令，请稍等。");
+                        CommonUtils.showCustomDialogSignle3(getActivity(), "", "正在开启语音寻车，请稍等。");
                     } else if (AppConfig.isExecuteLock == 0) {
-                        CommonUtils.showCustomDialogSignle3(getActivity(), "", "正在执行解锁命令，请稍等。");
+                        CommonUtils.showCustomDialogSignle3(getActivity(), "", "正在关闭语音寻车，请稍等。");
                     }
                 } else {
                     if (locInfoBean.getLock().equals("1")) {

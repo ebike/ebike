@@ -13,7 +13,6 @@ import com.jcsoft.emsystem.callback.DSingleDialogCallback;
 import com.jcsoft.emsystem.constants.AppConfig;
 import com.jcsoft.emsystem.event.OnlineExceptionEvent;
 import com.jcsoft.emsystem.utils.CommonUtils;
-import com.jcsoft.emsystem.utils.DataCleanManager;
 import com.jcsoft.emsystem.utils.DensityUtil;
 import com.jcsoft.emsystem.utils.PreferencesUtil;
 import com.jcsoft.emsystem.view.LoadingDialog;
@@ -210,12 +209,13 @@ public abstract class BaseActivity extends FragmentActivity {
         }
     }
 
-    private void logout() {
+    public void logout() {
         AppConfig.registrationId = "";
         AppConfig.loginName = "";
         AppConfig.password = "";
         AppConfig.userInfoBean = null;
-        DataCleanManager.cleanSharedPreference(this);
+        preferencesUtil.setPrefString(this, AppConfig.LOGIN_NAME, "");
+        preferencesUtil.setPrefString(this, AppConfig.PASSWORD, "");
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
         this.finish();

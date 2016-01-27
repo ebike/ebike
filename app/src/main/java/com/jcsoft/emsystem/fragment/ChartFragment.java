@@ -36,6 +36,7 @@ import org.xutils.http.RequestParams;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -142,6 +143,8 @@ public class ChartFragment extends BaseFragment implements View.OnClickListener 
                         initViews();
                     } catch (DbException e) {
                         e.printStackTrace();
+                    } catch (ParseException e) {
+                        e.printStackTrace();
                     }
                 } else {
                     showShortText(bean.getErrmsg());
@@ -171,12 +174,16 @@ public class ChartFragment extends BaseFragment implements View.OnClickListener 
         barChart.setDragEnabled(false);// 是否可以拖拽
         barChart.setScaleEnabled(false);// 是否可以缩放
         barChart.setPinchZoom(false);//
+        barChart.setViewPortOffsets(0, 0, 0, 80f);
         XAxis xAxis = barChart.getXAxis();
         xAxis.setDrawAxisLine(false);
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setDrawGridLines(false);
         xAxis.setSpaceBetweenLabels(0);
         xAxis.setLabelsToSkip(0);
+        xAxis.setTextSize(14f);
+        xAxis.setYOffset(8f);
+        xAxis.setTextColor(getResources().getColor(R.color.white));
         YAxis leftAxis = barChart.getAxisLeft();
         leftAxis.setEnabled(false);
         YAxis rightAxis = barChart.getAxisRight();
@@ -188,10 +195,10 @@ public class ChartFragment extends BaseFragment implements View.OnClickListener 
         barChart.animateXY(1000, 1000); // 立即执行的动画
     }
 
-    private BarData getBarData() {
+    private BarData getBarData() throws ParseException {
         ArrayList<String> xValues = new ArrayList<String>();
         for (int i = 0; i < dayDataBeans.size(); i++) {
-            xValues.add(dayDataBeans.get(i).getDate());
+            xValues.add(CommonUtils.changeDateFormat1(dayDataBeans.get(i).getDate()));
         }
         ArrayList<BarEntry> yValues = new ArrayList<BarEntry>();
         for (int i = 0; i < dayDataBeans.size(); i++) {
@@ -213,9 +220,10 @@ public class ChartFragment extends BaseFragment implements View.OnClickListener 
         // y轴的数据集合
         BarDataSet barDataSet = new BarDataSet(yValues, "");
         barDataSet.setColor(getResources().getColor(R.color.orange_chart));// 显示颜色
-        barDataSet.setDrawValues(false);
+        barDataSet.setDrawValues(true);
+        barDataSet.setValueTextColor(getResources().getColor(R.color.white));
+        barDataSet.setValueTextSize(14f);
         ArrayList<BarDataSet> barDataSets = new ArrayList<BarDataSet>();
-        barDataSet.setValueTextSize(12f);
         barDataSets.add(barDataSet);
         barDataSet.setBarSpacePercent(50);
         BarData barData = new BarData(xValues, barDataSets);
@@ -236,7 +244,12 @@ public class ChartFragment extends BaseFragment implements View.OnClickListener 
                 minSpeedImageView.setVisibility(View.GONE);
                 which = 0;
                 //初始报表
-                showChart(getBarData());
+                try {
+                    barChart.setData(getBarData()); // 设置数据
+                    barChart.animateXY(1000, 1000); // 立即执行的动画
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
                 break;
             case R.id.rl_average_speed:
                 todayMileageRelativeLayout.setBackgroundColor(getResources().getColor(R.color.gray_bg));
@@ -249,7 +262,12 @@ public class ChartFragment extends BaseFragment implements View.OnClickListener 
                 minSpeedImageView.setVisibility(View.GONE);
                 which = 1;
                 //初始报表
-                showChart(getBarData());
+                try {
+                    barChart.setData(getBarData()); // 设置数据
+                    barChart.animateXY(1000, 1000); // 立即执行的动画
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
                 break;
             case R.id.rl_max_speed:
                 todayMileageRelativeLayout.setBackgroundColor(getResources().getColor(R.color.gray_bg));
@@ -262,7 +280,12 @@ public class ChartFragment extends BaseFragment implements View.OnClickListener 
                 minSpeedImageView.setVisibility(View.GONE);
                 which = 2;
                 //初始报表
-                showChart(getBarData());
+                try {
+                    barChart.setData(getBarData()); // 设置数据
+                    barChart.animateXY(1000, 1000); // 立即执行的动画
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
                 break;
             case R.id.rl_min_speed:
                 todayMileageRelativeLayout.setBackgroundColor(getResources().getColor(R.color.gray_bg));
@@ -275,7 +298,12 @@ public class ChartFragment extends BaseFragment implements View.OnClickListener 
                 minSpeedImageView.setVisibility(View.VISIBLE);
                 which = 3;
                 //初始报表
-                showChart(getBarData());
+                try {
+                    barChart.setData(getBarData()); // 设置数据
+                    barChart.animateXY(1000, 1000); // 立即执行的动画
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
                 break;
         }
     }

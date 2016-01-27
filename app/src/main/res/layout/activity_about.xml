@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_bg">
+
+    <com.jcsoft.emsystem.view.TopBarView
+        android:id="@+id/top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        app:back_is_finish="true"
+        app:center_text="@string/top_bar_about"
+        app:has_center="true"
+        app:has_left="true"
+        app:has_left_clickable="true"
+        app:left_icon="@mipmap/back_icon"
+        app:left_text="@string/top_bar_setting" />
+
+    <TextView
+        android:id="@+id/tv_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/top_bar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:drawablePadding="8dp"
+        android:drawableTop="@mipmap/icon_app"
+        android:text="For Android V2.0"
+        android:textColor="@color/gray_6"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tv_qr_code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_logo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:drawablePadding="8dp"
+        android:drawableTop="@mipmap/icon_download_qrcode"
+        android:text="扫描二维码，您的朋友也可下载电动车秘书"
+        android:textColor="@color/gray_3"
+        android:textSize="16sp" />
+
+    <com.jcsoft.emsystem.view.RowEntryView
+        android:id="@+id/rev_special_statement"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_qr_code"
+        android:layout_marginTop="32dp"
+        app:row_entry_bottom_line="2"
+        app:row_entry_can_click="true"
+        app:row_entry_has_right_arrow="true"
+        app:row_entry_icon_visible="false"
+        app:row_entry_text="特别声明" />
+
+    <com.jcsoft.emsystem.view.RowEntryView
+        android:id="@+id/rev_use_help"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rev_special_statement"
+        app:row_entry_bottom_line="1"
+        app:row_entry_can_click="true"
+        app:row_entry_has_right_arrow="true"
+        app:row_entry_icon_visible="false"
+        app:row_entry_text="使用帮助" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingBottom="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:text="山东佳诚软件科技有限公司 版权所有"
+            android:textColor="@color/gray_6"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="4dp"
+            android:text="Copyright©2011-2016 JCSoft.All Rights Reserved."
+            android:textColor="@color/gray_6"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+</RelativeLayout>
