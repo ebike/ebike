@@ -29,7 +29,9 @@ import org.xutils.http.RequestParams;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
-
+/**
+ * 欢迎
+ */
 public class SplashActivity extends BaseActivity {
     private final static long MILLIS = 2000;// 启动画面延迟时间
     private boolean isReciverRegiest;

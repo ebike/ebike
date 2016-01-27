@@ -23,6 +23,13 @@ public class ReportUtils {
             return new DecimalFormat("#").format(v);
         }
     };
+
+    public static ValueFormatter formatterOnePoint = new ValueFormatter() {
+        @Override
+        public String getFormattedValue(float v, Entry entry, int i, ViewPortHandler viewPortHandler) {
+            return new DecimalFormat("0.0").format(v);
+        }
+    };
     //处理超过1000的
     public static ValueFormatter handleKFormatter = new ValueFormatter() {
         @Override
@@ -47,8 +54,8 @@ public class ReportUtils {
      */
     public static void setChartLayout(Activity context, Chart chart, int xValueCount) {
         ViewGroup.LayoutParams params = null;
-        //如果横项数据项过多，超出屏幕宽度，则，每项的宽度设为24dp
-        int width = xValueCount * DensityUtil.dip2px(context, 24);
+        //如果横项数据项过多，超出屏幕宽度，则，每项的宽度设为48dp
+        int width = xValueCount * DensityUtil.dip2px(context, 48);
         int screenWidth = DensityUtil.screenWidth();
         if (width > screenWidth) {
             params = new LinearLayout.LayoutParams(width, ViewGroup.LayoutParams.MATCH_PARENT);

@@ -42,30 +42,7 @@
         android:drawableTop="@mipmap/icon_download_qrcode"
         android:text="扫描二维码，您的朋友也可下载电动车秘书"
         android:textColor="@color/gray_3"
-        android:textSize="16sp" />
-
-    <com.jcsoft.emsystem.view.RowEntryView
-        android:id="@+id/rev_special_statement"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_qr_code"
-        android:layout_marginTop="32dp"
-        app:row_entry_bottom_line="2"
-        app:row_entry_can_click="true"
-        app:row_entry_has_right_arrow="true"
-        app:row_entry_icon_visible="false"
-        app:row_entry_text="特别声明" />
-
-    <com.jcsoft.emsystem.view.RowEntryView
-        android:id="@+id/rev_use_help"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/rev_special_statement"
-        app:row_entry_bottom_line="1"
-        app:row_entry_can_click="true"
-        app:row_entry_has_right_arrow="true"
-        app:row_entry_icon_visible="false"
-        app:row_entry_text="使用帮助" />
+        android:textSize="14sp" />
 
     <LinearLayout
         android:layout_width="match_parent"

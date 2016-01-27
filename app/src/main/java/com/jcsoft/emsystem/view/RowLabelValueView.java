@@ -123,4 +123,8 @@ public class RowLabelValueView extends RelativeLayout {
         valueTextView.setVisibility(View.VISIBLE);
         valueTextView.setText(value);
     }
+
+    public String getValue(){
+        return valueTextView.getText().toString();
+    }
 }

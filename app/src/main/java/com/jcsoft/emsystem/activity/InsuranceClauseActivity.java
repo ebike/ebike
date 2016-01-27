@@ -20,6 +20,9 @@ import org.xutils.x;
 
 import java.util.Date;
 
+/**
+ * 保险信息
+ */
 public class InsuranceClauseActivity extends BaseActivity {
     @ViewInject(R.id.rlvv_equipment_serial_number)
     RowLabelValueView equipmentSerialNumberRowLabelValueView;

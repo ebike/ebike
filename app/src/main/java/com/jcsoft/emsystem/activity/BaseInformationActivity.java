@@ -18,6 +18,9 @@ import org.xutils.http.RequestParams;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
+/**
+ * 基本资料
+ */
 public class BaseInformationActivity extends BaseActivity {
     @ViewInject(R.id.rlvv_equipment_serial_number)
     RowLabelValueView equipmentSerialNumberRowLabelValueView;

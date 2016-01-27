@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.jcsoft.emsystem.view.TopBarView
+        android:id="@+id/top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        app:back_is_finish="true"
+        app:center_text="@string/top_bar_register"
+        app:has_center="true"
+        app:has_left="true"
+        app:has_left_clickable="true"
+        app:has_right="true"
+        app:has_right_clickable="true"
+        app:left_icon="@mipmap/back_icon"
+        app:left_text="@string/top_bar_login"
+        app:right_text="@string/top_bar_submit" />
+
+    <com.jcsoft.emsystem.view.RowLabelEditView
+        android:id="@+id/rlev_imei"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:row_label_edit_bottom_line="2"
+        app:row_label_edit_hint="请输入IMEI后八位"
+        app:row_label_edit_label="@string/register_imei"
+        app:row_label_edit_top_line="1" />
+
+    <com.jcsoft.emsystem.view.RowLabelValueView
+        android:id="@+id/rlev_equipment_serial_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:row_label_value_bottom_line="2"
+        app:row_label_value_label="@string/register_equipment_serial_number" />
+
+    <com.jcsoft.emsystem.view.RowLabelEditView
+        android:id="@+id/rlev_data_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:row_label_edit_bottom_line="1"
+        app:row_label_edit_hint="@string/app_require_input"
+        app:row_label_edit_label="@string/register_data_card" />
+
+    <com.jcsoft.emsystem.view.RowLabelEditView
+        android:id="@+id/rlev_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:row_label_edit_bottom_line="2"
+        app:row_label_edit_hint="@string/app_require_input"
+        app:row_label_edit_label="@string/register_name"
+        app:row_label_edit_top_line="1" />
+
+    <com.jcsoft.emsystem.view.RowLabelEditView
+        android:id="@+id/rlev_sex"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:row_label_edit_bottom_line="2"
+        app:row_label_edit_hint="@string/app_require_input"
+        app:row_label_edit_label="@string/register_sex" />
+
+    <com.jcsoft.emsystem.view.RowLabelEditView
+        android:id="@+id/rlev_id_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:row_label_edit_bottom_line="2"
+        app:row_label_edit_hint="@string/app_require_input"
+        app:row_label_edit_label="@string/register_id_card" />
+
+    <com.jcsoft.emsystem.view.RowLabelEditView
+        android:id="@+id/rlev_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:row_label_edit_bottom_line="2"
+        app:row_label_edit_hint="@string/app_require_input"
+        app:row_label_edit_label="@string/register_phone" />
+
+    <com.jcsoft.emsystem.view.RowLabelEditView
+        android:id="@+id/rlev_area"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:row_label_edit_bottom_line="2"
+        app:row_label_edit_hint="@string/app_require_input"
+        app:row_label_edit_label="@string/register_area" />
+
+    <com.jcsoft.emsystem.view.RowLabelEditView
+        android:id="@+id/rlev_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:row_label_edit_bottom_line="1"
+        app:row_label_edit_hint="@string/app_require_input"
+        app:row_label_edit_label="@string/register_address" />
+
+    <com.jcsoft.emsystem.view.RowLabelEditView
+        android:id="@+id/rlev_dealer_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:row_label_edit_bottom_line="2"
+        app:row_label_edit_label="@string/register_dealer_number"
+        app:row_label_edit_top_line="1" />
+
+    <com.jcsoft.emsystem.view.RowLabelEditView
+        android:id="@+id/rlev_salesman_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:row_label_edit_bottom_line="1"
+        app:row_label_edit_label="@string/register_salesman_name" />
+</LinearLayout>

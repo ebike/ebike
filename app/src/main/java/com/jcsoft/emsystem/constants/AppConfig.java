@@ -15,6 +15,8 @@ public class AppConfig {
     //登录密码（MD5加密）
     public static String password;
     public static String PASSWORD = "password";
+    //调取过所有统计数据的日期
+    public static String IS_USED_DATE = "isUsedDate";
     //当前用户信息
     public static UserInfoBean userInfoBean;
     //用户被禁用或删除

@@ -5,6 +5,9 @@ import android.os.Bundle;
 import com.jcsoft.emsystem.R;
 import com.jcsoft.emsystem.base.BaseActivity;
 
+/**
+ * 关于
+ */
 public class AboutActivity extends BaseActivity {
 
 

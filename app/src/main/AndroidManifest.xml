@@ -201,6 +201,12 @@
         <activity android:name=".activity.SettingActivity" />
         <activity android:name=".activity.AboutActivity" >
         </activity>
+        <activity android:name=".activity.RegisterActivity" >
+        </activity>
+        <activity android:name=".activity.BookInstallActivity" >
+        </activity>
+        <activity android:name=".activity.DealInsuranceActivity" >
+        </activity>
     </application>
 
 </manifest>

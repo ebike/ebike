@@ -27,6 +27,7 @@ import com.jcsoft.emsystem.db.XUtil;
 import com.jcsoft.emsystem.http.DHttpUtils;
 import com.jcsoft.emsystem.http.HttpConstants;
 import com.jcsoft.emsystem.utils.CommonUtils;
+import com.jcsoft.emsystem.utils.PreferencesUtil;
 import com.jcsoft.emsystem.utils.ReportUtils;
 
 import org.xutils.common.util.KeyValue;
@@ -99,9 +100,16 @@ public class ChartFragment extends BaseFragment implements View.OnClickListener 
         if (!isPrepared || !isVisible || hasLoadedOnce || !isAdded()) {
             return;
         }
+        //每天调一次半月的统计数据
+        String isUsedDate = PreferencesUtil.getPrefString(getActivity(), AppConfig.IS_USED_DATE, "");
+        if (!isUsedDate.equals(CommonUtils.getCurrentDateString(null))) {
+            getSomeDayData();
+        }
         //查询数据库中统计数据
         try {
-            dayDataBeans = XUtil.db.selector(DayDataBean.class).where("carId", "=", AppConfig.userInfoBean.getCarId()).orderBy("date", false).findAll();
+            if (dayDataBeans == null || dayDataBeans.size() == 0) {
+                dayDataBeans = XUtil.db.selector(DayDataBean.class).where("carId", "=", AppConfig.userInfoBean.getCarId()).orderBy("date", false).findAll();
+            }
         } catch (DbException e) {
             e.printStackTrace();
         }
@@ -152,6 +160,34 @@ public class ChartFragment extends BaseFragment implements View.OnClickListener 
             }
         });
 
+    }
+
+    //每天调一次半月的统计数据
+    private void getSomeDayData() {
+        RequestParams params = new RequestParams(HttpConstants.getSomeDayDataUrl());
+        DHttpUtils.get_String((MainActivity) getActivity(), true, params, new DCommonCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+                try {
+                    ResponseBean<List<DayDataBean>> bean = new Gson().fromJson(result, new TypeToken<ResponseBean<List<DayDataBean>>>() {
+                    }.getType());
+                    if (bean.getCode() == 1) {
+                        dayDataBeans = bean.getData();
+                        //删除表中数据
+                        XUtil.db.delete(DayDataBean.class);
+                        //插入新数据
+                        for (DayDataBean dataBean : dayDataBeans) {
+                            XUtil.db.save(dataBean);
+                        }
+                        PreferencesUtil.setPrefString(getActivity(), AppConfig.IS_USED_DATE, CommonUtils.getCurrentDateString(null));
+                    } else {
+                        showShortText(bean.getErrmsg());
+                    }
+                } catch (DbException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     private void initViews() {
@@ -223,9 +259,10 @@ public class ChartFragment extends BaseFragment implements View.OnClickListener 
         barDataSet.setDrawValues(true);
         barDataSet.setValueTextColor(getResources().getColor(R.color.white));
         barDataSet.setValueTextSize(14f);
+        barDataSet.setValueFormatter(ReportUtils.formatterOnePoint);
         ArrayList<BarDataSet> barDataSets = new ArrayList<BarDataSet>();
         barDataSets.add(barDataSet);
-        barDataSet.setBarSpacePercent(50);
+        barDataSet.setBarSpacePercent(30);
         BarData barData = new BarData(xValues, barDataSets);
         return barData;
     }

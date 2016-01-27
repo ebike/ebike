@@ -31,6 +31,9 @@ import org.xutils.http.RequestParams;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
+/**
+ * 登录
+ */
 public class LoginActivity extends BaseActivity implements View.OnClickListener, TextWatcher {
     @ViewInject(R.id.rl_rootView)
     RelativeLayout rootViewRelativeLayout;
@@ -74,6 +77,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         loginNameEditText.addTextChangedListener(this);
         passwordEditText.addTextChangedListener(this);
         loginButton.setOnClickListener(this);
+        registerTextView.setOnClickListener(this);
         forgetPasswordTextView.setOnClickListener(this);
     }
 
@@ -118,7 +122,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                 });
                 break;
             case R.id.tv_register://注册帐号
-
+                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
                 break;
             case R.id.tv_forget_password://忘记密码
                 CommonUtils.showCustomDialog3(this, "呼叫", "取消", "", "0531-67805000", new DSingleDialogCallback() {

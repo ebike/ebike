@@ -14,6 +14,7 @@ import com.jcsoft.emsystem.R;
 import com.jcsoft.emsystem.activity.AboutActivity;
 import com.jcsoft.emsystem.activity.BaseInformationActivity;
 import com.jcsoft.emsystem.activity.CarInformationActivity;
+import com.jcsoft.emsystem.activity.DealInsuranceActivity;
 import com.jcsoft.emsystem.activity.InsuranceClauseActivity;
 import com.jcsoft.emsystem.activity.MainActivity;
 import com.jcsoft.emsystem.bean.ResponseBean;
@@ -161,7 +162,7 @@ public class MyFragment extends BaseFragment implements RowEntryView.OnClickCall
                 break;
             case R.id.rev_deal_insurance://办理保险
                 if (!CommonUtils.strIsEmpty(AppConfig.userInfoBean.getInsurNum())) {
-                    intent = new Intent(getActivity(), InsuranceClauseActivity.class);
+                    intent = new Intent(getActivity(), DealInsuranceActivity.class);
                 } else {
                     intent = new Intent(getActivity(), InsuranceClauseActivity.class);
                 }

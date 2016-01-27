@@ -1,6 +1,11 @@
 <resources>
+    <!-- 公共 -->
     <string name="app_name">电动车秘书</string>
     <string name="app_id">输入您讯飞的appid</string>
+    <string name="app_require_input">必填</string>
+    <string name="app_require_check">必选</string>
+
+    <!-- preference -->
     <string name="preference_default_tts_role">xiaoyan</string>
     <string name="preference_key_tts_speed">tts_speed</string>
     <string name="preference_title_tts_speed">语速</string>
@@ -74,6 +79,9 @@
     <string name="top_bar_setting">设置</string>
     <string name="top_bar_today_statistics">今日统计</string>
     <string name="top_bar_about">关于</string>
+    <string name="top_bar_register">用户注册</string>
+    <string name="top_bar_login">登录</string>
+    <string name="top_bar_submit">提交</string>
 
     <!-- my -->
     <string name="my_base_info">基本资料</string>
@@ -128,5 +136,18 @@
     <string name="chart_max_speed">最高速度</string>
     <string name="chart_min_speed">最低速度</string>
 
+    <!-- register -->
+    <string name="register_imei">IMEI</string>
+    <string name="register_equipment_serial_number">设备编号</string>
+    <string name="register_data_card">数据卡号</string>
+    <string name="register_name">姓名</string>
+    <string name="register_sex">性别</string>
+    <string name="register_id_card">身份证号</string>
+    <string name="register_phone">联系电话</string>
+    <string name="register_area">所在地区</string>
+    <string name="register_address">详细地址</string>
+    <string name="register_dealer_number">经销商编号</string>
+    <string name="register_salesman_name">业务员姓名</string>
+    <string name="register_submit">提交</string>
 
 </resources>

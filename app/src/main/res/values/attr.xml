@@ -65,12 +65,21 @@
         <attr name="row_entry_can_click" format="boolean" />
         <attr name="row_entry_bottom_line" format="integer" />
     </declare-styleable>
-    <!-- common -->
+    <!-- RowLabelValueView -->
     <declare-styleable name="RowLabelValueView">
         <attr name="row_label_value_top_line" format="integer" />
         <attr name="row_label_value_label" format="string" />
         <attr name="row_label_value_value" format="string" />
         <attr name="row_label_value_can_click" format="boolean" />
         <attr name="row_label_value_bottom_line" format="integer" />
+    </declare-styleable>
+    <!-- RowLabelEditView -->
+    <declare-styleable name="RowLabelEditView">
+        <attr name="row_label_edit_top_line" format="integer" />
+        <attr name="row_label_edit_label" format="string" />
+        <attr name="row_label_edit_value" format="string" />
+        <attr name="row_label_edit_hint" format="string" />
+        <attr name="row_label_edit_can_click" format="boolean" />
+        <attr name="row_label_edit_bottom_line" format="integer" />
     </declare-styleable>
 </resources>

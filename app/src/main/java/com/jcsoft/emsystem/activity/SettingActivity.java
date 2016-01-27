@@ -7,6 +7,9 @@ import com.jcsoft.emsystem.base.BaseActivity;
 
 import org.xutils.x;
 
+/**
+ * 设置
+ */
 public class SettingActivity extends BaseActivity {
 
 

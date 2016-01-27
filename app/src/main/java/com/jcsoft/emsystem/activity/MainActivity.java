@@ -26,6 +26,9 @@ import org.xutils.x;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 首页
+ */
 public class MainActivity extends BaseActivity implements View.OnClickListener {
     @ViewInject(R.id.view_pager)
     NotSlideViewPager viewPager;

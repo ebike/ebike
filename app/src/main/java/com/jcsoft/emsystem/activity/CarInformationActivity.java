@@ -18,6 +18,9 @@ import org.xutils.http.RequestParams;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
+/**
+ * 车辆资料
+ */
 public class CarInformationActivity extends BaseActivity {
     @ViewInject(R.id.rlvv_brand_models)
     RowLabelValueView brandModelsRowLabelValueView;
