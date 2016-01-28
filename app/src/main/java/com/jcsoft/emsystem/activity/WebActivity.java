@@ -9,6 +9,8 @@ import android.webkit.WebViewClient;
 
 import com.jcsoft.emsystem.R;
 import com.jcsoft.emsystem.base.BaseActivity;
+import com.jcsoft.emsystem.utils.CommonUtils;
+import com.jcsoft.emsystem.view.TopBarView;
 
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
@@ -17,8 +19,12 @@ import org.xutils.x;
  * 网页
  */
 public class WebActivity extends BaseActivity {
+    @ViewInject(R.id.top_bar)
+    TopBarView topBarView;
     @ViewInject(R.id.webView)
     WebView webView;
+    private String title;//标题
+    private String url;//链接
 
     @Override
     public void loadXml() {
@@ -29,13 +35,17 @@ public class WebActivity extends BaseActivity {
 
     @Override
     public void getIntentData(Bundle savedInstanceState) {
-
+        title = getIntent().getStringExtra("title");
+        url = getIntent().getStringExtra("url");
     }
 
     @Override
     public void init() {
+        topBarView.setCenterTextView(title);
         // WebView加载web资源
-        String url = "";
+        if (CommonUtils.strIsEmpty(url)) {
+            return;
+        }
         webView.loadUrl(url);
         // 覆盖WebView默认使用第三方或系统默认浏览器打开网页的行为，使网页用WebView打开
         webView.setWebViewClient(new WebViewClient() {

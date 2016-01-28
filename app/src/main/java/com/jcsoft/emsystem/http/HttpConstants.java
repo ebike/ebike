@@ -148,6 +148,7 @@ public class HttpConstants {
         sb.append("?carId=").append(map.get("carId"));
         sb.append("&telNum=").append(map.get("telNum"));
         sb.append("&userName=").append(map.get("userName"));
+        sb.append("&sex=").append(map.get("sex"));
         sb.append("&idNum=").append(map.get("idNum"));
         sb.append("&phone=").append(map.get("phone"));
         sb.append("&province=").append(map.get("province"));

@@ -47,6 +47,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     TextView registerTextView;
     @ViewInject(R.id.tv_forget_password)
     TextView forgetPasswordTextView;
+    @ViewInject(R.id.tv_book_install)
+    TextView bookInstallTextView;
     private String loginName;
     private String password;
 
@@ -79,6 +81,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         loginButton.setOnClickListener(this);
         registerTextView.setOnClickListener(this);
         forgetPasswordTextView.setOnClickListener(this);
+        bookInstallTextView.setOnClickListener(this);
     }
 
     @Override
@@ -137,6 +140,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                         }
                     }
                 });
+                break;
+            case R.id.tv_book_install://预约安装
+                startActivity(new Intent(LoginActivity.this, BookInstallActivity.class));
                 break;
         }
     }

@@ -17,6 +17,7 @@ import com.jcsoft.emsystem.activity.CarInformationActivity;
 import com.jcsoft.emsystem.activity.DealInsuranceActivity;
 import com.jcsoft.emsystem.activity.InsuranceClauseActivity;
 import com.jcsoft.emsystem.activity.MainActivity;
+import com.jcsoft.emsystem.activity.WebActivity;
 import com.jcsoft.emsystem.bean.ResponseBean;
 import com.jcsoft.emsystem.callback.DCommonCallback;
 import com.jcsoft.emsystem.callback.DSingleDialogCallback;
@@ -169,9 +170,16 @@ public class MyFragment extends BaseFragment implements RowEntryView.OnClickCall
                 startActivity(intent);
                 break;
             case R.id.rev_insurance_clause://保险条款
-
+                intent = new Intent(getActivity(), WebActivity.class);
+                intent.putExtra("title", getResources().getString(R.string.top_bar_insurance_policy));
+                intent.putExtra("url", "http://api.gnets.cn/app/h5/insurance_policy.html");
+                startActivity(intent);
                 break;
             case R.id.rev_terms_of_service://服务条款
+                intent = new Intent(getActivity(), WebActivity.class);
+                intent.putExtra("title", getResources().getString(R.string.top_bar_terms_of_service));
+                intent.putExtra("url", "http://api.gnets.cn/app/h5/service_terms.html");
+                startActivity(intent);
                 break;
             case R.id.rev_contact_customer_service://联系客服
                 CommonUtils.showCustomDialog3(getActivity(), "呼叫", "取消", "", "0531-67805000", new DSingleDialogCallback() {

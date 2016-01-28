@@ -124,7 +124,11 @@ public class RowLabelValueView extends RelativeLayout {
         valueTextView.setText(value);
     }
 
-    public String getValue(){
+    public void setValueColor(int color) {
+        valueTextView.setTextColor(getResources().getColor(color));
+    }
+
+    public String getValue() {
         return valueTextView.getText().toString();
     }
 }

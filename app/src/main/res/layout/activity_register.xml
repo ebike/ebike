@@ -21,94 +21,140 @@
         app:left_text="@string/top_bar_login"
         app:right_text="@string/top_bar_submit" />
 
-    <com.jcsoft.emsystem.view.RowLabelEditView
-        android:id="@+id/rlev_imei"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:row_label_edit_bottom_line="2"
-        app:row_label_edit_hint="请输入IMEI后八位"
-        app:row_label_edit_label="@string/register_imei"
-        app:row_label_edit_top_line="1" />
+        android:scrollbars="none">
 
-    <com.jcsoft.emsystem.view.RowLabelValueView
-        android:id="@+id/rlev_equipment_serial_number"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:row_label_value_bottom_line="2"
-        app:row_label_value_label="@string/register_equipment_serial_number" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <com.jcsoft.emsystem.view.RowLabelEditView
-        android:id="@+id/rlev_data_card"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:row_label_edit_bottom_line="1"
-        app:row_label_edit_hint="@string/app_require_input"
-        app:row_label_edit_label="@string/register_data_card" />
+            <com.jcsoft.emsystem.view.RowLabelEditView
+                android:id="@+id/rlev_imei"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:row_label_edit_bottom_line="2"
+                app:row_label_edit_hint="请输入IMEI后八位"
+                app:row_label_edit_label="@string/register_imei"
+                app:row_label_edit_top_line="1" />
 
-    <com.jcsoft.emsystem.view.RowLabelEditView
-        android:id="@+id/rlev_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:row_label_edit_bottom_line="2"
-        app:row_label_edit_hint="@string/app_require_input"
-        app:row_label_edit_label="@string/register_name"
-        app:row_label_edit_top_line="1" />
+            <com.jcsoft.emsystem.view.RowLabelValueView
+                android:id="@+id/rlvv_equipment_serial_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:row_label_value_bottom_line="2"
+                app:row_label_value_label="@string/register_equipment_serial_number" />
 
-    <com.jcsoft.emsystem.view.RowLabelEditView
-        android:id="@+id/rlev_sex"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:row_label_edit_bottom_line="2"
-        app:row_label_edit_hint="@string/app_require_input"
-        app:row_label_edit_label="@string/register_sex" />
+            <com.jcsoft.emsystem.view.RowLabelEditView
+                android:id="@+id/rlev_data_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:row_label_edit_bottom_line="1"
+                app:row_label_edit_hint="@string/app_require_input"
+                app:row_label_edit_label="@string/register_data_card" />
 
-    <com.jcsoft.emsystem.view.RowLabelEditView
-        android:id="@+id/rlev_id_card"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:row_label_edit_bottom_line="2"
-        app:row_label_edit_hint="@string/app_require_input"
-        app:row_label_edit_label="@string/register_id_card" />
+            <com.jcsoft.emsystem.view.RowLabelEditView
+                android:id="@+id/rlev_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:row_label_edit_bottom_line="2"
+                app:row_label_edit_hint="@string/app_require_input"
+                app:row_label_edit_label="@string/register_name"
+                app:row_label_edit_top_line="1" />
 
-    <com.jcsoft.emsystem.view.RowLabelEditView
-        android:id="@+id/rlev_phone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:row_label_edit_bottom_line="2"
-        app:row_label_edit_hint="@string/app_require_input"
-        app:row_label_edit_label="@string/register_phone" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical">
 
-    <com.jcsoft.emsystem.view.RowLabelEditView
-        android:id="@+id/rlev_area"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:row_label_edit_bottom_line="2"
-        app:row_label_edit_hint="@string/app_require_input"
-        app:row_label_edit_label="@string/register_area" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="8dp"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:paddingTop="8dp">
 
-    <com.jcsoft.emsystem.view.RowLabelEditView
-        android:id="@+id/rlev_address"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:row_label_edit_bottom_line="1"
-        app:row_label_edit_hint="@string/app_require_input"
-        app:row_label_edit_label="@string/register_address" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:singleLine="true"
+                        android:text="@string/register_sex"
+                        android:textColor="@color/gray_3"
+                        android:textSize="16sp" />
 
-    <com.jcsoft.emsystem.view.RowLabelEditView
-        android:id="@+id/rlev_dealer_number"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:row_label_edit_bottom_line="2"
-        app:row_label_edit_label="@string/register_dealer_number"
-        app:row_label_edit_top_line="1" />
+                    <ToggleButton
+                        android:id="@+id/tb_sex"
+                        android:layout_width="48dp"
+                        android:layout_height="24dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/toggle_sex"
+                        android:text=""
+                        android:textOff=""
+                        android:textOn="" />
 
-    <com.jcsoft.emsystem.view.RowLabelEditView
-        android:id="@+id/rlev_salesman_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:row_label_edit_bottom_line="1"
-        app:row_label_edit_label="@string/register_salesman_name" />
+                </RelativeLayout>
+
+                <View
+                    style="@style/style_base_line"
+                    android:layout_marginLeft="16dp" />
+            </LinearLayout>
+
+            <com.jcsoft.emsystem.view.RowLabelEditView
+                android:id="@+id/rlev_id_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:row_label_edit_bottom_line="2"
+                app:row_label_edit_hint="@string/app_require_input"
+                app:row_label_edit_label="@string/register_id_card" />
+
+            <com.jcsoft.emsystem.view.RowLabelEditView
+                android:id="@+id/rlev_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:row_label_edit_bottom_line="2"
+                app:row_label_edit_hint="@string/app_require_input"
+                app:row_label_edit_label="@string/register_phone" />
+
+            <com.jcsoft.emsystem.view.RowLabelValueView
+                android:id="@+id/rlvv_area"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:row_label_value_bottom_line="2"
+                app:row_label_value_label="@string/register_area"
+                app:row_label_value_value="@string/app_require_check" />
+
+            <com.jcsoft.emsystem.view.RowLabelEditView
+                android:id="@+id/rlev_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:row_label_edit_bottom_line="1"
+                app:row_label_edit_hint="@string/app_require_input"
+                app:row_label_edit_label="@string/register_address" />
+
+            <com.jcsoft.emsystem.view.RowLabelEditView
+                android:id="@+id/rlev_dealer_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:row_label_edit_bottom_line="2"
+                app:row_label_edit_label="@string/register_dealer_number"
+                app:row_label_edit_top_line="1" />
+
+            <com.jcsoft.emsystem.view.RowLabelEditView
+                android:id="@+id/rlev_salesman_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:row_label_edit_bottom_line="1"
+                app:row_label_edit_label="@string/register_salesman_name" />
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

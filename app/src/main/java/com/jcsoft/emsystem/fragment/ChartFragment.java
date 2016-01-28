@@ -1,11 +1,14 @@
 package com.jcsoft.emsystem.fragment;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.BarChart;
@@ -46,6 +49,8 @@ import java.util.List;
  * Created by jimmy on 15/12/28.
  */
 public class ChartFragment extends BaseFragment implements View.OnClickListener {
+    @ViewInject(R.id.hsv_chart)
+    HorizontalScrollView chartHorizontalScrollView;
     @ViewInject(R.id.bar_chart)
     BarChart barChart;
     @ViewInject(R.id.rl_today_mileage)
@@ -78,6 +83,7 @@ public class ChartFragment extends BaseFragment implements View.OnClickListener 
     private List<DayDataBean> dayDataBeans;
     //选中的统计(0：里程；1：平均速度；2：最大速度；3：最小速度)
     private int which;
+    private Handler handler;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -229,12 +235,27 @@ public class ChartFragment extends BaseFragment implements View.OnClickListener 
         barChart.fitScreen();
         barChart.setData(barData); // 设置数据
         barChart.animateXY(1000, 1000); // 立即执行的动画
+//        scrollToBottom();
+    }
+
+    private void scrollToBottom() {
+        handler = new Handler();
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                chartHorizontalScrollView.fullScroll(ScrollView.FOCUS_DOWN);
+            }
+        });
     }
 
     private BarData getBarData() throws ParseException {
         ArrayList<String> xValues = new ArrayList<String>();
         for (int i = 0; i < dayDataBeans.size(); i++) {
-            xValues.add(CommonUtils.changeDateFormat1(dayDataBeans.get(i).getDate()));
+            if (dayDataBeans.get(i).getDate().equals(CommonUtils.getCurrentDateString(null))) {
+                xValues.add("今天");
+            } else {
+                xValues.add(CommonUtils.changeDateFormat1(dayDataBeans.get(i).getDate()));
+            }
         }
         ArrayList<BarEntry> yValues = new ArrayList<BarEntry>();
         for (int i = 0; i < dayDataBeans.size(); i++) {

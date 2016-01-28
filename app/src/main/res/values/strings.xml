@@ -77,11 +77,14 @@
     <string name="top_bar_car_info">车辆资料</string>
     <string name="top_bar_insurance_clause">保险信息</string>
     <string name="top_bar_setting">设置</string>
-    <string name="top_bar_today_statistics">今日统计</string>
+    <string name="top_bar_today_statistics">行车数据统计</string>
     <string name="top_bar_about">关于</string>
     <string name="top_bar_register">用户注册</string>
     <string name="top_bar_login">登录</string>
     <string name="top_bar_submit">提交</string>
+    <string name="top_bar_insurance_policy">保险条款</string>
+    <string name="top_bar_terms_of_service">服务条款</string>
+    <string name="top_bar_book_install">预约安装</string>
 
     <!-- my -->
     <string name="my_base_info">基本资料</string>
@@ -141,6 +144,7 @@
     <string name="register_equipment_serial_number">设备编号</string>
     <string name="register_data_card">数据卡号</string>
     <string name="register_name">姓名</string>
+    <string name="register_your_name">您的姓名</string>
     <string name="register_sex">性别</string>
     <string name="register_id_card">身份证号</string>
     <string name="register_phone">联系电话</string>
@@ -149,5 +153,6 @@
     <string name="register_dealer_number">经销商编号</string>
     <string name="register_salesman_name">业务员姓名</string>
     <string name="register_submit">提交</string>
+    <string name="book_install_count">所需数量</string>
 
 </resources>

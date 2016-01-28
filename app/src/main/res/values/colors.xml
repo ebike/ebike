@@ -15,6 +15,8 @@
     <color name="gray">#eaebed</color>
     <color name="bold_gray">#d1d1d1</color>
     <color name="gray_border">#CCCCCC</color>
+    <color name="province_line_border">#C7C7C7</color>
+
 
     <!-- topbar -->
     <color name="topbar_bg">#fc5823</color>
