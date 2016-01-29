@@ -1,6 +1,10 @@
 package com.jcsoft.emsystem.constants;
 
+import android.os.Environment;
+
 import com.jcsoft.emsystem.bean.UserInfoBean;
+
+import java.io.File;
 
 /*
  * 全局的常量存放工具
@@ -57,4 +61,10 @@ public class AppConfig {
     public static final String ATTACHMENTS_FIELD = "attachments_field";//附件
     public static final String GO_ADDRESS_FIELD = "geo_address_field";
     public static final String EXPECT_SIGN_DATE = "expect_sign_date";
+
+    /**
+     * 当前选择的照片位置
+     **/
+    public static final String CAMERA_PIC_PATH = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separatorChar + "ebike"
+            + File.separatorChar + "CameraPic" + File.separatorChar;
 }

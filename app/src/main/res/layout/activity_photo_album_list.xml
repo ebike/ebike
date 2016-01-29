@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <com.jcsoft.emsystem.view.TopBarView
+        android:id="@+id/top_bar_view"
+        style="@style/style_base_f"
+        app:center_text="照片"
+        app:has_center="true"
+        app:has_left="true"
+        app:has_left_clickable="true"
+        app:left_icon="@mipmap/back_icon" />
+
+    <GridView
+        android:id="@+id/grid_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/top_bar_view"
+        android:layout_margin="8dp"
+        android:background="@null"
+        android:cacheColorHint="@color/transparent"
+        android:gravity="center"
+        android:horizontalSpacing="30dp"
+        android:listSelector="@color/transparent"
+        android:numColumns="2"
+        android:scrollbars="none"
+        android:verticalSpacing="15dp" />
+
+</RelativeLayout>

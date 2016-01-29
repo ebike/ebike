@@ -16,7 +16,10 @@
     <color name="bold_gray">#d1d1d1</color>
     <color name="gray_border">#CCCCCC</color>
     <color name="province_line_border">#C7C7C7</color>
-
+    <color name="actionsheet_blue">#037BFF</color>
+    <color name="actionsheet_red">#FD4A2E</color>
+    <color name="actionsheet_gray">#8F8F8F</color>
+    <color name="transparent">#00000000</color>
 
     <!-- topbar -->
     <color name="topbar_bg">#fc5823</color>

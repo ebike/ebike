@@ -163,9 +163,9 @@ public class MyFragment extends BaseFragment implements RowEntryView.OnClickCall
                 break;
             case R.id.rev_deal_insurance://办理保险
                 if (!CommonUtils.strIsEmpty(AppConfig.userInfoBean.getInsurNum())) {
-                    intent = new Intent(getActivity(), DealInsuranceActivity.class);
-                } else {
                     intent = new Intent(getActivity(), InsuranceClauseActivity.class);
+                } else {
+                    intent = new Intent(getActivity(), DealInsuranceActivity.class);
                 }
                 startActivity(intent);
                 break;

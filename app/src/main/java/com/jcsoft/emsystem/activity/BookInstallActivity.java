@@ -72,6 +72,9 @@ public class BookInstallActivity extends BaseAreaActivity {
         phoneRowLabelEditView.setEditInteger();
         installCountRowLabelEditView.setEditInteger();
         installCountRowLabelEditView.setEditLength(8);
+        dialog = new AddressThreeWheelViewDialog(this);
+        provinceDao = new ProvinceInfoDao(this);
+        mProvinceList = provinceDao.queryAll();
     }
 
     @Override

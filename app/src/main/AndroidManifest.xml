@@ -207,6 +207,12 @@
         <activity android:name=".activity.BookInstallActivity" />
         <activity android:name=".activity.DealInsuranceActivity" />
         <activity android:name=".activity.WebActivity" />
+        <activity
+            android:name=".activity.PhotoAlbumListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.PhotoSingleSelectionActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp" >
+
+    <LinearLayout
+        android:id="@+id/llImage"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:background="@mipmap/pic_back"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/cover"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:scaleType="centerCrop"
+            android:layout_gravity="center" >
+        </ImageView>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/info_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/llImage"
+        android:layout_alignRight="@+id/llImage"
+        android:layout_below="@+id/llImage"
+        android:layout_centerVertical="true" >
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal"
+            android:maxLines="2"
+            android:text="相册名称"
+            android:textColor="#000000"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/title"
+            android:singleLine="true"
+            android:text="0张"
+            android:textColor="@color/gray_bg"
+            android:textSize="13sp" />
+    </RelativeLayout>
+
+</RelativeLayout>

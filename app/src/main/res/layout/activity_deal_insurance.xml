@@ -22,67 +22,120 @@
         app:left_text="@string/top_bar_my"
         app:right_text="@string/top_bar_submit" />
 
-    <com.jcsoft.emsystem.view.RowLabelValueView
-        android:id="@+id/rlvv_car_photo"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:row_label_value_bottom_line="2"
-        app:row_label_value_label="@string/deal_insurance_car_photo"
-        app:row_label_value_top_line="1" />
+        android:scrollbars="none">
 
-    <com.jcsoft.emsystem.view.RowLabelValueView
-        android:id="@+id/rlvv_id_card_positive"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:row_label_value_bottom_line="2"
-        app:row_label_value_label="@string/deal_insurance_id_card_positive" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <com.jcsoft.emsystem.view.RowLabelValueView
-        android:id="@+id/rlvv_id_card_negative"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:row_label_value_bottom_line="2"
-        app:row_label_value_label="@string/deal_insurance_id_card_negative" />
+            <com.jcsoft.emsystem.view.RowLabelValueView
+                android:id="@+id/rlvv_car_photo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:row_label_value_bottom_line="2"
+                app:row_label_value_can_click="true"
+                app:row_label_value_label="@string/deal_insurance_car_photo"
+                app:row_label_value_top_line="1" />
 
-    <com.jcsoft.emsystem.view.RowLabelValueView
-        android:id="@+id/rlvv_certificate_photos"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:row_label_value_bottom_line="1"
-        app:row_label_value_label="@string/deal_insurance_certificate_photos" />
+            <com.jcsoft.emsystem.view.RowLabelValueView
+                android:id="@+id/rlvv_id_card_positive"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:row_label_value_bottom_line="2"
+                app:row_label_value_can_click="true"
+                app:row_label_value_label="@string/deal_insurance_id_card_positive" />
 
-    <com.jcsoft.emsystem.view.RowLabelEditView
-        android:id="@+id/rlev_invoice_or_receipt"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:row_label_edit_bottom_line="2"
-        app:row_label_edit_hint="@string/app_require_input"
-        app:row_label_edit_label="@string/deal_insurance_invoice_or_receipt"
-        app:row_label_edit_top_line="1" />
+            <com.jcsoft.emsystem.view.RowLabelValueView
+                android:id="@+id/rlvv_id_card_negative"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:row_label_value_bottom_line="2"
+                app:row_label_value_can_click="true"
+                app:row_label_value_label="@string/deal_insurance_id_card_negative" />
 
-    <com.jcsoft.emsystem.view.RowLabelEditView
-        android:id="@+id/rlev_motor_number"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:row_label_edit_bottom_line="2"
-        app:row_label_edit_hint="@string/app_require_input"
-        app:row_label_edit_label="@string/deal_insurance_motor_number" />
+            <com.jcsoft.emsystem.view.RowLabelValueView
+                android:id="@+id/rlvv_certificate_photos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:row_label_value_bottom_line="2"
+                app:row_label_value_can_click="true"
+                app:row_label_value_label="@string/deal_insurance_certificate_photos" />
 
-    <com.jcsoft.emsystem.view.RowLabelEditView
-        android:id="@+id/rlev_frame_number"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:row_label_edit_bottom_line="2"
-        app:row_label_edit_hint="@string/app_require_input"
-        app:row_label_edit_label="@string/deal_insurance_frame_number" />
+            <com.jcsoft.emsystem.view.RowLabelValueView
+                android:id="@+id/rlvv_invoice_or_receipt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:row_label_value_bottom_line="1"
+                app:row_label_value_can_click="true"
+                app:row_label_value_label="@string/deal_insurance_invoice_or_receipt" />
 
-    <com.jcsoft.emsystem.view.RowLabelValueView
-        android:id="@+id/rlvv_coverage_area"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:row_label_value_bottom_line="1"
-        app:row_label_value_label="@string/deal_insurance_coverage_area"
-        app:row_label_value_value="@string/app_require_check" />
+            <com.jcsoft.emsystem.view.RowLabelEditView
+                android:id="@+id/rlev_motor_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:row_label_edit_bottom_line="2"
+                app:row_label_edit_hint="@string/app_require_input"
+                app:row_label_edit_label="@string/deal_insurance_motor_number"
+                app:row_label_edit_top_line="1" />
+
+            <com.jcsoft.emsystem.view.RowLabelEditView
+                android:id="@+id/rlev_frame_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:row_label_edit_bottom_line="2"
+                app:row_label_edit_hint="@string/app_require_input"
+                app:row_label_edit_label="@string/deal_insurance_frame_number" />
+
+            <com.jcsoft.emsystem.view.RowLabelValueView
+                android:id="@+id/rlvv_coverage_area"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:row_label_value_bottom_line="1"
+                app:row_label_value_can_click="true"
+                app:row_label_value_label="@string/deal_insurance_coverage_area"
+                app:row_label_value_value="@string/app_require_check" />
+
+            <com.jcsoft.emsystem.view.RowLabelEditView
+                android:id="@+id/rlev_car_brand"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:row_label_edit_bottom_line="2"
+                app:row_label_edit_hint="@string/app_require_input"
+                app:row_label_edit_label="@string/deal_insurance_car_brand"
+                app:row_label_edit_top_line="1" />
+
+            <com.jcsoft.emsystem.view.RowLabelEditView
+                android:id="@+id/rlev_car_model"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:row_label_edit_bottom_line="2"
+                app:row_label_edit_hint="@string/app_require_input"
+                app:row_label_edit_label="@string/deal_insurance_car_model" />
+
+            <com.jcsoft.emsystem.view.RowLabelValueView
+                android:id="@+id/rlvv_buy_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:row_label_value_bottom_line="2"
+                app:row_label_value_can_click="true"
+                app:row_label_value_label="@string/deal_insurance_buy_date"
+                app:row_label_value_value="@string/app_require_check" />
+
+            <com.jcsoft.emsystem.view.RowLabelEditView
+                android:id="@+id/rlev_buy_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:row_label_edit_bottom_line="1"
+                app:row_label_edit_hint="@string/app_require_input"
+                app:row_label_edit_label="@string/deal_insurance_buy_price" />
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
