@@ -16,6 +16,7 @@ import com.jcsoft.emsystem.callback.DCommonCallback;
 import com.jcsoft.emsystem.callback.DSingleDialogCallback;
 import com.jcsoft.emsystem.db.ProvinceInfoDao;
 import com.jcsoft.emsystem.http.DHttpUtils;
+import com.jcsoft.emsystem.http.DRequestParamsUtils;
 import com.jcsoft.emsystem.http.HttpConstants;
 import com.jcsoft.emsystem.utils.CommonUtils;
 import com.jcsoft.emsystem.view.RowLabelEditView;
@@ -78,9 +79,7 @@ public class RegisterActivity extends BaseActivity {
 
     @Override
     public void getIntentData(Bundle savedInstanceState) {
-        provinceId = getIntent().getIntExtra("provinceId", -1);
-        cityId = getIntent().getIntExtra("cityId", -1);
-        districtId = getIntent().getIntExtra("districtId", -1);
+
     }
 
     @Override
@@ -165,7 +164,7 @@ public class RegisterActivity extends BaseActivity {
                     return;
                 }
                 if (CommonUtils.strIsEmpty(dataCardRowLabelEditView.getValue())) {
-                    dataCardRowLabelEditView.setHint("必填");
+                    dataCardRowLabelEditView.setHint(R.string.app_require_input);
                     dataCardRowLabelEditView.setHintColor(R.color.orange_dark);
                     return;
                 }
@@ -177,14 +176,17 @@ public class RegisterActivity extends BaseActivity {
                     return;
                 }
                 if (CommonUtils.strIsEmpty(nameRowLabelEditView.getValue())) {
+                    nameRowLabelEditView.setHint(R.string.app_require_input);
                     nameRowLabelEditView.setHintColor(R.color.orange_dark);
                     return;
                 }
                 if (CommonUtils.strIsEmpty(idCardRowLabelEditView.getValue())) {
+                    idCardRowLabelEditView.setHint(R.string.app_require_input);
                     idCardRowLabelEditView.setHintColor(R.color.orange_dark);
                     return;
                 }
                 if (CommonUtils.strIsEmpty(phoneRowLabelEditView.getValue())) {
+                    phoneRowLabelEditView.setHint(R.string.app_require_input);
                     phoneRowLabelEditView.setHintColor(R.color.orange_dark);
                     return;
                 }
@@ -193,6 +195,7 @@ public class RegisterActivity extends BaseActivity {
                     return;
                 }
                 if (CommonUtils.strIsEmpty(addressRowLabelEditView.getValue())) {
+                    addressRowLabelEditView.setHint(R.string.app_require_input);
                     addressRowLabelEditView.setHintColor(R.color.orange_dark);
                     return;
                 }
@@ -211,8 +214,7 @@ public class RegisterActivity extends BaseActivity {
                 map.put("dealerId", dealerNumberRowLabelEditView.getValue());
                 map.put("salesman", salesmanNameRowLabelEditView.getValue());
                 //提交
-                RequestParams params = new RequestParams(HttpConstants.getRegDeviceUrl(map));
-                params.setCharset("UTF-8");
+                RequestParams params = DRequestParamsUtils.getRequestParams(HttpConstants.getRegDeviceUrl(), map);
                 DHttpUtils.post_String(RegisterActivity.this, true, params, new DCommonCallback<String>() {
                     @Override
                     public void onSuccess(String result) {

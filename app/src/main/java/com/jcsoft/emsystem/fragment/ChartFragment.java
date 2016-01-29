@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.BarChart;
@@ -235,15 +234,15 @@ public class ChartFragment extends BaseFragment implements View.OnClickListener 
         barChart.fitScreen();
         barChart.setData(barData); // 设置数据
         barChart.animateXY(1000, 1000); // 立即执行的动画
-//        scrollToBottom();
+        scrollToRight();
     }
 
-    private void scrollToBottom() {
+    private void scrollToRight() {
         handler = new Handler();
         handler.post(new Runnable() {
             @Override
             public void run() {
-                chartHorizontalScrollView.fullScroll(ScrollView.FOCUS_DOWN);
+                chartHorizontalScrollView.smoothScrollTo(barChart.getWidth(), 0);
             }
         });
     }

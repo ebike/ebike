@@ -2,8 +2,6 @@ package com.jcsoft.emsystem.http;
 
 import com.jcsoft.emsystem.constants.AppConfig;
 
-import java.util.Map;
-
 /**
  * Created by jimmy on 15/12/28.
  */
@@ -142,21 +140,9 @@ public class HttpConstants {
     }
 
     //用户注册
-    public static String getRegDeviceUrl(Map<String, String> map) {
+    public static String getRegDeviceUrl() {
         StringBuffer sb = new StringBuffer(baseUrl);
         sb.append("/user/regDevice.do");
-        sb.append("?carId=").append(map.get("carId"));
-        sb.append("&telNum=").append(map.get("telNum"));
-        sb.append("&userName=").append(map.get("userName"));
-        sb.append("&sex=").append(map.get("sex"));
-        sb.append("&idNum=").append(map.get("idNum"));
-        sb.append("&phone=").append(map.get("phone"));
-        sb.append("&province=").append(map.get("province"));
-        sb.append("&city=").append(map.get("city"));
-        sb.append("&area=").append(map.get("area"));
-        sb.append("&address=").append(map.get("address"));
-        sb.append("&dealerId=").append(map.get("dealerId"));
-        sb.append("&salesman=").append(map.get("salesman"));
         return sb.toString();
     }
 
@@ -166,6 +152,13 @@ public class HttpConstants {
         sb.append("/chart/getSomeDayData.do");
         sb.append("?carId=").append(AppConfig.userInfoBean.getCarId());
         sb.append("&dayNum=").append(15);
+        return sb.toString();
+    }
+
+    //在线预订
+    public static String saveOnlineBookUrl(){
+        StringBuffer sb = new StringBuffer(baseUrl);
+        sb.append("/book/saveOnlineBook.do");
         return sb.toString();
     }
 }

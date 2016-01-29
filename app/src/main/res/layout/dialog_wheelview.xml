@@ -1,75 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/content"
-    android:layout_width="fill_parent"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
     android:layout_gravity="bottom"
-    android:background="@mipmap/dialog2_background"
-    android:orientation="vertical" >
+    android:background="@color/white"
+    android:orientation="vertical">
 
     <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="45dip"
-        android:background="@mipmap/dialogtop_background"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/gray_border"
         android:clickable="false"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/wheel_button_cancel"
-            android:layout_width="57dip"
-            android:layout_height="30dip"
-            android:layout_marginLeft="5dip"
-            android:layout_marginTop="8dip"
-            android:background="@drawable/button_normal"
+            android:layout_width="57dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@null"
             android:text="取消"
-            android:textSize="12sp" />
+            android:textColor="@color/orange_dark"
+            android:textSize="14sp" />
 
         <Button
             android:id="@+id/wheel_button_ok"
-            android:layout_width="57dip"
-            android:layout_height="30dip"
+            android:layout_width="57dp"
+            android:layout_height="30dp"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="5dip"
-            android:layout_marginTop="8dip"
-            android:background="@drawable/button_normal"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@null"
             android:text="确定"
-            android:textSize="12sp" />
+            android:textColor="@color/orange_dark"
+            android:textSize="14sp" />
     </RelativeLayout>
 
     <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="180dip"
-        android:orientation="horizontal"
-        android:paddingBottom="4dip"
-        android:paddingLeft="12dip"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
         android:layout_gravity="center"
         android:gravity="center"
-        android:paddingRight="12dip"
-        android:paddingTop="4dip" >
+        android:orientation="horizontal"
+        android:paddingBottom="4dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:paddingTop="4dp">
 
         <com.jcsoft.emsystem.view.wheel.WheelView
             android:id="@+id/wheelView_view1"
-            android:layout_width="fill_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1" />
 
         <com.jcsoft.emsystem.view.wheel.WheelView
             android:id="@+id/wheelView_view2"
-            android:layout_width="fill_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
         <com.jcsoft.emsystem.view.wheel.WheelView
             android:id="@+id/wheelView_view3"
-            android:layout_width="fill_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:visibility="gone"/>
+            android:visibility="gone" />
     </LinearLayout>
 
 </LinearLayout>

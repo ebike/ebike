@@ -175,6 +175,11 @@ public class RowLabelEditView extends RelativeLayout {
         valueEditText.setHint(hint);
     }
 
+    //设置右侧提示
+    public void setHint(int resource){
+        valueEditText.setHint(getResources().getString(resource));
+    }
+
     //设置右侧提示颜色
     public void setHintColor(int color) {
         valueEditText.setHintTextColor(getResources().getColor(color));

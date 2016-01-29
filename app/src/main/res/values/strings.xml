@@ -85,6 +85,7 @@
     <string name="top_bar_insurance_policy">保险条款</string>
     <string name="top_bar_terms_of_service">服务条款</string>
     <string name="top_bar_book_install">预约安装</string>
+    <string name="top_bar_deal_insurance">办理保险</string>
 
     <!-- my -->
     <string name="my_base_info">基本资料</string>
@@ -154,5 +155,19 @@
     <string name="register_salesman_name">业务员姓名</string>
     <string name="register_submit">提交</string>
     <string name="book_install_count">所需数量</string>
+
+    <!-- deal_insurance -->
+    <string name="deal_insurance_car_photo">车辆照片</string>
+    <string name="deal_insurance_id_card_positive">身份证正面</string>
+    <string name="deal_insurance_id_card_negative">身份证反面</string>
+    <string name="deal_insurance_certificate_photos">合格证照片</string>
+    <string name="deal_insurance_invoice_or_receipt">发票或收据</string>
+    <string name="deal_insurance_motor_number">电机编号</string>
+    <string name="deal_insurance_frame_number">车架编号</string>
+    <string name="deal_insurance_coverage_area">承保区域</string>
+    <string name="deal_insurance_car_brand">车辆品牌</string>
+    <string name="deal_insurance_car_model">车辆型号</string>
+    <string name="deal_insurance_buy_date">购买日期</string>
+    <string name="deal_insurance_buy_price">购买价格</string>
 
 </resources>

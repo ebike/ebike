@@ -1,6 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/gray_bg"
+    android:orientation="vertical">
 
-</RelativeLayout>
+    <com.jcsoft.emsystem.view.TopBarView
+        android:id="@+id/top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        app:back_is_finish="true"
+        app:center_text="@string/top_bar_deal_insurance"
+        app:has_center="true"
+        app:has_left="true"
+        app:has_left_clickable="true"
+        app:has_right="true"
+        app:has_right_clickable="true"
+        app:left_icon="@mipmap/back_icon"
+        app:left_text="@string/top_bar_my"
+        app:right_text="@string/top_bar_submit" />
+
+    <com.jcsoft.emsystem.view.RowLabelValueView
+        android:id="@+id/rlvv_car_photo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:row_label_value_bottom_line="2"
+        app:row_label_value_label="@string/deal_insurance_car_photo"
+        app:row_label_value_top_line="1" />
+
+    <com.jcsoft.emsystem.view.RowLabelValueView
+        android:id="@+id/rlvv_id_card_positive"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:row_label_value_bottom_line="2"
+        app:row_label_value_label="@string/deal_insurance_id_card_positive" />
+
+    <com.jcsoft.emsystem.view.RowLabelValueView
+        android:id="@+id/rlvv_id_card_negative"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:row_label_value_bottom_line="2"
+        app:row_label_value_label="@string/deal_insurance_id_card_negative" />
+
+    <com.jcsoft.emsystem.view.RowLabelValueView
+        android:id="@+id/rlvv_certificate_photos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:row_label_value_bottom_line="1"
+        app:row_label_value_label="@string/deal_insurance_certificate_photos" />
+
+    <com.jcsoft.emsystem.view.RowLabelEditView
+        android:id="@+id/rlev_invoice_or_receipt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:row_label_edit_bottom_line="2"
+        app:row_label_edit_hint="@string/app_require_input"
+        app:row_label_edit_label="@string/deal_insurance_invoice_or_receipt"
+        app:row_label_edit_top_line="1" />
+
+    <com.jcsoft.emsystem.view.RowLabelEditView
+        android:id="@+id/rlev_motor_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:row_label_edit_bottom_line="2"
+        app:row_label_edit_hint="@string/app_require_input"
+        app:row_label_edit_label="@string/deal_insurance_motor_number" />
+
+    <com.jcsoft.emsystem.view.RowLabelEditView
+        android:id="@+id/rlev_frame_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:row_label_edit_bottom_line="2"
+        app:row_label_edit_hint="@string/app_require_input"
+        app:row_label_edit_label="@string/deal_insurance_frame_number" />
+
+    <com.jcsoft.emsystem.view.RowLabelValueView
+        android:id="@+id/rlvv_coverage_area"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:row_label_value_bottom_line="1"
+        app:row_label_value_label="@string/deal_insurance_coverage_area"
+        app:row_label_value_value="@string/app_require_check" />
+</LinearLayout>
