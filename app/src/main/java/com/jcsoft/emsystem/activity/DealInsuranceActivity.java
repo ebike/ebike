@@ -12,26 +12,42 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.jcsoft.emsystem.R;
 import com.jcsoft.emsystem.base.BaseActivity;
+import com.jcsoft.emsystem.base.LocationJson;
+import com.jcsoft.emsystem.base.SendParamsBean;
+import com.jcsoft.emsystem.bean.CarLikeImeiBean;
 import com.jcsoft.emsystem.bean.ImageItem;
+import com.jcsoft.emsystem.bean.ResponseBean;
+import com.jcsoft.emsystem.callback.DCommonCallback;
+import com.jcsoft.emsystem.callback.DSingleDialogCallback;
 import com.jcsoft.emsystem.constants.AppConfig;
+import com.jcsoft.emsystem.db.ProvinceInfoDao;
 import com.jcsoft.emsystem.event.SelectPhotoEvent;
+import com.jcsoft.emsystem.http.DHttpUtils;
+import com.jcsoft.emsystem.http.DRequestParamsUtils;
+import com.jcsoft.emsystem.http.HttpConstants;
 import com.jcsoft.emsystem.utils.CommonUtils;
 import com.jcsoft.emsystem.view.ActionSheetDialog;
 import com.jcsoft.emsystem.view.RowLabelEditView;
 import com.jcsoft.emsystem.view.RowLabelValueView;
 import com.jcsoft.emsystem.view.TopBarView;
+import com.jcsoft.emsystem.view.wheel.AddressTwoWheelViewDialog;
 
+import org.xutils.http.RequestParams;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 /**
  * 办理保险
@@ -63,6 +79,13 @@ public class DealInsuranceActivity extends BaseActivity implements RowLabelValue
     RowLabelValueView buyDateRowLabelValueView;
     @ViewInject(R.id.rlev_buy_price)
     RowLabelEditView buyPriceRowLabelValueView;
+    private AddressTwoWheelViewDialog dialog;
+    private ProvinceInfoDao provinceDao;
+    private List<LocationJson> mProvinceList;
+    private int provinceId;
+    private int cityId;
+    private String provinceName;
+    private String cityName;
     //拍照时间
     private long takePhotoTime;
     //当前操作的照片（当前操作照片的ID）
@@ -93,6 +116,9 @@ public class DealInsuranceActivity extends BaseActivity implements RowLabelValue
     @Override
     public void init() {
         buyPriceRowLabelValueView.setEditInteger();
+        dialog = new AddressTwoWheelViewDialog(this);
+        provinceDao = new ProvinceInfoDao(this);
+        mProvinceList = provinceDao.queryAll();
     }
 
     @Override
@@ -103,6 +129,7 @@ public class DealInsuranceActivity extends BaseActivity implements RowLabelValue
         certificatePhotosRowLabelValueView.setOnClickCallback(this);
         invoiceOrReceiptRowLabelValueView.setOnClickCallback(this);
         buyDateRowLabelValueView.setOnClickCallback(this);
+        coverageAreaRowLabelValueView.setOnClickCallback(this);
         topBarView.setRightCallback(new TopBarView.TopBarRightCallback() {
             @Override
             public void setRightOnClickListener() {
@@ -132,8 +159,74 @@ public class DealInsuranceActivity extends BaseActivity implements RowLabelValue
                     invoiceOrReceiptRowLabelValueView.setValueColor(R.color.orange_dark);
                     return;
                 }
-
+                if (CommonUtils.strIsEmpty(motorNumberRowLabelValueView.getValue())) {
+                    motorNumberRowLabelValueView.setHint(R.string.app_require_input);
+                    motorNumberRowLabelValueView.setHintColor(R.color.orange_dark);
+                    return;
+                }
+                if (CommonUtils.strIsEmpty(frameNumberRowLabelValueView.getValue())) {
+                    frameNumberRowLabelValueView.setHint(R.string.app_require_input);
+                    frameNumberRowLabelValueView.setHintColor(R.color.orange_dark);
+                    return;
+                }
+                if (provinceId <= 0 && cityId <= 0) {
+                    coverageAreaRowLabelValueView.setValueColor(R.color.orange_dark);
+                    return;
+                }
+                if (CommonUtils.strIsEmpty(carBrandRowLabelValueView.getValue())) {
+                    carBrandRowLabelValueView.setHint(R.string.app_require_input);
+                    carBrandRowLabelValueView.setHintColor(R.color.orange_dark);
+                    return;
+                }
+                if (CommonUtils.strIsEmpty(carModelRowLabelValueView.getValue())) {
+                    carModelRowLabelValueView.setHint(R.string.app_require_input);
+                    carModelRowLabelValueView.setHintColor(R.color.orange_dark);
+                    return;
+                }
+                if (CommonUtils.strIsEmpty(buyDateRowLabelValueView.getValue()) || buyDateRowLabelValueView.getValue().equals("必选")) {
+                    buyDateRowLabelValueView.setValueColor(R.color.orange_dark);
+                    return;
+                }
+                if (CommonUtils.strIsEmpty(buyPriceRowLabelValueView.getValue())) {
+                    buyPriceRowLabelValueView.setHint(R.string.app_require_input);
+                    buyPriceRowLabelValueView.setHintColor(R.color.orange_dark);
+                    return;
+                }
+                //整理参数
+                List<SendParamsBean> sendParamsBeans = new ArrayList<SendParamsBean>();
+                sendParamsBeans.add(new SendParamsBean("carId", AppConfig.userInfoBean.getCarId() + "", false));
+                sendParamsBeans.add(new SendParamsBean("motorNum", motorNumberRowLabelValueView.getValue(), false));
+                sendParamsBeans.add(new SendParamsBean("frameNum", frameNumberRowLabelValueView.getValue(), false));
+                sendParamsBeans.add(new SendParamsBean("carBrand", carBrandRowLabelValueView.getValue(), false));
+                sendParamsBeans.add(new SendParamsBean("carModel", carModelRowLabelValueView.getValue(), false));
+                sendParamsBeans.add(new SendParamsBean("carDate", buyDateRowLabelValueView.getValue(), false));
+                sendParamsBeans.add(new SendParamsBean("carPrice", buyPriceRowLabelValueView.getValue(), false));
+                sendParamsBeans.add(new SendParamsBean("idPic", idPic, true));
+                sendParamsBeans.add(new SendParamsBean("idbPic", idbPic, true));
+                sendParamsBeans.add(new SendParamsBean("carPic", carPic, true));
+                sendParamsBeans.add(new SendParamsBean("billPic", billPic, true));
+                sendParamsBeans.add(new SendParamsBean("cerPic", cerPic, true));
+                sendParamsBeans.add(new SendParamsBean("underwritePro", provinceName, false));
+                sendParamsBeans.add(new SendParamsBean("underwriteCity", cityName, false));
                 //提交
+                RequestParams params = DRequestParamsUtils.getRequestParamsHasFile(HttpConstants.uploadInsurInfoUrl(), sendParamsBeans);
+                DHttpUtils.post_String(DealInsuranceActivity.this, true, params, new DCommonCallback<String>() {
+                    @Override
+                    public void onSuccess(String result) {
+                        ResponseBean<Object> bean = new Gson().fromJson(result, new TypeToken<ResponseBean<CarLikeImeiBean>>() {
+                        }.getType());
+                        if (bean.getCode() == 1) {
+                            CommonUtils.showCustomDialogSignle2(DealInsuranceActivity.this, "", bean.getErrmsg(), new DSingleDialogCallback() {
+                                @Override
+                                public void onPositiveButtonClick(String editText) {
+                                    DealInsuranceActivity.this.finish();
+                                }
+                            });
+                        } else {
+                            showShortText(bean.getErrmsg());
+                        }
+                    }
+                });
 
             }
         });
@@ -174,6 +267,20 @@ public class DealInsuranceActivity extends BaseActivity implements RowLabelValue
                 break;
             case R.id.rlvv_buy_date://购买日期
                 showDataCardelar();
+                break;
+            case R.id.rlvv_coverage_area://承保区域
+                dialog.setData(mProvinceList);
+                dialog.show(new AddressTwoWheelViewDialog.ConfirmAction() {
+                    @Override
+                    public void doAction(LocationJson root, LocationJson child) {
+                        coverageAreaRowLabelValueView.setValue(root.getName() + " " + child.getName());
+                        coverageAreaRowLabelValueView.setValueColor(R.color.gray_6);
+                        provinceId = root.getId();
+                        provinceName = root.getName();
+                        cityId = child.getId();
+                        cityName = child.getName();
+                    }
+                });
                 break;
             default:
                 break;

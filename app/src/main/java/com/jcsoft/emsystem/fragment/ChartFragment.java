@@ -304,6 +304,7 @@ public class ChartFragment extends BaseFragment implements View.OnClickListener 
                 try {
                     barChart.setData(getBarData()); // 设置数据
                     barChart.animateXY(1000, 1000); // 立即执行的动画
+                    scrollToRight();
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
@@ -322,6 +323,7 @@ public class ChartFragment extends BaseFragment implements View.OnClickListener 
                 try {
                     barChart.setData(getBarData()); // 设置数据
                     barChart.animateXY(1000, 1000); // 立即执行的动画
+                    scrollToRight();
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
@@ -340,6 +342,7 @@ public class ChartFragment extends BaseFragment implements View.OnClickListener 
                 try {
                     barChart.setData(getBarData()); // 设置数据
                     barChart.animateXY(1000, 1000); // 立即执行的动画
+                    scrollToRight();
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
@@ -358,6 +361,7 @@ public class ChartFragment extends BaseFragment implements View.OnClickListener 
                 try {
                     barChart.setData(getBarData()); // 设置数据
                     barChart.animateXY(1000, 1000); // 立即执行的动画
+                    scrollToRight();
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }

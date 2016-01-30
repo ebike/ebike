@@ -162,7 +162,7 @@ public abstract class BaseActivity extends FragmentActivity {
     //设置别名
     protected void setAlias() {
         // 调用 Handler 来异步设置别名
-        aliasHandler.sendMessage(aliasHandler.obtainMessage(MSG_SET_ALIAS, AppConfig.registrationId));
+        aliasHandler.sendMessage(aliasHandler.obtainMessage(MSG_SET_ALIAS, AppConfig.userInfoBean.getCarId() + ""));
     }
 
     //设置别名回调方法

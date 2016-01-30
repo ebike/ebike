@@ -204,8 +204,14 @@
             android:name=".activity.RegisterActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateVisible|adjustResize" />
-        <activity android:name=".activity.BookInstallActivity" />
-        <activity android:name=".activity.DealInsuranceActivity" />
+        <activity
+            android:name=".activity.BookInstallActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible|adjustResize" />
+        <activity
+            android:name=".activity.DealInsuranceActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible|adjustResize" />
         <activity android:name=".activity.WebActivity" />
         <activity
             android:name=".activity.PhotoAlbumListActivity"

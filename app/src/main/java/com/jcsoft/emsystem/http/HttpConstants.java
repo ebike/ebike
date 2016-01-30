@@ -161,4 +161,11 @@ public class HttpConstants {
         sb.append("/book/saveOnlineBook.do");
         return sb.toString();
     }
+
+    //提交保险资料
+    public static String uploadInsurInfoUrl(){
+        StringBuffer sb = new StringBuffer(baseUrl);
+        sb.append("/insur/uploadInsurInfo.do");
+        return sb.toString();
+    }
 }

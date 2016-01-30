@@ -87,7 +87,7 @@ import de.greenrobot.event.EventBus;
  * Created by jimmy on 15/12/28.
  */
 public class LocationFragment extends BaseFragment implements Runnable, View.OnClickListener,
-        AMap.OnMapClickListener, AMapNaviListener, AMap.OnInfoWindowClickListener, GeocodeSearch.OnGeocodeSearchListener {
+        AMap.OnMapClickListener, AMapNaviListener, AMap.OnMarkerClickListener, AMap.OnInfoWindowClickListener, GeocodeSearch.OnGeocodeSearchListener {
     @ViewInject(R.id.map_view)
     MapView mapView;
     @ViewInject(R.id.iv_traffic)
@@ -202,6 +202,7 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
         if (aMap == null) {
             aMap = mapView.getMap();
             aMap.setOnMapClickListener(this);
+            aMap.setOnMarkerClickListener(this);// 设置点击marker事件监听器
             aMap.setOnInfoWindowClickListener(this);
             uiSettings = aMap.getUiSettings();
             //不显示缩放按键
@@ -271,7 +272,7 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
                             markerOptions.icon(BitmapDescriptorFactory.fromResource(R.mipmap.ebike_offline));
                         }
                         marker = aMap.addMarker(markerOptions);
-                        marker.showInfoWindow();
+//                        marker.showInfoWindow();
                         CameraUpdate cu = CameraUpdateFactory.changeLatLng(position);
                         aMap.moveCamera(cu);
                         //判断锁车状态
@@ -884,6 +885,14 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
         NaviLatLng startP = new NaviLatLng(startPoint.getLatitude(), startPoint.getLongitude());
         NaviLatLng endP = new NaviLatLng(stopPoint.getLatitude(), stopPoint.getLongitude());
         AMapNavi.getInstance(getActivity()).calculateWalkRoute(startP, endP);
+    }
+
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        if (marker != null && !marker.isInfoWindowShown()) {
+            marker.showInfoWindow();
+        }
+        return false;
     }
 
     @Override

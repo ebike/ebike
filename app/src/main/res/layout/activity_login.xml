@@ -75,23 +75,12 @@
             android:layout_height="wrap_content"
             android:src="@mipmap/password" />
 
-        <TextView
-            android:id="@+id/tv_forget_password"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/iv_password"
-            android:layout_alignParentRight="true"
-            android:paddingLeft="16dp"
-            android:text="忘记密码"
-            android:textColor="@color/white" />
-
         <EditText
             android:id="@+id/et_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/iv_password"
             android:layout_marginLeft="3dp"
-            android:layout_toLeftOf="@id/tv_forget_password"
             android:layout_toRightOf="@+id/iv_password"
             android:background="@null"
             android:hint="密码"
@@ -116,13 +105,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/line2"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="24dp"
         android:alpha="0.4"
         android:background="@drawable/login_button"
         android:enabled="false"
         android:text="登录"
         android:textColor="@color/login_text_disabled"
         android:textSize="22sp" />
+
+    <TextView
+        android:id="@+id/tv_forget_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@id/btn_login"
+        android:layout_below="@id/btn_login"
+        android:layout_marginTop="8dp"
+        android:paddingLeft="16dp"
+        android:text="忘记密码？"
+        android:textColor="@color/gray_border" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -149,7 +149,6 @@
             android:layout_centerVertical="true"
             android:paddingBottom="16dp"
             android:paddingLeft="16dp"
-            android:paddingRight="16dp"
             android:paddingTop="16dp"
             android:text="预约安装"
             android:textColor="@color/white" />

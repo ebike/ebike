@@ -9,10 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:center_text="@string/top_bar_location"
-        app:has_center="true"
-        app:has_right="true"
-        app:has_right_clickable="true"
-        app:right_icon="@mipmap/top_menu" />
+        app:has_center="true" />
 
     <FrameLayout
         android:layout_width="match_parent"
