@@ -112,7 +112,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                             AppConfig.userInfoBean = responseBean.getData();
                             preferencesUtil.setPrefString(LoginActivity.this, AppConfig.LOGIN_NAME, loginName);
                             preferencesUtil.setPrefString(LoginActivity.this, AppConfig.PASSWORD, CommonUtils.MD5(password));
-                            preferencesUtil.setPrefString(LoginActivity.this, AppConfig.REGISTRATION_ID, AppConfig.registrationId);
                             //注册极光推送别名
                             setAlias();
                             //进入首页

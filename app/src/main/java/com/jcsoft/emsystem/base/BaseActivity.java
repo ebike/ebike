@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
+import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
@@ -162,7 +163,7 @@ public abstract class BaseActivity extends FragmentActivity {
     //设置别名
     protected void setAlias() {
         // 调用 Handler 来异步设置别名
-        aliasHandler.sendMessage(aliasHandler.obtainMessage(MSG_SET_ALIAS, AppConfig.userInfoBean.getCarId() + ""));
+        aliasHandler.sendMessage(aliasHandler.obtainMessage(MSG_SET_ALIAS, AppConfig.imei));
     }
 
     //设置别名回调方法
@@ -200,7 +201,7 @@ public abstract class BaseActivity extends FragmentActivity {
 
     public void onEvent(OnlineExceptionEvent onlineExceptionEvent) {
         if (onlineExceptionEvent.isFlag()) {
-            CommonUtils.showCustomDialogSignle2(this, "", onlineExceptionEvent.getMessage(), new DSingleDialogCallback() {
+            CommonUtils.showCustomDialogSignle(this, "", onlineExceptionEvent.getMessage(), Gravity.LEFT | Gravity.CENTER_VERTICAL, new DSingleDialogCallback() {
                 @Override
                 public void onPositiveButtonClick(String editText) {
                     logout();
@@ -210,7 +211,6 @@ public abstract class BaseActivity extends FragmentActivity {
     }
 
     public void logout() {
-        AppConfig.registrationId = "";
         AppConfig.loginName = "";
         AppConfig.password = "";
         AppConfig.userInfoBean = null;

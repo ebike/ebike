@@ -38,9 +38,7 @@ public class JReceiver extends BroadcastReceiver {
         Log.d(TAG, "[MyReceiver] onReceive - " + intent.getAction() + ", extras: " + printBundle(bundle));
 
         if (JPushInterface.ACTION_REGISTRATION_ID.equals(intent.getAction())) {
-            String regId = bundle.getString(JPushInterface.EXTRA_REGISTRATION_ID);
-            //保存推送的ID
-            AppConfig.registrationId = regId;
+
         } else if (JPushInterface.ACTION_MESSAGE_RECEIVED.equals(intent.getAction())) {
             String extra = bundle.getString(JPushInterface.EXTRA_EXTRA);
             ReceiveExtraBean receiveExtraBean = new Gson().fromJson(extra, ReceiveExtraBean.class);

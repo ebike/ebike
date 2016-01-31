@@ -15,6 +15,7 @@ import com.jcsoft.emsystem.http.HttpConstants;
 import com.jcsoft.emsystem.view.RowLabelValueView;
 
 import org.xutils.http.RequestParams;
+import org.xutils.image.ImageOptions;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
@@ -57,7 +58,13 @@ public class CarInformationActivity extends BaseActivity {
             frameNumberRowLabelValueView.setValue(carInfoBean.getFrameNum());
             buyDateRowLabelValueView.setValue(carInfoBean.getCarDate());
             buyPriceRowLabelValueView.setValue("￥" + carInfoBean.getCarPrice());
-            x.image().bind(carPhotoImageView, carInfoBean.getCarPic());
+            ImageOptions imageOptions = new ImageOptions.Builder()
+                    // 如果ImageView的大小不是定义为wrap_content, 不要crop.
+//                    .setCrop(true)
+                    // 加载中或错误图片的ScaleType
+                    .setImageScaleType(ImageView.ScaleType.FIT_CENTER)
+                    .build();
+            x.image().bind(carPhotoImageView, carInfoBean.getCarPic(), imageOptions);
         }
     }
 

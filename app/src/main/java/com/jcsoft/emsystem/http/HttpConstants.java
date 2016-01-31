@@ -16,7 +16,7 @@ public class HttpConstants {
         sb.append("/checkLogin.do");
         sb.append("?loginName=").append(loginName);
         sb.append("&password=").append(password);
-        sb.append("&clientId=").append(AppConfig.registrationId);
+        sb.append("&clientId=").append(AppConfig.imei);
         return sb.toString();
     }
 

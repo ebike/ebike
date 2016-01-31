@@ -91,7 +91,6 @@ public class SplashActivity extends BaseActivity {
                     //获取share中的账号、密码
                     final String loginName = preferencesUtil.getPrefString(SplashActivity.this, AppConfig.LOGIN_NAME, "");
                     final String password = preferencesUtil.getPrefString(SplashActivity.this, AppConfig.PASSWORD, "");
-                    AppConfig.registrationId = preferencesUtil.getPrefString(SplashActivity.this, AppConfig.REGISTRATION_ID, "");
                     if (!CommonUtils.strIsEmpty(loginName) && !CommonUtils.strIsEmpty(password)) {
                         RequestParams params = new RequestParams(HttpConstants.getLoginUrl(loginName, password));
                         DHttpUtils.get_String(SplashActivity.this, false, params, new DCommonCallback<String>() {

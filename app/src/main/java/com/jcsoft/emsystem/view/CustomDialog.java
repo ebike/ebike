@@ -33,6 +33,7 @@ public class CustomDialog extends Dialog {
         private Context context; //上下文对象
         private String title; //对话框标题
         private String message; //对话框内容
+        private int msgGravity;//文字内容的排放方式
         private boolean hasEditText;//是否含编辑框
         private String editText;//输入的内容
         private String hintText;//默认显示内容
@@ -170,6 +171,11 @@ public class CustomDialog extends Dialog {
             return this;
         }
 
+        public Builder setMsgGravity(int msgGravity) {
+            this.msgGravity = msgGravity;
+            return this;
+        }
+
         public CustomDialog create() {
             LayoutInflater inflater = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -231,6 +237,10 @@ public class CustomDialog extends Dialog {
                         ViewGroup.LayoutParams.MATCH_PARENT,
                         ViewGroup.LayoutParams.WRAP_CONTENT));
             }
+            //设置文字内容排放方式
+            if (msgGravity != 0) {
+                messageTextView.setGravity(msgGravity);
+            }
             //设置是否显示输入框
             if (hasEditText) {
                 mEditText.setVisibility(View.VISIBLE);
@@ -266,5 +276,4 @@ public class CustomDialog extends Dialog {
             return dialog;
         }
     }
-
 }

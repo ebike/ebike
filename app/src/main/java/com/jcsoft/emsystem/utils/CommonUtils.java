@@ -490,6 +490,25 @@ public class CommonUtils {
         dialog.show();
     }
 
+    public static void showCustomDialogSignle(Context ctx, String title, String mesage, int msgGravity, final DSingleDialogCallback clickInterface) {
+        CustomDialog.Builder builder = new CustomDialog.Builder(ctx);
+        builder.setTitle(title);
+        builder.setMessage(mesage);
+        builder.setMsgGravity(msgGravity);
+        builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                dialog.cancel();
+                if (clickInterface != null) {
+                    clickInterface.onPositiveButtonClick("");
+                }
+            }
+        });
+        CustomDialog dialog = builder.create();
+        dialog.setCancelable(false);
+        dialog.show();
+    }
+
     /**
      * IOS风格
      * 固定按钮文字的单选对话框

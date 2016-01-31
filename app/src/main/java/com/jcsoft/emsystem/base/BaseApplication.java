@@ -1,7 +1,9 @@
 package com.jcsoft.emsystem.base;
 
 import android.app.Application;
+import android.telephony.TelephonyManager;
 
+import com.jcsoft.emsystem.constants.AppConfig;
 import com.jcsoft.emsystem.db.XUtil;
 
 import org.xutils.x;
@@ -26,5 +28,8 @@ public class BaseApplication extends Application {
         JPushInterface.setDebugMode(true);
         // 初始化 JPush
         JPushInterface.init(this);
+        //获取手机imei码
+        TelephonyManager TelephonyMgr = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
+        AppConfig.imei = TelephonyMgr.getDeviceId();
     }
 }
