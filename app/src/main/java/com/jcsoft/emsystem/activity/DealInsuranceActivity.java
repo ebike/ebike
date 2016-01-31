@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -30,6 +31,7 @@ import com.jcsoft.emsystem.http.DHttpUtils;
 import com.jcsoft.emsystem.http.DRequestParamsUtils;
 import com.jcsoft.emsystem.http.HttpConstants;
 import com.jcsoft.emsystem.utils.CommonUtils;
+import com.jcsoft.emsystem.utils.ImageCompress;
 import com.jcsoft.emsystem.view.ActionSheetDialog;
 import com.jcsoft.emsystem.view.RowLabelEditView;
 import com.jcsoft.emsystem.view.RowLabelValueView;
@@ -100,6 +102,8 @@ public class DealInsuranceActivity extends BaseActivity implements RowLabelValue
     private File cerPic;
     //发票或收据
     private File billPic;
+    //图片压缩类
+    private ImageCompress compress;
 
 
     @Override
@@ -116,6 +120,11 @@ public class DealInsuranceActivity extends BaseActivity implements RowLabelValue
     @Override
     public void init() {
         buyPriceRowLabelValueView.setEditInteger();
+        if (AppConfig.userInfoBean != null) {
+            provinceName = AppConfig.userInfoBean.getProvince();
+            cityName = AppConfig.userInfoBean.getCity();
+            coverageAreaRowLabelValueView.setValue(provinceName + " " + cityName);
+        }
         dialog = new AddressTwoWheelViewDialog(this);
         provinceDao = new ProvinceInfoDao(this);
         mProvinceList = provinceDao.queryAll();
@@ -169,7 +178,7 @@ public class DealInsuranceActivity extends BaseActivity implements RowLabelValue
                     frameNumberRowLabelValueView.setHintColor(R.color.orange_dark);
                     return;
                 }
-                if (provinceId <= 0 && cityId <= 0) {
+                if (CommonUtils.strIsEmpty(provinceName)) {
                     coverageAreaRowLabelValueView.setValueColor(R.color.orange_dark);
                     return;
                 }
@@ -352,29 +361,40 @@ public class DealInsuranceActivity extends BaseActivity implements RowLabelValue
     private void setPhotoByType(ImageItem imageItem) {
         //由于目前没有查看图片，每次选择图片都是覆盖更新，所以，只用到路径字段，其他字段预留
         if (imageItem != null && !CommonUtils.strIsEmpty(imageItem.sourcePath)) {
+            //对图片做压缩处理
+            Bitmap bitmap = compress.getimage(imageItem.sourcePath);
+            if (null != bitmap) {
+                try {
+                    compress.compressAndGenImage(bitmap, imageItem.sourcePath, AppConfig.compressedImage + imageItem.picName, 100);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            //压缩后的图片文件
+            File file = new File(AppConfig.compressedImage + imageItem.picName);
             switch (photoType) {
                 case R.id.rlvv_car_photo://车辆照片
-                    carPic = new File(imageItem.sourcePath);
+                    carPic = file;
                     carPhotoRowLabelValueView.setValue("已选中照片");
                     carPhotoRowLabelValueView.setValueColor(R.color.orange_dark);
                     break;
                 case R.id.rlvv_id_card_positive://身份证正面
-                    idPic = new File(imageItem.sourcePath);
+                    idPic = file;
                     idCardPositiveRowLabelValueView.setValue("已选中照片");
                     idCardPositiveRowLabelValueView.setValueColor(R.color.orange_dark);
                     break;
                 case R.id.rlvv_id_card_negative://身份证反面
-                    idbPic = new File(imageItem.sourcePath);
+                    idbPic = file;
                     idCardNegativeRowLabelValueView.setValue("已选中照片");
                     idCardNegativeRowLabelValueView.setValueColor(R.color.orange_dark);
                     break;
                 case R.id.rlvv_certificate_photos://合格证照片
-                    cerPic = new File(imageItem.sourcePath);
+                    cerPic = file;
                     certificatePhotosRowLabelValueView.setValue("已选中照片");
                     certificatePhotosRowLabelValueView.setValueColor(R.color.orange_dark);
                     break;
                 case R.id.rlvv_invoice_or_receipt://发票或收据
-                    billPic = new File(imageItem.sourcePath);
+                    billPic = file;
                     invoiceOrReceiptRowLabelValueView.setValue("已选中照片");
                     invoiceOrReceiptRowLabelValueView.setValueColor(R.color.orange_dark);
                     break;
@@ -421,7 +441,7 @@ public class DealInsuranceActivity extends BaseActivity implements RowLabelValue
         TimePicker mTimePicker = (TimePicker) mTargetView.findViewById(R.id.timePicker);
         mTimePicker.setVisibility(View.GONE);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("设置截止时间");
+        builder.setTitle("设置购买日期");
         builder.setView(mTargetView);
         mDatePicker.init(mYear, mMonth, mDay, datePickerChangeListener);
         builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {

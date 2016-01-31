@@ -21,6 +21,7 @@ import com.jcsoft.emsystem.constants.AppConfig;
 import com.jcsoft.emsystem.db.XUtil;
 import com.jcsoft.emsystem.http.DHttpUtils;
 import com.jcsoft.emsystem.http.HttpConstants;
+import com.jcsoft.emsystem.utils.CommonUtils;
 import com.jcsoft.emsystem.view.PullListFragmentHandler;
 import com.jcsoft.emsystem.view.pullrefresh.EmptyViewForList;
 import com.jcsoft.emsystem.view.pullrefresh.PullToRefreshBase;
@@ -120,6 +121,15 @@ public class AlarmMessageFragment extends BaseListFragment {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+                    //更新底部菜单报警消息角标数
+                    if (AppConfig.badge != null || AppConfig.badge.isShown()) {
+                        int count = Integer.valueOf(AppConfig.badge.getText().toString()) - 1;
+                        if (count == 0) {
+                            AppConfig.badge.hide();
+                        } else {
+                            AppConfig.badge.setText(count + "");
+                        }
+                    }
                 }
                 //展开内容信息
                 if (!bean.isExpand()) {
@@ -166,6 +176,22 @@ public class AlarmMessageFragment extends BaseListFragment {
                             if (bean.getData() != null && bean.getData().size() > 0) {
                                 if (mPage == 1) {
                                     alarmMessageBeans.addAll(0, bean.getData());
+                                    //刷新数据后更新底部菜单报警消息角标数
+                                    if (!AppConfig.badge.isShown()) {
+                                        AppConfig.badge.show();
+                                    }
+                                    String oldCount = AppConfig.badge.getText().toString();
+                                    int count = 0;
+                                    if (!CommonUtils.strIsEmpty(oldCount)) {
+                                        count = Integer.valueOf(oldCount) + bean.getData().size();
+                                    } else {
+                                        count = bean.getData().size();
+                                    }
+                                    if (count == 0) {
+                                        AppConfig.badge.hide();
+                                    } else {
+                                        AppConfig.badge.setText(count + "");
+                                    }
                                 } else {
                                     alarmMessageBeans.addAll(bean.getData());
                                 }
@@ -197,7 +223,6 @@ public class AlarmMessageFragment extends BaseListFragment {
         } else {
             pullToRefreshListView.setVisibility(View.GONE);
             emptyViewForList.setVisibility(View.VISIBLE);
-//            emptyViewForList.setmIv_iconId(R.mipmap.empty);
             emptyViewForList.setTextDesc("你还没有消息哦");
         }
     }

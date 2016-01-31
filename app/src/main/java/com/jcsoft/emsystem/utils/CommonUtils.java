@@ -153,6 +153,17 @@ public class CommonUtils {
         }
     }
 
+    //七天后日期
+    public static String AfterAWeekDate(String date) {
+        Date oldDate = new Date(date);
+        long t1 = oldDate.getTime();
+        long week = 7 * 24 * 60 * 60 * 1000;
+        long t2 = t1 + week;
+        Date aWeekDate = new Date();
+        aWeekDate.setTime(t2);
+        return DateToString(aWeekDate, DEFAULT_DATE_FORMAT);
+    }
+
     /**
      * Description 友好显示时间
      *
@@ -164,7 +175,7 @@ public class CommonUtils {
         long nowTime = new Date().getTime();
         String txt = "";
         long t = nowTime - time; //时间差（毫秒）
-        if (t == 0) {
+        if (t <= 0) {
             txt = "刚刚";
         } else if (t < 60 * 1000) {
             txt = t / 1000 + "秒前"; // 一分钟内

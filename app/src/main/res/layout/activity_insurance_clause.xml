@@ -43,6 +43,13 @@
         app:row_label_value_label="@string/insurance_clause_start_date" />
 
     <com.jcsoft.emsystem.view.RowLabelValueView
+        android:id="@+id/rlvv_used_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:row_label_value_bottom_line="2"
+        app:row_label_value_label="@string/insurance_clause_used_date" />
+
+    <com.jcsoft.emsystem.view.RowLabelValueView
         android:id="@+id/rlvv_due_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

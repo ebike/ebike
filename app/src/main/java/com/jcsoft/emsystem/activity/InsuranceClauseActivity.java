@@ -30,6 +30,8 @@ public class InsuranceClauseActivity extends BaseActivity {
     RowLabelValueView policyNumberRowLabelValueView;
     @ViewInject(R.id.rlvv_start_date)
     RowLabelValueView startDateRowLabelValueView;
+    @ViewInject(R.id.rlvv_used_date)
+    RowLabelValueView usedDateRowLabelValueView;
     @ViewInject(R.id.rlvv_due_date)
     RowLabelValueView dueDateRowLabelValueView;
     @ViewInject(R.id.rlvv_insured_person)
@@ -59,7 +61,8 @@ public class InsuranceClauseActivity extends BaseActivity {
         if (insurInfoBean != null) {
             equipmentSerialNumberRowLabelValueView.setValue(insurInfoBean.getCarId() + "");
             policyNumberRowLabelValueView.setValue(insurInfoBean.getInsurNum());
-            startDateRowLabelValueView.setValue(CommonUtils.DateToString(new Date(insurInfoBean.getStartDate()),"yyyy-MM-dd"));
+            startDateRowLabelValueView.setValue(CommonUtils.DateToString(new Date(insurInfoBean.getStartDate()), "yyyy-MM-dd"));
+            usedDateRowLabelValueView.setValue(CommonUtils.AfterAWeekDate(insurInfoBean.getStartDate()));
             dueDateRowLabelValueView.setValue(CommonUtils.DateToString(new Date(insurInfoBean.getEndDate()),"yyyy-MM-dd"));
             insuredPersonRowLabelValueView.setValue(insurInfoBean.getUserName());
             idCardRowLabelValueView.setValue(insurInfoBean.getIdNum());

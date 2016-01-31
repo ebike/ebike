@@ -260,6 +260,10 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
                 if (responseBean != null && responseBean.getCode() == 1) {
                     locInfoBean = responseBean.getData();
                     if (locInfoBean.getLon() > 0 && locInfoBean.getLat() > 0) {
+                        //清除之前添加的障碍物
+                        if (marker != null) {
+                            marker.remove();
+                        }
                         //添加障碍物
                         MarkerOptions markerOptions = new MarkerOptions();
                         LatLng position = new LatLng(locInfoBean.getLat() / 1000000.0, locInfoBean.getLon() / 1000000.0);
@@ -290,13 +294,16 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
                             if (locInfoBean.isOpenVf()) {
                                 fenceImageView.setImageResource(R.mipmap.fence_open);
                                 LatLng vfPosition = new LatLng(locInfoBean.getVfLat() / 1000000.0, locInfoBean.getVfLon() / 1000000.0);
-                                circle = aMap.addCircle(new CircleOptions().center(vfPosition)
-                                        .radius(100).strokeColor(Color.RED).fillColor(Color.TRANSPARENT)
-                                        .strokeWidth(5));
+                                if (circle == null) {
+                                    circle = aMap.addCircle(new CircleOptions().center(vfPosition)
+                                            .radius(100).strokeColor(Color.RED).fillColor(Color.TRANSPARENT)
+                                            .strokeWidth(5));
+                                }
                             } else {
                                 fenceImageView.setImageResource(R.mipmap.fence_close);
                                 if (circle != null) {
                                     circle.remove();
+                                    circle = null;
                                 }
                             }
                         }
@@ -753,13 +760,18 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
             if (event.getIsOpen().equals("1")) {
                 fenceImageView.setImageResource(R.mipmap.fence_open);
                 LatLng position = new LatLng(locInfoBean.getLat() / 1000000.0, locInfoBean.getLon() / 1000000.0);
-                circle = aMap.addCircle(new CircleOptions().center(position)
-                        .radius(100).strokeColor(Color.RED).fillColor(Color.TRANSPARENT)
-                        .strokeWidth(5));
+                if (circle == null) {
+                    circle = aMap.addCircle(new CircleOptions().center(position)
+                            .radius(100).strokeColor(Color.RED).fillColor(Color.TRANSPARENT)
+                            .strokeWidth(5));
+                }
+                locInfoBean.setIsOpenVf(true);
             } else {
                 fenceImageView.setImageResource(R.mipmap.fence_close);
                 if (circle != null) {
                     circle.remove();
+                    circle = null;
+                    locInfoBean.setIsOpenVf(false);
                 }
             }
             AppConfig.isExecuteVF = null;

@@ -12,14 +12,18 @@ import com.jcsoft.emsystem.R;
 import com.jcsoft.emsystem.adapter.ViewPagerFragmentAdapter;
 import com.jcsoft.emsystem.base.BaseActivity;
 import com.jcsoft.emsystem.base.TabIndicator;
+import com.jcsoft.emsystem.bean.AlarmMessageBean;
 import com.jcsoft.emsystem.constants.AppConfig;
+import com.jcsoft.emsystem.db.XUtil;
 import com.jcsoft.emsystem.fragment.AlarmMessageFragment;
 import com.jcsoft.emsystem.fragment.ChartFragment;
 import com.jcsoft.emsystem.fragment.LocationFragment;
 import com.jcsoft.emsystem.fragment.MyFragment;
 import com.jcsoft.emsystem.utils.ViewPagerUtils;
 import com.jcsoft.emsystem.view.NotSlideViewPager;
+import com.readystatesoftware.viewbadger.BadgeView;
 
+import org.xutils.ex.DbException;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
@@ -116,7 +120,19 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     public void setData() {
-
+        try {
+            //气泡中显示的数字是本地数据库中未读的消息数量
+            long count = XUtil.db.selector(AlarmMessageBean.class).where("carId", "=", AppConfig.userInfoBean.getCarId()).and("status", "=", "1").count();
+            AppConfig.badge = new BadgeView(this, alarmLinearLayout);
+            if (count > 0) {
+                //显示气泡
+                AppConfig.badge.setText(count + "");
+                AppConfig.badge.setBadgeMargin(0);
+                AppConfig.badge.show();
+            }
+        } catch (DbException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

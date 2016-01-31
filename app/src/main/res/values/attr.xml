@@ -70,6 +70,7 @@
         <attr name="row_label_value_top_line" format="integer" />
         <attr name="row_label_value_label" format="string" />
         <attr name="row_label_value_value" format="string" />
+        <attr name="row_label_value_has_right_arrow" format="boolean" />
         <attr name="row_label_value_can_click" format="boolean" />
         <attr name="row_label_value_bottom_line" format="integer" />
     </declare-styleable>

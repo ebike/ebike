@@ -2,18 +2,11 @@
 <items version="2" >
 
     <item
-        jar="/Users/huguangwen/.gradle/caches/modules-2/files-2.1/com.nostra13.universalimageloader/universal-image-loader/1.9.3/a85588bec3e2c4584d593d3f15df1677321bca72/universal-image-loader-1.9.3.jar"
+        jar="/Users/huguangwen/Documents/Code/gitlab/ebike/app/libs/android-viewbadger.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="a85588bec3e2c4584d593d3f15df1677321bca72">
-        <dex dex="/Users/huguangwen/Documents/Code/gitlab/ebike/app/build/intermediates/pre-dexed/debug/universal-image-loader-1.9.3-16d5257e025862cf7d5caf5b6e79ddd8e34bc48e.jar" />
-    </item>
-    <item
-        jar="/Users/huguangwen/Documents/Code/gitlab/ebike/app/libs/mpandroidchartlibrary-2-1-6.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="3f8beaf2f9b5357717e0b1ef9f6820e517784ea1">
-        <dex dex="/Users/huguangwen/Documents/Code/gitlab/ebike/app/build/intermediates/pre-dexed/debug/mpandroidchartlibrary-2-1-6-0c503b6d0cd5360354f4b8ba81ae835bf1c21748.jar" />
+        sha1="f1303b50d535716ca7601c5014357b8435658313">
+        <dex dex="/Users/huguangwen/Documents/Code/gitlab/ebike/app/build/intermediates/pre-dexed/debug/android-viewbadger-70968eabdf42dfddf2bceee478b8105301803152.jar" />
     </item>
 
 </items>

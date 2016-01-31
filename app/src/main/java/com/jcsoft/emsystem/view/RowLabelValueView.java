@@ -5,6 +5,7 @@ import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -28,6 +29,8 @@ public class RowLabelValueView extends RelativeLayout {
     TextView labelTextView;
     @ViewInject(R.id.tv_value)
     TextView valueTextView;
+    @ViewInject(R.id.iv_arrow)
+    ImageView arrowImageView;
     @ViewInject(R.id.v_bottom_line)
     View bottomLineView;
     //顶部横线
@@ -36,6 +39,8 @@ public class RowLabelValueView extends RelativeLayout {
     private String label;
     //右侧文字
     private String value;
+    //含右侧箭头
+    private boolean hasRightArrow;
     //底部横线
     private int bottomLine;
     //可点击
@@ -67,6 +72,7 @@ public class RowLabelValueView extends RelativeLayout {
         topLine = typedArray.getInt(R.styleable.RowLabelValueView_row_label_value_top_line, 0);
         label = typedArray.getString(R.styleable.RowLabelValueView_row_label_value_label);
         value = typedArray.getString(R.styleable.RowLabelValueView_row_label_value_value);
+        hasRightArrow = typedArray.getBoolean(R.styleable.RowLabelValueView_row_label_value_has_right_arrow, false);
         bottomLine = typedArray.getInt(R.styleable.RowLabelValueView_row_label_value_bottom_line, 0);
         canClick = typedArray.getBoolean(R.styleable.RowLabelValueView_row_label_value_can_click, false);
         typedArray.recycle();
@@ -92,6 +98,12 @@ public class RowLabelValueView extends RelativeLayout {
         //右侧文字
         if (!CommonUtils.strIsEmpty(value)) {
             valueTextView.setText(value);
+        }
+        //右侧箭头显示
+        if (hasRightArrow) {
+            arrowImageView.setVisibility(View.VISIBLE);
+        } else {
+            arrowImageView.setVisibility(View.GONE);
         }
         //显示底部横线
         if (bottomLine == 1) {

@@ -58,6 +58,8 @@ public class FormTextDateTimeView extends RelativeLayout implements View.OnClick
 
     private String custom_column_name;
 
+    private Context context;
+
     private int tagViewColor = R.color.color_gray;
 
     private boolean mClickable;//是否能被点击
@@ -65,17 +67,20 @@ public class FormTextDateTimeView extends RelativeLayout implements View.OnClick
 
     public FormTextDateTimeView(Context context, int mDateTimeType) {
         super(context);
+        this.context = context;
         this.mDateTimeType = mDateTimeType;
         init(null, 0);
     }
 
     public FormTextDateTimeView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        this.context = context;
         init(attrs, 0);
     }
 
     public FormTextDateTimeView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+        this.context = context;
         init(attrs, defStyle);
     }
 
@@ -179,6 +184,7 @@ public class FormTextDateTimeView extends RelativeLayout implements View.OnClick
 
     /**
      * 设置左边tag的值
+     *
      * @param tag
      */
     public void setTag(String tag) {
@@ -187,6 +193,7 @@ public class FormTextDateTimeView extends RelativeLayout implements View.OnClick
 
     /**
      * 必输字段的 提示信息
+     *
      * @param hintText
      */
     public void setHintText(String hintText) {
@@ -198,6 +205,7 @@ public class FormTextDateTimeView extends RelativeLayout implements View.OnClick
 
     /**
      * 是否显示底部的线
+     *
      * @param mShowDivider
      */
     public void setShowDriver(boolean mShowDivider) {
@@ -206,6 +214,7 @@ public class FormTextDateTimeView extends RelativeLayout implements View.OnClick
 
     /**
      * 点击事件的绑定
+     *
      * @param isOnclick
      */
     public void setmFormViewOnclick(boolean isOnclick) {
@@ -215,6 +224,7 @@ public class FormTextDateTimeView extends RelativeLayout implements View.OnClick
 
     /**
      * 是否支持编辑 支持编辑则显示右箭头
+     *
      * @param mShowArrow
      */
     public void setmShowArrow(Boolean mShowArrow) {
@@ -223,6 +233,7 @@ public class FormTextDateTimeView extends RelativeLayout implements View.OnClick
 
     /**
      * 校验时候的提示信息
+     *
      * @param hintText
      */
     public void setErrorText(String hintText) {
@@ -233,6 +244,7 @@ public class FormTextDateTimeView extends RelativeLayout implements View.OnClick
 
     /**
      * 设置左边tag的值
+     *
      * @param custom_column_name
      */
     public void setCustom_column_name(String custom_column_name) {
@@ -241,6 +253,7 @@ public class FormTextDateTimeView extends RelativeLayout implements View.OnClick
 
     /**
      * 设置右边value的值
+     *
      * @param text
      */
     public void setDateText(String text) {
@@ -258,7 +271,7 @@ public class FormTextDateTimeView extends RelativeLayout implements View.OnClick
 
         Calendar calendar = Calendar.getInstance();
         try {
-            if(!CommonUtils.strIsEmpty(text)){
+            if (!CommonUtils.strIsEmpty(text)) {
                 calendar.setTime(sdft.parse(text));
                 mYear = calendar.get(Calendar.YEAR);
                 mMonth = calendar.get(Calendar.MONTH);
@@ -287,7 +300,7 @@ public class FormTextDateTimeView extends RelativeLayout implements View.OnClick
     public void onClick(View view) {
         try {
             if (mClickable) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), AlertDialog.THEME_HOLO_LIGHT);
                 builder.setTitle(mDialogTitle);
                 if (mTargetView.getParent() == null) {
                     builder.setView(mTargetView);
@@ -325,7 +338,7 @@ public class FormTextDateTimeView extends RelativeLayout implements View.OnClick
                 });
                 builder.show();
             } else {
-                if(!CommonUtils.strIsEmpty(tipsString)){
+                if (!CommonUtils.strIsEmpty(tipsString)) {
                     CommonUtils.showShortText(getContext(), tipsString);
                 }
             }

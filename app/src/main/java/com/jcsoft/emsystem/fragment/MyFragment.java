@@ -164,10 +164,14 @@ public class MyFragment extends BaseFragment implements RowEntryView.OnClickCall
             case R.id.rev_deal_insurance://办理保险
                 if (!CommonUtils.strIsEmpty(AppConfig.userInfoBean.getInsurNum())) {
                     intent = new Intent(getActivity(), InsuranceClauseActivity.class);
+                    startActivity(intent);
+                } else if (CommonUtils.strIsEmpty(AppConfig.userInfoBean.getInsurNum())
+                        && !CommonUtils.strIsEmpty(AppConfig.userInfoBean.getInsurUpdateTime())) {
+                    CommonUtils.showCustomDialogSignle3(getActivity(), "", "您的资料已提交，无需再次操作");
                 } else {
                     intent = new Intent(getActivity(), DealInsuranceActivity.class);
+                    startActivity(intent);
                 }
-                startActivity(intent);
                 break;
             case R.id.rev_insurance_clause://保险条款
                 intent = new Intent(getActivity(), WebActivity.class);

@@ -22,6 +22,7 @@ public class UserInfoBean implements Serializable{
     private int activeType;
     private String salesman;
     private String insurNum;
+    private String insurUpdateTime;
 
     public UserInfoBean() {
     }
@@ -148,6 +149,14 @@ public class UserInfoBean implements Serializable{
 
     public int getSex() {
         return sex;
+    }
+
+    public String getInsurUpdateTime() {
+        return insurUpdateTime;
+    }
+
+    public void setInsurUpdateTime(String insurUpdateTime) {
+        this.insurUpdateTime = insurUpdateTime;
     }
 
     public void setSex(int sex) {

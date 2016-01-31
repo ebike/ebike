@@ -46,28 +46,35 @@
                 android:textSize="12sp" />
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/ll_alarm"
+        <FrameLayout
+            android:id="@+id/fl_alarm"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:layout_weight="1">
 
-            <ImageView
-                android:id="@+id/iv_alarm"
+            <LinearLayout
+                android:id="@+id/ll_alarm"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/alarm_ico" />
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tv_alarm"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="报警消息"
-                android:textColor="@color/bottombar_text_default"
-                android:textSize="12sp" />
-        </LinearLayout>
+                <ImageView
+                    android:id="@+id/iv_alarm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/alarm_ico" />
+
+                <TextView
+                    android:id="@+id/tv_alarm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="报警消息"
+                    android:textColor="@color/bottombar_text_default"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </FrameLayout>
 
         <LinearLayout
             android:id="@+id/ll_chart"

@@ -19,7 +19,7 @@
         app:has_right_clickable="true"
         app:left_icon="@mipmap/back_icon"
         app:left_text="@string/top_bar_login"
-        app:right_text="@string/top_bar_submit" />
+        app:right_icon="@mipmap/btn_submit"/>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -130,7 +130,8 @@
                 android:layout_height="wrap_content"
                 app:row_label_value_bottom_line="2"
                 app:row_label_value_label="@string/register_area"
-                app:row_label_value_value="@string/app_require_check" />
+                app:row_label_value_value="@string/app_require_check"
+                app:row_label_value_has_right_arrow="true" />
 
             <com.jcsoft.emsystem.view.RowLabelEditView
                 android:id="@+id/rlev_address"
