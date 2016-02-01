@@ -19,7 +19,7 @@
         app:has_right_clickable="true"
         app:left_icon="@mipmap/back_icon"
         app:left_text="@string/top_bar_login"
-        app:right_icon="@mipmap/btn_submit"/>
+        app:right_text="@string/top_bar_submit"/>
 
     <ScrollView
         android:layout_width="match_parent"

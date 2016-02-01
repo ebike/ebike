@@ -20,6 +20,7 @@
     <color name="actionsheet_red">#FD4A2E</color>
     <color name="actionsheet_gray">#8F8F8F</color>
     <color name="transparent">#00000000</color>
+    <color name="stateBarColor">#E74916</color>
 
     <!-- topbar -->
     <color name="topbar_bg">#fc5823</color>

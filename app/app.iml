@@ -92,6 +92,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="AMap_Services_V2.7.0_20151125" level="project" />
     <orderEntry type="library" exported="" name="Msc" level="project" />
+    <orderEntry type="library" exported="" name="systembartint-1.0.4" level="project" />
     <orderEntry type="library" exported="" name="gson-2.2.2" level="project" />
     <orderEntry type="library" exported="" name="jpush-android-2.0.5" level="project" />
     <orderEntry type="library" exported="" name="eventbus-2.4.0" level="project" />

@@ -188,7 +188,7 @@ public class CustomDialog extends Dialog {
             TextView titleTextView = (TextView) layout.findViewById(R.id.title);
             Button confirmButton = (Button) layout.findViewById(R.id.confirm_btn);
             Button cancelButton = (Button) layout.findViewById(R.id.cancel_btn);
-            TextView messageTextView = (TextView) layout.findViewById(R.id.message);
+            JustifyTextView messageTextView = (JustifyTextView) layout.findViewById(R.id.message);
             TextView divider = (TextView) layout.findViewById(R.id.divider);
             LinearLayout contentViewLL = (LinearLayout) layout.findViewById(R.id.contentView);
             //设置标题

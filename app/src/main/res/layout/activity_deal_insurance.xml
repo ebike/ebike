@@ -39,6 +39,7 @@
                 android:layout_marginTop="16dp"
                 app:row_label_value_bottom_line="2"
                 app:row_label_value_can_click="true"
+                app:row_label_value_has_right_arrow="true"
                 app:row_label_value_label="@string/deal_insurance_car_photo"
                 app:row_label_value_top_line="1" />
 
@@ -48,6 +49,7 @@
                 android:layout_height="wrap_content"
                 app:row_label_value_bottom_line="2"
                 app:row_label_value_can_click="true"
+                app:row_label_value_has_right_arrow="true"
                 app:row_label_value_label="@string/deal_insurance_id_card_positive" />
 
             <com.jcsoft.emsystem.view.RowLabelValueView
@@ -56,6 +58,7 @@
                 android:layout_height="wrap_content"
                 app:row_label_value_bottom_line="2"
                 app:row_label_value_can_click="true"
+                app:row_label_value_has_right_arrow="true"
                 app:row_label_value_label="@string/deal_insurance_id_card_negative" />
 
             <com.jcsoft.emsystem.view.RowLabelValueView
@@ -64,6 +67,7 @@
                 android:layout_height="wrap_content"
                 app:row_label_value_bottom_line="2"
                 app:row_label_value_can_click="true"
+                app:row_label_value_has_right_arrow="true"
                 app:row_label_value_label="@string/deal_insurance_certificate_photos" />
 
             <com.jcsoft.emsystem.view.RowLabelValueView
@@ -72,6 +76,7 @@
                 android:layout_height="wrap_content"
                 app:row_label_value_bottom_line="1"
                 app:row_label_value_can_click="true"
+                app:row_label_value_has_right_arrow="true"
                 app:row_label_value_label="@string/deal_insurance_invoice_or_receipt" />
 
             <com.jcsoft.emsystem.view.RowLabelEditView

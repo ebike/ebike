@@ -62,6 +62,7 @@ import com.jcsoft.emsystem.event.RemoteLockCarEvent;
 import com.jcsoft.emsystem.event.RemoteVFEvent;
 import com.jcsoft.emsystem.event.StopNaviEvent;
 import com.jcsoft.emsystem.http.DHttpUtils;
+import com.jcsoft.emsystem.http.DRequestParamsUtils;
 import com.jcsoft.emsystem.http.HttpConstants;
 import com.jcsoft.emsystem.map.TTSController;
 import com.jcsoft.emsystem.utils.CommonUtils;
@@ -163,6 +164,8 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
     private Circle circle;
     //地图导航类
     private AMapNavi mapNavi;
+    //电动车上的信息框显示状态(默认显示)
+    private boolean isHidden;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -251,7 +254,7 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
         if (hasTrack) {
             aMap.clear();
         }
-        RequestParams params = new RequestParams(HttpConstants.getLocInfoUrl());
+        RequestParams params = DRequestParamsUtils.getRequestParams_Header(HttpConstants.getLocInfoUrl());
         DHttpUtils.get_String((MainActivity) getActivity(), true, params, new DCommonCallback<String>() {
             @Override
             public void onSuccess(String result) {
@@ -276,7 +279,11 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
                             markerOptions.icon(BitmapDescriptorFactory.fromResource(R.mipmap.ebike_offline));
                         }
                         marker = aMap.addMarker(markerOptions);
-//                        marker.showInfoWindow();
+                        if (!isHidden) {
+                            marker.showInfoWindow();
+                        } else {
+                            marker.hideInfoWindow();
+                        }
                         CameraUpdate cu = CameraUpdateFactory.changeLatLng(position);
                         aMap.moveCamera(cu);
                         //判断锁车状态
@@ -447,7 +454,7 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
                         CommonUtils.showCustomDialog0(getActivity(), "提示", "您确定要关闭语音寻车吗？", new DSingleDialogCallback() {
                             @Override
                             public void onPositiveButtonClick(String editText) {
-                                RequestParams params = new RequestParams(HttpConstants.getUnLockBikeUrl());
+                                RequestParams params = DRequestParamsUtils.getRequestParams_Header(HttpConstants.getUnLockBikeUrl());
                                 DHttpUtils.get_String((MainActivity) getActivity(), true, params, new DCommonCallback<String>() {
                                     @Override
                                     public void onSuccess(String result) {
@@ -466,7 +473,7 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
                         CommonUtils.showCustomDialog0(getActivity(), "提示", "您确定要开启语音寻车吗？", new DSingleDialogCallback() {
                             @Override
                             public void onPositiveButtonClick(String editText) {
-                                RequestParams params = new RequestParams(HttpConstants.getlockBikeUrl());
+                                RequestParams params = DRequestParamsUtils.getRequestParams_Header(HttpConstants.getlockBikeUrl());
                                 DHttpUtils.get_String((MainActivity) getActivity(), true, params, new DCommonCallback<String>() {
                                     @Override
                                     public void onSuccess(String result) {
@@ -497,7 +504,7 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
                             showShortText("最多可查看一周的轨迹，您已超出时间范围，请修改后重试。");
                             return;
                         }
-                        RequestParams params = new RequestParams(HttpConstants.getTrackInfoUrl(startTime, endTime));
+                        RequestParams params = DRequestParamsUtils.getRequestParams_Header(HttpConstants.getTrackInfoUrl(startTime, endTime));
                         DHttpUtils.get_String((MainActivity) getActivity(), true, params, new DCommonCallback<String>() {
                             @Override
                             public void onSuccess(String result) {
@@ -583,7 +590,7 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
                         CommonUtils.showCustomDialog0(getActivity(), "提示", "您确定要关闭电子围栏吗？", new DSingleDialogCallback() {
                             @Override
                             public void onPositiveButtonClick(String editText) {
-                                RequestParams params = new RequestParams(HttpConstants.getCloseVfUrl());
+                                RequestParams params = DRequestParamsUtils.getRequestParams_Header(HttpConstants.getCloseVfUrl());
                                 DHttpUtils.get_String((MainActivity) getActivity(), true, params, new DCommonCallback<String>() {
                                     @Override
                                     public void onSuccess(String result) {
@@ -612,7 +619,7 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
                                 double minLat = latitude - (double) r / K;//最小纬度
                                 double minLon = longitude - r / (K * Math.cos(latitude * R));//最小经度
                                 double maxLon = longitude + r / (K * Math.cos(latitude * R));//最大经度
-                                RequestParams params = new RequestParams(HttpConstants.getOpenVfUrl(longitude, latitude, maxLon, maxLat, minLon, minLat));
+                                RequestParams params = DRequestParamsUtils.getRequestParams_Header(HttpConstants.getOpenVfUrl(longitude, latitude, maxLon, maxLat, minLon, minLat));
                                 DHttpUtils.get_String((MainActivity) getActivity(), true, params, new DCommonCallback<String>() {
                                     @Override
                                     public void onSuccess(String result) {
@@ -697,9 +704,13 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
     private Marker addMarkerToMap(LatLng latlng, String devName, String time,
                                   double speed, int drawableId, boolean isPerspective) {
         MarkerOptions options = new MarkerOptions();
-        options.anchor(0.5f, 0.5f);
         options.position(latlng);
         options.title(devName);
+        if (drawableId == R.mipmap.marker_start || drawableId == R.mipmap.marker_end) {
+            options.anchor(0.5f, 1.0f);
+        } else {
+            options.anchor(0.5f, 0.5f);
+        }
         options.snippet(time + "\n" + String.valueOf(speed) + "km/h");
         options.draggable(false);
         BitmapDescriptor bd = BitmapDescriptorFactory.fromResource(drawableId);
@@ -902,6 +913,7 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
     @Override
     public boolean onMarkerClick(Marker marker) {
         if (marker != null && !marker.isInfoWindowShown()) {
+            isHidden = false;
             marker.showInfoWindow();
         }
         return false;
@@ -917,6 +929,9 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
             startNavi(startPoint, destPoint);
             _startMarker.remove();
             return;
+        }
+        if(marker != null && this.marker.equals(marker)){
+            isHidden = true;
         }
     }
 

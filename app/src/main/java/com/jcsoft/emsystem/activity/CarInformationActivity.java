@@ -11,6 +11,7 @@ import com.jcsoft.emsystem.bean.CarInfoBean;
 import com.jcsoft.emsystem.bean.ResponseBean;
 import com.jcsoft.emsystem.callback.DCommonCallback;
 import com.jcsoft.emsystem.http.DHttpUtils;
+import com.jcsoft.emsystem.http.DRequestParamsUtils;
 import com.jcsoft.emsystem.http.HttpConstants;
 import com.jcsoft.emsystem.view.RowLabelValueView;
 
@@ -51,7 +52,6 @@ public class CarInformationActivity extends BaseActivity {
 
     @Override
     public void init() {
-        carPhotoImageView.setImageResource(R.mipmap.icon_default_ebike);
         if (carInfoBean != null) {
             brandModelsRowLabelValueView.setValue(carInfoBean.getCarBrand() + " " + carInfoBean.getCarModel());
             motorNumberRowLabelValueView.setValue(carInfoBean.getMotorNum());
@@ -59,10 +59,9 @@ public class CarInformationActivity extends BaseActivity {
             buyDateRowLabelValueView.setValue(carInfoBean.getCarDate());
             buyPriceRowLabelValueView.setValue("￥" + carInfoBean.getCarPrice());
             ImageOptions imageOptions = new ImageOptions.Builder()
-                    // 如果ImageView的大小不是定义为wrap_content, 不要crop.
-//                    .setCrop(true)
-                    // 加载中或错误图片的ScaleType
-                    .setImageScaleType(ImageView.ScaleType.FIT_CENTER)
+                    .setLoadingDrawableId(R.mipmap.icon_default_ebike)
+                    .setFailureDrawableId(R.mipmap.icon_default_ebike)
+                    .setImageScaleType(ImageView.ScaleType.FIT_START)
                     .build();
             x.image().bind(carPhotoImageView, carInfoBean.getCarPic(), imageOptions);
         }
@@ -76,7 +75,7 @@ public class CarInformationActivity extends BaseActivity {
     @Override
     public void setData() {
         //获取车辆基本信息
-        RequestParams params = new RequestParams(HttpConstants.getCarInfoUrl());
+        RequestParams params = DRequestParamsUtils.getRequestParams_Header(HttpConstants.getCarInfoUrl());
         DHttpUtils.get_String(this, true, params, new DCommonCallback<String>() {
             @Override
             public void onSuccess(String result) {

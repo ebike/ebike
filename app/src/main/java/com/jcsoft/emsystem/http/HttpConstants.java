@@ -89,6 +89,7 @@ public class HttpConstants {
         StringBuffer sb = new StringBuffer(baseUrl);
         sb.append("/alarm/viewAlarmEvent.do");
         sb.append("?eventId=").append(eventId);
+        sb.append("&carId=").append(AppConfig.userInfoBean.getCarId());
         return sb.toString();
     }
 

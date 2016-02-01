@@ -2,11 +2,11 @@
 <items version="2" >
 
     <item
-        jar="/Users/huguangwen/Documents/Code/gitlab/ebike/app/libs/android-viewbadger.jar"
+        jar="/Users/huguangwen/Documents/Code/gitlab/ebike/app/libs/systembartint-1.0.4.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="f1303b50d535716ca7601c5014357b8435658313">
-        <dex dex="/Users/huguangwen/Documents/Code/gitlab/ebike/app/build/intermediates/pre-dexed/debug/android-viewbadger-70968eabdf42dfddf2bceee478b8105301803152.jar" />
+        sha1="06404f77b92ec723cc132e825afe85a07da85ee6">
+        <dex dex="/Users/huguangwen/Documents/Code/gitlab/ebike/app/build/intermediates/pre-dexed/debug/systembartint-1.0.4-ef41da940e4b3783a46f65b62b2e33d223d2c033.jar" />
     </item>
 
 </items>

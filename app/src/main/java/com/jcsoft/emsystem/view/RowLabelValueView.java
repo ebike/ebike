@@ -143,4 +143,8 @@ public class RowLabelValueView extends RelativeLayout {
     public String getValue() {
         return valueTextView.getText().toString();
     }
+
+    public void setRightImage(int resource) {
+        arrowImageView.setImageResource(resource);
+    }
 }

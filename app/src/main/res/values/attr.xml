@@ -83,4 +83,5 @@
         <attr name="row_label_edit_can_click" format="boolean" />
         <attr name="row_label_edit_bottom_line" format="integer" />
     </declare-styleable>
+
 </resources>

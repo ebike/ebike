@@ -1,5 +1,6 @@
 package com.jcsoft.emsystem.fragment;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -20,6 +21,7 @@ import com.jcsoft.emsystem.callback.DFinishedCallback;
 import com.jcsoft.emsystem.constants.AppConfig;
 import com.jcsoft.emsystem.db.XUtil;
 import com.jcsoft.emsystem.http.DHttpUtils;
+import com.jcsoft.emsystem.http.DRequestParamsUtils;
 import com.jcsoft.emsystem.http.HttpConstants;
 import com.jcsoft.emsystem.utils.CommonUtils;
 import com.jcsoft.emsystem.view.PullListFragmentHandler;
@@ -58,6 +60,13 @@ public class AlarmMessageFragment extends BaseListFragment {
     //1刷新；2加载更多
     private int mark;
     private int eventId;
+    //初始打开的页面是该页面时，需要在初始化时加载数据
+    private int initPosition;
+
+    @SuppressLint("ValidFragment")
+    public AlarmMessageFragment(int initPosition) {
+        this.initPosition = initPosition;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -66,6 +75,9 @@ public class AlarmMessageFragment extends BaseListFragment {
         mHandler = new PullListFragmentHandler(this, pullToRefreshListView);
         isPrepared = true;
         init();
+        if (initPosition == 1) {
+            requestDatas();
+        }
         setListener();
         return view;
     }
@@ -108,7 +120,7 @@ public class AlarmMessageFragment extends BaseListFragment {
                 if (bean.getStatus() == 1) {
                     bean.setStatus(2);
                     //执行查看报警消息接口
-                    RequestParams params = new RequestParams(HttpConstants.viewAlarmEvent(bean.getEventId()));
+                    RequestParams params = DRequestParamsUtils.getRequestParams_Header(HttpConstants.viewAlarmEvent(bean.getEventId()));
                     DHttpUtils.get_String((MainActivity) getActivity(), false, params, new DCommonCallback<String>() {
                         @Override
                         public void onSuccess(String result) {
@@ -161,7 +173,7 @@ public class AlarmMessageFragment extends BaseListFragment {
                 }
             } else {
                 //从接口获取数据
-                RequestParams params = new RequestParams(HttpConstants.getNewAlarmEventInfo(mark, eventId));
+                RequestParams params = DRequestParamsUtils.getRequestParams_Header(HttpConstants.getNewAlarmEventInfo(mark, eventId));
                 DHttpUtils.get_String((MainActivity) getActivity(), true, params, new DFinishedCallback<String>() {
                     @Override
                     public void onFinished() {

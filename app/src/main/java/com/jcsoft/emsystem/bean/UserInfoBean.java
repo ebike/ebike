@@ -3,7 +3,8 @@ package com.jcsoft.emsystem.bean;
 import java.io.Serializable;
 
 /**
- * Created by huguangwen on 16/1/3.
+ * 用户信息
+ * Created by jimmy on 16/1/3.
  */
 public class UserInfoBean implements Serializable{
     private int carId;
@@ -23,6 +24,7 @@ public class UserInfoBean implements Serializable{
     private String salesman;
     private String insurNum;
     private String insurUpdateTime;
+    private String userToken;
 
     public UserInfoBean() {
     }
@@ -161,5 +163,13 @@ public class UserInfoBean implements Serializable{
 
     public void setSex(int sex) {
         this.sex = sex;
+    }
+
+    public String getUserToken() {
+        return userToken;
+    }
+
+    public void setUserToken(String userToken) {
+        this.userToken = userToken;
     }
 }

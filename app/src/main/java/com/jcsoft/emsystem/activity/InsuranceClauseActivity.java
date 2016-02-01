@@ -10,6 +10,7 @@ import com.jcsoft.emsystem.bean.InsurInfoBean;
 import com.jcsoft.emsystem.bean.ResponseBean;
 import com.jcsoft.emsystem.callback.DCommonCallback;
 import com.jcsoft.emsystem.http.DHttpUtils;
+import com.jcsoft.emsystem.http.DRequestParamsUtils;
 import com.jcsoft.emsystem.http.HttpConstants;
 import com.jcsoft.emsystem.utils.CommonUtils;
 import com.jcsoft.emsystem.view.RowLabelValueView;
@@ -78,7 +79,7 @@ public class InsuranceClauseActivity extends BaseActivity {
 
     @Override
     public void setData() {
-        RequestParams params = new RequestParams(HttpConstants.getInsurInfoUrl());
+        RequestParams params = DRequestParamsUtils.getRequestParams_Header(HttpConstants.getInsurInfoUrl());
         DHttpUtils.get_String(this, true, params, new DCommonCallback<String>() {
             @Override
             public void onSuccess(String result) {

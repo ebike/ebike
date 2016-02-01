@@ -3,10 +3,13 @@ package com.jcsoft.emsystem.receiver;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.jcsoft.emsystem.R;
+import com.jcsoft.emsystem.activity.MainActivity;
 import com.jcsoft.emsystem.bean.ReceiveExtraBean;
 import com.jcsoft.emsystem.constants.AppConfig;
 import com.jcsoft.emsystem.event.OnlineExceptionEvent;
@@ -17,6 +20,7 @@ import com.jcsoft.emsystem.utils.CommonUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.Iterator;
 
 import cn.jpush.android.api.JPushInterface;
@@ -24,26 +28,27 @@ import de.greenrobot.event.EventBus;
 
 /**
  * 自定义接收器
- * <p>
+ * <p/>
  * 如果不定义这个 Receiver，则：
  * 1) 默认用户会打开主界面
  * 2) 接收不到自定义消息
  */
 public class JReceiver extends BroadcastReceiver {
     private static final String TAG = "JPush";
+    private MediaPlayer player;
 
     @Override
     public void onReceive(Context context, Intent intent) {
         Bundle bundle = intent.getExtras();
         Log.d(TAG, "[MyReceiver] onReceive - " + intent.getAction() + ", extras: " + printBundle(bundle));
+        String extra = bundle.getString(JPushInterface.EXTRA_EXTRA);
+        ReceiveExtraBean receiveExtraBean = new Gson().fromJson(extra, ReceiveExtraBean.class);
+        int eventType = receiveExtraBean.eventType;
+        String msg = bundle.getString(JPushInterface.EXTRA_MESSAGE);
 
         if (JPushInterface.ACTION_REGISTRATION_ID.equals(intent.getAction())) {
 
         } else if (JPushInterface.ACTION_MESSAGE_RECEIVED.equals(intent.getAction())) {
-            String extra = bundle.getString(JPushInterface.EXTRA_EXTRA);
-            ReceiveExtraBean receiveExtraBean = new Gson().fromJson(extra, ReceiveExtraBean.class);
-            int eventType = receiveExtraBean.eventType;
-            String msg = bundle.getString(JPushInterface.EXTRA_MESSAGE);
             //如果在后台运行
             if (CommonUtils.isBackground(context)) {
                 AppConfig.isDisabled = true;
@@ -75,10 +80,10 @@ public class JReceiver extends BroadcastReceiver {
                     case 8://电子围栏关闭超时
                         EventBus.getDefault().post(new RemoteVFEvent("1", msg));
                         break;
-                    case 9://报警消息
-                        break;
                     case 10://账号在其他设备登录被迫下线
                         EventBus.getDefault().post(new OnlineExceptionEvent(true, msg));
+                        break;
+                    default:
                         break;
                 }
             }
@@ -87,17 +92,47 @@ public class JReceiver extends BroadcastReceiver {
             Log.d(TAG, "[MyReceiver] 接收到推送下来的通知");
             int notifactionId = bundle.getInt(JPushInterface.EXTRA_NOTIFICATION_ID);
             Log.d(TAG, "[MyReceiver] 接收到推送下来的通知的ID: " + notifactionId);
-
+            //接收到的是警报消息时需要播放报警声音
+            if (eventType == 9) {
+                if (player == null) {
+                    player = MediaPlayer.create(context, R.raw.msg_prompt);
+                    player.stop();
+                    player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mp) {
+                            mp.release();//释放音频资源
+                            player = null;
+                        }
+                    });
+                }
+                if (!player.isPlaying()) {
+                    try {
+                        player.prepare();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    player.start();
+                }
+            }
         } else if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent.getAction())) {
             Log.d(TAG, "[MyReceiver] 用户点击打开了通知");
-
-            //打开自定义的Activity
-//            Intent i = new Intent(context, TestActivity.class);
-//            i.putExtras(bundle);
-            //i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//            context.startActivity(i);
-
+            int fragmentPosition = 0;
+            if (eventType == 9) {//报警声音
+                if (player != null) {
+                    player.pause();//暂停
+                    player.stop();//停止播放
+                    player.release();//释放资源
+                    player = null;
+                }
+                fragmentPosition = 1;
+            } else if (eventType == 11) {//您昨日的统计数据已生成，请点击查看
+                fragmentPosition = 2;
+            }
+            Intent i = new Intent(context, MainActivity.class);
+            i.putExtras(bundle);
+            i.putExtra("fragmentPosition", fragmentPosition);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            context.startActivity(i);
         } else if (JPushInterface.ACTION_RICHPUSH_CALLBACK.equals(intent.getAction())) {
             Log.d(TAG, "[MyReceiver] 用户收到到RICH PUSH CALLBACK: " + bundle.getString(JPushInterface.EXTRA_EXTRA));
             //在这里根据 JPushInterface.EXTRA_EXTRA 的内容处理代码，比如打开新的Activity， 打开一个网页等..

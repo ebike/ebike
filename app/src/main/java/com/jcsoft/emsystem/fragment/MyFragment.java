@@ -24,6 +24,7 @@ import com.jcsoft.emsystem.callback.DSingleDialogCallback;
 import com.jcsoft.emsystem.constants.AppConfig;
 import com.jcsoft.emsystem.event.RemoteLockCarEvent;
 import com.jcsoft.emsystem.http.DHttpUtils;
+import com.jcsoft.emsystem.http.DRequestParamsUtils;
 import com.jcsoft.emsystem.http.HttpConstants;
 import com.jcsoft.emsystem.utils.CommonUtils;
 import com.jcsoft.emsystem.view.RowEntryView;
@@ -123,7 +124,7 @@ public class MyFragment extends BaseFragment implements RowEntryView.OnClickCall
                         CommonUtils.showCustomDialog0(getActivity(), "提示", "您确定要执行远程解锁吗？", new DSingleDialogCallback() {
                             @Override
                             public void onPositiveButtonClick(String editText) {
-                                RequestParams params = new RequestParams(HttpConstants.getUnLockBikeUrl());
+                                RequestParams params = DRequestParamsUtils.getRequestParams_Header(HttpConstants.getUnLockBikeUrl());
                                 DHttpUtils.get_String((MainActivity) getActivity(), true, params, new DCommonCallback<String>() {
                                     @Override
                                     public void onSuccess(String result) {
@@ -143,7 +144,7 @@ public class MyFragment extends BaseFragment implements RowEntryView.OnClickCall
                         CommonUtils.showCustomDialog0(getActivity(), "提示", "您确定要执行远程锁车吗？", new DSingleDialogCallback() {
                             @Override
                             public void onPositiveButtonClick(String editText) {
-                                RequestParams params = new RequestParams(HttpConstants.getlockBikeUrl());
+                                RequestParams params = DRequestParamsUtils.getRequestParams_Header(HttpConstants.getlockBikeUrl());
                                 DHttpUtils.get_String((MainActivity) getActivity(), true, params, new DCommonCallback<String>() {
                                     @Override
                                     public void onSuccess(String result) {

@@ -1,5 +1,6 @@
 package com.jcsoft.emsystem.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.KeyEvent;
@@ -76,7 +77,16 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     public void getIntentData(Bundle savedInstanceState) {
+        fragmentPosition = getIntent().getIntExtra("fragmentPosition", 0);
+    }
 
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        fragmentPosition = intent.getIntExtra("fragmentPosition", 0);
+        //设置初始显示界面
+        viewPager.setCurrentItem(fragmentPosition, false);
+        ViewPagerUtils.setBottomBar(MainActivity.this, fragmentPosition, textViews, imageViews);
     }
 
     @Override
@@ -102,12 +112,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         // 4个fragment界面封装
         fragmentList = new ArrayList<Fragment>();
         fragmentList.add(new LocationFragment());
-        fragmentList.add(new AlarmMessageFragment());
-        fragmentList.add(new ChartFragment());
+        fragmentList.add(new AlarmMessageFragment(fragmentPosition));
+        fragmentList.add(new ChartFragment(fragmentPosition));
         fragmentList.add(new MyFragment());
         // 设置ViewPager适配器
         viewPagerFragmentAdapter = new ViewPagerFragmentAdapter(getSupportFragmentManager(), tabIndicatorList, fragmentList);
         viewPager.setAdapter(viewPagerFragmentAdapter);
+        //设置初始显示界面
+        viewPager.setCurrentItem(fragmentPosition, false);
+        ViewPagerUtils.setBottomBar(MainActivity.this, fragmentPosition, textViews, imageViews);
     }
 
     @Override

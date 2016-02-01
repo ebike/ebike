@@ -1,5 +1,6 @@
 package com.jcsoft.emsystem.fragment;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -27,6 +28,7 @@ import com.jcsoft.emsystem.callback.DCommonCallback;
 import com.jcsoft.emsystem.constants.AppConfig;
 import com.jcsoft.emsystem.db.XUtil;
 import com.jcsoft.emsystem.http.DHttpUtils;
+import com.jcsoft.emsystem.http.DRequestParamsUtils;
 import com.jcsoft.emsystem.http.HttpConstants;
 import com.jcsoft.emsystem.utils.CommonUtils;
 import com.jcsoft.emsystem.utils.PreferencesUtil;
@@ -83,12 +85,22 @@ public class ChartFragment extends BaseFragment implements View.OnClickListener 
     //选中的统计(0：里程；1：平均速度；2：最大速度；3：最小速度)
     private int which;
     private Handler handler;
+    //初始打开的页面是该页面时，需要在初始化时加载数据
+    private int initPosition;
+
+    @SuppressLint("ValidFragment")
+    public ChartFragment(int initPosition) {
+        this.initPosition = initPosition;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_chart, container, false);
         x.view().inject(this, view);
         isPrepared = true;
+        if (initPosition == 2) {
+            requestDatas();
+        }
         initListener();
         return view;
     }
@@ -119,7 +131,7 @@ public class ChartFragment extends BaseFragment implements View.OnClickListener 
             e.printStackTrace();
         }
         //请求今日统计数据
-        RequestParams params = new RequestParams(HttpConstants.getDayDataUrl(CommonUtils.DateToString(new Date(), "yyyy-MM-dd")));
+        RequestParams params = DRequestParamsUtils.getRequestParams_Header(HttpConstants.getDayDataUrl(CommonUtils.DateToString(new Date(), "yyyy-MM-dd")));
         DHttpUtils.get_String((MainActivity) getActivity(), true, params, new DCommonCallback<String>() {
             @Override
             public void onSuccess(String result) {
@@ -169,7 +181,7 @@ public class ChartFragment extends BaseFragment implements View.OnClickListener 
 
     //每天调一次半月的统计数据
     private void getSomeDayData() {
-        RequestParams params = new RequestParams(HttpConstants.getSomeDayDataUrl());
+        RequestParams params = DRequestParamsUtils.getRequestParams_Header(HttpConstants.getSomeDayDataUrl());
         DHttpUtils.get_String((MainActivity) getActivity(), true, params, new DCommonCallback<String>() {
             @Override
             public void onSuccess(String result) {

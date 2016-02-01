@@ -23,7 +23,7 @@
 
         <TextView
             android:id="@+id/tv_left"
-            style="@style/white_18"
+            style="@style/white_16"
             android:gravity="center"
             android:visibility="gone" />
 
@@ -60,7 +60,7 @@
 
         <TextView
             android:id="@+id/tv_right"
-            style="@style/white_14"
+            style="@style/white_16"
             android:gravity="center"
             android:visibility="gone" />
 

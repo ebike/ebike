@@ -119,6 +119,11 @@ public class DealInsuranceActivity extends BaseActivity implements RowLabelValue
 
     @Override
     public void init() {
+        carPhotoRowLabelValueView.setRightImage(R.mipmap.icon_camera);
+        idCardPositiveRowLabelValueView.setRightImage(R.mipmap.icon_camera);
+        idCardNegativeRowLabelValueView.setRightImage(R.mipmap.icon_camera);
+        certificatePhotosRowLabelValueView.setRightImage(R.mipmap.icon_camera);
+        invoiceOrReceiptRowLabelValueView.setRightImage(R.mipmap.icon_camera);
         buyPriceRowLabelValueView.setEditInteger();
         if (AppConfig.userInfoBean != null) {
             provinceName = AppConfig.userInfoBean.getProvince();
@@ -218,7 +223,7 @@ public class DealInsuranceActivity extends BaseActivity implements RowLabelValue
                 sendParamsBeans.add(new SendParamsBean("underwritePro", provinceName, false));
                 sendParamsBeans.add(new SendParamsBean("underwriteCity", cityName, false));
                 //提交
-                RequestParams params = DRequestParamsUtils.getRequestParamsHasFile(HttpConstants.uploadInsurInfoUrl(), sendParamsBeans);
+                RequestParams params = DRequestParamsUtils.getRequestParamsHasFile_Header(HttpConstants.uploadInsurInfoUrl(), sendParamsBeans);
                 DHttpUtils.post_String(DealInsuranceActivity.this, true, params, new DCommonCallback<String>() {
                     @Override
                     public void onSuccess(String result) {
@@ -278,7 +283,7 @@ public class DealInsuranceActivity extends BaseActivity implements RowLabelValue
                 showDataCardelar();
                 break;
             case R.id.rlvv_coverage_area://承保区域
-                dialog.setData(mProvinceList);
+                dialog.setData(mProvinceList, provinceName, cityName);
                 dialog.show(new AddressTwoWheelViewDialog.ConfirmAction() {
                     @Override
                     public void doAction(LocationJson root, LocationJson child) {
