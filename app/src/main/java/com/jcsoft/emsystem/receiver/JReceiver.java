@@ -41,14 +41,14 @@ public class JReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         Bundle bundle = intent.getExtras();
         Log.d(TAG, "[MyReceiver] onReceive - " + intent.getAction() + ", extras: " + printBundle(bundle));
-        String extra = bundle.getString(JPushInterface.EXTRA_EXTRA);
-        ReceiveExtraBean receiveExtraBean = new Gson().fromJson(extra, ReceiveExtraBean.class);
-        int eventType = receiveExtraBean.eventType;
-        String msg = bundle.getString(JPushInterface.EXTRA_MESSAGE);
 
         if (JPushInterface.ACTION_REGISTRATION_ID.equals(intent.getAction())) {
 
         } else if (JPushInterface.ACTION_MESSAGE_RECEIVED.equals(intent.getAction())) {
+            String extra = bundle.getString(JPushInterface.EXTRA_EXTRA);
+            ReceiveExtraBean receiveExtraBean = new Gson().fromJson(extra, ReceiveExtraBean.class);
+            int eventType = receiveExtraBean.eventType;
+            String msg = bundle.getString(JPushInterface.EXTRA_MESSAGE);
             //如果在后台运行
             if (CommonUtils.isBackground(context)) {
                 AppConfig.isDisabled = true;
@@ -92,6 +92,9 @@ public class JReceiver extends BroadcastReceiver {
             Log.d(TAG, "[MyReceiver] 接收到推送下来的通知");
             int notifactionId = bundle.getInt(JPushInterface.EXTRA_NOTIFICATION_ID);
             Log.d(TAG, "[MyReceiver] 接收到推送下来的通知的ID: " + notifactionId);
+            String extra = bundle.getString(JPushInterface.EXTRA_EXTRA);
+            ReceiveExtraBean receiveExtraBean = new Gson().fromJson(extra, ReceiveExtraBean.class);
+            int eventType = receiveExtraBean.eventType;
             //接收到的是警报消息时需要播放报警声音
             if (eventType == 9) {
                 if (player == null) {
@@ -116,6 +119,9 @@ public class JReceiver extends BroadcastReceiver {
             }
         } else if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent.getAction())) {
             Log.d(TAG, "[MyReceiver] 用户点击打开了通知");
+            String extra = bundle.getString(JPushInterface.EXTRA_EXTRA);
+            ReceiveExtraBean receiveExtraBean = new Gson().fromJson(extra, ReceiveExtraBean.class);
+            int eventType = receiveExtraBean.eventType;
             int fragmentPosition = 0;
             if (eventType == 9) {//报警声音
                 if (player != null) {

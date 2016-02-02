@@ -119,6 +119,7 @@ public class DealInsuranceActivity extends BaseActivity implements RowLabelValue
 
     @Override
     public void init() {
+        compress = new ImageCompress();
         carPhotoRowLabelValueView.setRightImage(R.mipmap.icon_camera);
         idCardPositiveRowLabelValueView.setRightImage(R.mipmap.icon_camera);
         idCardNegativeRowLabelValueView.setRightImage(R.mipmap.icon_camera);
