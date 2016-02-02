@@ -61,7 +61,7 @@ public class CarInformationActivity extends BaseActivity {
             ImageOptions imageOptions = new ImageOptions.Builder()
                     .setLoadingDrawableId(R.mipmap.icon_default_ebike)
                     .setFailureDrawableId(R.mipmap.icon_default_ebike)
-                    .setImageScaleType(ImageView.ScaleType.FIT_START)
+                    .setImageScaleType(ImageView.ScaleType.CENTER_CROP)
                     .build();
             x.image().bind(carPhotoImageView, carInfoBean.getCarPic(), imageOptions);
         }

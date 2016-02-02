@@ -35,7 +35,6 @@ import de.greenrobot.event.EventBus;
  */
 public class JReceiver extends BroadcastReceiver {
     private static final String TAG = "JPush";
-    private MediaPlayer player;
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -97,24 +96,24 @@ public class JReceiver extends BroadcastReceiver {
             int eventType = receiveExtraBean.eventType;
             //接收到的是警报消息时需要播放报警声音
             if (eventType == 9) {
-                if (player == null) {
-                    player = MediaPlayer.create(context, R.raw.msg_prompt);
-                    player.stop();
-                    player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                if (AppConfig.mediaPlayer == null) {
+                    AppConfig.mediaPlayer = MediaPlayer.create(context, R.raw.msg_prompt);
+                    AppConfig.mediaPlayer.stop();
+                    AppConfig.mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                         @Override
                         public void onCompletion(MediaPlayer mp) {
                             mp.release();//释放音频资源
-                            player = null;
+                            AppConfig.mediaPlayer = null;
                         }
                     });
                 }
-                if (!player.isPlaying()) {
+                if (!AppConfig.mediaPlayer.isPlaying()) {
                     try {
-                        player.prepare();
+                        AppConfig.mediaPlayer.prepare();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    player.start();
+                    AppConfig.mediaPlayer.start();
                 }
             }
         } else if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent.getAction())) {
@@ -124,11 +123,11 @@ public class JReceiver extends BroadcastReceiver {
             int eventType = receiveExtraBean.eventType;
             int fragmentPosition = 0;
             if (eventType == 9) {//报警声音
-                if (player != null) {
-                    player.pause();//暂停
-                    player.stop();//停止播放
-                    player.release();//释放资源
-                    player = null;
+                if (AppConfig.mediaPlayer != null) {
+                    AppConfig.mediaPlayer.pause();//暂停
+                    AppConfig.mediaPlayer.stop();//停止播放
+                    AppConfig.mediaPlayer.release();//释放资源
+                    AppConfig.mediaPlayer = null;
                 }
                 fragmentPosition = 1;
             } else if (eventType == 11) {//您昨日的统计数据已生成，请点击查看

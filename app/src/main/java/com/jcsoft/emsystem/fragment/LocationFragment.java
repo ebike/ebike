@@ -733,12 +733,12 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
         dateLayout.setOrientation(LinearLayout.VERTICAL);
         dateLayout.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         //开始时间
-        startDateView = FormViewUtils.createFormTextDateTimeView(getActivity(), "开始时间", 2, true, true, true);
+        startDateView = FormViewUtils.createFormTextDateTimeView(getActivity(), "开始时间", "请选择开始时间", 2, true, true, true);
         startDateView.setDateText(CommonUtils.getYesterdayDateString("yyyy-MM-dd HH:mm"));
         startDateView.setmFormViewOnclick(true);
         dateLayout.addView(startDateView);
         //结束时间
-        endDateView = FormViewUtils.createFormTextDateTimeView(getActivity(), "结束时间", 2, true, true, true);
+        endDateView = FormViewUtils.createFormTextDateTimeView(getActivity(), "结束时间", "请选择结束时间", 2, true, true, true);
         endDateView.setDateText(CommonUtils.getCurrentDateString("yyyy-MM-dd HH:mm"));
         endDateView.setmFormViewOnclick(true);
         dateLayout.addView(endDateView);
@@ -930,7 +930,7 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
             _startMarker.remove();
             return;
         }
-        if(marker != null && this.marker.equals(marker)){
+        if (marker != null && this.marker.equals(marker)) {
             isHidden = true;
         }
     }

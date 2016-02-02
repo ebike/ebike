@@ -1,11 +1,10 @@
 package com.jcsoft.emsystem.constants;
 
+import android.media.MediaPlayer;
 import android.os.Environment;
 
 import com.jcsoft.emsystem.bean.UserInfoBean;
 import com.readystatesoftware.viewbadger.BadgeView;
-
-import java.io.File;
 
 /*
  * 全局的常量存放工具
@@ -65,10 +64,11 @@ public class AppConfig {
     /**
      * 当前选择的照片位置
      **/
-    public static final String CAMERA_PIC_PATH = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separatorChar + "ebike"
-            + File.separatorChar + "CameraPic" + File.separatorChar;
+    public static final String CAMERA_PIC_PATH = Environment.getExternalStorageDirectory() + "/ebike/CameraPic/";
     //压缩图片路径
-    public static String compressedImage = Environment.getExternalStorageDirectory() + "/ebike/compressedImage/";
+    public static final String compressedImage = Environment.getExternalStorageDirectory() + "/ebike/compressedImage/";
     //底部菜单报警消息图标的角标组件
     public static BadgeView badge;
+    //报警铃声
+    public static MediaPlayer mediaPlayer;
 }

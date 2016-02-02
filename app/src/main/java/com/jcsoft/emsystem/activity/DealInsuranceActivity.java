@@ -447,7 +447,7 @@ public class DealInsuranceActivity extends BaseActivity implements RowLabelValue
         TimePicker mTimePicker = (TimePicker) mTargetView.findViewById(R.id.timePicker);
         mTimePicker.setVisibility(View.GONE);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("设置购买日期");
+        builder.setTitle("请选择购买日期");
         builder.setView(mTargetView);
         mDatePicker.init(mYear, mMonth, mDay, datePickerChangeListener);
         builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -456,7 +456,7 @@ public class DealInsuranceActivity extends BaseActivity implements RowLabelValue
                 dialogInterface.dismiss();
             }
         });
-        builder.setPositiveButton("完成", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 buyDateRowLabelValueView.setValue(mDate);
             }

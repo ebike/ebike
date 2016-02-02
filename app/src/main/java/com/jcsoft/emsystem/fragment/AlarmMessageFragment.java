@@ -63,6 +63,9 @@ public class AlarmMessageFragment extends BaseListFragment {
     //初始打开的页面是该页面时，需要在初始化时加载数据
     private int initPosition;
 
+    public AlarmMessageFragment() {
+    }
+
     @SuppressLint("ValidFragment")
     public AlarmMessageFragment(int initPosition) {
         this.initPosition = initPosition;
@@ -156,6 +159,8 @@ public class AlarmMessageFragment extends BaseListFragment {
 
     @Override
     public void requestDatas() {
+        //如果有警报铃声，则关闭
+        closePlayer();
         if (!isPrepared || !isVisible || hasLoadedOnce || !isAdded()) {
             return;
         }
@@ -249,6 +254,16 @@ public class AlarmMessageFragment extends BaseListFragment {
                     e.printStackTrace();
                 }
             }
+        }
+    }
+
+    //如果有警报铃声，则关闭
+    private void closePlayer() {
+        if (AppConfig.mediaPlayer != null) {
+            AppConfig.mediaPlayer.pause();//暂停
+            AppConfig.mediaPlayer.stop();//停止播放
+            AppConfig.mediaPlayer.release();//释放资源
+            AppConfig.mediaPlayer = null;
         }
     }
 }

@@ -222,6 +222,28 @@ public class FormViewUtils {
         return view;
     }
 
+    public static FormTextDateTimeView createFormTextDateTimeView(Context myContext, String tagText, String dialogTitle, int dateTimeType, boolean isShowDriver, boolean isUpdateView, boolean isEditPermissions) {
+        FormTextDateTimeView view = new FormTextDateTimeView(myContext, dateTimeType);
+        view.setLayoutParams(params);
+        view.setTag(tagText);
+        view.setDateTimeType(dateTimeType);
+        view.setShowDriver(isShowDriver);
+        view.setmShowArrow(isUpdateView);
+        view.setmDialogTitle(dialogTitle);
+        if (isUpdateView) {
+            if (isEditPermissions) {
+                view.setmFormViewOnclick(true);
+            } else {
+                view.setmFormViewOnclick(false);
+                view.setTipsString("暂无编辑权限");
+            }
+        } else {
+            view.setmFormViewOnclick(false);
+            view.setTipsString("");
+        }
+        return view;
+    }
+
     /**
      * 自定义字段的详情编辑view
      *

@@ -61,10 +61,14 @@ public abstract class BaseActivity extends FragmentActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             setTranslucentStatus(true);
         }
-
         SystemBarTintManager tintManager = new SystemBarTintManager(this);
         tintManager.setStatusBarTintEnabled(true);
-        tintManager.setStatusBarTintResource(R.color.stateBarColor);
+        if (this.getLocalClassName().equals("activity.SplashActivity")
+                || this.getLocalClassName().equals("activity.LoginActivity")) {
+            tintManager.setStatusBarTintResource(R.drawable.bg_status);
+        } else {
+            tintManager.setStatusBarTintResource(R.color.stateBarColor);
+        }
     }
 
     @TargetApi(19)

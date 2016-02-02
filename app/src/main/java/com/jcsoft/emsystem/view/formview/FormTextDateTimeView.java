@@ -365,4 +365,8 @@ public class FormTextDateTimeView extends RelativeLayout implements View.OnClick
         this.tagViewColor = viewColor;
         mTagTextView.setTextColor(tagViewColor);
     }
+
+    public void setmDialogTitle(String mDialogTitle) {
+        this.mDialogTitle = mDialogTitle;
+    }
 }

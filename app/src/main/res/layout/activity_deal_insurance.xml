@@ -81,34 +81,6 @@
                 app:row_label_value_label="@string/deal_insurance_invoice_or_receipt" />
 
             <com.jcsoft.emsystem.view.RowLabelEditView
-                android:id="@+id/rlev_motor_number"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                app:row_label_edit_bottom_line="2"
-                app:row_label_edit_hint="@string/app_require_input"
-                app:row_label_edit_label="@string/deal_insurance_motor_number"
-                app:row_label_edit_top_line="1" />
-
-            <com.jcsoft.emsystem.view.RowLabelEditView
-                android:id="@+id/rlev_frame_number"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:row_label_edit_bottom_line="2"
-                app:row_label_edit_hint="@string/app_require_input"
-                app:row_label_edit_label="@string/deal_insurance_frame_number" />
-
-            <com.jcsoft.emsystem.view.RowLabelValueView
-                android:id="@+id/rlvv_coverage_area"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:row_label_value_bottom_line="1"
-                app:row_label_value_can_click="true"
-                app:row_label_value_has_right_arrow="true"
-                app:row_label_value_label="@string/deal_insurance_coverage_area"
-                app:row_label_value_value="@string/app_require_check" />
-
-            <com.jcsoft.emsystem.view.RowLabelEditView
                 android:id="@+id/rlev_car_brand"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -139,10 +111,37 @@
                 android:id="@+id/rlev_buy_price"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                app:row_label_edit_bottom_line="1"
+                app:row_label_edit_bottom_line="2"
                 app:row_label_edit_hint="@string/app_require_input"
                 app:row_label_edit_label="@string/deal_insurance_buy_price" />
+
+            <com.jcsoft.emsystem.view.RowLabelEditView
+                android:id="@+id/rlev_motor_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:row_label_edit_bottom_line="2"
+                app:row_label_edit_hint="@string/app_require_input"
+                app:row_label_edit_label="@string/deal_insurance_motor_number" />
+
+            <com.jcsoft.emsystem.view.RowLabelEditView
+                android:id="@+id/rlev_frame_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:row_label_edit_bottom_line="2"
+                app:row_label_edit_hint="@string/app_require_input"
+                app:row_label_edit_label="@string/deal_insurance_frame_number" />
+
+            <com.jcsoft.emsystem.view.RowLabelValueView
+                android:id="@+id/rlvv_coverage_area"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:row_label_value_bottom_line="1"
+                app:row_label_value_can_click="true"
+                app:row_label_value_has_right_arrow="true"
+                app:row_label_value_label="@string/deal_insurance_coverage_area"
+                app:row_label_value_value="@string/app_require_check" />
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
