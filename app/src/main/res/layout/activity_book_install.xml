@@ -80,11 +80,13 @@
     </ScrollView>
 
     <LinearLayout
+        android:id="@+id/ll_pay_method"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal"
-        android:paddingBottom="16dp">
+        android:paddingBottom="16dp"
+        android:paddingTop="16dp">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -125,4 +127,8 @@
                 android:src="@mipmap/code_account" />
         </LinearLayout>
     </LinearLayout>
+
+    <View
+        style="@style/style_base_line"
+        android:layout_above="@id/ll_pay_method" />
 </RelativeLayout>

@@ -2,32 +2,11 @@
 <items version="2" >
 
     <item
-        jar="/Users/huguangwen/.gradle/caches/modules-2/files-2.1/com.nostra13.universalimageloader/universal-image-loader/1.9.3/a85588bec3e2c4584d593d3f15df1677321bca72/universal-image-loader-1.9.3.jar"
+        jar="/Users/huguangwen/Documents/Code/gitlab/ebike/app/libs/bugly_1.1.2_release.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="a85588bec3e2c4584d593d3f15df1677321bca72">
-        <dex dex="/Users/huguangwen/Documents/Code/gitlab/ebike/app/build/intermediates/pre-dexed/release/universal-image-loader-1.9.3-16d5257e025862cf7d5caf5b6e79ddd8e34bc48e.jar" />
-    </item>
-    <item
-        jar="/Users/huguangwen/Documents/Code/gitlab/ebike/app/libs/mpandroidchartlibrary-2-1-6.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="3f8beaf2f9b5357717e0b1ef9f6820e517784ea1">
-        <dex dex="/Users/huguangwen/Documents/Code/gitlab/ebike/app/build/intermediates/pre-dexed/release/mpandroidchartlibrary-2-1-6-0c503b6d0cd5360354f4b8ba81ae835bf1c21748.jar" />
-    </item>
-    <item
-        jar="/Users/huguangwen/Documents/Code/gitlab/ebike/app/libs/systembartint-1.0.4.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="06404f77b92ec723cc132e825afe85a07da85ee6">
-        <dex dex="/Users/huguangwen/Documents/Code/gitlab/ebike/app/build/intermediates/pre-dexed/release/systembartint-1.0.4-ef41da940e4b3783a46f65b62b2e33d223d2c033.jar" />
-    </item>
-    <item
-        jar="/Users/huguangwen/Documents/Code/gitlab/ebike/app/libs/android-viewbadger.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="f1303b50d535716ca7601c5014357b8435658313">
-        <dex dex="/Users/huguangwen/Documents/Code/gitlab/ebike/app/build/intermediates/pre-dexed/release/android-viewbadger-70968eabdf42dfddf2bceee478b8105301803152.jar" />
+        sha1="ffdaa2e2ca0912b890f69ca251c5c8fa0a20c176">
+        <dex dex="/Users/huguangwen/Documents/Code/gitlab/ebike/app/build/intermediates/pre-dexed/release/bugly_1.1.2_release-f1ff635b20481daeed0b78932474214a22770a6d.jar" />
     </item>
 
 </items>

@@ -43,7 +43,7 @@
     <string name="http_download_failed">下载失败</string>
 
     <!-- map -->
-    <string name="txt_track_prompt">轨迹信息</string>
+    <string name="txt_track_prompt">途经点</string>
     <string name="txt_start">起点</string>
     <string name="txt_end">终点</string>
 
