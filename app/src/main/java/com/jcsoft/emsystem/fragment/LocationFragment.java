@@ -58,6 +58,7 @@ import com.jcsoft.emsystem.client.JCLocationManager;
 import com.jcsoft.emsystem.constants.AppConfig;
 import com.jcsoft.emsystem.constants.JCConstValues;
 import com.jcsoft.emsystem.database.ConfigService;
+import com.jcsoft.emsystem.event.ChangeLocationEvent;
 import com.jcsoft.emsystem.event.RemoteLockCarEvent;
 import com.jcsoft.emsystem.event.RemoteVFEvent;
 import com.jcsoft.emsystem.event.StopNaviEvent;
@@ -366,9 +367,21 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
         mapView.onResume();
         if (hasTrack) {
             aMap.clear();
+            //每30秒刷新一次电动车位置
+            handler.postDelayed(this, 1000 * 30);
+            hasTrack = false;
         }
-        //每30秒刷新一次电动车位置
-        handler.postDelayed(this, 1000 * 30);
+    }
+
+    //切换回定位模式
+    public void onEvent(ChangeLocationEvent event) {
+        if (event != null && event.isChange() && hasTrack) {
+            aMap.clear();
+            requestDatas();
+            //每30秒刷新一次电动车位置
+            handler.postDelayed(this, 1000 * 30);
+            hasTrack = false;
+        }
     }
 
     /**
@@ -512,10 +525,10 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
                                 }.getType());
                                 if (responseBean != null && responseBean.getCode() == 1) {
                                     hasTrack = true;
+                                    aMap.clear();
                                     if (responseBean.getData().size() <= 0) {
                                         return;
                                     }
-                                    aMap.clear();
                                     String isShowNonGps = ConfigService.instance().getConfigValue(
                                             JCConstValues.S_IsShowNonGps);
                                     if (isShowNonGps == null || isShowNonGps.length() == 0) {
@@ -605,6 +618,8 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
                             }
                         });
                     } else {
+                        //打开电子围栏前需切回定位模式
+                        onEvent(new ChangeLocationEvent(true));
                         CommonUtils.showCustomDialog0(getActivity(), "提示", "您确定要开启电子围栏吗？", new DSingleDialogCallback() {
                             @Override
                             public void onPositiveButtonClick(String editText) {

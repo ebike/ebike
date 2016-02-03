@@ -78,6 +78,7 @@
         <item name="android:windowEnterAnimation">@anim/popshow_anim</item>
         <item name="android:windowExitAnimation">@anim/pophidden_anim</item>
     </style>
+
     <style name="AbovePopupWindowAnimation">
         <item name="android:windowEnterAnimation">@anim/above_popshow_anim</item>
         <item name="android:windowExitAnimation">@anim/above_pophidden_anim</item>
@@ -117,5 +118,9 @@
     <style name="ActionSheetDialogAnimation" parent="@android:style/Animation.Dialog">
         <item name="android:windowEnterAnimation">@anim/actionsheet_dialog_in</item>
         <item name="android:windowExitAnimation">@anim/actionsheet_dialog_out</item>
+    </style>
+
+    <style name="test_style">
+        <item name="android:fitsSystemWindows">true</item>
     </style>
 </resources>

@@ -88,6 +88,9 @@ public class ChartFragment extends BaseFragment implements View.OnClickListener 
     //初始打开的页面是该页面时，需要在初始化时加载数据
     private int initPosition;
 
+    public ChartFragment() {
+    }
+
     @SuppressLint("ValidFragment")
     public ChartFragment(int initPosition) {
         this.initPosition = initPosition;

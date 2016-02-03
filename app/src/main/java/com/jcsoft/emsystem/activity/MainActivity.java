@@ -16,6 +16,7 @@ import com.jcsoft.emsystem.base.TabIndicator;
 import com.jcsoft.emsystem.bean.AlarmMessageBean;
 import com.jcsoft.emsystem.constants.AppConfig;
 import com.jcsoft.emsystem.db.XUtil;
+import com.jcsoft.emsystem.event.ChangeLocationEvent;
 import com.jcsoft.emsystem.fragment.AlarmMessageFragment;
 import com.jcsoft.emsystem.fragment.ChartFragment;
 import com.jcsoft.emsystem.fragment.LocationFragment;
@@ -30,6 +31,8 @@ import org.xutils.x;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import de.greenrobot.event.EventBus;
 
 /**
  * 首页
@@ -152,6 +155,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ll_location:
+                if (fragmentPosition == 0) {//当前处于定位界面，且点击定位
+                    //通知卫星定位界面切换到定位模式
+                    EventBus.getDefault().post(new ChangeLocationEvent(true));
+                }
                 fragmentPosition = 0;
                 viewPager.setCurrentItem(fragmentPosition, false);
                 ViewPagerUtils.setBottomBar(MainActivity.this, fragmentPosition, textViews, imageViews);
