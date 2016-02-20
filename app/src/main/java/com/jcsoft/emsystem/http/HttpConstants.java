@@ -17,6 +17,7 @@ public class HttpConstants {
         sb.append("?loginName=").append(loginName);
         sb.append("&password=").append(password);
         sb.append("&clientId=").append(AppConfig.imei);
+        sb.append("&system=android:").append(android.os.Build.VERSION.RELEASE);
         return sb.toString();
     }
 
@@ -157,14 +158,14 @@ public class HttpConstants {
     }
 
     //在线预订
-    public static String saveOnlineBookUrl(){
+    public static String saveOnlineBookUrl() {
         StringBuffer sb = new StringBuffer(baseUrl);
         sb.append("/book/saveOnlineBook.do");
         return sb.toString();
     }
 
     //提交保险资料
-    public static String uploadInsurInfoUrl(){
+    public static String uploadInsurInfoUrl() {
         StringBuffer sb = new StringBuffer(baseUrl);
         sb.append("/insur/uploadInsurInfo.do");
         return sb.toString();

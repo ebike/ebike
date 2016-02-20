@@ -102,7 +102,7 @@ public class SplashActivity extends BaseActivity {
                                     //保存数据信息
                                     AppConfig.userInfoBean = responseBean.getData();
                                     preferencesUtil.setPrefString(SplashActivity.this, AppConfig.LOGIN_NAME, loginName);
-                                    preferencesUtil.setPrefString(SplashActivity.this, AppConfig.PASSWORD, CommonUtils.MD5(password));
+                                    preferencesUtil.setPrefString(SplashActivity.this, AppConfig.PASSWORD, password);
                                     //注册极光推送别名
                                     setAlias();
                                     //进入首页

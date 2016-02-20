@@ -17,6 +17,7 @@ import com.jcsoft.emsystem.R;
 import com.jcsoft.emsystem.activity.LoginActivity;
 import com.jcsoft.emsystem.callback.DSingleDialogCallback;
 import com.jcsoft.emsystem.constants.AppConfig;
+import com.jcsoft.emsystem.event.FinishActivityEvent;
 import com.jcsoft.emsystem.event.OnlineExceptionEvent;
 import com.jcsoft.emsystem.utils.CommonUtils;
 import com.jcsoft.emsystem.utils.DensityUtil;
@@ -245,6 +246,12 @@ public abstract class BaseActivity extends FragmentActivity {
         }
     }
 
+    public void onEvent(FinishActivityEvent event) {
+        if (event != null && event.isFinish() && event.getTarget().equals("BaseActivity")) {
+            this.finish();
+        }
+    }
+
     public void logout() {
         AppConfig.loginName = "";
         AppConfig.password = "";
@@ -253,7 +260,7 @@ public abstract class BaseActivity extends FragmentActivity {
         preferencesUtil.setPrefString(this, AppConfig.PASSWORD, "");
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
-        this.finish();
+        EventBus.getDefault().post(new FinishActivityEvent(true, "BaseActivity"));
     }
 
 }

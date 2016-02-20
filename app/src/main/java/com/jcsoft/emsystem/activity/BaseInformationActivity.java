@@ -11,7 +11,6 @@ import com.jcsoft.emsystem.bean.UserInfoBean;
 import com.jcsoft.emsystem.callback.DCommonCallback;
 import com.jcsoft.emsystem.constants.AppConfig;
 import com.jcsoft.emsystem.http.DHttpUtils;
-import com.jcsoft.emsystem.http.DRequestParamsUtils;
 import com.jcsoft.emsystem.http.HttpConstants;
 import com.jcsoft.emsystem.view.RowLabelValueView;
 
@@ -87,7 +86,8 @@ public class BaseInformationActivity extends BaseActivity {
 
     @Override
     public void setData() {
-        RequestParams params = DRequestParamsUtils.getRequestParams_Header(HttpConstants.getUserInfo());
+//        RequestParams params = DRequestParamsUtils.getRequestParams_Header(HttpConstants.getUserInfo());
+        RequestParams params = new RequestParams(HttpConstants.getUserInfo());
         DHttpUtils.get_String(this, true, params, new DCommonCallback<String>() {
             @Override
             public void onSuccess(String result) {

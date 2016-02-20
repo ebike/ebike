@@ -530,25 +530,10 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
                                     if (responseBean.getData().size() <= 0) {
                                         return;
                                     }
-                                    String isShowNonGps = ConfigService.instance().getConfigValue(
-                                            JCConstValues.S_IsShowNonGps);
-                                    if (isShowNonGps == null || isShowNonGps.length() == 0) {
-                                        // 系统中暂无此值，操作一次数据库
-                                        ConfigService.instance().insertConfigValue(
-                                                JCConstValues.S_IsShowNonGps, "1");
-                                        isShowNonGps = "1";
-                                    }
-                                    boolean isShowNonGpsBool = isShowNonGps.equalsIgnoreCase("1");
-                                    // 如果不显示基站定位，则过滤掉基站定位点
                                     List<LatLng> points = new ArrayList<LatLng>();
                                     int i = 0;
                                     int maxCount = responseBean.getData().size();
                                     for (TrackBean trackBean : responseBean.getData()) {
-                                        int status = trackBean.getSourceType();
-                                        boolean isGps = (status & 0x01) == 0; // 第0个二进制位 0：卫星定位；1：基站定位
-                                        if (!isShowNonGpsBool && !isGps) {
-                                            continue;
-                                        }
                                         LatLng point = new LatLng(trackBean.getLat() / 1000000.0,
                                                 trackBean.getLon() / 1000000.0);
                                         points.add(point);
@@ -560,12 +545,6 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
                                         }
                                         i++;
                                     }
-                                    if (i == 0) {
-                                        // 如果所有信息点都是基站定位，则提示没有轨迹信息，并返回
-                                        showShortText("您选择的时间段内只有基站定位信息，请在设置中开启显示基站定位！");
-                                        return;
-                                    }
-
                                     TrackBean start = responseBean.getData().get(0);
                                     TrackBean end = responseBean.getData().get(maxCount - 1);
                                     addMarkerToMap(points.get(0),

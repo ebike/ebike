@@ -138,13 +138,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     public void setData() {
         try {
             //气泡中显示的数字是本地数据库中未读的消息数量
-            long count = XUtil.db.selector(AlarmMessageBean.class).where("carId", "=", AppConfig.userInfoBean.getCarId()).and("status", "=", "1").count();
-            AppConfig.badge = new BadgeView(this, alarmLinearLayout);
-            if (count > 0) {
-                //显示气泡
-                AppConfig.badge.setText(count + "");
-                AppConfig.badge.setBadgeMargin(0);
-                AppConfig.badge.show();
+            if (AppConfig.userInfoBean != null) {
+                long count = XUtil.db.selector(AlarmMessageBean.class).where("carId", "=", AppConfig.userInfoBean.getCarId()).and("status", "=", "1").count();
+                AppConfig.badge = new BadgeView(this, alarmLinearLayout);
+                if (count > 0) {
+                    //显示气泡
+                    AppConfig.badge.setText(count + "");
+                    AppConfig.badge.setBadgeMargin(0);
+                    AppConfig.badge.show();
+                }
             }
         } catch (DbException e) {
             e.printStackTrace();
