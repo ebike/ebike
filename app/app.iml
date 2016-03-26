@@ -105,7 +105,7 @@
     <orderEntry type="library" exported="" name="mpandroidchartlibrary-2-1-6" level="project" />
     <orderEntry type="library" exported="" name="xUtils-3.1.22" level="project" />
     <orderEntry type="library" exported="" name="Android_Navi_V1.1.2" level="project" />
-    <orderEntry type="library" exported="" name="support-annotations-23.0.1" level="project" />
     <orderEntry type="library" exported="" name="universal-image-loader-1.9.3" level="project" />
+    <orderEntry type="library" exported="" name="support-annotations-23.0.1" level="project" />
   </component>
 </module>

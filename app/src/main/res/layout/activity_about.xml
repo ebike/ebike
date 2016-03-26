@@ -28,7 +28,6 @@
         android:layout_marginTop="24dp"
         android:drawablePadding="8dp"
         android:drawableTop="@mipmap/icon_app"
-        android:text="For Android V2.0"
         android:textColor="@color/gray_6"
         android:textSize="14sp" />
 
@@ -43,7 +42,7 @@
         android:drawableTop="@mipmap/icon_download_qrcode"
         android:text="扫描二维码，您的朋友也可下载电动车秘书"
         android:textColor="@color/gray_3"
-        android:textSize="14sp" />
+        android:textSize="12sp" />
 
     <LinearLayout
         android:layout_width="match_parent"

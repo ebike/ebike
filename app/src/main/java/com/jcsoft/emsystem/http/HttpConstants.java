@@ -170,4 +170,12 @@ public class HttpConstants {
         sb.append("/insur/uploadInsurInfo.do");
         return sb.toString();
     }
+
+    //退出账号
+    public static String getLogoutUrl() {
+        StringBuffer sb = new StringBuffer(baseUrl);
+        sb.append("/logout.do");
+        sb.append("?carId=").append(AppConfig.userInfoBean.getCarId());
+        return sb.toString();
+    }
 }
