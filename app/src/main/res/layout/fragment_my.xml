@@ -82,22 +82,11 @@
                 android:id="@+id/rev_car_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:row_entry_bottom_line="2"
+                app:row_entry_bottom_line="1"
                 app:row_entry_can_click="true"
                 app:row_entry_has_right_arrow="true"
                 app:row_entry_icon="@mipmap/car_info_icon"
                 app:row_entry_text="@string/my_car_info" />
-
-
-            <com.jcsoft.emsystem.view.RowEntryView
-                android:id="@+id/rev_remote_lock_car"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:row_entry_bottom_line="1"
-                app:row_entry_can_click="true"
-                app:row_entry_icon="@mipmap/lock_icon"
-                app:row_entry_text="@string/my_remote_lock_car" />
-
 
             <com.jcsoft.emsystem.view.RowEntryView
                 android:id="@+id/rev_deal_insurance"

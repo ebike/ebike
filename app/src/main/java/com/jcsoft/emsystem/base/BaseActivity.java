@@ -256,7 +256,9 @@ public abstract class BaseActivity extends FragmentActivity {
     }
 
     public void onEvent(FinishActivityEvent event) {
-        if (event != null && event.isFinish() && event.getTarget().equals("BaseActivity")) {
+        if (event != null && event.isFinish()
+                && event.getTarget() != null
+                && event.getTarget().equals("BaseActivity")) {
             this.finish();
         }
     }
@@ -273,6 +275,7 @@ public abstract class BaseActivity extends FragmentActivity {
                         AppConfig.loginName = "";
                         AppConfig.password = "";
                         AppConfig.userInfoBean = null;
+                        AppConfig.isExecuteLock = null;
                         AppConfig.isExecuteVF = null;
                         preferencesUtil.setPrefString(BaseActivity.this, AppConfig.LOGIN_NAME, "");
                         preferencesUtil.setPrefString(BaseActivity.this, AppConfig.PASSWORD, "");

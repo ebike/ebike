@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="16dp">
+
+    <View style="@style/style_base_line" />
+
+    <LinearLayout
+        android:id="@+id/ll_48v"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="48V"
+            android:textColor="@color/gray_3" />
+
+        <ImageView
+            android:id="@+id/iv_48v"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/check_mark"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+    <View style="@style/style_base_line" />
+
+    <LinearLayout
+        android:id="@+id/ll_60v"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="60V"
+            android:textColor="@color/gray_3" />
+
+        <ImageView
+            android:id="@+id/iv_60v"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/check_mark"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+    <View style="@style/style_base_line" />
+
+    <LinearLayout
+        android:id="@+id/ll_72v"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="72V"
+            android:textColor="@color/gray_3" />
+
+        <ImageView
+            android:id="@+id/iv_72v"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/check_mark"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+    <View style="@style/style_base_line" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
+
+        <EditText
+            android:id="@+id/et_custom_voltage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="输入其他规格电压"
+            android:inputType="phone" />
+    </LinearLayout>
+
+</LinearLayout>

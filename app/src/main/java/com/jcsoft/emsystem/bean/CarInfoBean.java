@@ -15,6 +15,9 @@ public class CarInfoBean implements Serializable{
     private String carPic;
     private String frameNum;
     private String motorNum;
+    private String controlType;
+    private String voltage;
+    private String upVoltage;
     private int carPrice;
     private String carDate;
 
@@ -91,5 +94,29 @@ public class CarInfoBean implements Serializable{
 
     public String getCarDate() {
         return carDate;
+    }
+
+    public String getControlType() {
+        return controlType;
+    }
+
+    public void setControlType(String controlType) {
+        this.controlType = controlType;
+    }
+
+    public String getVoltage() {
+        return voltage;
+    }
+
+    public void setVoltage(String voltage) {
+        this.voltage = voltage;
+    }
+
+    public String getUpVoltage() {
+        return upVoltage;
+    }
+
+    public void setUpVoltage(String upVoltage) {
+        this.upVoltage = upVoltage;
     }
 }

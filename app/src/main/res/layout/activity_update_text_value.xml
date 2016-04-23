@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_bg"
+    android:orientation="vertical">
+
+    <com.jcsoft.emsystem.view.TopBarView
+        android:id="@+id/top_bar_view"
+        style="@style/style_base_f"
+        app:back_is_finish="true"
+        app:has_center="true"
+        app:has_left="true"
+        app:has_left_clickable="true"
+        app:has_right="true"
+        app:has_right_clickable="true"
+        app:left_icon="@mipmap/back_icon"
+        app:right_text="@string/save" />
+
+    <View
+        style="@style/style_base_line"
+        android:layout_marginTop="16dp" />
+
+    <EditText
+        android:id="@+id/et_field"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingBottom="8dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="8dp"
+        android:textSize="14sp" />
+
+
+    <View style="@style/style_base_line" />
+</LinearLayout>

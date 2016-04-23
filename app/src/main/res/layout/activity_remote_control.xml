@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.jcsoft.emsystem.view.TopBarView
+        android:id="@+id/top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:back_is_finish="true"
+        app:has_center="true"
+        app:has_left="true"
+        app:has_left_clickable="true"
+        app:left_icon="@mipmap/back_icon"
+        app:left_text="@string/top_bar_location" />
+
+    <com.jcsoft.emsystem.view.XiuView
+        android:id="@+id/xv_execute"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/tv_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="16dp"
+        android:textColor="@color/gray_3"
+        android:textSize="14sp"
+        android:text="注：此功能只有设备端远程控制线为一键启动才支持"/>
+
+</LinearLayout>

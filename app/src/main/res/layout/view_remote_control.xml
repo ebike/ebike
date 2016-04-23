@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="16dp">
+
+    <View style="@style/style_base_line" />
+
+    <LinearLayout
+        android:id="@+id/ll_remote_lock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="远程锁车"
+            android:textColor="@color/gray_3" />
+
+        <ImageView
+            android:id="@+id/iv_remote_lock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/check_mark"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+    <View style="@style/style_base_line" />
+
+    <LinearLayout
+        android:id="@+id/ll_voice_seach"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="语音寻车"
+            android:textColor="@color/gray_3" />
+
+        <ImageView
+            android:id="@+id/iv_voice_seach"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/check_mark"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+    <View style="@style/style_base_line" />
+
+    <LinearLayout
+        android:id="@+id/ll_one_key_start"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="16dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="一键启动"
+            android:textColor="@color/gray_3" />
+
+        <ImageView
+            android:id="@+id/iv_one_key_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/check_mark"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+</LinearLayout>

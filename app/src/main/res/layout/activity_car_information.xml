@@ -29,19 +29,32 @@
             android:orientation="vertical">
 
             <com.jcsoft.emsystem.view.RowLabelValueView
-                android:id="@+id/rlvv_brand_models"
+                android:id="@+id/rlvv_brand"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 app:row_label_value_bottom_line="2"
-                app:row_label_value_label="@string/car_information_brand_models"
+                app:row_label_value_can_click="true"
+                app:row_label_value_has_right_arrow="true"
+                app:row_label_value_label="@string/car_information_brand"
                 app:row_label_value_top_line="1" />
+
+            <com.jcsoft.emsystem.view.RowLabelValueView
+                android:id="@+id/rlvv_models"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:row_label_value_bottom_line="2"
+                app:row_label_value_can_click="true"
+                app:row_label_value_has_right_arrow="true"
+                app:row_label_value_label="@string/car_information_models" />
 
             <com.jcsoft.emsystem.view.RowLabelValueView
                 android:id="@+id/rlvv_motor_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:row_label_value_bottom_line="2"
+                app:row_label_value_can_click="true"
+                app:row_label_value_has_right_arrow="true"
                 app:row_label_value_label="@string/car_information_motor_number" />
 
             <com.jcsoft.emsystem.view.RowLabelValueView
@@ -49,13 +62,33 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:row_label_value_bottom_line="2"
+                app:row_label_value_can_click="true"
+                app:row_label_value_has_right_arrow="true"
                 app:row_label_value_label="@string/car_information_frame_number" />
+
+            <com.jcsoft.emsystem.view.RowLabelValueView
+                android:id="@+id/rlvv_remote_control"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:row_label_value_bottom_line="2"
+                app:row_label_value_has_right_arrow="true"
+                app:row_label_value_label="@string/register_remote_control" />
+
+            <com.jcsoft.emsystem.view.RowLabelValueView
+                android:id="@+id/rlvv_voltage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:row_label_value_bottom_line="1"
+                app:row_label_value_has_right_arrow="true"
+                app:row_label_value_label="@string/register_voltage" />
 
             <com.jcsoft.emsystem.view.RowLabelValueView
                 android:id="@+id/rlvv_buy_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:row_label_value_bottom_line="2"
+                app:row_label_value_can_click="true"
+                app:row_label_value_has_right_arrow="true"
                 app:row_label_value_label="@string/car_information_buy_date" />
 
             <com.jcsoft.emsystem.view.RowLabelValueView
@@ -63,6 +96,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:row_label_value_bottom_line="2"
+                app:row_label_value_can_click="true"
+                app:row_label_value_has_right_arrow="true"
                 app:row_label_value_label="@string/car_information_buy_price" />
 
             <com.jcsoft.emsystem.view.RowLabelValueView
@@ -70,6 +105,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:row_label_value_bottom_line="1"
+                app:row_label_value_can_click="true"
+                app:row_label_value_has_right_arrow="true"
                 app:row_label_value_label="@string/car_information_car_photo" />
 
             <ImageView

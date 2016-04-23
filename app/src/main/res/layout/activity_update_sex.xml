@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_bg"
+    android:orientation="vertical">
+
+    <com.jcsoft.emsystem.view.TopBarView
+        android:id="@+id/top_bar_view"
+        style="@style/style_base_f"
+        app:back_is_finish="true"
+        app:center_text="@string/sex"
+        app:has_center="true"
+        app:has_left="true"
+        app:has_left_clickable="true"
+        app:left_icon="@mipmap/back_icon" />
+
+    <View
+        style="@style/style_base_line"
+        android:layout_marginTop="16dp" />
+
+    <RelativeLayout
+        android:id="@+id/relayout_man"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/tv_man"
+            style="@style/black_14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:text="男" />
+
+        <ImageView
+            android:id="@+id/iv_man_selected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/check_mark"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+    <View
+        style="@style/style_base_line"
+        android:layout_marginLeft="16dp" />
+
+    <RelativeLayout
+        android:id="@+id/relayout_woman"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/tv_woman"
+            style="@style/black_14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:text="女" />
+
+        <ImageView
+            android:id="@+id/iv_woman_selected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/check_mark"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+    <View style="@style/style_base_line" />
+</LinearLayout>

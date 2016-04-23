@@ -20,7 +20,7 @@
         app:has_right_clickable="true"
         app:left_icon="@mipmap/back_icon"
         app:left_text="@string/top_bar_login"
-        app:right_text="@string/top_bar_submit"/>
+        app:right_text="@string/top_bar_submit" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -130,9 +130,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:row_label_value_bottom_line="2"
+                app:row_label_value_has_right_arrow="true"
                 app:row_label_value_label="@string/register_area"
-                app:row_label_value_value="@string/app_require_check"
-                app:row_label_value_has_right_arrow="true" />
+                app:row_label_value_value="@string/app_require_check" />
 
             <com.jcsoft.emsystem.view.RowLabelEditView
                 android:id="@+id/rlev_address"
@@ -141,6 +141,26 @@
                 app:row_label_edit_bottom_line="1"
                 app:row_label_edit_hint="@string/app_require_input"
                 app:row_label_edit_label="@string/register_address" />
+
+            <com.jcsoft.emsystem.view.RowLabelValueView
+                android:id="@+id/rlvv_remote_control"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:row_label_value_top_line="1"
+                app:row_label_value_bottom_line="2"
+                app:row_label_value_has_right_arrow="true"
+                app:row_label_value_label="@string/register_remote_control"
+                app:row_label_value_value="@string/app_require_input" />
+
+            <com.jcsoft.emsystem.view.RowLabelValueView
+                android:id="@+id/rlvv_voltage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:row_label_value_bottom_line="1"
+                app:row_label_value_has_right_arrow="true"
+                app:row_label_value_label="@string/register_voltage"
+                app:row_label_value_value="@string/app_require_input" />
 
             <com.jcsoft.emsystem.view.RowLabelEditView
                 android:id="@+id/rlev_dealer_number"

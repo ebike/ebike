@@ -9,6 +9,7 @@ import com.jcsoft.emsystem.adapter.WheelProvinceAdapter;
 import com.jcsoft.emsystem.base.LocationJson;
 import com.jcsoft.emsystem.db.CityInfoDao;
 import com.jcsoft.emsystem.db.DistrictInfoDao;
+import com.jcsoft.emsystem.utils.CommonUtils;
 
 import java.util.List;
 
@@ -143,6 +144,45 @@ public class AddressThreeWheelViewDialog extends AbsDialog implements View.OnCli
         adapter3 = new WheelProvinceAdapter(mContext, districtList);
         wheelView_view3.setViewAdapter(adapter3);
         wheelView_view3.setCurrentItem(wheelDistrictIndex);
+    }
+
+    public void setData(List<LocationJson> beanList, String provinceName, String cityName, String districtName) {
+        setProvinceList(beanList);
+        if (!CommonUtils.strIsEmpty(provinceName)) {
+            wheelProvinceIndex = getWheelIndex(beanList, provinceName);
+        }
+        adapter = new WheelProvinceAdapter(mContext, beanList);
+        wheelView_view1.setViewAdapter(adapter);
+        wheelView_view1.setCurrentItem(wheelProvinceIndex);
+
+        LocationJson areaBean = beanList.get(wheelView_view1.getCurrentItem());
+        CityInfoDao cityDao = new CityInfoDao(getContext());
+        List<LocationJson> stationList = cityDao.queryByProvinceId(areaBean.getId());
+        if (!CommonUtils.strIsEmpty(cityName)) {
+            wheelCityIndex = getWheelIndex(stationList, cityName);
+        }
+        adapter2 = new WheelProvinceAdapter(mContext, stationList);
+        wheelView_view2.setViewAdapter(adapter2);
+        wheelView_view2.setCurrentItem(wheelCityIndex);
+
+        DistrictInfoDao districtDao = new DistrictInfoDao(getContext());
+        List<LocationJson> districtList = districtDao.queryByCityId(stationList.get(wheelCityIndex).getId());
+        if (!CommonUtils.strIsEmpty(districtName)) {
+            wheelDistrictIndex = getWheelIndex(districtList, districtName);
+        }
+        adapter3 = new WheelProvinceAdapter(mContext, districtList);
+        wheelView_view3.setViewAdapter(adapter3);
+        wheelView_view3.setCurrentItem(wheelDistrictIndex);
+    }
+
+    private int getWheelIndex(List<LocationJson> list, String name) {
+        for (int i = 0; i < list.size(); i++) {
+            LocationJson locationJson = list.get(i);
+            if (locationJson.getName().equals(name)) {
+                return i;
+            }
+        }
+        return 0;
     }
 
     @Override

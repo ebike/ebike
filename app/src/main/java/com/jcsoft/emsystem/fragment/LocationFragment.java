@@ -48,6 +48,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jcsoft.emsystem.R;
 import com.jcsoft.emsystem.activity.MainActivity;
+import com.jcsoft.emsystem.activity.RemoteControlActivity;
 import com.jcsoft.emsystem.activity.SimpleNaviActivity;
 import com.jcsoft.emsystem.base.LocInfoBean;
 import com.jcsoft.emsystem.bean.ResponseBean;
@@ -457,53 +458,10 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
                 changeMapType(AMap.MAP_TYPE_NORMAL);
                 break;
             case R.id.iv_lock://语音锁车/解锁
-                if (AppConfig.isExecuteLock != null) {
-                    if (AppConfig.isExecuteLock == 1) {
-                        CommonUtils.showCustomDialogSignle3(getActivity(), "", "正在开启语音寻车，请稍等。");
-                    } else if (AppConfig.isExecuteLock == 0) {
-                        CommonUtils.showCustomDialogSignle3(getActivity(), "", "正在关闭语音寻车，请稍等。");
-                    }
-                } else {
-                    if (locInfoBean.getLock().equals("1")) {
-                        CommonUtils.showCustomDialog0(getActivity(), "提示", "您确定要关闭语音寻车吗？", new DSingleDialogCallback() {
-                            @Override
-                            public void onPositiveButtonClick(String editText) {
-                                RequestParams params = DRequestParamsUtils.getRequestParams_Header(HttpConstants.getUnLockBikeUrl());
-                                DHttpUtils.get_String((MainActivity) getActivity(), true, params, new DCommonCallback<String>() {
-                                    @Override
-                                    public void onSuccess(String result) {
-                                        ResponseBean<String> responseBean = new Gson().fromJson(result, new TypeToken<ResponseBean<String>>() {
-                                        }.getType());
-                                        if (responseBean != null) {
-                                            AppConfig.isExecuteLock = 0;
-                                            AppConfig.lockCarType = 1;
-                                            showShortText("关闭命令发送成功");
-                                        }
-                                    }
-                                });
-                            }
-                        });
-                    } else {
-                        CommonUtils.showCustomDialog0(getActivity(), "提示", "您确定要开启语音寻车吗？", new DSingleDialogCallback() {
-                            @Override
-                            public void onPositiveButtonClick(String editText) {
-                                RequestParams params = DRequestParamsUtils.getRequestParams_Header(HttpConstants.getlockBikeUrl());
-                                DHttpUtils.get_String((MainActivity) getActivity(), true, params, new DCommonCallback<String>() {
-                                    @Override
-                                    public void onSuccess(String result) {
-                                        ResponseBean<String> responseBean = new Gson().fromJson(result, new TypeToken<ResponseBean<String>>() {
-                                        }.getType());
-                                        if (responseBean != null) {
-                                            AppConfig.isExecuteLock = 1;
-                                            AppConfig.lockCarType = 1;
-                                            showShortText("开启命令发送成功");
-                                        }
-                                    }
-                                });
-                            }
-                        });
-                    }
-                }
+                Intent intent = new Intent(getActivity(), RemoteControlActivity.class);
+                intent.putExtra("isLock", locInfoBean.getLock());
+                intent.putExtra("controlType", locInfoBean.getControlType());
+                startActivity(intent);
                 break;
             case R.id.iv_trajectory://轨迹
                 //选择时间弹出框

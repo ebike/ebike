@@ -4,6 +4,8 @@
     <string name="app_id">输入您讯飞的appid</string>
     <string name="app_require_input">必填</string>
     <string name="app_require_check">必选</string>
+    <string name="save">保存</string>
+    <string name="sex">性别</string>
 
     <!-- preference -->
     <string name="preference_default_tts_role">xiaoyan</string>
@@ -116,10 +118,10 @@
     <string name="base_information_address">详细地址</string>
 
     <!-- car_information -->
-    <string name="car_information_brand_models">品牌型号</string>
+    <string name="car_information_brand">车辆品牌</string>
+    <string name="car_information_models">车辆型号</string>
     <string name="car_information_motor_number">电机编号</string>
     <string name="car_information_frame_number">车架编号</string>
-    <string name="car_information_car_color">车辆颜色</string>
     <string name="car_information_buy_date">购买日期</string>
     <string name="car_information_buy_price">购买价格</string>
     <string name="car_information_car_photo">车辆照片</string>
@@ -152,6 +154,8 @@
     <string name="register_phone">联系电话</string>
     <string name="register_area">所在地区</string>
     <string name="register_address">详细地址</string>
+    <string name="register_remote_control">远程控制</string>
+    <string name="register_voltage">电动车电压</string>
     <string name="register_dealer_number">经销商编号</string>
     <string name="register_salesman_name">业务员姓名</string>
     <string name="register_submit">提交</string>

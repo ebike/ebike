@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.jcsoft.emsystem">
+    package="com.jcsoft.emsystem" >
 
     <permission
         android:name="com.jcsoft.emsystem.permission.JPUSH_MESSAGE"
@@ -62,7 +62,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme" >
 
         <!-- 高德地图 -->
         <meta-data
@@ -74,7 +74,7 @@
             android:name="cn.jpush.android.ui.PushActivity"
             android:configChanges="orientation|keyboardHidden"
             android:exported="false"
-            android:theme="@android:style/Theme.NoTitleBar">
+            android:theme="@android:style/Theme.NoTitleBar" >
             <intent-filter>
                 <action android:name="cn.jpush.android.ui.PushActivity" />
 
@@ -93,7 +93,7 @@
         <service
             android:name="cn.jpush.android.service.PushService"
             android:enabled="true"
-            android:exported="false">
+            android:exported="false" >
             <intent-filter>
                 <action android:name="cn.jpush.android.intent.REGISTER" />
                 <action android:name="cn.jpush.android.intent.REPORT" />
@@ -107,7 +107,7 @@
         <service
             android:name="cn.jpush.android.service.DaemonService"
             android:enabled="true"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="cn.jpush.android.intent.DaemonService" />
 
@@ -119,8 +119,8 @@
         <receiver
             android:name="cn.jpush.android.service.PushReceiver"
             android:enabled="true"
-            android:exported="false">
-            <intent-filter android:priority="1000">
+            android:exported="false" >
+            <intent-filter android:priority="1000" >
                 <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY" />
                 <!-- Required  显示通知栏 -->
                 <category android:name="com.jcsoft.emsystem" />
@@ -147,7 +147,7 @@
         <receiver
             android:name=".receiver.JReceiver"
             android:enabled="true"
-            android:exported="false">
+            android:exported="false" >
             <intent-filter>
                 <action android:name="cn.jpush.android.intent.REGISTRATION" />
                 <!-- Required  用户注册SDK的intent -->
@@ -178,7 +178,7 @@
         <activity
             android:name=".activity.SplashActivity"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -197,11 +197,21 @@
         <activity
             android:name=".activity.SimpleNaviActivity"
             android:configChanges="orientation|keyboardHidden" />
-        <activity android:name=".activity.BaseInformationActivity" />
-        <activity android:name=".activity.CarInformationActivity" />
-        <activity android:name=".activity.InsuranceClauseActivity" />
-        <activity android:name=".activity.SettingActivity" />
-        <activity android:name=".activity.AboutActivity" />
+        <activity
+            android:name=".activity.BaseInformationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.CarInformationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.InsuranceClauseActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.SettingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.AboutActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.RegisterActivity"
             android:screenOrientation="portrait"
@@ -221,6 +231,15 @@
         <activity
             android:name=".activity.PhotoSingleSelectionActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.UpdateTextValueActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible" />
+        <activity
+            android:name=".activity.UpdateSexActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activity.RemoteControlActivity" >
+        </activity>
     </application>
 
 </manifest>

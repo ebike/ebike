@@ -21,6 +21,7 @@ public class LocInfoBean {
     private int vfLon;
     private int vfLat;
     private int vfStatus;
+    private String controlType;
 
     public LocInfoBean() {
     }
@@ -159,5 +160,13 @@ public class LocInfoBean {
 
     public int getVfStatus() {
         return vfStatus;
+    }
+
+    public String getControlType() {
+        return controlType;
+    }
+
+    public void setControlType(String controlType) {
+        this.controlType = controlType;
     }
 }

@@ -1,8 +1,14 @@
 package com.jcsoft.emsystem.activity;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CompoundButton;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ToggleButton;
 
 import com.google.gson.Gson;
@@ -35,7 +41,7 @@ import java.util.Map;
 /**
  * 注册账号
  */
-public class RegisterActivity extends BaseActivity {
+public class RegisterActivity extends BaseActivity implements View.OnClickListener {
     @ViewInject(R.id.top_bar)
     TopBarView topBarView;
     @ViewInject(R.id.rlev_imei)
@@ -60,6 +66,28 @@ public class RegisterActivity extends BaseActivity {
     RowLabelEditView dealerNumberRowLabelEditView;
     @ViewInject(R.id.rlev_salesman_name)
     RowLabelEditView salesmanNameRowLabelEditView;
+
+    @ViewInject(R.id.rlvv_remote_control)
+    RowLabelValueView remoteControlView;
+
+    LinearLayout remoteLockLayout;
+    ImageView remoteLockView;
+    LinearLayout voiceSeachLayout;
+    ImageView voiceSeachView;
+    LinearLayout oneKeyStartLayout;
+    ImageView oneKeyStartView;
+
+    @ViewInject(R.id.rlvv_voltage)
+    RowLabelValueView voltageView;
+
+    LinearLayout v48Layout;
+    ImageView v48View;
+    LinearLayout v60Layout;
+    ImageView v60View;
+    LinearLayout v72Layout;
+    ImageView v72View;
+    EditText customVoltageText;
+
     private AddressThreeWheelViewDialog dialog;
     private ProvinceInfoDao provinceDao;
     private List<LocationJson> mProvinceList;
@@ -70,11 +98,19 @@ public class RegisterActivity extends BaseActivity {
     private String cityName;
     private String districtName;
     private String sex;
+    private View remoteControlDialogView;
+    private Integer remoteControlTempValue;
+    private Integer remoteControlValue;
+    private View voltageDialogView;
+    private Integer voltageTempValue;
+    private Integer voltageValue;
 
     @Override
     public void loadXml() {
         setContentView(R.layout.activity_register);
         x.view().inject(this);
+
+//        voltageDialogView = LayoutInflater.from(this).inflate(R.layout.view_voltage, null);
     }
 
     @Override
@@ -153,6 +189,44 @@ public class RegisterActivity extends BaseActivity {
                 });
             }
         });
+        //选择远程控制
+        remoteControlView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                initRemoteControlDialogView(remoteControlValue);
+                CommonUtils.showCustomDialog1(RegisterActivity.this, "选择远程控制功能", remoteControlDialogView, new DSingleDialogCallback() {
+                    @Override
+                    public void onPositiveButtonClick(String editText) {
+                        if (remoteControlTempValue != null) {
+                            remoteControlValue = remoteControlTempValue;
+                            if (remoteControlValue == 1) {
+                                remoteControlView.setValue("远程锁车");
+                            } else if (remoteControlValue == 2) {
+                                remoteControlView.setValue("语音寻车");
+                            } else if (remoteControlValue == 3) {
+                                remoteControlView.setValue("一键启动");
+                            }
+                        }
+                    }
+                });
+            }
+        });
+        //选择电动车电压
+        voltageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                initVoltageDialogView(voltageValue);
+                CommonUtils.showCustomDialog1(RegisterActivity.this, "选择电动车电压", voltageDialogView, new DSingleDialogCallback() {
+                    @Override
+                    public void onPositiveButtonClick(String editText) {
+                        if (voltageTempValue != null) {
+                            voltageValue = voltageTempValue;
+                            voltageView.setValue(voltageValue + "V");
+                        }
+                    }
+                });
+            }
+        });
         //提交
         topBarView.setRightCallback(new TopBarView.TopBarRightCallback() {
             @Override
@@ -199,6 +273,12 @@ public class RegisterActivity extends BaseActivity {
                     addressRowLabelEditView.setHintColor(R.color.orange_dark);
                     return;
                 }
+                if (remoteControlValue == null) {
+                    remoteControlView.setValueColor(R.color.orange_dark);
+                }
+                if (voltageValue == null) {
+                    voltageView.setValueColor(R.color.orange_dark);
+                }
                 //整理参数
                 Map<String, String> map = new HashMap<String, String>();
                 map.put("carId", equipmentSerialNumberRowLabelValueView.getValue());
@@ -213,6 +293,8 @@ public class RegisterActivity extends BaseActivity {
                 map.put("address", addressRowLabelEditView.getValue());
                 map.put("dealerId", dealerNumberRowLabelEditView.getValue());
                 map.put("salesman", salesmanNameRowLabelEditView.getValue());
+                map.put("controlType", remoteControlValue + "");
+                map.put("voltage", voltageValue + "");
                 //提交
                 RequestParams params = DRequestParamsUtils.getRequestParams(HttpConstants.getRegDeviceUrl(), map);
                 DHttpUtils.post_String(RegisterActivity.this, true, params, new DCommonCallback<String>() {
@@ -239,5 +321,142 @@ public class RegisterActivity extends BaseActivity {
     @Override
     public void setData() {
 
+    }
+
+    private View initRemoteControlDialogView(Integer remoteControlValue) {
+        remoteControlDialogView = LayoutInflater.from(this).inflate(R.layout.view_remote_control, null);
+        remoteLockLayout = (LinearLayout) remoteControlDialogView.findViewById(R.id.ll_remote_lock);
+        voiceSeachLayout = (LinearLayout) remoteControlDialogView.findViewById(R.id.ll_voice_seach);
+        oneKeyStartLayout = (LinearLayout) remoteControlDialogView.findViewById(R.id.ll_one_key_start);
+        remoteLockView = (ImageView) remoteControlDialogView.findViewById(R.id.iv_remote_lock);
+        voiceSeachView = (ImageView) remoteControlDialogView.findViewById(R.id.iv_voice_seach);
+        oneKeyStartView = (ImageView) remoteControlDialogView.findViewById(R.id.iv_one_key_start);
+
+        if (remoteControlValue != null) {
+            if (remoteControlValue == 1) {
+                remoteLockView.setVisibility(View.VISIBLE);
+                voiceSeachView.setVisibility(View.GONE);
+                oneKeyStartView.setVisibility(View.GONE);
+            } else if (remoteControlValue == 2) {
+                remoteLockView.setVisibility(View.GONE);
+                voiceSeachView.setVisibility(View.VISIBLE);
+                oneKeyStartView.setVisibility(View.GONE);
+            } else if (remoteControlValue == 3) {
+                remoteLockView.setVisibility(View.GONE);
+                voiceSeachView.setVisibility(View.GONE);
+                oneKeyStartView.setVisibility(View.VISIBLE);
+            }
+        }
+
+        remoteLockLayout.setOnClickListener(this);
+        voiceSeachLayout.setOnClickListener(this);
+        oneKeyStartLayout.setOnClickListener(this);
+
+        return remoteControlDialogView;
+    }
+
+    private View initVoltageDialogView(Integer voltageValue) {
+        voltageDialogView = LayoutInflater.from(this).inflate(R.layout.view_voltage, null);
+        v48Layout = (LinearLayout) voltageDialogView.findViewById(R.id.ll_48v);
+        v60Layout = (LinearLayout) voltageDialogView.findViewById(R.id.ll_60v);
+        v72Layout = (LinearLayout) voltageDialogView.findViewById(R.id.ll_72v);
+        v48View = (ImageView) voltageDialogView.findViewById(R.id.iv_48v);
+        v60View = (ImageView) voltageDialogView.findViewById(R.id.iv_60v);
+        v72View = (ImageView) voltageDialogView.findViewById(R.id.iv_72v);
+        customVoltageText = (EditText) voltageDialogView.findViewById(R.id.et_custom_voltage);
+
+        if (voltageValue != null) {
+            if (voltageValue == 48) {
+                v48View.setVisibility(View.VISIBLE);
+                v60View.setVisibility(View.GONE);
+                v72View.setVisibility(View.GONE);
+                customVoltageText.setText("");
+            } else if (voltageValue == 60) {
+                v48View.setVisibility(View.GONE);
+                v60View.setVisibility(View.VISIBLE);
+                v72View.setVisibility(View.GONE);
+                customVoltageText.setText("");
+            } else if (voltageValue == 72) {
+                v48View.setVisibility(View.GONE);
+                v60View.setVisibility(View.GONE);
+                v72View.setVisibility(View.VISIBLE);
+                customVoltageText.setText("");
+            }else{
+                customVoltageText.setText(voltageValue);
+            }
+        }
+
+        v48Layout.setOnClickListener(this);
+        v60Layout.setOnClickListener(this);
+        v72Layout.setOnClickListener(this);
+        customVoltageText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String value = customVoltageText.getText().toString().trim();
+                if (!CommonUtils.strIsEmpty(value)) {
+                    voltageTempValue = Integer.valueOf(value);
+                    v48View.setVisibility(View.GONE);
+                    v60View.setVisibility(View.GONE);
+                    v72View.setVisibility(View.GONE);
+                }
+            }
+        });
+
+        return voltageDialogView;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.ll_remote_lock:
+                remoteControlTempValue = 1;
+                remoteLockView.setVisibility(View.VISIBLE);
+                voiceSeachView.setVisibility(View.GONE);
+                oneKeyStartView.setVisibility(View.GONE);
+                break;
+            case R.id.ll_voice_seach:
+                remoteControlTempValue = 2;
+                remoteLockView.setVisibility(View.GONE);
+                voiceSeachView.setVisibility(View.VISIBLE);
+                oneKeyStartView.setVisibility(View.GONE);
+                break;
+            case R.id.ll_one_key_start:
+                remoteControlTempValue = 3;
+                remoteLockView.setVisibility(View.GONE);
+                voiceSeachView.setVisibility(View.GONE);
+                oneKeyStartView.setVisibility(View.VISIBLE);
+                break;
+            case R.id.ll_48v:
+                voltageTempValue = 48;
+                v48View.setVisibility(View.VISIBLE);
+                v60View.setVisibility(View.GONE);
+                v72View.setVisibility(View.GONE);
+                customVoltageText.setText("");
+                break;
+            case R.id.ll_60v:
+                voltageTempValue = 60;
+                v48View.setVisibility(View.GONE);
+                v60View.setVisibility(View.VISIBLE);
+                v72View.setVisibility(View.GONE);
+                customVoltageText.setText("");
+                break;
+            case R.id.ll_72v:
+                voltageTempValue = 72;
+                v48View.setVisibility(View.GONE);
+                v60View.setVisibility(View.GONE);
+                v72View.setVisibility(View.VISIBLE);
+                customVoltageText.setText("");
+                break;
+        }
     }
 }
