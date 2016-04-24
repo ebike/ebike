@@ -43,6 +43,16 @@ public class XiuView extends FrameLayout {
     private FrameLayout fl_move_circle;
 
     /**
+     * 波纹背景资源
+     */
+    private int circleResource;
+
+    /**
+     * 是否循环波纹
+     */
+    private boolean isCycle = true;
+
+    /**
      * 按钮点击监听
      */
     private OnBtnPressListener onBtnPressListener;
@@ -117,7 +127,11 @@ public class XiuView extends FrameLayout {
         LayoutParams lp = new LayoutParams(dip2px(getContext(), 120), dip2px(getContext(), 120));
         lp.gravity = Gravity.CENTER;
         imageView.setLayoutParams(lp);
-        imageView.setImageResource(R.mipmap.bg_control_close);
+        if (circleResource != 0) {
+            imageView.setImageResource(circleResource);
+        } else {
+            imageView.setImageResource(R.mipmap.bg_control_close);
+        }
         fl_move_circle.addView(imageView);
         ObjectAnimator outCircleAnimX = ObjectAnimator.ofFloat(imageView, "scaleX", 1f, 3f);
         ObjectAnimator outCircleAnimY = ObjectAnimator.ofFloat(imageView, "scaleY", 1f, 3f);
@@ -138,7 +152,7 @@ public class XiuView extends FrameLayout {
             public void onAnimationEnd(Animator animation) {
                 //移除掉刚才添加的波纹
                 fl_move_circle.removeView(imageView);
-                if (fl_move_circle.getChildCount() == 0) {
+                if (fl_move_circle.getChildCount() == 0 && isCycle) {
                     handler.sendEmptyMessage(1);
                 }
             }
@@ -216,10 +230,16 @@ public class XiuView extends FrameLayout {
     }
 
     /**
-     * 关闭波纹动画
+     * 是否循环波纹动画
      */
-    public void closeMoveCircle() {
-        handler.removeMessages(1);
+    public void setIsCycle(boolean isCycle) {
+        this.isCycle = isCycle;
+    }
+
+    /**
+     * 清除波纹
+     */
+    public void clearMoveCircle() {
         if (fl_move_circle.getChildCount() > 0) {
             fl_move_circle.removeAllViews();
         }
@@ -228,5 +248,9 @@ public class XiuView extends FrameLayout {
     @Override
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public void setCircleResource(int circleResource) {
+        this.circleResource = circleResource;
     }
 }

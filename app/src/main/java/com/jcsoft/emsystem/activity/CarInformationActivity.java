@@ -36,6 +36,7 @@ import com.jcsoft.emsystem.http.HttpConstants;
 import com.jcsoft.emsystem.utils.CommonUtils;
 import com.jcsoft.emsystem.utils.DateUtil;
 import com.jcsoft.emsystem.utils.ImageCompress;
+import com.jcsoft.emsystem.utils.KeyboardUtils;
 import com.jcsoft.emsystem.view.ActionSheetDialog;
 import com.jcsoft.emsystem.view.RowLabelValueView;
 
@@ -197,6 +198,7 @@ public class CarInformationActivity extends BaseActivity implements View.OnClick
                 intent.putExtra("fieldName_CH", getString(R.string.car_information_brand));
                 intent.putExtra("fieldValue", carInfoBean.getCarBrand());
                 intent.putExtra("fieldName", "carBrand");
+                intent.putExtra("length", 32);
                 startActivity(intent);
                 break;
             case R.id.rlvv_models:
@@ -205,6 +207,7 @@ public class CarInformationActivity extends BaseActivity implements View.OnClick
                 intent.putExtra("fieldName_CH", getString(R.string.car_information_models));
                 intent.putExtra("fieldValue", carInfoBean.getCarModel());
                 intent.putExtra("fieldName", "carModel");
+                intent.putExtra("length", 16);
                 startActivity(intent);
                 break;
             case R.id.rlvv_motor_number:
@@ -213,6 +216,7 @@ public class CarInformationActivity extends BaseActivity implements View.OnClick
                 intent.putExtra("fieldName_CH", getString(R.string.car_information_motor_number));
                 intent.putExtra("fieldValue", carInfoBean.getMotorNum());
                 intent.putExtra("fieldName", "motorNum");
+                intent.putExtra("length", 32);
                 startActivity(intent);
                 break;
             case R.id.rlvv_frame_number:
@@ -221,6 +225,7 @@ public class CarInformationActivity extends BaseActivity implements View.OnClick
                 intent.putExtra("fieldName_CH", getString(R.string.car_information_frame_number));
                 intent.putExtra("fieldValue", carInfoBean.getFrameNum());
                 intent.putExtra("fieldName", "frameNum");
+                intent.putExtra("length", 32);
                 startActivity(intent);
                 break;
             case R.id.rlvv_remote_control:
@@ -244,9 +249,15 @@ public class CarInformationActivity extends BaseActivity implements View.OnClick
                 break;
             case R.id.rlvv_voltage:
                 initVoltageDialogView(voltageValue);
-                CommonUtils.showCustomDialog1(this, "选择电动车电压", voltageDialogView, new DSingleDialogCallback() {
+                CommonUtils.showCustomDialog2(this, "选择电动车电压", voltageDialogView, new DSingleDialogCallback() {
                     @Override
                     public void onPositiveButtonClick(String editText) {
+                        KeyboardUtils.hideSoftInput(CarInformationActivity.this);
+                    }
+                }, new DSingleDialogCallback() {
+                    @Override
+                    public void onPositiveButtonClick(String editText) {
+                        KeyboardUtils.hideSoftInput(CarInformationActivity.this);
                         if (voltageTempValue != null) {
                             voltageValue = voltageTempValue;
                             voltageView.setValue(voltageValue + "V");
@@ -268,6 +279,8 @@ public class CarInformationActivity extends BaseActivity implements View.OnClick
                 intent.putExtra("fieldName_CH", getString(R.string.car_information_buy_price));
                 intent.putExtra("fieldValue", carInfoBean.getCarPrice() + "");
                 intent.putExtra("fieldName", "carPrice");
+                intent.putExtra("length", 11);
+                intent.putExtra("fieldName", "phone");
                 startActivity(intent);
                 break;
             case R.id.rlvv_car_photo:
@@ -298,6 +311,7 @@ public class CarInformationActivity extends BaseActivity implements View.OnClick
                 v60View.setVisibility(View.GONE);
                 v72View.setVisibility(View.GONE);
                 customVoltageText.setText("");
+                CommonUtils.hideSoftInput(this, customVoltageText);
                 break;
             case R.id.ll_60v:
                 voltageTempValue = 60;
@@ -305,6 +319,7 @@ public class CarInformationActivity extends BaseActivity implements View.OnClick
                 v60View.setVisibility(View.VISIBLE);
                 v72View.setVisibility(View.GONE);
                 customVoltageText.setText("");
+                CommonUtils.hideSoftInput(this, customVoltageText);
                 break;
             case R.id.ll_72v:
                 voltageTempValue = 72;
@@ -312,6 +327,7 @@ public class CarInformationActivity extends BaseActivity implements View.OnClick
                 v60View.setVisibility(View.GONE);
                 v72View.setVisibility(View.VISIBLE);
                 customVoltageText.setText("");
+                CommonUtils.hideSoftInput(this, customVoltageText);
                 break;
         }
     }
@@ -375,7 +391,7 @@ public class CarInformationActivity extends BaseActivity implements View.OnClick
                 v72View.setVisibility(View.VISIBLE);
                 customVoltageText.setText("");
             } else {
-                customVoltageText.setText(voltageValue);
+                customVoltageText.setText(voltageValue + "");
             }
         }
 

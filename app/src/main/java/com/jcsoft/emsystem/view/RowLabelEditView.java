@@ -6,6 +6,7 @@ import android.text.Editable;
 import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.text.method.DigitsKeyListener;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -193,6 +194,11 @@ public class RowLabelEditView extends RelativeLayout {
     //设置输入长度
     public void setEditLength(int length) {
         valueEditText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(length)});
+    }
+
+    //设置输入格式
+    public void setEditFormat(String digits){
+        valueEditText.setKeyListener(DigitsKeyListener.getInstance(digits));
     }
 
 }

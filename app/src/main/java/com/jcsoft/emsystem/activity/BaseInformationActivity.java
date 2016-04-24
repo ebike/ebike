@@ -2,6 +2,7 @@ package com.jcsoft.emsystem.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 
 import com.google.gson.Gson;
@@ -31,7 +32,7 @@ import java.util.Map;
 /**
  * 基本资料
  */
-public class BaseInformationActivity extends BaseActivity implements View.OnClickListener{
+public class BaseInformationActivity extends BaseActivity implements View.OnClickListener {
     @ViewInject(R.id.rlvv_equipment_serial_number)
     RowLabelValueView equipmentSerialNumberView;
     @ViewInject(R.id.rlvv_imei)
@@ -102,6 +103,7 @@ public class BaseInformationActivity extends BaseActivity implements View.OnClic
         nameView.setOnClickListener(this);
         sexView.setOnClickListener(this);
         phoneView.setOnClickListener(this);
+        idCardView.setOnClickListener(this);
         areaView.setOnClickListener(this);
         addressView.setOnClickListener(this);
     }
@@ -137,6 +139,7 @@ public class BaseInformationActivity extends BaseActivity implements View.OnClic
                 intent.putExtra("fieldName_CH", getString(R.string.base_information_name));
                 intent.putExtra("fieldValue", userInfoBean.getUserName());
                 intent.putExtra("fieldName", "userName");
+                intent.putExtra("length", 32);
                 startActivity(intent);
                 break;
             case R.id.rlvv_sex:
@@ -148,6 +151,18 @@ public class BaseInformationActivity extends BaseActivity implements View.OnClic
                 intent.putExtra("fieldName_CH", getString(R.string.base_information_phone));
                 intent.putExtra("fieldValue", userInfoBean.getPhone());
                 intent.putExtra("fieldName", "phone");
+                intent.putExtra("inputType", InputType.TYPE_CLASS_PHONE);
+                intent.putExtra("length", 11);
+                startActivity(intent);
+                break;
+            case R.id.rlvv_id_card:
+                intent = new Intent(this, UpdateTextValueActivity.class);
+                intent.putExtra("type", 1);
+                intent.putExtra("fieldName_CH", getString(R.string.base_information_id_card));
+                intent.putExtra("fieldValue", userInfoBean.getIdNum());
+                intent.putExtra("fieldName", "idNum");
+                intent.putExtra("isIdcard", true);
+                intent.putExtra("length", 18);
                 startActivity(intent);
                 break;
             case R.id.rlvv_area:
@@ -188,6 +203,7 @@ public class BaseInformationActivity extends BaseActivity implements View.OnClic
                 intent.putExtra("fieldName_CH", getString(R.string.base_information_address));
                 intent.putExtra("fieldValue", userInfoBean.getAddress());
                 intent.putExtra("fieldName", "address");
+                intent.putExtra("length", 64);
                 startActivity(intent);
                 break;
         }

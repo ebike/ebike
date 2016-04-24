@@ -80,6 +80,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:row_label_value_bottom_line="2"
+        app:row_label_value_has_right_arrow="true"
         app:row_label_value_label="@string/base_information_id_card" />
 
     <com.jcsoft.emsystem.view.RowLabelValueView

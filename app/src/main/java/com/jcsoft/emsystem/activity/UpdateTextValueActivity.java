@@ -1,6 +1,8 @@
 package com.jcsoft.emsystem.activity;
 
 import android.os.Bundle;
+import android.text.InputFilter;
+import android.text.method.DigitsKeyListener;
 import android.widget.EditText;
 
 import com.google.gson.Gson;
@@ -35,6 +37,9 @@ public class UpdateTextValueActivity extends BaseActivity {
     private String fieldName;
     private String fieldValue;
     private String fieldName_CH;
+    private Integer inputType;
+    private Integer length;
+    private boolean isIdcard;
 
     @Override
     public void loadXml() {
@@ -48,12 +53,25 @@ public class UpdateTextValueActivity extends BaseActivity {
         fieldName_CH = getIntent().getStringExtra("fieldName_CH");
         fieldValue = getIntent().getStringExtra("fieldValue");
         fieldName = getIntent().getStringExtra("fieldName");
+        inputType = getIntent().getIntExtra("inputType", -1);
+        length = getIntent().getIntExtra("length", -1);
+        isIdcard = getIntent().getBooleanExtra("isIdcard", false);
     }
 
     @Override
     public void init() {
         topBarView.setCenterTextView(fieldName_CH);
         fieldEditText.setText(fieldValue);
+        if (inputType != null && inputType != -1) {
+            fieldEditText.setInputType(inputType);
+        }
+        if (length != null && length != -1) {
+            fieldEditText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(length)});
+        }
+        if(isIdcard){
+            String digits = "0123456789xX";
+            fieldEditText.setKeyListener(DigitsKeyListener.getInstance(digits));
+        }
         fieldEditText.requestFocus();
     }
 

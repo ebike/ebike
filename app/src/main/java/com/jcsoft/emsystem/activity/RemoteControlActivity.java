@@ -54,23 +54,29 @@ public class RemoteControlActivity extends BaseActivity {
             if (controlType.equals("1")) {
                 controlTypeName = "远程锁车";
                 if (isLock.equals("1")) {
-                    executeView.setBtnNormalResource(R.mipmap.icon_lock_open);
-                } else {
+                    executeView.setCircleResource(R.mipmap.bg_control_close);
                     executeView.setBtnNormalResource(R.mipmap.icon_lock_close);
+                } else {
+                    executeView.setCircleResource(R.mipmap.bg_control_open);
+                    executeView.setBtnNormalResource(R.mipmap.icon_lock_open);
                 }
             } else if (controlType.equals("2")) {
                 controlTypeName = "语音寻车";
                 if (isLock.equals("1")) {
-                    executeView.setBtnNormalResource(R.mipmap.icon_sound_open);
-                } else {
+                    executeView.setCircleResource(R.mipmap.bg_control_close);
                     executeView.setBtnNormalResource(R.mipmap.icon_sound_close);
+                } else {
+                    executeView.setCircleResource(R.mipmap.bg_control_open);
+                    executeView.setBtnNormalResource(R.mipmap.icon_sound_open);
                 }
             } else if (controlType.equals("3")) {
                 controlTypeName = "一键启动";
                 if (isLock.equals("1")) {
-                    executeView.setBtnNormalResource(R.mipmap.icon_onekey_start);
-                } else {
+                    executeView.setCircleResource(R.mipmap.bg_control_close);
                     executeView.setBtnNormalResource(R.mipmap.icon_onekey_end);
+                } else {
+                    executeView.setCircleResource(R.mipmap.bg_control_open);
+                    executeView.setBtnNormalResource(R.mipmap.icon_onekey_start);
                 }
             }
         }
@@ -78,6 +84,7 @@ public class RemoteControlActivity extends BaseActivity {
         topBarView.setCenterTextView(controlTypeName);
 
         if (AppConfig.isExecuteLock != null) {
+            executeView.setIsCycle(true);
             executeView.setEnabled(false);
             executeView.openMoveCircle();
         }
@@ -89,6 +96,7 @@ public class RemoteControlActivity extends BaseActivity {
         executeView.setOnBtnPressListener(new XiuView.OnBtnPressListener() {
             @Override
             public void btnClick() {
+                executeView.setIsCycle(true);
                 executeView.setEnabled(false);
                 if (isLock.equals("1")) {
                     RequestParams params = DRequestParamsUtils.getRequestParams_Header(HttpConstants.getUnLockBikeUrl());
@@ -132,27 +140,30 @@ public class RemoteControlActivity extends BaseActivity {
     public void onEvent(RemoteLockCarEvent event) {
         if (event != null) {
             AppConfig.isExecuteLock = null;
-            executeView.closeMoveCircle();
+            executeView.setIsCycle(false);
+            executeView.clearMoveCircle();
             executeView.setEnabled(true);
             if (event.getIsLock().equals("1")) {
                 if (!CommonUtils.strIsEmpty(controlType)) {
-                    if (controlType.equals("1")) {
-                        executeView.setBtnNormalResource(R.mipmap.icon_lock_open);
-                    } else if (controlType.equals("2")) {
-                        executeView.setBtnNormalResource(R.mipmap.icon_sound_open);
-                    } else if (controlType.equals("3")) {
-                        executeView.setBtnNormalResource(R.mipmap.icon_onekey_start);
-                    }
-                }
-                AppConfig.isLock = true;
-            } else {
-                if (!CommonUtils.strIsEmpty(controlType)) {
+                    executeView.setCircleResource(R.mipmap.bg_control_close);
                     if (controlType.equals("1")) {
                         executeView.setBtnNormalResource(R.mipmap.icon_lock_close);
                     } else if (controlType.equals("2")) {
                         executeView.setBtnNormalResource(R.mipmap.icon_sound_close);
                     } else if (controlType.equals("3")) {
                         executeView.setBtnNormalResource(R.mipmap.icon_onekey_end);
+                    }
+                }
+                AppConfig.isLock = true;
+            } else {
+                if (!CommonUtils.strIsEmpty(controlType)) {
+                    executeView.setCircleResource(R.mipmap.bg_control_open);
+                    if (controlType.equals("1")) {
+                        executeView.setBtnNormalResource(R.mipmap.icon_lock_open);
+                    } else if (controlType.equals("2")) {
+                        executeView.setBtnNormalResource(R.mipmap.icon_sound_open);
+                    } else if (controlType.equals("3")) {
+                        executeView.setBtnNormalResource(R.mipmap.icon_onekey_start);
                     }
                 }
                 AppConfig.isLock = false;

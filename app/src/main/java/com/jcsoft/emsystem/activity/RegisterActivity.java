@@ -25,6 +25,7 @@ import com.jcsoft.emsystem.http.DHttpUtils;
 import com.jcsoft.emsystem.http.DRequestParamsUtils;
 import com.jcsoft.emsystem.http.HttpConstants;
 import com.jcsoft.emsystem.utils.CommonUtils;
+import com.jcsoft.emsystem.utils.KeyboardUtils;
 import com.jcsoft.emsystem.view.RowLabelEditView;
 import com.jcsoft.emsystem.view.RowLabelValueView;
 import com.jcsoft.emsystem.view.TopBarView;
@@ -126,7 +127,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         dataCardRowLabelEditView.setEditInteger();
         dataCardRowLabelEditView.setEditLength(13);
         phoneRowLabelEditView.setEditInteger();
-        idCardRowLabelEditView.setEditInteger();
+        idCardRowLabelEditView.setEditFormat("0123456789xX");
         idCardRowLabelEditView.setEditLength(18);
         dialog = new AddressThreeWheelViewDialog(this);
         provinceDao = new ProvinceInfoDao(this);
@@ -216,9 +217,15 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
             @Override
             public void onClick(View v) {
                 initVoltageDialogView(voltageValue);
-                CommonUtils.showCustomDialog1(RegisterActivity.this, "选择电动车电压", voltageDialogView, new DSingleDialogCallback() {
+                CommonUtils.showCustomDialog2(RegisterActivity.this, "选择电动车电压", voltageDialogView, new DSingleDialogCallback() {
                     @Override
                     public void onPositiveButtonClick(String editText) {
+                        KeyboardUtils.hideSoftInput(RegisterActivity.this);
+                    }
+                }, new DSingleDialogCallback() {
+                    @Override
+                    public void onPositiveButtonClick(String editText) {
+                        KeyboardUtils.hideSoftInput(RegisterActivity.this);
                         if (voltageTempValue != null) {
                             voltageValue = voltageTempValue;
                             voltageView.setValue(voltageValue + "V");
@@ -381,8 +388,8 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 v60View.setVisibility(View.GONE);
                 v72View.setVisibility(View.VISIBLE);
                 customVoltageText.setText("");
-            }else{
-                customVoltageText.setText(voltageValue);
+            } else {
+                customVoltageText.setText(voltageValue + "");
             }
         }
 
@@ -442,6 +449,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 v60View.setVisibility(View.GONE);
                 v72View.setVisibility(View.GONE);
                 customVoltageText.setText("");
+                CommonUtils.hideSoftInput(this, customVoltageText);
                 break;
             case R.id.ll_60v:
                 voltageTempValue = 60;
@@ -449,6 +457,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 v60View.setVisibility(View.VISIBLE);
                 v72View.setVisibility(View.GONE);
                 customVoltageText.setText("");
+                CommonUtils.hideSoftInput(this, customVoltageText);
                 break;
             case R.id.ll_72v:
                 voltageTempValue = 72;
@@ -456,6 +465,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 v60View.setVisibility(View.GONE);
                 v72View.setVisibility(View.VISIBLE);
                 customVoltageText.setText("");
+                CommonUtils.hideSoftInput(this, customVoltageText);
                 break;
         }
     }
