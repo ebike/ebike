@@ -82,6 +82,7 @@ public class RemoteControlActivity extends BaseActivity {
         }
 
         topBarView.setCenterTextView(controlTypeName);
+        messageView.setText("此功能只有设备端远程控制线为" + controlTypeName + "才支持");
 
         if (AppConfig.isExecuteLock != null) {
             executeView.setIsCycle(true);

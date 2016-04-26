@@ -124,6 +124,7 @@ public class CarInformationActivity extends BaseActivity implements View.OnClick
     @Override
     public void init() {
         compress = new ImageCompress();
+        carPhotoValueView.setRightImage(R.mipmap.icon_camera);
         if (carInfoBean != null) {
             brandView.setValue(carInfoBean.getCarBrand());
             modelsView.setValue(carInfoBean.getCarModel());

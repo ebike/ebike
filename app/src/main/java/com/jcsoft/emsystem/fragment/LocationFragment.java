@@ -293,10 +293,22 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
                         if (AppConfig.isExecuteLock == null) {
                             if (locInfoBean.getLock().equals("1")) {
                                 AppConfig.isLock = true;
-                                lockImageView.setImageResource(R.mipmap.voice_lock);
+                                if (locInfoBean.getControlType().equals("1")) {
+                                    lockImageView.setImageResource(R.mipmap.icon_map_lock_close);
+                                } else if (locInfoBean.getControlType().equals("2")) {
+                                    lockImageView.setImageResource(R.mipmap.icon_map_sound_open);
+                                } else if (locInfoBean.getControlType().equals("3")) {
+                                    lockImageView.setImageResource(R.mipmap.icon_map_onkey_start);
+                                }
                             } else {
                                 AppConfig.isLock = false;
-                                lockImageView.setImageResource(R.mipmap.voice_unlock);
+                                if (locInfoBean.getControlType().equals("1")) {
+                                    lockImageView.setImageResource(R.mipmap.icon_map_lock_open);
+                                } else if (locInfoBean.getControlType().equals("2")) {
+                                    lockImageView.setImageResource(R.mipmap.icon_map_sound_close);
+                                } else if (locInfoBean.getControlType().equals("3")) {
+                                    lockImageView.setImageResource(R.mipmap.icon_map_onkey_start);
+                                }
                             }
                         }
                         //判断电子围栏

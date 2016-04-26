@@ -31,54 +31,165 @@
     <leaf>
       <file leaf-file-name="activity_remote_control.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_remote_control.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.275862">
-              <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
           <provider editor-type-id="android-designer">
             <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-9.137931">
+              <caret line="30" column="30" selection-start-line="30" selection-start-column="30" selection-end-line="30" selection-end-column="30" />
+              <folding />
+            </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="RemoteControlActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jcsoft/emsystem/activity/RemoteControlActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="2.4793103">
-              <caret line="163" column="83" selection-start-line="163" selection-start-column="83" selection-end-line="163" selection-end-column="83" />
+            <state vertical-scroll-proportion="0.70526314">
+              <caret line="84" column="72" selection-start-line="84" selection-start-column="72" selection-end-line="84" selection-end-column="72" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="activity_about.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_about.xml">
+      <file leaf-file-name="CarInformationActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jcsoft/emsystem/activity/CarInformationActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.586207">
-              <caret line="4" column="40" selection-start-line="4" selection-start-column="40" selection-end-line="5" selection-end-column="36" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="120" column="0" selection-start-line="120" selection-start-column="0" selection-end-line="120" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="false" />
+                <element signature="method#beforeTextChanged#0;class#17339:18089" expanded="false" />
+                <element signature="method#onTextChanged#0;class#17339:18089" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LocationFragment.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jcsoft/emsystem/fragment/LocationFragment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="302" column="36" selection-start-line="302" selection-start-column="36" selection-end-line="302" selection-end-column="36" />
               <folding />
             </state>
           </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LocInfoBean.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jcsoft/emsystem/base/LocInfoBean.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="164" column="18" selection-start-line="164" selection-start-column="18" selection-end-line="164" selection-end-column="18" />
+              <folding>
+                <element signature="e#632#633#0" expanded="false" />
+                <element signature="e#660#661#0" expanded="false" />
+                <element signature="e#699#700#0" expanded="false" />
+                <element signature="e#733#734#0" expanded="false" />
+                <element signature="e#760#761#0" expanded="false" />
+                <element signature="e#786#787#0" expanded="false" />
+                <element signature="e#821#822#0" expanded="false" />
+                <element signature="e#851#852#0" expanded="false" />
+                <element signature="e#878#879#0" expanded="false" />
+                <element signature="e#904#905#0" expanded="false" />
+                <element signature="e#939#940#0" expanded="false" />
+                <element signature="e#969#970#0" expanded="false" />
+                <element signature="e#998#999#0" expanded="false" />
+                <element signature="e#1026#1027#0" expanded="false" />
+                <element signature="e#1065#1066#0" expanded="false" />
+                <element signature="e#1099#1100#0" expanded="false" />
+                <element signature="e#1130#1131#0" expanded="false" />
+                <element signature="e#1160#1161#0" expanded="false" />
+                <element signature="e#1203#1204#0" expanded="false" />
+                <element signature="e#1241#1242#0" expanded="false" />
+                <element signature="e#1275#1276#0" expanded="false" />
+                <element signature="e#1308#1309#0" expanded="false" />
+                <element signature="e#1357#1358#0" expanded="false" />
+                <element signature="e#1401#1402#0" expanded="false" />
+                <element signature="e#1441#1442#0" expanded="false" />
+                <element signature="e#1477#1478#0" expanded="false" />
+                <element signature="e#1535#1536#0" expanded="false" />
+                <element signature="e#1585#1586#0" expanded="false" />
+                <element signature="e#1619#1620#0" expanded="false" />
+                <element signature="e#1649#1650#0" expanded="false" />
+                <element signature="e#1695#1696#0" expanded="false" />
+                <element signature="e#1733#1734#0" expanded="false" />
+                <element signature="e#1768#1769#0" expanded="false" />
+                <element signature="e#1799#1800#0" expanded="false" />
+                <element signature="e#1847#1848#0" expanded="false" />
+                <element signature="e#1887#1888#0" expanded="false" />
+                <element signature="e#1917#1918#0" expanded="false" />
+                <element signature="e#1943#1944#0" expanded="false" />
+                <element signature="e#1981#1982#0" expanded="false" />
+                <element signature="e#2011#2012#0" expanded="false" />
+                <element signature="e#2043#2044#0" expanded="false" />
+                <element signature="e#2071#2072#0" expanded="false" />
+                <element signature="e#2113#2114#0" expanded="false" />
+                <element signature="e#2147#2148#0" expanded="false" />
+                <element signature="e#2177#2178#0" expanded="false" />
+                <element signature="e#2203#2204#0" expanded="false" />
+                <element signature="e#2241#2242#0" expanded="false" />
+                <element signature="e#2271#2272#0" expanded="false" />
+                <element signature="e#2302#2303#0" expanded="false" />
+                <element signature="e#2329#2330#0" expanded="false" />
+                <element signature="e#2369#2370#0" expanded="false" />
+                <element signature="e#2401#2402#0" expanded="false" />
+                <element signature="e#2434#2435#0" expanded="false" />
+                <element signature="e#2465#2466#0" expanded="false" />
+                <element signature="e#2514#2515#0" expanded="false" />
+                <element signature="e#2554#2555#0" expanded="false" />
+                <element signature="e#2593#2594#0" expanded="false" />
+                <element signature="e#2627#2628#0" expanded="false" />
+                <element signature="e#2666#2667#0" expanded="false" />
+                <element signature="e#2700#2701#0" expanded="false" />
+                <element signature="e#2745#2746#0" expanded="false" />
+                <element signature="e#2785#2786#0" expanded="false" />
+                <element signature="e#2814#2815#0" expanded="false" />
+                <element signature="e#2842#2843#0" expanded="false" />
+                <element signature="e#2871#2872#0" expanded="false" />
+                <element signature="e#2899#2900#0" expanded="false" />
+                <element signature="e#2931#2932#0" expanded="false" />
+                <element signature="e#2962#2963#0" expanded="false" />
+                <element signature="e#3088#3089#0" expanded="false" />
+                <element signature="e#3134#3135#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DealInsuranceActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jcsoft/emsystem/activity/DealInsuranceActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="122" column="70" selection-start-line="122" selection-start-column="33" selection-end-line="122" selection-end-column="70" />
+              <folding>
+                <element signature="imports" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="activity_car_information.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_car_information.xml">
           <provider editor-type-id="android-designer">
             <state />
           </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="XiuView.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jcsoft/emsystem/view/XiuView.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="241" column="31" selection-start-line="241" selection-start-column="16" selection-end-line="241" selection-end-column="31" />
+              <caret line="103" column="47" selection-start-line="103" selection-start-column="33" selection-end-line="103" selection-end-column="47" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RowLabelValueView.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jcsoft/emsystem/view/RowLabelValueView.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="146" column="29" selection-start-line="146" selection-start-column="16" selection-end-line="146" selection-end-column="29" />
               <folding>
-                <element signature="e#6953#6954#0" expanded="true" />
-                <element signature="e#6996#6997#0" expanded="true" />
-                <element signature="e#7075#7076#0" expanded="true" />
-                <element signature="e#7113#7114#0" expanded="true" />
-                <element signature="e#7350#7351#0" expanded="true" />
-                <element signature="e#7388#7389#0" expanded="true" />
-                <element signature="e#7445#7446#0" expanded="true" />
-                <element signature="e#7497#7498#0" expanded="true" />
+                <element signature="e#4853#4854#0" expanded="true" />
+                <element signature="e#4910#4911#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -86,60 +197,14 @@
       </file>
       <file leaf-file-name="xiu_view.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/xiu_view.xml">
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.275862">
+            <state vertical-scroll-proportion="0.0">
               <caret line="7" column="20" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="20" />
               <folding />
             </state>
-          </provider>
-          <provider editor-type-id="android-designer">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UpdateTextValueActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jcsoft/emsystem/activity/UpdateTextValueActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.740741">
-              <caret line="33" column="30" selection-start-line="33" selection-start-column="30" selection-end-line="33" selection-end-column="30" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="activity_update_text_value.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_update_text_value.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.37931">
-              <caret line="6" column="36" selection-start-line="6" selection-start-column="36" selection-end-line="6" selection-end-column="36" />
-              <folding />
-            </state>
-          </provider>
-          <provider editor-type-id="android-designer">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UpdateSexActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jcsoft/emsystem/activity/UpdateSexActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="40" column="44" selection-start-line="40" selection-start-column="44" selection-end-line="40" selection-end-column="44" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="activity_update_sex.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_update_sex.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.37931">
-              <caret line="6" column="36" selection-start-line="6" selection-start-column="36" selection-end-line="6" selection-end-column="36" />
-              <folding />
-            </state>
-          </provider>
-          <provider editor-type-id="android-designer">
-            <state />
           </provider>
         </entry>
       </file>
@@ -1602,7 +1667,6 @@
       <list>
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_register.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/view_remote_control.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_car_information.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/jcsoft/emsystem/bean/CarInfoBean.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/jcsoft/emsystem/http/HttpConstants.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/jcsoft/emsystem/utils/DateUtil.java" />
@@ -1614,7 +1678,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/jcsoft/emsystem/constants/AppConfig.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/jcsoft/emsystem/base/LocInfoBean.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_my.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/jcsoft/emsystem/fragment/LocationFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/jcsoft/emsystem/base/BaseActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/jcsoft/emsystem/utils/CommonUtils.java" />
@@ -1622,15 +1685,18 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/jcsoft/emsystem/utils/KeyboardUtils.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_base_information.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/view_voltage.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/jcsoft/emsystem/activity/CarInformationActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/jcsoft/emsystem/activity/BaseInformationActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/jcsoft/emsystem/activity/UpdateTextValueActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/jcsoft/emsystem/activity/RegisterActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/jcsoft/emsystem/view/RowLabelEditView.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_remote_control.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_update_text_value.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_update_sex.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/jcsoft/emsystem/view/XiuView.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_car_information.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/jcsoft/emsystem/activity/CarInformationActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_location.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/jcsoft/emsystem/fragment/LocationFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_remote_control.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/jcsoft/emsystem/activity/RemoteControlActivity.java" />
       </list>
     </option>
@@ -1666,6 +1732,8 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="ProjectPane" />
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -1683,59 +1751,11 @@
               <option name="myItemId" value="app" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ebike" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ebike" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ebike" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="emsystem" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
       <pane id="Scratches" />
-      <pane id="PackagesPane" />
       <pane id="Scope" />
-      <pane id="ProjectPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1975,7 +1995,7 @@
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32956383" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24342105" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32894737" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32894737" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39967105" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -1995,7 +2015,7 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32894737" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -2023,55 +2043,26 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/view_row_entry.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.24809161">
-          <caret line="42" column="23" selection-start-line="42" selection-start-column="23" selection-end-line="42" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jcsoft/emsystem/view/RowEntryView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.30018082">
-          <caret line="84" column="50" selection-start-line="84" selection-start-column="50" selection-end-line="84" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/popupwindow_map_type.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/view_remote_control.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-4.034483">
           <caret line="65" column="35" selection-start-line="65" selection-start-column="35" selection-end-line="65" selection-end-column="35" />
           <folding />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/dialog_custom.xml">
       <provider editor-type-id="android-designer">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/dialog_custom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="63" column="10" selection-start-line="63" selection-start-column="10" selection-end-line="63" selection-end-column="10" />
           <folding />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jcsoft/emsystem/bean/CarInfoBean.java">
@@ -2103,29 +2094,20 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_register.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.18874773">
           <caret line="144" column="12" selection-start-line="144" selection-start-column="12" selection-end-line="162" selection-end-column="72" />
           <folding />
         </state>
       </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jcsoft/emsystem/activity/BookInstallActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.67368424">
           <caret line="61" column="30" selection-start-line="61" selection-start-column="8" selection-end-line="61" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jcsoft/emsystem/view/RowLabelValueView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="50" column="21" selection-start-line="50" selection-start-column="21" selection-end-line="50" selection-end-column="21" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2133,7 +2115,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.68421054">
           <caret line="11" column="41" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="41" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2149,10 +2130,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.91034484">
           <caret line="185" column="5" selection-start-line="185" selection-start-column="5" selection-end-line="185" selection-end-column="5" />
-          <folding>
-            <element signature="e#1800#1801#0" expanded="false" />
-            <element signature="e#1850#1851#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2161,13 +2138,6 @@
         <state vertical-scroll-proportion="0.3569405">
           <caret line="2443" column="32" selection-start-line="2443" selection-start-column="32" selection-end-line="2443" selection-end-column="32" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jcsoft/emsystem/base/LocInfoBean.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="6.4777446">
-          <caret line="166" column="5" selection-start-line="166" selection-start-column="5" selection-end-line="166" selection-end-column="5" />
         </state>
       </provider>
     </entry>
@@ -2180,6 +2150,9 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_my.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.19056262">
           <caret line="77" column="57" selection-start-line="77" selection-start-column="57" selection-end-line="77" selection-end-column="57" />
@@ -2188,18 +2161,11 @@
           </folding>
         </state>
       </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jcsoft/emsystem/fragment/MyFragment.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.43103448">
           <caret line="55" column="52" selection-start-line="55" selection-start-column="52" selection-end-line="55" selection-end-column="52" />
-          <folding>
-            <element signature="e#6735#6736#0" expanded="false" />
-            <element signature="e#6768#6769#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2208,27 +2174,6 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="135" column="38" selection-start-line="135" selection-start-column="38" selection-end-line="135" selection-end-column="38" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/icon_sound_open.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/icon_lock_open.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jcsoft/emsystem/fragment/LocationFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="718" column="5" selection-start-line="699" selection-start-column="4" selection-end-line="718" selection-end-column="5" />
-          <folding>
-            <element signature="e#9627#15231#0" expanded="false" />
-            <element signature="e#15230#15231#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2254,7 +2199,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="134" column="9" selection-start-line="134" selection-start-column="9" selection-end-line="134" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2262,7 +2206,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="899" column="28" selection-start-line="899" selection-start-column="28" selection-end-line="899" selection-end-column="28" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2270,7 +2213,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="14" column="26" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2289,20 +2231,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_car_information.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4246824">
-          <caret line="47" column="57" selection-start-line="47" selection-start-column="57" selection-end-line="47" selection-end-column="57" />
-          <folding>
-            <element signature="e#1528#1559#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_base_information.xml">
       <provider editor-type-id="android-designer">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_base_information.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.37931034">
           <caret line="78" column="37" selection-start-line="78" selection-start-column="25" selection-end-line="78" selection-end-column="37" />
@@ -2310,9 +2242,6 @@
             <element signature="e#3487#3521#0" expanded="true" />
           </folding>
         </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jcsoft/emsystem/base/BaseActivity.java">
@@ -2324,14 +2253,14 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/view_voltage.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5753176">
           <caret line="96" column="37" selection-start-line="96" selection-start-column="37" selection-end-line="96" selection-end-column="37" />
           <folding />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
@@ -2339,26 +2268,6 @@
         <state vertical-scroll-proportion="-6.814815">
           <caret line="120" column="18" selection-start-line="120" selection-start-column="18" selection-end-line="120" selection-end-column="18" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jcsoft/emsystem/activity/CarInformationActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="209" column="46" selection-start-line="209" selection-start-column="46" selection-end-line="209" selection-end-column="46" />
-          <folding>
-            <element signature="e#7059#7100#0" expanded="false" />
-            <element signature="e#7545#7587#0" expanded="false" />
-            <element signature="e#8038#8086#0" expanded="false" />
-            <element signature="e#8537#8585#0" expanded="false" />
-            <element signature="e#10057#10311#0" expanded="false" />
-            <element signature="e#10310#10311#0" expanded="false" />
-            <element signature="e#10313#10846#0" expanded="false" />
-            <element signature="e#10845#10846#0" expanded="false" />
-            <element signature="method#beforeTextChanged#0;class#17276:18026" expanded="false" />
-            <element signature="method#onTextChanged#0;class#17276:18026" expanded="false" />
-            <element signature="e#21543#21559#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2379,14 +2288,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.73103446">
           <caret line="198" column="12" selection-start-line="198" selection-start-column="12" selection-end-line="198" selection-end-column="12" />
-          <folding>
-            <element signature="e#1643#1644#0" expanded="false" />
-            <element signature="e#1678#1679#0" expanded="false" />
-            <element signature="e#5374#5375#0" expanded="false" />
-            <element signature="e#5418#5419#0" expanded="false" />
-            <element signature="e#5931#5932#0" expanded="false" />
-            <element signature="e#6002#6003#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2394,14 +2295,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5678119">
           <caret line="134" column="5" selection-start-line="134" selection-start-column="5" selection-end-line="134" selection-end-column="5" />
-          <folding>
-            <element signature="e#8714#8962#0" expanded="false" />
-            <element signature="e#8961#8962#0" expanded="false" />
-            <element signature="e#8964#9425#0" expanded="false" />
-            <element signature="e#9424#9425#0" expanded="false" />
-            <element signature="method#beforeTextChanged#0;class#18022:18772" expanded="false" />
-            <element signature="method#onTextChanged#0;class#18022:18772" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2409,92 +2302,68 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="21" column="38" selection-start-line="21" selection-start-column="38" selection-end-line="21" selection-end-column="38" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_about.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.586207">
+        <state vertical-scroll-proportion="0.0">
           <caret line="4" column="40" selection-start-line="4" selection-start-column="40" selection-end-line="5" selection-end-column="36" />
           <folding />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jcsoft/emsystem/activity/UpdateSexActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="40" column="44" selection-start-line="40" selection-start-column="44" selection-end-line="40" selection-end-column="44" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_update_sex.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.37931">
+        <state vertical-scroll-proportion="0.0">
           <caret line="6" column="36" selection-start-line="6" selection-start-column="36" selection-end-line="6" selection-end-column="36" />
           <folding />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jcsoft/emsystem/activity/UpdateTextValueActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.740741">
+        <state vertical-scroll-proportion="0.0">
           <caret line="33" column="30" selection-start-line="33" selection-start-column="30" selection-end-line="33" selection-end-column="30" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_update_text_value.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.37931">
+        <state vertical-scroll-proportion="0.0">
           <caret line="6" column="36" selection-start-line="6" selection-start-column="36" selection-end-line="6" selection-end-column="36" />
           <folding />
         </state>
       </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_remote_control.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.275862">
-          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/xiu_view.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.275862">
+        <state vertical-scroll-proportion="0.0">
           <caret line="7" column="20" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="20" />
           <folding />
         </state>
       </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/icon_lock_close.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/bg_control_close.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/icon_onekey_end.png">
       <provider selected="true" editor-type-id="images">
         <state />
       </provider>
@@ -2509,22 +2378,195 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="241" column="31" selection-start-line="241" selection-start-column="16" selection-end-line="241" selection-end-column="31" />
           <folding>
-            <element signature="e#6953#6954#0" expanded="true" />
-            <element signature="e#6996#6997#0" expanded="true" />
-            <element signature="e#7075#7076#0" expanded="true" />
-            <element signature="e#7113#7114#0" expanded="true" />
-            <element signature="e#7350#7351#0" expanded="true" />
-            <element signature="e#7388#7389#0" expanded="true" />
-            <element signature="e#7445#7446#0" expanded="true" />
-            <element signature="e#7497#7498#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#1697#1698#0" expanded="false" />
+            <element signature="e#1736#1737#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/icon_camera.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jcsoft/emsystem/view/RowLabelValueView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="146" column="29" selection-start-line="146" selection-start-column="16" selection-end-line="146" selection-end-column="29" />
+          <folding>
+            <element signature="e#4853#4854#0" expanded="true" />
+            <element signature="e#4910#4911#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jcsoft/emsystem/activity/DealInsuranceActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="122" column="70" selection-start-line="122" selection-start-column="33" selection-end-line="122" selection-end-column="70" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_car_information.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="103" column="47" selection-start-line="103" selection-start-column="33" selection-end-line="103" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/voice_lock.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/voice_unlock.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jcsoft/emsystem/base/LocInfoBean.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="164" column="18" selection-start-line="164" selection-start-column="18" selection-end-line="164" selection-end-column="18" />
+          <folding>
+            <element signature="e#632#633#0" expanded="false" />
+            <element signature="e#660#661#0" expanded="false" />
+            <element signature="e#699#700#0" expanded="false" />
+            <element signature="e#733#734#0" expanded="false" />
+            <element signature="e#760#761#0" expanded="false" />
+            <element signature="e#786#787#0" expanded="false" />
+            <element signature="e#821#822#0" expanded="false" />
+            <element signature="e#851#852#0" expanded="false" />
+            <element signature="e#878#879#0" expanded="false" />
+            <element signature="e#904#905#0" expanded="false" />
+            <element signature="e#939#940#0" expanded="false" />
+            <element signature="e#969#970#0" expanded="false" />
+            <element signature="e#998#999#0" expanded="false" />
+            <element signature="e#1026#1027#0" expanded="false" />
+            <element signature="e#1065#1066#0" expanded="false" />
+            <element signature="e#1099#1100#0" expanded="false" />
+            <element signature="e#1130#1131#0" expanded="false" />
+            <element signature="e#1160#1161#0" expanded="false" />
+            <element signature="e#1203#1204#0" expanded="false" />
+            <element signature="e#1241#1242#0" expanded="false" />
+            <element signature="e#1275#1276#0" expanded="false" />
+            <element signature="e#1308#1309#0" expanded="false" />
+            <element signature="e#1357#1358#0" expanded="false" />
+            <element signature="e#1401#1402#0" expanded="false" />
+            <element signature="e#1441#1442#0" expanded="false" />
+            <element signature="e#1477#1478#0" expanded="false" />
+            <element signature="e#1535#1536#0" expanded="false" />
+            <element signature="e#1585#1586#0" expanded="false" />
+            <element signature="e#1619#1620#0" expanded="false" />
+            <element signature="e#1649#1650#0" expanded="false" />
+            <element signature="e#1695#1696#0" expanded="false" />
+            <element signature="e#1733#1734#0" expanded="false" />
+            <element signature="e#1768#1769#0" expanded="false" />
+            <element signature="e#1799#1800#0" expanded="false" />
+            <element signature="e#1847#1848#0" expanded="false" />
+            <element signature="e#1887#1888#0" expanded="false" />
+            <element signature="e#1917#1918#0" expanded="false" />
+            <element signature="e#1943#1944#0" expanded="false" />
+            <element signature="e#1981#1982#0" expanded="false" />
+            <element signature="e#2011#2012#0" expanded="false" />
+            <element signature="e#2043#2044#0" expanded="false" />
+            <element signature="e#2071#2072#0" expanded="false" />
+            <element signature="e#2113#2114#0" expanded="false" />
+            <element signature="e#2147#2148#0" expanded="false" />
+            <element signature="e#2177#2178#0" expanded="false" />
+            <element signature="e#2203#2204#0" expanded="false" />
+            <element signature="e#2241#2242#0" expanded="false" />
+            <element signature="e#2271#2272#0" expanded="false" />
+            <element signature="e#2302#2303#0" expanded="false" />
+            <element signature="e#2329#2330#0" expanded="false" />
+            <element signature="e#2369#2370#0" expanded="false" />
+            <element signature="e#2401#2402#0" expanded="false" />
+            <element signature="e#2434#2435#0" expanded="false" />
+            <element signature="e#2465#2466#0" expanded="false" />
+            <element signature="e#2514#2515#0" expanded="false" />
+            <element signature="e#2554#2555#0" expanded="false" />
+            <element signature="e#2593#2594#0" expanded="false" />
+            <element signature="e#2627#2628#0" expanded="false" />
+            <element signature="e#2666#2667#0" expanded="false" />
+            <element signature="e#2700#2701#0" expanded="false" />
+            <element signature="e#2745#2746#0" expanded="false" />
+            <element signature="e#2785#2786#0" expanded="false" />
+            <element signature="e#2814#2815#0" expanded="false" />
+            <element signature="e#2842#2843#0" expanded="false" />
+            <element signature="e#2871#2872#0" expanded="false" />
+            <element signature="e#2899#2900#0" expanded="false" />
+            <element signature="e#2931#2932#0" expanded="false" />
+            <element signature="e#2962#2963#0" expanded="false" />
+            <element signature="e#3088#3089#0" expanded="false" />
+            <element signature="e#3134#3135#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/icon_map_lock_close.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/icon_map_sound_close.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_location.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.615245">
+          <caret line="60" column="46" selection-start-line="60" selection-start-column="46" selection-end-line="60" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jcsoft/emsystem/fragment/LocationFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="302" column="36" selection-start-line="302" selection-start-column="36" selection-end-line="302" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_remote_control.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.137931">
+          <caret line="30" column="30" selection-start-line="30" selection-start-column="30" selection-end-line="30" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jcsoft/emsystem/activity/CarInformationActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="120" column="0" selection-start-line="120" selection-start-column="0" selection-end-line="120" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="method#beforeTextChanged#0;class#17339:18089" expanded="false" />
+            <element signature="method#onTextChanged#0;class#17339:18089" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jcsoft/emsystem/activity/RemoteControlActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.4793103">
-          <caret line="163" column="83" selection-start-line="163" selection-start-column="83" selection-end-line="163" selection-end-column="83" />
+        <state vertical-scroll-proportion="0.70526314">
+          <caret line="84" column="72" selection-start-line="84" selection-start-column="72" selection-end-line="84" selection-end-column="72" />
           <folding />
         </state>
       </provider>

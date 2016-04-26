@@ -29,7 +29,6 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="16dp"
-        android:text="注：此功能只有设备端远程控制线为一键启动才支持"
         android:textColor="@color/gray_3"
         android:textSize="14sp" />
 

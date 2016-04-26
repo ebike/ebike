@@ -107,7 +107,8 @@
                 app:row_label_value_bottom_line="1"
                 app:row_label_value_can_click="true"
                 app:row_label_value_has_right_arrow="true"
-                app:row_label_value_label="@string/car_information_car_photo" />
+                app:row_label_value_label="@string/car_information_car_photo"
+                />
 
             <ImageView
                 android:id="@+id/iv_car_photo"
