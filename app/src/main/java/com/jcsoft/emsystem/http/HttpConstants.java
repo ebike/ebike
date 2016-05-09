@@ -52,18 +52,20 @@ public class HttpConstants {
     }
 
     //远程锁车
-    public static String getlockBikeUrl() {
+    public static String getlockBikeUrl(String type) {
         StringBuffer sb = new StringBuffer(baseUrl);
         sb.append("/lock/lockBike.do");
         sb.append("?carId=").append(AppConfig.userInfoBean.getCarId());
+        sb.append("&para=").append(type);
         return sb.toString();
     }
 
     //远程解锁
-    public static String getUnLockBikeUrl() {
+    public static String getUnLockBikeUrl(String type) {
         StringBuffer sb = new StringBuffer(baseUrl);
         sb.append("/lock/unLockBike.do");
         sb.append("?carId=").append(AppConfig.userInfoBean.getCarId());
+        sb.append("&para=").append(type);
         return sb.toString();
     }
 

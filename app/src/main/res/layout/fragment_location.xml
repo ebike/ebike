@@ -99,6 +99,16 @@
                 android:layout_marginBottom="4dp"
                 android:layout_marginTop="4dp"
                 android:src="@mipmap/car_status" />
+
+            <ImageView
+                android:id="@+id/iv_battery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/iv_car_status"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="4dp"
+                android:layout_marginTop="4dp"
+                android:src="@mipmap/icon_map_battery" />
         </RelativeLayout>
 
     </FrameLayout>

@@ -55,11 +55,11 @@ public class AlarmMessageAdapter extends TAdapter<AlarmMessageBean> {
                     break;
                 case 3://锁车通知
                     msgImageView.setImageResource(R.mipmap.notify_lock);
-                    titleTextView.setText("锁车通知");
+                    titleTextView.setText("远程控制");
                     break;
                 case 4://解锁通知
                     msgImageView.setImageResource(R.mipmap.notify_unlock);
-                    titleTextView.setText("解锁通知");
+                    titleTextView.setText("远程控制");
                     break;
                 case 11://电池欠压
                     msgImageView.setImageResource(R.mipmap.alarm_lowpower);

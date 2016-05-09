@@ -100,7 +100,14 @@ public class RemoteControlActivity extends BaseActivity {
                 executeView.setIsCycle(true);
                 executeView.setEnabled(false);
                 if (isLock.equals("1")) {
-                    RequestParams params = DRequestParamsUtils.getRequestParams_Header(HttpConstants.getUnLockBikeUrl());
+                    RequestParams params = null;
+                    if (controlType.equals("2")) {
+                        params = DRequestParamsUtils.getRequestParams_Header(HttpConstants.getUnLockBikeUrl("1"));
+                    } else if (controlType.equals("3")) {
+                        params = DRequestParamsUtils.getRequestParams_Header(HttpConstants.getUnLockBikeUrl("2"));
+                    } else {
+                        params = DRequestParamsUtils.getRequestParams_Header(HttpConstants.getUnLockBikeUrl("0"));
+                    }
                     DHttpUtils.get_String(RemoteControlActivity.this, false, params, new DCommonCallback<String>() {
                         @Override
                         public void onSuccess(String result) {
@@ -109,12 +116,19 @@ public class RemoteControlActivity extends BaseActivity {
                             if (responseBean != null) {
                                 AppConfig.isExecuteLock = 0;
                                 AppConfig.lockCarType = 1;
-                                showShortText("关闭命令发送成功");
+                                showShortText(responseBean.getErrmsg());
                             }
                         }
                     });
                 } else {
-                    RequestParams params = DRequestParamsUtils.getRequestParams_Header(HttpConstants.getlockBikeUrl());
+                    RequestParams params = null;
+                    if (controlType.equals("2")) {
+                        params = DRequestParamsUtils.getRequestParams_Header(HttpConstants.getlockBikeUrl("1"));
+                    } else if (controlType.equals("3")) {
+                        params = DRequestParamsUtils.getRequestParams_Header(HttpConstants.getlockBikeUrl("2"));
+                    } else {
+                        params = DRequestParamsUtils.getRequestParams_Header(HttpConstants.getlockBikeUrl("0"));
+                    }
                     DHttpUtils.get_String(RemoteControlActivity.this, false, params, new DCommonCallback<String>() {
                         @Override
                         public void onSuccess(String result) {
@@ -123,7 +137,7 @@ public class RemoteControlActivity extends BaseActivity {
                             if (responseBean != null) {
                                 AppConfig.isExecuteLock = 1;
                                 AppConfig.lockCarType = 1;
-                                showShortText("开启命令发送成功");
+                                showShortText(responseBean.getErrmsg());
                             }
                         }
                     });

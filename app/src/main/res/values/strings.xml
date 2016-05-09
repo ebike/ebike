@@ -88,6 +88,7 @@
     <string name="top_bar_terms_of_service">服务条款</string>
     <string name="top_bar_book_install">预约安装</string>
     <string name="top_bar_deal_insurance">办理保险</string>
+    <string name="top_bar_battery">电量监测</string>
 
     <!-- my -->
     <string name="my_base_info">基本资料</string>

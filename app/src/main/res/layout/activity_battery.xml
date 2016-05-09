@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <com.jcsoft.emsystem.view.TopBarView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:back_is_finish="true"
+        app:center_text="@string/top_bar_battery"
+        app:has_center="true"
+        app:has_left="true"
+        app:has_left_clickable="true"
+        app:left_icon="@mipmap/back_icon"
+        app:left_text="@string/top_bar_location" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_voltage"
+                style="@style/black_16"
+                android:layout_marginTop="48dp" />
+
+            <ImageView
+                android:id="@+id/iv_battery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36dp"
+                android:src="@mipmap/icon_battery_percent_10" />
+
+            <TextView
+                android:id="@+id/tv_battery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="26dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingBottom="32dp">
+
+            <TextView
+                style="@style/black_14"
+                android:text="注意：如您注册时未填写电动车电压，系统将自动判断"
+                android:textColor="@color/gray_3" />
+
+            <TextView
+                android:id="@+id/tv_update"
+                style="@style/black_14"
+                android:paddingBottom="4dp"
+                android:paddingTop="4dp"
+                android:text="不准确？点击修改"
+                android:textColor="@color/gray_3" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

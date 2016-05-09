@@ -47,6 +47,7 @@ import com.amap.api.services.geocoder.RegeocodeResult;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jcsoft.emsystem.R;
+import com.jcsoft.emsystem.activity.BatteryActivity;
 import com.jcsoft.emsystem.activity.MainActivity;
 import com.jcsoft.emsystem.activity.RemoteControlActivity;
 import com.jcsoft.emsystem.activity.SimpleNaviActivity;
@@ -106,6 +107,8 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
     ImageView fenceImageView;
     @ViewInject(R.id.iv_car_status)
     ImageView carStatusImageView;
+    @ViewInject(R.id.iv_battery)
+    ImageView batteryView;
     @ViewInject(R.id.iv_nav)
     ImageView navImageView;
     @ViewInject(R.id.tv_satellite)
@@ -199,6 +202,7 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
         satelliteTextView.setOnClickListener(this);
         planeTextView.setOnClickListener(this);
         carStatusImageView.setOnClickListener(this);
+        batteryView.setOnClickListener(this);
     }
 
     /**
@@ -618,6 +622,16 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
                 carPopupWindow.showAtLocation(v, Gravity.NO_GRAVITY, (vLocation[0] + v.getWidth() / 2) - popupWidth / 2,
                         vLocation[1] - popupHeight);
                 carStatusImageView.setImageResource(R.mipmap.close_car_status_tip);
+                break;
+            case R.id.iv_battery://电量
+                if (locInfoBean != null && locInfoBean.getUpVoltage().equals("2")) {
+                    Intent intent1 = new Intent(getActivity(), BatteryActivity.class);
+                    intent1.putExtra("CurrVoltage", locInfoBean.getVoltage());
+                    intent1.putExtra("RemainBattery", locInfoBean.getRemainBattery());
+                    startActivity(intent1);
+                } else {
+                    showShortText("您的设备不支持此功能");
+                }
                 break;
             case R.id.iv_nav://导航
                 marker.hideInfoWindow();
