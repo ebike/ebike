@@ -624,7 +624,8 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
                 carStatusImageView.setImageResource(R.mipmap.close_car_status_tip);
                 break;
             case R.id.iv_battery://电量
-                if (locInfoBean != null && locInfoBean.getUpVoltage().equals("2")) {
+                if (locInfoBean != null && locInfoBean.getUpVoltage() != null
+                        && locInfoBean.getUpVoltage().equals("2")) {
                     Intent intent1 = new Intent(getActivity(), BatteryActivity.class);
                     intent1.putExtra("CurrVoltage", locInfoBean.getVoltage());
                     intent1.putExtra("RemainBattery", locInfoBean.getRemainBattery());

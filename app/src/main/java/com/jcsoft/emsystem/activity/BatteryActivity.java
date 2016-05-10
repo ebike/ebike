@@ -80,7 +80,9 @@ public class BatteryActivity extends BaseActivity {
         updateView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(BatteryActivity.this, CarInformationActivity.class));
+                Intent intent = new Intent(BatteryActivity.this, CarInformationActivity.class);
+                intent.putExtra("leftText", "电量监测");
+                startActivity(intent);
             }
         });
     }

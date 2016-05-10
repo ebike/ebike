@@ -39,6 +39,7 @@ import com.jcsoft.emsystem.utils.ImageCompress;
 import com.jcsoft.emsystem.utils.KeyboardUtils;
 import com.jcsoft.emsystem.view.ActionSheetDialog;
 import com.jcsoft.emsystem.view.RowLabelValueView;
+import com.jcsoft.emsystem.view.TopBarView;
 
 import org.xutils.http.RequestParams;
 import org.xutils.image.ImageOptions;
@@ -61,6 +62,8 @@ import java.util.Map;
  * 车辆资料
  */
 public class CarInformationActivity extends BaseActivity implements View.OnClickListener {
+    @ViewInject(R.id.top_bar_view)
+    TopBarView topBarView;
     @ViewInject(R.id.rlvv_brand)
     RowLabelValueView brandView;
     @ViewInject(R.id.rlvv_models)
@@ -110,6 +113,8 @@ public class CarInformationActivity extends BaseActivity implements View.OnClick
     private Integer voltageTempValue;
     private Integer voltageValue;
 
+    private String leftText;
+
     @Override
     public void loadXml() {
         setContentView(R.layout.activity_car_information);
@@ -118,11 +123,15 @@ public class CarInformationActivity extends BaseActivity implements View.OnClick
 
     @Override
     public void getIntentData(Bundle savedInstanceState) {
-
+        leftText = getIntent().getStringExtra("leftText");
     }
 
     @Override
     public void init() {
+        if (!CommonUtils.strIsEmpty(leftText)) {
+            topBarView.setLeftTextView(leftText);
+        }
+
         compress = new ImageCompress();
         carPhotoValueView.setRightImage(R.mipmap.icon_camera);
         if (carInfoBean != null) {

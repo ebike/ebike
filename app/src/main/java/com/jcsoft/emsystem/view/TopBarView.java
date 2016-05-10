@@ -219,6 +219,13 @@ public class TopBarView extends RelativeLayout {
         rightTextView.setText(text);
     }
 
+    //设置左侧文字
+    public void setLeftTextView(String text) {
+        leftRelativeLayout.setVisibility(View.VISIBLE);
+        leftTextView.setVisibility(View.VISIBLE);
+        leftTextView.setText(text);
+    }
+
     //设置右侧文字
     public void setRightTextView(int resource) {
         rightRelativeLayout.setVisibility(View.VISIBLE);

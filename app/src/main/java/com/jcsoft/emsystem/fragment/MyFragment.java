@@ -94,6 +94,7 @@ public class MyFragment extends BaseFragment implements RowEntryView.OnClickCall
                 break;
             case R.id.rev_car_info://车辆资料
                 intent = new Intent(getActivity(), CarInformationActivity.class);
+                intent.putExtra("leftText", "我");
                 startActivity(intent);
                 break;
             case R.id.rev_deal_insurance://办理保险
