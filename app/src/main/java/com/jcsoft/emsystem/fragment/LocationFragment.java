@@ -297,21 +297,25 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
                         if (AppConfig.isExecuteLock == null) {
                             if (locInfoBean.getLock().equals("1")) {
                                 AppConfig.isLock = true;
-                                if (locInfoBean.getControlType().equals("1")) {
-                                    lockImageView.setImageResource(R.mipmap.icon_map_lock_close);
-                                } else if (locInfoBean.getControlType().equals("2")) {
+                                if (locInfoBean.getControlType() != null
+                                        && locInfoBean.getControlType().equals("2")) {
                                     lockImageView.setImageResource(R.mipmap.icon_map_sound_open);
-                                } else if (locInfoBean.getControlType().equals("3")) {
+                                } else if (locInfoBean.getControlType() != null
+                                        && locInfoBean.getControlType().equals("3")) {
                                     lockImageView.setImageResource(R.mipmap.icon_map_onkey_start);
+                                } else {
+                                    lockImageView.setImageResource(R.mipmap.icon_map_lock_close);
                                 }
                             } else {
                                 AppConfig.isLock = false;
-                                if (locInfoBean.getControlType().equals("1")) {
-                                    lockImageView.setImageResource(R.mipmap.icon_map_lock_open);
-                                } else if (locInfoBean.getControlType().equals("2")) {
+                                if (locInfoBean.getControlType() != null
+                                        && locInfoBean.getControlType().equals("2")) {
                                     lockImageView.setImageResource(R.mipmap.icon_map_sound_close);
-                                } else if (locInfoBean.getControlType().equals("3")) {
+                                } else if (locInfoBean.getControlType() != null
+                                        && locInfoBean.getControlType().equals("3")) {
                                     lockImageView.setImageResource(R.mipmap.icon_map_onkey_start);
+                                } else {
+                                    lockImageView.setImageResource(R.mipmap.icon_map_lock_open);
                                 }
                             }
                         }
@@ -729,19 +733,30 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
         if (event != null) {
             AppConfig.isExecuteLock = null;
             if (event.getIsLock().equals("1")) {
-                lockImageView.setImageResource(R.mipmap.voice_lock);
+                if (locInfoBean.getControlType() != null
+                        && locInfoBean.getControlType().equals("2")) {
+                    lockImageView.setImageResource(R.mipmap.voice_lock);
+                } else if (locInfoBean.getControlType() != null
+                        && locInfoBean.getControlType().equals("3")) {
+                    lockImageView.setImageResource(R.mipmap.voice_lock);
+                } else {
+                    lockImageView.setImageResource(R.mipmap.voice_lock);
+                }
                 AppConfig.isLock = true;
-                if (AppConfig.lockCarType == 1) {
-                    showShortText("开启成功");
-                }
+                showShortText("开启成功");
             } else {
-                lockImageView.setImageResource(R.mipmap.voice_unlock);
-                AppConfig.isLock = false;
-                if (AppConfig.lockCarType == 1) {
-                    showShortText("关闭成功");
+                if (locInfoBean.getControlType() != null
+                        && locInfoBean.getControlType().equals("2")) {
+                    lockImageView.setImageResource(R.mipmap.voice_lock);
+                } else if (locInfoBean.getControlType() != null
+                        && locInfoBean.getControlType().equals("3")) {
+                    lockImageView.setImageResource(R.mipmap.voice_lock);
+                } else {
+                    lockImageView.setImageResource(R.mipmap.voice_lock);
                 }
+                AppConfig.isLock = false;
+                showShortText("关闭成功");
             }
-
         }
     }
 

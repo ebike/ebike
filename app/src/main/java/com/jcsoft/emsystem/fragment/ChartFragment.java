@@ -120,9 +120,11 @@ public class ChartFragment extends BaseFragment implements View.OnClickListener 
         if (!isPrepared || !isVisible || hasLoadedOnce || !isAdded()) {
             return;
         }
-        //每天调一次半月的统计数据
+        //每个用户每天调一次半月的统计数据
         String isUsedDate = PreferencesUtil.getPrefString(getActivity(), AppConfig.IS_USED_DATE, "");
-        if (!isUsedDate.equals(CommonUtils.getCurrentDateString(null))) {
+        String isUsedDateUser = PreferencesUtil.getPrefString(getActivity(), AppConfig.IS_USED_DATE_USER, "");
+        if (!isUsedDate.equals(CommonUtils.getCurrentDateString(null))
+                || !isUsedDateUser.equals(AppConfig.userInfoBean.getCarId() + "")) {
             getSomeDayData();
         }
         //查询数据库中统计数据
@@ -200,6 +202,7 @@ public class ChartFragment extends BaseFragment implements View.OnClickListener 
                             XUtil.db.save(dataBean);
                         }
                         PreferencesUtil.setPrefString(getActivity(), AppConfig.IS_USED_DATE, CommonUtils.getCurrentDateString(null));
+                        PreferencesUtil.setPrefString(getActivity(), AppConfig.IS_USED_DATE_USER, AppConfig.userInfoBean.getCarId() + "");
                     } else {
                         showShortText(bean.getErrmsg());
                     }
