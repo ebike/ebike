@@ -120,68 +120,71 @@ public class ChartFragment extends BaseFragment implements View.OnClickListener 
         if (!isPrepared || !isVisible || hasLoadedOnce || !isAdded()) {
             return;
         }
-        //每个用户每天调一次半月的统计数据
-        String isUsedDate = PreferencesUtil.getPrefString(getActivity(), AppConfig.IS_USED_DATE, "");
-        String isUsedDateUser = PreferencesUtil.getPrefString(getActivity(), AppConfig.IS_USED_DATE_USER, "");
-        if (!isUsedDate.equals(CommonUtils.getCurrentDateString(null))
-                || !isUsedDateUser.equals(AppConfig.userInfoBean.getCarId() + "")) {
-            getSomeDayData();
-        }
-        //查询数据库中统计数据
+
         try {
+            //每个用户每天调一次半月的统计数据
+            String isUsedDate = PreferencesUtil.getPrefString(getActivity(), AppConfig.IS_USED_DATE, "");
+            String isUsedDateUser = PreferencesUtil.getPrefString(getActivity(), AppConfig.IS_USED_DATE_USER, "");
+            if (!isUsedDate.equals(CommonUtils.getCurrentDateString(null))
+                    || !isUsedDateUser.equals(AppConfig.userInfoBean.getCarId() + "")) {
+                getSomeDayData();
+            }
+            //查询数据库中统计数据
             if (dayDataBeans == null || dayDataBeans.size() == 0) {
                 dayDataBeans = XUtil.db.selector(DayDataBean.class).where("carId", "=", AppConfig.userInfoBean.getCarId()).orderBy("date", false).findAll();
             }
+
+            //请求今日统计数据
+            RequestParams params = DRequestParamsUtils.getRequestParams_Header(HttpConstants.getDayDataUrl(CommonUtils.DateToString(new Date(), "yyyy-MM-dd")));
+            DHttpUtils.get_String((MainActivity) getActivity(), true, params, new DCommonCallback<String>() {
+                @Override
+                public void onSuccess(String result) {
+                    ResponseBean<DayDataBean> bean = new Gson().fromJson(result, new TypeToken<ResponseBean<DayDataBean>>() {
+                    }.getType());
+                    if (bean.getCode() == 1) {
+                        try {
+                            boolean isUpdate = false;
+                            if(dayDataBeans != null && dayDataBeans.size()>0){
+                                if (dayDataBeans.get(dayDataBeans.size() - 1).getDate().equals(bean.getData().getDate())) {
+                                    isUpdate = true;
+                                }
+                            }else{
+                                dayDataBeans = new ArrayList<DayDataBean>();
+                            }
+
+                            //数据入库
+                            if (isUpdate) {
+                                dayDataBeans.remove(dayDataBeans.size() - 1);
+                                dayDataBeans.add(bean.getData());
+                                KeyValue[] keyValues = new KeyValue[4];
+                                keyValues[0] = new KeyValue("maxSpeed", bean.getData().getMaxSpeed());
+                                keyValues[1] = new KeyValue("minSpeed", bean.getData().getMinSpeed());
+                                keyValues[2] = new KeyValue("avgSpeed", bean.getData().getAvgSpeed());
+                                keyValues[3] = new KeyValue("mileage", bean.getData().getMileage());
+                                XUtil.db.update(bean.getData().getClass(), WhereBuilder.b("date", "=", bean.getData().getDate()), keyValues);
+                            } else {
+                                dayDataBeans.add(bean.getData());
+                                XUtil.db.save(bean.getData());
+                            }
+
+                            //初始报表
+                            BarData mBarData = getBarData();
+                            showChart(mBarData);
+                            //赋值今日统计信息
+                            initViews();
+                        } catch (DbException e) {
+                            e.printStackTrace();
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        showShortText(bean.getErrmsg());
+                    }
+                }
+            });
         } catch (DbException e) {
             e.printStackTrace();
         }
-        //请求今日统计数据
-        RequestParams params = DRequestParamsUtils.getRequestParams_Header(HttpConstants.getDayDataUrl(CommonUtils.DateToString(new Date(), "yyyy-MM-dd")));
-        DHttpUtils.get_String((MainActivity) getActivity(), true, params, new DCommonCallback<String>() {
-            @Override
-            public void onSuccess(String result) {
-                ResponseBean<DayDataBean> bean = new Gson().fromJson(result, new TypeToken<ResponseBean<DayDataBean>>() {
-                }.getType());
-                if (bean.getCode() == 1) {
-                    try {
-                        boolean isUpdate = false;
-                        if (dayDataBeans == null) {
-                            dayDataBeans = new ArrayList<DayDataBean>();
-                        } else {
-                            if (dayDataBeans.get(dayDataBeans.size() - 1).getDate().equals(bean.getData().getDate())) {
-                                isUpdate = true;
-                            }
-                        }
-                        //数据入库
-                        if (isUpdate) {
-                            dayDataBeans.remove(dayDataBeans.size() - 1);
-                            dayDataBeans.add(bean.getData());
-                            KeyValue[] keyValues = new KeyValue[4];
-                            keyValues[0] = new KeyValue("maxSpeed", bean.getData().getMaxSpeed());
-                            keyValues[1] = new KeyValue("minSpeed", bean.getData().getMinSpeed());
-                            keyValues[2] = new KeyValue("avgSpeed", bean.getData().getAvgSpeed());
-                            keyValues[3] = new KeyValue("mileage", bean.getData().getMileage());
-                            XUtil.db.update(bean.getData().getClass(), WhereBuilder.b("date", "=", bean.getData().getDate()), keyValues);
-                        } else {
-                            dayDataBeans.add(bean.getData());
-                            XUtil.db.save(bean.getData());
-                        }
-                        //初始报表
-                        BarData mBarData = getBarData();
-                        showChart(mBarData);
-                        //赋值今日统计信息
-                        initViews();
-                    } catch (DbException e) {
-                        e.printStackTrace();
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
-                } else {
-                    showShortText(bean.getErrmsg());
-                }
-            }
-        });
-
     }
 
     //每天调一次半月的统计数据
