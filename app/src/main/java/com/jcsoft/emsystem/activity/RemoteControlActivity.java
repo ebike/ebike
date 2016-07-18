@@ -113,7 +113,6 @@ public class RemoteControlActivity extends BaseActivity {
                             }.getType());
                             if (responseBean != null) {
                                 AppConfig.isExecuteLock = 0;
-                                AppConfig.lockCarType = 1;
                                 showShortText(responseBean.getErrmsg());
                             }
                         }
@@ -134,7 +133,6 @@ public class RemoteControlActivity extends BaseActivity {
                             }.getType());
                             if (responseBean != null) {
                                 AppConfig.isExecuteLock = 1;
-                                AppConfig.lockCarType = 1;
                                 showShortText(responseBean.getErrmsg());
                             }
                         }

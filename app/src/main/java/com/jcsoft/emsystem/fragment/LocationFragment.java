@@ -735,27 +735,27 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
             if (event.getIsLock().equals("1")) {
                 if (locInfoBean.getControlType() != null
                         && locInfoBean.getControlType().equals("2")) {
-                    lockImageView.setImageResource(R.mipmap.voice_lock);
+                    lockImageView.setImageResource(R.mipmap.icon_map_sound_open);
                 } else if (locInfoBean.getControlType() != null
                         && locInfoBean.getControlType().equals("3")) {
-                    lockImageView.setImageResource(R.mipmap.voice_lock);
+                    lockImageView.setImageResource(R.mipmap.icon_map_onkey_start);
                 } else {
-                    lockImageView.setImageResource(R.mipmap.voice_lock);
+                    lockImageView.setImageResource(R.mipmap.icon_map_lock_close);
                 }
                 AppConfig.isLock = true;
-                showShortText("开启成功");
+                showShortText(event.getMsg());
             } else {
                 if (locInfoBean.getControlType() != null
                         && locInfoBean.getControlType().equals("2")) {
-                    lockImageView.setImageResource(R.mipmap.voice_lock);
+                    lockImageView.setImageResource(R.mipmap.icon_map_sound_close);
                 } else if (locInfoBean.getControlType() != null
                         && locInfoBean.getControlType().equals("3")) {
-                    lockImageView.setImageResource(R.mipmap.voice_lock);
+                    lockImageView.setImageResource(R.mipmap.icon_map_onkey_start);
                 } else {
-                    lockImageView.setImageResource(R.mipmap.voice_lock);
+                    lockImageView.setImageResource(R.mipmap.icon_map_lock_open);
                 }
                 AppConfig.isLock = false;
-                showShortText("关闭成功");
+                showShortText(event.getMsg());
             }
         }
     }

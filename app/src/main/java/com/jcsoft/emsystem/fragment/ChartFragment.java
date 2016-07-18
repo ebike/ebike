@@ -144,11 +144,11 @@ public class ChartFragment extends BaseFragment implements View.OnClickListener 
                     if (bean.getCode() == 1) {
                         try {
                             boolean isUpdate = false;
-                            if(dayDataBeans != null && dayDataBeans.size()>0){
+                            if (dayDataBeans != null && dayDataBeans.size() > 0) {
                                 if (dayDataBeans.get(dayDataBeans.size() - 1).getDate().equals(bean.getData().getDate())) {
                                     isUpdate = true;
                                 }
-                            }else{
+                            } else {
                                 dayDataBeans = new ArrayList<DayDataBean>();
                             }
 
@@ -198,11 +198,13 @@ public class ChartFragment extends BaseFragment implements View.OnClickListener 
                     }.getType());
                     if (bean.getCode() == 1) {
                         dayDataBeans = bean.getData();
-                        //删除表中数据
-                        XUtil.db.delete(DayDataBean.class);
-                        //插入新数据
-                        for (DayDataBean dataBean : dayDataBeans) {
-                            XUtil.db.save(dataBean);
+                        if (dayDataBeans != null && dayDataBeans.size() > 0) {
+                            //删除表中数据
+                            XUtil.db.delete(DayDataBean.class);
+                            //插入新数据
+                            for (DayDataBean dataBean : dayDataBeans) {
+                                XUtil.db.save(dataBean);
+                            }
                         }
                         PreferencesUtil.setPrefString(getActivity(), AppConfig.IS_USED_DATE, CommonUtils.getCurrentDateString(null));
                         PreferencesUtil.setPrefString(getActivity(), AppConfig.IS_USED_DATE_USER, AppConfig.userInfoBean.getCarId() + "");
