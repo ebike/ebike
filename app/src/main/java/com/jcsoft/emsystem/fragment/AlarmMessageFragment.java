@@ -41,7 +41,6 @@ import java.util.List;
 
 /**
  * 报警消息
- * Created by jimmy on 15/12/28.
  */
 public class AlarmMessageFragment extends BaseListFragment {
     @ViewInject(R.id.pull_list_view)

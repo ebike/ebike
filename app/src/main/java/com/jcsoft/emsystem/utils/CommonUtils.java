@@ -465,6 +465,15 @@ public class CommonUtils {
         builder.create().show();
     }
 
+    public static CustomDialog showCustomDialog1(Context ctx, String title, View view) {
+        CustomDialog.Builder builder = new CustomDialog.Builder(ctx);
+        builder.setTitle(title);
+        builder.setContentView(view);
+        CustomDialog dialog = builder.create();
+        dialog.show();
+        return dialog;
+    }
+
     public static void showCustomDialog2(Context ctx, String title, View view, final DSingleDialogCallback leftCallback, final DSingleDialogCallback rightCallback) {
         CustomDialog.Builder builder = new CustomDialog.Builder(ctx);
         builder.setTitle(title);
@@ -480,7 +489,7 @@ public class CommonUtils {
         builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
-                if(leftCallback != null){
+                if (leftCallback != null) {
                     leftCallback.onPositiveButtonClick("");
                 }
             }
@@ -813,16 +822,18 @@ public class CommonUtils {
      * 即将所有的数字、字母及标点全部转为全角字符，使它们与汉字同占两个字节，
      * 这样就可以避免由于占位导致的排版混乱问题了。
      * 半角转为全角的代码如下，只需调用即可。
+     *
      * @param input
      * @return
      */
     public static String ToDBC(String input) {
         char[] c = input.toCharArray();
-        for (int i = 0; i< c.length; i++) {
+        for (int i = 0; i < c.length; i++) {
             if (c[i] == 12288) {
                 c[i] = (char) 32;
                 continue;
-            }if (c[i]> 65280&& c[i]< 65375)
+            }
+            if (c[i] > 65280 && c[i] < 65375)
                 c[i] = (char) (c[i] - 65248);
         }
         return new String(c);
@@ -830,6 +841,7 @@ public class CommonUtils {
 
     /**
      * 获取包名称
+     *
      * @param context
      * @return
      */
@@ -841,7 +853,7 @@ public class CommonUtils {
             versionName = packInfo.versionName;
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
-        } catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return versionName;

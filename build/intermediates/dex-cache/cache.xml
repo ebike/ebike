@@ -2,11 +2,130 @@
 <items version="2" >
 
     <item
+        jar="/Users/huguangwen/Documents/Code/gitlab/ebike/app/libs/xUtils-3.1.22.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="ea94f9fe2c147efc1b4131d5abe13788f37955af">
+        <dex dex="/Users/huguangwen/Documents/Code/gitlab/ebike/app/build/intermediates/pre-dexed/debug/xUtils-3.1.22-b5fe2c0f1a52ab46f7e7915eeaaeb6fcaa29b09b.jar" />
+    </item>
+    <item
+        jar="/Users/huguangwen/Documents/Code/gitlab/ebike/app/libs/AMap_Location_v2.0.0_20151117.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="fbd0189f0d86bbfa558b2c2344ea3f3932a2ad35">
+        <dex dex="/Users/huguangwen/Documents/Code/gitlab/ebike/app/build/intermediates/pre-dexed/debug/AMap_Location_v2.0.0_20151117-e27acff88e3c1d0b1838ae1c964567b848834fad.jar" />
+    </item>
+    <item
+        jar="/Users/huguangwen/Documents/Code/gitlab/ebike/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
+        <dex dex="/Users/huguangwen/Documents/Code/gitlab/ebike/app/build/intermediates/pre-dexed/debug/classes-1de15e80ae5e447fc917713347fa14af010b677c.jar" />
+    </item>
+    <item
+        jar="/Users/huguangwen/Documents/Code/gitlab/ebike/app/libs/Msc.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="14e02a95fa56eb18b385a4f156b4fb14d4721df4">
+        <dex dex="/Users/huguangwen/Documents/Code/gitlab/ebike/app/build/intermediates/pre-dexed/debug/Msc-bb989c4b04d4bd2d103b7fa12b96c97e8e0499bf.jar" />
+    </item>
+    <item
+        jar="/Users/huguangwen/Documents/Code/gitlab/ebike/app/libs/gson-2.2.2.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="53bfcd3c8e310d1493b2691484525ed90b04e236">
+        <dex dex="/Users/huguangwen/Documents/Code/gitlab/ebike/app/build/intermediates/pre-dexed/debug/gson-2.2.2-07055920e1736557acdc4844301e57b2f8eb430c.jar" />
+    </item>
+    <item
+        jar="/Users/huguangwen/Documents/Code/gitlab/ebike/app/libs/systembartint-1.0.4.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="06404f77b92ec723cc132e825afe85a07da85ee6">
+        <dex dex="/Users/huguangwen/Documents/Code/gitlab/ebike/app/build/intermediates/pre-dexed/debug/systembartint-1.0.4-ef41da940e4b3783a46f65b62b2e33d223d2c033.jar" />
+    </item>
+    <item
+        jar="/Users/huguangwen/Documents/Code/gitlab/ebike/app/libs/mpandroidchartlibrary-2-1-6.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="3f8beaf2f9b5357717e0b1ef9f6820e517784ea1">
+        <dex dex="/Users/huguangwen/Documents/Code/gitlab/ebike/app/build/intermediates/pre-dexed/debug/mpandroidchartlibrary-2-1-6-0c503b6d0cd5360354f4b8ba81ae835bf1c21748.jar" />
+    </item>
+    <item
+        jar="/Users/huguangwen/.gradle/caches/modules-2/files-2.1/de.greenrobot/eventbus/2.4.0/ddd166d01b3158d1c00576d29f7ed15c030df719/eventbus-2.4.0.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="ddd166d01b3158d1c00576d29f7ed15c030df719">
+        <dex dex="/Users/huguangwen/Documents/Code/gitlab/ebike/app/build/intermediates/pre-dexed/debug/eventbus-2.4.0-0fb80b8084aaead876d71853758f447d5237d5be.jar" />
+    </item>
+    <item
         jar="/Users/huguangwen/Documents/Code/gitlab/ebike/app/libs/bugly_1.1.2_release.jar"
         jumboMode="false"
         revision="23.0.1"
         sha1="ffdaa2e2ca0912b890f69ca251c5c8fa0a20c176">
-        <dex dex="/Users/huguangwen/Documents/Code/gitlab/ebike/app/build/intermediates/pre-dexed/release/bugly_1.1.2_release-f1ff635b20481daeed0b78932474214a22770a6d.jar" />
+        <dex dex="/Users/huguangwen/Documents/Code/gitlab/ebike/app/build/intermediates/pre-dexed/debug/bugly_1.1.2_release-f1ff635b20481daeed0b78932474214a22770a6d.jar" />
+    </item>
+    <item
+        jar="/Users/huguangwen/Documents/Code/gitlab/ebike/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
+        <dex dex="/Users/huguangwen/Documents/Code/gitlab/ebike/app/build/intermediates/pre-dexed/debug/classes-4f9d7a9ef865d2a32054e4b7a4f47af73c7a06fc.jar" />
+    </item>
+    <item
+        jar="/Users/huguangwen/Documents/Code/gitlab/ebike/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/libs/internal_impl-23.0.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
+        <dex dex="/Users/huguangwen/Documents/Code/gitlab/ebike/app/build/intermediates/pre-dexed/debug/internal_impl-23.0.1-510cdbe42db5b4640a0b3500df481d35079bec6b.jar" />
+    </item>
+    <item
+        jar="/Users/huguangwen/Documents/Code/gitlab/ebike/app/libs/AMap_Services_V2.7.0_20151125.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="7eac53aff3958c7447c434fe376c8c978a2f9c5c">
+        <dex dex="/Users/huguangwen/Documents/Code/gitlab/ebike/app/build/intermediates/pre-dexed/debug/AMap_Services_V2.7.0_20151125-f315c5271b58cf3e1426d678333bebff95c32295.jar" />
+    </item>
+    <item
+        jar="/Users/huguangwen/.gradle/caches/modules-2/files-2.1/com.nostra13.universalimageloader/universal-image-loader/1.9.3/a85588bec3e2c4584d593d3f15df1677321bca72/universal-image-loader-1.9.3.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="a85588bec3e2c4584d593d3f15df1677321bca72">
+        <dex dex="/Users/huguangwen/Documents/Code/gitlab/ebike/app/build/intermediates/pre-dexed/debug/universal-image-loader-1.9.3-16d5257e025862cf7d5caf5b6e79ddd8e34bc48e.jar" />
+    </item>
+    <item
+        jar="/Users/huguangwen/Documents/Code/gitlab/ebike/app/libs/Android_Navi_V1.1.2.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="608ac5c3d9ff1e979301a88f5cb8e66d75333db4">
+        <dex dex="/Users/huguangwen/Documents/Code/gitlab/ebike/app/build/intermediates/pre-dexed/debug/Android_Navi_V1.1.2-4d8a95638675c39e0403fbf153aa7d356b8e3124.jar" />
+    </item>
+    <item
+        jar="/Users/huguangwen/Documents/Code/gitlab/ebike/app/libs/android-viewbadger.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="f1303b50d535716ca7601c5014357b8435658313">
+        <dex dex="/Users/huguangwen/Documents/Code/gitlab/ebike/app/build/intermediates/pre-dexed/debug/android-viewbadger-70968eabdf42dfddf2bceee478b8105301803152.jar" />
+    </item>
+    <item
+        jar="/Users/huguangwen/Documents/Code/gitlab/ebike/app/libs/jpush-android-2.0.5.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="f2c821a0d13219a2e70490085c390bab03fb5953">
+        <dex dex="/Users/huguangwen/Documents/Code/gitlab/ebike/app/build/intermediates/pre-dexed/debug/jpush-android-2.0.5-11bd2b757c889a766e50cfe363ea63b1308b6cc0.jar" />
+    </item>
+    <item
+        jar="/Users/huguangwen/Documents/Code/gitlab/ebike/app/libs/Android_Map_V2.7.20151124.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="2445bf37f89fbcd046db9bd82891bc9d6cc293ba">
+        <dex dex="/Users/huguangwen/Documents/Code/gitlab/ebike/app/build/intermediates/pre-dexed/debug/Android_Map_V2.7.20151124-235cc0ab5f02acf29edb917039abe39c5a7eabfa.jar" />
+    </item>
+    <item
+        jar="/Users/huguangwen/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.0.1/support-annotations-23.0.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="1fce89a6428c51467090d7f424e4c9c3dbd55f7e">
+        <dex dex="/Users/huguangwen/Documents/Code/gitlab/ebike/app/build/intermediates/pre-dexed/debug/support-annotations-23.0.1-98ba2d2ad3612cdf35b30539f8ad76cc8c363c65.jar" />
     </item>
 
 </items>

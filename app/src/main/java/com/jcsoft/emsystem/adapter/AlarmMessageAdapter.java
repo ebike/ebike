@@ -16,7 +16,6 @@ import java.util.Date;
 
 /**
  * 报警消息
- * Created by jimmy on 16/1/16.
  */
 public class AlarmMessageAdapter extends TAdapter<AlarmMessageBean> {
     public AlarmMessageAdapter(Context mContext) {
@@ -25,9 +24,7 @@ public class AlarmMessageAdapter extends TAdapter<AlarmMessageBean> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        if (convertView == null) {
-            convertView = LayoutInflater.from(mContext).inflate(R.layout.adapter_alarm_message, parent, false);
-        }
+        convertView = LayoutInflater.from(mContext).inflate(R.layout.adapter_alarm_message, parent, false);
         ImageView msgImageView = ViewHolder.get(convertView, R.id.iv_msg);
         TextView titleTextView = ViewHolder.get(convertView, R.id.tv_title);
         TextView contentTextView = ViewHolder.get(convertView, R.id.tv_content);
@@ -35,11 +32,11 @@ public class AlarmMessageAdapter extends TAdapter<AlarmMessageBean> {
 
         AlarmMessageBean bean = mList.get(position);
         if (bean != null) {
-            if(bean.getStatus() == 1){
+            if (bean.getStatus() == 1) {
                 convertView.setBackgroundColor(mContext.getResources().getColor(R.color.white));
                 titleTextView.setTextColor(mContext.getResources().getColor(R.color.gray_3));
                 contentTextView.setTextColor(mContext.getResources().getColor(R.color.gray_6));
-            }else{
+            } else {
                 convertView.setBackgroundColor(mContext.getResources().getColor(R.color.white_f5));
                 titleTextView.setTextColor(mContext.getResources().getColor(R.color.gray_6));
                 contentTextView.setTextColor(mContext.getResources().getColor(R.color.gray_6));

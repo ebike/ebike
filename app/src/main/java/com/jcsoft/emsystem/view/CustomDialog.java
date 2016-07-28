@@ -191,6 +191,8 @@ public class CustomDialog extends Dialog {
             JustifyTextView messageTextView = (JustifyTextView) layout.findViewById(R.id.message);
             TextView divider = (TextView) layout.findViewById(R.id.divider);
             LinearLayout contentViewLL = (LinearLayout) layout.findViewById(R.id.contentView);
+            LinearLayout btnLayout = (LinearLayout) layout.findViewById(R.id.ll_btn);
+            LinearLayout lineLayout = (LinearLayout) layout.findViewById(R.id.ll_line);
             //设置标题
             titleTextView.setText(title);
             titleTextView.getPaint().setFakeBoldText(true);
@@ -224,6 +226,11 @@ public class CustomDialog extends Dialog {
                 divider.setVisibility(View.GONE);
                 //没有取消按钮时，底部只有一个按钮，需要修改该按钮的圆角,否则，一边是圆角，一边是方角
                 confirmButton.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.single_btn_select));
+            }
+            //无按钮情况
+            if (CommonUtils.strIsEmpty(confirm_btnText) && CommonUtils.strIsEmpty(cancel_btnText)) {
+                btnLayout.setVisibility(View.GONE);
+                lineLayout.setVisibility(View.GONE);
             }
             //设置文字内容
             if (message != null) {

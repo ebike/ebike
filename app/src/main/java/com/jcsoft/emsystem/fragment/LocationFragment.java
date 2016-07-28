@@ -71,6 +71,7 @@ import com.jcsoft.emsystem.map.TTSController;
 import com.jcsoft.emsystem.utils.CommonUtils;
 import com.jcsoft.emsystem.utils.MapUtils;
 import com.jcsoft.emsystem.utils.Utils;
+import com.jcsoft.emsystem.view.CustomDialog;
 import com.jcsoft.emsystem.view.formview.FormTextDateTimeView;
 import com.jcsoft.emsystem.view.formview.FormViewUtils;
 
@@ -173,6 +174,10 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
     //电动车上的信息框显示状态(默认显示)
     private boolean isHidden;
 
+    private View chooseNavView;
+    private TextView driveView;
+    private TextView walkView;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_location, container, false);
@@ -221,6 +226,7 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
             uiSettings.setScaleControlsEnabled(true);
         }
         moveToCenter("36.68445", "117.126229");
+        JCLocationManager.instance().init(getActivity());
         // 初始化语音模块
         TTSController ttsManager = TTSController.getInstance(getActivity());
         ttsManager.init();
@@ -644,9 +650,8 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
                 Location location = JCLocationManager.instance().getCurrentLocation();
                 LatLonPoint destPoint = new LatLonPoint(locInfoBean.getLat() / 1000000.0, locInfoBean.getLon() / 1000000.0);
                 if (location != null) {
-                    Toast.makeText(getActivity(), "正在进行路径计算...", Toast.LENGTH_LONG).show();
                     LatLonPoint startPoint = new LatLonPoint(location.getLatitude(), location.getLongitude());
-                    startNavi(startPoint, destPoint);
+                    chooseNav(startPoint, destPoint);
                 } else {
                     String text = "手机定位尚未完成，请先在地图上选择您的位置";
                     TTSController.getInstance(getActivity()).playText(text);
@@ -658,6 +663,27 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
                 }
                 break;
         }
+    }
+
+    private void chooseNav(final LatLonPoint startPoint, final LatLonPoint destPoint) {
+        chooseNavView = LayoutInflater.from(getActivity()).inflate(R.layout.view_choose_nav, null, false);
+        driveView = (TextView) chooseNavView.findViewById(R.id.tv_drive);
+        walkView = (TextView) chooseNavView.findViewById(R.id.tv_walk);
+        final CustomDialog dialog = CommonUtils.showCustomDialog1(getActivity(), "选择导航方式", chooseNavView);
+        driveView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.cancel();
+                startNavi(startPoint, destPoint, "1");
+            }
+        });
+        walkView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.cancel();
+                startNavi(startPoint, destPoint, "2");
+            }
+        });
     }
 
     //切换地图类型时变化页面UI
@@ -899,10 +925,23 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
     }
 
     //开始导航
-    private void startNavi(LatLonPoint startPoint, LatLonPoint stopPoint) {
+    private void startNavi(LatLonPoint startPoint, LatLonPoint stopPoint, String type) {
         NaviLatLng startP = new NaviLatLng(startPoint.getLatitude(), startPoint.getLongitude());
         NaviLatLng endP = new NaviLatLng(stopPoint.getLatitude(), stopPoint.getLongitude());
-        AMapNavi.getInstance(getActivity()).calculateWalkRoute(startP, endP);
+        List<NaviLatLng> startList = new ArrayList<>();
+        startList.add(startP);
+        List<NaviLatLng> endList = new ArrayList<>();
+        endList.add(endP);
+        if (type.equals("1")) {
+            AMapNavi.getInstance(getActivity()).calculateDriveRoute(startList, endList, null, AMapNavi.DrivingDefault);
+        } else if (type.equals("2")) {
+            boolean flag = AMapNavi.getInstance(getActivity()).calculateWalkRoute(startP, endP);
+            if (!flag) {
+                Toast.makeText(getActivity(), "您距电动车距离较远，将为您进行驾车导航", Toast.LENGTH_LONG).show();
+                AMapNavi.getInstance(getActivity()).calculateDriveRoute(startList, endList, null, AMapNavi.DrivingDefault);
+            }
+        }
+
     }
 
     @Override
@@ -921,7 +960,7 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
         if (_startMarker != null && _startMarker.equals(marker)) {
             LatLonPoint startPoint = new LatLonPoint(_startMarker.getPosition().latitude, _startMarker.getPosition().longitude);
             LatLonPoint destPoint = new LatLonPoint(locInfoBean.getLat() / 1000000.0, locInfoBean.getLon() / 1000000.0);
-            startNavi(startPoint, destPoint);
+            chooseNav(startPoint, destPoint);
             _startMarker.remove();
             return;
         }
