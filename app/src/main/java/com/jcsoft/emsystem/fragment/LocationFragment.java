@@ -356,7 +356,7 @@ public class LocationFragment extends BaseFragment implements Runnable, View.OnC
                     if (locInfoBean.getIsOnline().equals("1")) {
                         onlineStatusTextView.setText("在线");
                     } else {
-                        onlineStatusTextView.setText("不在线");
+                        onlineStatusTextView.setText("离线");
                     }
                     if (locInfoBean.getAcc().equals("1")) {
                         accTextView.setText("开启");
