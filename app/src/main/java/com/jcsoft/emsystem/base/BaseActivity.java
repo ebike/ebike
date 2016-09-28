@@ -249,7 +249,7 @@ public abstract class BaseActivity extends FragmentActivity {
             CommonUtils.showCustomDialogSignle(this, "", onlineExceptionEvent.getMessage(), Gravity.LEFT | Gravity.CENTER_VERTICAL, new DSingleDialogCallback() {
                 @Override
                 public void onPositiveButtonClick(String editText) {
-                    logout();
+                    logoutClearData();
                 }
             });
         }
@@ -288,6 +288,19 @@ public abstract class BaseActivity extends FragmentActivity {
                 }
             });
         }
+    }
+
+    public void logoutClearData(){
+        AppConfig.loginName = "";
+        AppConfig.password = "";
+        AppConfig.userInfoBean = null;
+        AppConfig.isExecuteLock = null;
+        AppConfig.isExecuteVF = null;
+        preferencesUtil.setPrefString(BaseActivity.this, AppConfig.LOGIN_NAME, "");
+        preferencesUtil.setPrefString(BaseActivity.this, AppConfig.PASSWORD, "");
+        Intent intent = new Intent(BaseActivity.this, LoginActivity.class);
+        startActivity(intent);
+        EventBus.getDefault().post(new FinishActivityEvent(true, "BaseActivity"));
     }
 
 }

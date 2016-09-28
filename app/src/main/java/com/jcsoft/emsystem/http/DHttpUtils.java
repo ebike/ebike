@@ -58,7 +58,7 @@ public class DHttpUtils {
             CommonUtils.showCustomDialogSignle(activity, "", "您的登录信息过期，请重新登录", Gravity.LEFT | Gravity.CENTER_VERTICAL, new DSingleDialogCallback() {
                 @Override
                 public void onPositiveButtonClick(String editText) {
-                    activity.logout();
+                    activity.logoutClearData();
                 }
             });
         } else {
